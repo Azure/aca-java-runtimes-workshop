@@ -8,6 +8,7 @@
   <packaging>pom</packaging>
   <name>Azure Container Apps and Java Runtimes Workshop</name>
   <modules>
+    <module>docs</module>
     <module>micronaut-app</module>
     <module>springboot-app</module>
     <module>quarkus-app</module>

@@ -1,0 +1,43 @@
+@startuml
+
+left to right direction
+
+node "Super Hero UI" as ui {
+    agent "Quarkus" <<frontend>> as uiQuarkus
+}
+
+node "Fight" as fight {
+    agent "Quarkus" <<application>> as fightQuarkus
+    database "Postgresql" as fightPostgresql
+    fightQuarkus .left.> fightPostgresql
+}
+
+node "Hero" as hero {
+    agent "Quarkus" <<application>> as heroQuarkus
+    database "Postgresql" as heroPostgresql
+    heroQuarkus .left.> heroPostgresql
+}
+
+node "Villain" as villain {
+    agent "Quarkus" <<application>> as villainQuarkus
+    database "Postgresql" as villainPostgresql
+    villainQuarkus .left.> villainPostgresql
+}
+
+node "Kafka" as kafka {
+}
+
+node "Fallback" as fallback {
+    agent "Quarkus" <<application>> as fallbackQuarkus
+    file "File" as fallbackFile
+    fallbackQuarkus .left.> fallbackFile
+}
+
+fightQuarkus ..> kafka : Message
+fallback <.. kafka : Message
+
+uiQuarkus --> fightQuarkus : HTTP
+fightQuarkus --> heroQuarkus : HTTP
+fightQuarkus --> villainQuarkus : HTTP
+
+@enduml

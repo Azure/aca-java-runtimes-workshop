@@ -1,0 +1,74 @@
+[[micronaut]]
+= Micronaut
+
+'''
+
+
+[[micronaut-listing-rest-resource]]
+.REST Resource
+[source,indent=0]
+----
+include::{heroes-github-raw}/src/main/java/io/containerapps/quarkus/workshop/superheroes/hero/HeroResource.java[]
+----
+
+== Bootstrapping the Heroes Microservice
+
+=== Directory Structure
+
+=== The Hero REST Resource
+
+=== Running the Application
+
+=== Debugging the Application
+
+=== Testing the Application
+
+== Transactions and ORM
+
+=== Directory Structure
+
+=== Installing the PostgreSQL Dependency, Hibernate with Panache and Hibernate Validator
+
+=== The Hero Entity
+
+=== Configuring Hibernate
+
+=== Accessing a database in dev mode
+
+=== Refactoring the Hero REST Resource
+
+=== Dependency Injection
+
+=== Adding Data
+
+=== Testing the Hero REST Resource
+
+== Configuring the Heroes Microservice
+
+=== Configuring Logging
+
+=== Configuring Quarkus Listening Port
+
+== Open API
+
+=== Directory Structure
+
+=== Installing the OpenAPI extension
+
+=== Default Open API Contract
+
+=== Customizing the Open API Contract
+
+==== Customizing Methods
+
+==== Customizing the Application
+
+==== Customized Contract
+
+== Deploying the Heroes Microservice
+
+=== Creating the Managed Postgres Database
+
+=== Refactoring the CI/CD Pipeline
+
+=== Deploying the Heroes Microservice

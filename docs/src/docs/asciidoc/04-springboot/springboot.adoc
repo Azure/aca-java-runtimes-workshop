@@ -1,0 +1,54 @@
+[[springboot]]
+= Spring Boot
+
+'''
+
+
+[[springboot-listing-rest-resource]]
+.REST Resource
+[source,indent=0]
+----
+include::{fights-github-raw}/src/main/java/io/containerapps/quarkus/workshop/superheroes/fight/FightResource.java[]
+----
+
+== Bootstrapping the Fights Microservice
+
+=== Directory Structure
+
+=== The Fight REST Resource
+
+=== The Fight Entity
+
+=== Installing the Mongo DB Dependency, Hibernate with Panache and Hibernate Validator
+
+=== Configuring
+
+=== Accessing a database in dev mode
+
+=== Testing the Fight REST Resource
+
+== Configuring the Fights Microservice
+
+== Open API
+
+=== Directory Structure
+
+=== Installing the OpenAPI extension
+
+=== Default Open API Contract
+
+=== Customizing the Open API Contract
+
+==== Customizing Methods
+
+==== Customizing the Application
+
+==== Customized Contract
+
+== Deploying the Fights Microservice
+
+=== Creating the Managed Mongo DB Database
+
+=== Refactoring the CI/CD Pipeline
+
+=== Deploying the Fights Microservice

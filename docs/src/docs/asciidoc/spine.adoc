@@ -1,0 +1,29 @@
+= Azure Container Apps and Java Runtimes Workshop
+Antonio Goncalves
+:revnumber: {project-version}
+:example-caption!:
+
+// Welcome
+include::00-welcome/welcome.adoc[leveloffset=+1]
+<<<
+
+// Introduction
+include::01-introduction/introduction.adoc[leveloffset=+1]
+<<<
+
+// Quarkus
+include::02-quarkus/quarkus.adoc[leveloffset=+1]
+<<<
+
+// Micronaut
+include::03-micronaut/micronaut.adoc[leveloffset=+1]
+<<<
+
+// SpringBoot
+include::04-springboot/springboot.adoc[leveloffset=+1]
+<<<
+
+// Scaling
+include::05-scaling/ui.adoc[leveloffset=+1]
+<<<
+
