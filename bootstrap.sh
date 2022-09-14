@@ -5,13 +5,12 @@
 ### #################################################################
 
 
-### Removes all the generated files from the project
+echo "### Removes all the generated files from the project"
 rm -rf pom.xml \
   quarkus-app \
-  micronaut-app \
-  springboot-app
+  micronaut-app
 
-### Creates a Parent POM
+echo "### Creates a Parent POM"
 echo -e "<?xml version=\"1.0\"?>
 <project xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\"
          xmlns=\"http://maven.apache.org/POM/4.0.0\"
@@ -24,7 +23,6 @@ echo -e "<?xml version=\"1.0\"?>
   <name>Azure Container Apps and Java Runtimes Workshop</name>
   
   <modules>
-    <module>quarkus-app</module>
     <module>micronaut-app</module>
     <module>springboot-app</module>
   </modules>
@@ -33,21 +31,28 @@ echo -e "<?xml version=\"1.0\"?>
 " >> pom.xml
 
 
-### Bootstraps the Quarkus App
+echo "### Bootstraps the Micronaut App"
+mn create-app io.containerapps.javaruntime.workshop.micronaut.micronaut-app  \
+    --build=maven  \
+    --lang=java \
+    --java-version=17
+
+
+echo "### Bootstraps the Quarkus App"
 mvn io.quarkus:quarkus-maven-plugin:2.12.1.Final:create \
     -DplatformVersion=2.12.1.Final \
-    -DprojectGroupId=io.containerapps.quarkus.workshop.superheroes \
-    -DprojectArtifactId=heroes-app \
-    -DclassName="io.containerapps.quarkus.workshop.superheroes.hero.HeroResource" \
+    -DprojectGroupId=io.containerapps.javaruntime.workshop \
+    -DprojectArtifactId=quarkus-app \
+    -DclassName="io.containerapps.javaruntime.workshop.quarkus.QuarkusResource" \
     -Dpath="/api/heroes" \
-    -Dextensions="resteasy, resteasy-jsonb, hibernate-orm-panache, hibernate-validator, jdbc-postgresql, smallrye-openapi, smallrye-health"
+    -Dextensions="resteasy, resteasy-jsonb, hibernate-orm-panache, jdbc-postgresql"
 
 
-### Running all the Tests
+echo "### Running all the Tests"
 mvn test
 
 
-### Adding .editorconfig file
+echo "### Adding .editorconfig file"
 echo -e "# EditorConfig helps developers define and maintain consistent
 # coding styles between different editors and IDEs
 # editorconfig.org
