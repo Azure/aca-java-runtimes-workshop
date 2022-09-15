@@ -2,9 +2,9 @@ package io.containerapps.javaruntime.workshop.micronaut;
 
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
 @MicronautTest
@@ -30,6 +30,7 @@ class MicronautResourceTest {
     }
 
     @Test
+    @Disabled
     public void testCpuWithDBEndpoint(RequestSpecification spec) {
         spec.param("iterations", 1).param("db", true)
             .when().get("/micronaut/cpu")
@@ -50,6 +51,7 @@ class MicronautResourceTest {
     }
 
     @Test
+    @Disabled
     public void testMemoryWithDBEndpoint(RequestSpecification spec) {
         spec.param("bites", 1).param("db", true)
             .when().get("/micronaut/memory")

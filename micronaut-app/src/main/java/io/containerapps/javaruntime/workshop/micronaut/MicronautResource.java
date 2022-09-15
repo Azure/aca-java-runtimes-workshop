@@ -12,6 +12,12 @@ import java.util.HashMap;
 @Controller("/micronaut")
 public class MicronautResource {
 
+    private final StatisticsRepository statisticsRepository;
+
+    public MicronautResource(StatisticsRepository statisticsRepository) {
+        this.statisticsRepository = statisticsRepository;
+    }
+
     @Get(produces = MediaType.TEXT_PLAIN)
     public String hello() {
         return "Hello from Micronaut";
@@ -49,7 +55,7 @@ public class MicronautResource {
             statistics.type = Type.CPU;
             statistics.parameter = iterations.toString();
             statistics.duration = Duration.between(start, Instant.now());
-//            statistics.persist();
+            statisticsRepository.save(statistics);
         }
 
         String msg = "CPU consumption is done with " + iterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
@@ -89,7 +95,7 @@ public class MicronautResource {
             statistics.type = Type.MEMORY;
             statistics.parameter = bites.toString();
             statistics.duration = Duration.between(start, Instant.now());
-//            statistics.persist();
+            statisticsRepository.save(statistics);
         }
 
         String msg = "Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
