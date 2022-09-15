@@ -112,6 +112,7 @@ If you chose to use the dev container environment, open the project in VS Code, 
 
 === Setting Up Azure
 
+Once you have created your Azure account, go to https://portal.azure.com?WT.mc_id=javascript-0000-yolasors[Azure Portal]
 
 
 ==== Setting Up the Environment Variables
