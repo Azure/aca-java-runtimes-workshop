@@ -1,5 +1,6 @@
 package io.containerapps.javaruntime.workshop.quarkus;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,8 +10,10 @@ import java.util.HashMap;
 
 @Path("/quarkus")
 @Produces(MediaType.TEXT_PLAIN)
-@Transactional
 public class QuarkusResource {
+
+    @Inject
+    StatisticsRepository repository;
 
     @GET
     public String hello() {
@@ -50,7 +53,7 @@ public class QuarkusResource {
             statistics.type = Type.CPU;
             statistics.parameter = iterations.toString();
             statistics.duration = Duration.between(start, Instant.now());
-            statistics.persist();
+            repository.persist(statistics);
         }
 
         String msg = "CPU consumption is done with " + iterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
@@ -91,7 +94,7 @@ public class QuarkusResource {
             statistics.type = Type.MEMORY;
             statistics.parameter = bites.toString();
             statistics.duration = Duration.between(start, Instant.now());
-            statistics.persist();
+            repository.persist(statistics);
         }
 
         String msg = "Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
