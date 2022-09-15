@@ -1,6 +1,8 @@
 micronaut:
   application:
-    name: micronautApp
+    name: MicronautApp
+  server:
+    port: 8702
 netty:
   default:
     allocator:

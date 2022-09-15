@@ -57,6 +57,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>io.micronaut.test</groupId>
+      <artifactId>micronaut-test-rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>io.micronaut</groupId>
       <artifactId>micronaut-http-client</artifactId>
       <scope>compile</scope>
