@@ -4,7 +4,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 
 @QuarkusTest
 public class QuarkusResourceTest {
@@ -12,10 +12,49 @@ public class QuarkusResourceTest {
     @Test
     public void testHelloEndpoint() {
         given()
-          .when().get("/api/heroes")
+          .when().get("/quarkus")
           .then()
              .statusCode(200)
-             .body(is("Hello RESTEasy"));
+             .body(is("Hello from Quarkus"));
     }
 
+    @Test
+    public void testCpuEndpoint() {
+        given().param("iterations", 1)
+          .when().get("/quarkus/cpu")
+          .then()
+             .statusCode(200)
+             .body(startsWith("CPU consumption is done with"))
+             .body(endsWith("nano-seconds!"));
+    }
+
+    @Test
+    public void testCpuWithDBEndpoint() {
+        given().param("iterations", 1).param("db", true)
+          .when().get("/quarkus/cpu")
+          .then()
+             .statusCode(200)
+             .body(startsWith("CPU consumption is done with"))
+             .body(endsWith("Results are stored in the database !"));
+    }
+
+    @Test
+    public void testMemoryEndpoint() {
+        given().param("bites", 1)
+          .when().get("/quarkus/memory")
+          .then()
+             .statusCode(200)
+             .body(startsWith("Memory consumption is done with"))
+             .body(endsWith("nano-seconds!"));
+    }
+
+    @Test
+    public void testMemoryWithDBEndpoint() {
+        given().param("bites", 1).param("db", true)
+          .when().get("/quarkus/memory")
+          .then()
+             .statusCode(200)
+             .body(startsWith("Memory consumption is done with"))
+             .body(endsWith("Results are stored in the database !"));
+    }
 }
