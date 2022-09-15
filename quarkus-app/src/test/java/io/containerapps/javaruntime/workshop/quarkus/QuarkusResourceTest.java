@@ -25,7 +25,7 @@ public class QuarkusResourceTest {
           .then()
              .statusCode(200)
              .body(startsWith("CPU consumption is done with"))
-             .body(endsWith("nano-seconds!"));
+             .body(endsWith("nano-seconds."));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class QuarkusResourceTest {
           .then()
              .statusCode(200)
              .body(startsWith("CPU consumption is done with"))
-             .body(endsWith("Results are stored in the database !"));
+             .body(endsWith("The result is persisted in the database."));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class QuarkusResourceTest {
           .then()
              .statusCode(200)
              .body(startsWith("Memory consumption is done with"))
-             .body(endsWith("nano-seconds!"));
+             .body(endsWith("nano-seconds."));
     }
 
     @Test
@@ -55,6 +55,6 @@ public class QuarkusResourceTest {
           .then()
              .statusCode(200)
              .body(startsWith("Memory consumption is done with"))
-             .body(endsWith("Results are stored in the database !"));
+             .body(endsWith("The result is persisted in the database."));
     }
 }

@@ -44,19 +44,20 @@ public class QuarkusResource {
             }
             iterations--;
         }
-        Instant end = Instant.now();
-        Duration duration = Duration.between(start, end);
 
         if (db) {
             Statistics statistics = new Statistics();
             statistics.type = Type.CPU;
             statistics.parameter = iterations.toString();
-            statistics.duration = duration;
+            statistics.duration = Duration.between(start, Instant.now());
             statistics.persist();
-            return "CPU consumption is done with " + iterations + " iterations in " + duration.getNano() + " nano-seconds. Results are stored in the database !";
-        } else {
-            return "CPU consumption is done with " + iterations + " iterations in " + duration.getNano() + " nano-seconds!";
         }
+
+        String msg = "CPU consumption is done with " + iterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        if (db) {
+            msg += " The result is persisted in the database.";
+        }
+        return msg;
 
     }
 
@@ -84,18 +85,19 @@ public class QuarkusResource {
                 bytes[j] = '0';
             }
         }
-        Instant end = Instant.now();
-        Duration duration = Duration.between(start, end);
 
         if (db) {
             Statistics statistics = new Statistics();
             statistics.type = Type.MEMORY;
             statistics.parameter = bites.toString();
-            statistics.duration = duration;
+            statistics.duration = Duration.between(start, Instant.now());
             statistics.persist();
-            return "Memory consumption is done with " + bites + " bites in " + duration.getNano() + " nano-seconds. Results are stored in the database !";
-        } else {
-            return "Memory consumption is done with " + bites + " bites in " + duration.getNano() + " nano-seconds!";
         }
+
+        String msg = "Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        if (db) {
+            msg += " The result is persisted in the database.";
+        }
+        return msg;
     }
 }
