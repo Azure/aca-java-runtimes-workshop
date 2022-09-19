@@ -20,7 +20,7 @@ public class SpringbootResource {
 
     @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
     public String hello() {
-        return "Hello from Micronaut";
+        return "Hello from SpringBoot";
     }
 
     /**
