@@ -1,5 +1,13 @@
 # Project
 
+## Test
+
+## Execute
+
+```shell
+docker compose -f infrastructure/postgres.yaml up
+```
+
 > This repo has been populated by an initial template to help get you started. Please
 > make sure to update the content to build a great experience for community-building.
 

@@ -1,0 +1,11 @@
+version: "3"
+services:
+    database:
+        image: "postgres:14"
+        container_name: "aca-java-runtimes-workshop-database"
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_PASSWORD: password
+        volumes:
+            - ./db-init/initialize-databases.sql:/docker-entrypoint-initdb.d/init.sql

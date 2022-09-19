@@ -1,0 +1,6 @@
+CREATE ROLE aca_java_runtimes_db_role WITH LOGIN PASSWORD 'aca_java_runtimes_db_pwd';
+
+CREATE ROLE super_aca_java_runtimes_db WITH LOGIN PASSWORD 'super_aca_java_runtimes_db_pwd' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+CREATE DATABASE aca_java_runtimes_workshop_database;
+GRANT ALL PRIVILEGES ON DATABASE aca_java_runtimes_workshop_database TO super_aca_java_runtimes_db ;
+GRANT ALL PRIVILEGES ON DATABASE aca_java_runtimes_workshop_database TO aca_java_runtimes_db_role;
