@@ -9,18 +9,23 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 
+import static java.lang.System.Logger.Level.INFO;
+
 @Controller("/micronaut")
 public class MicronautResource {
 
-    private final StatisticsRepository statisticsRepository;
+    System.Logger LOGGER = System.getLogger(this.getClass().getName());
+
+    private final StatisticsRepository repository;
 
     public MicronautResource(StatisticsRepository statisticsRepository) {
-        this.statisticsRepository = statisticsRepository;
+        this.repository = statisticsRepository;
     }
 
     @Get(produces = MediaType.TEXT_PLAIN)
     public String hello() {
-        return "Hello from Micronaut";
+        LOGGER.log(INFO, "hello");
+        return "Micronaut: hello";
     }
 
     /**
@@ -33,6 +38,7 @@ public class MicronautResource {
     @Get(uri = "/cpu", produces = MediaType.TEXT_PLAIN)
     public String cpu(@QueryValue("iterations") Long iterations,
                       @QueryValue(value = "db", defaultValue = "false") Boolean db) {
+        LOGGER.log(INFO, "Micronaut: cpu: {0} {1}", iterations, db);
 
         Instant start = Instant.now();
         if (iterations == null) {
@@ -55,7 +61,7 @@ public class MicronautResource {
             statistics.type = Type.CPU;
             statistics.parameter = iterations.toString();
             statistics.duration = Duration.between(start, Instant.now());
-            statisticsRepository.save(statistics);
+            repository.save(statistics);
         }
 
         String msg = "CPU consumption is done with " + iterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
@@ -76,6 +82,7 @@ public class MicronautResource {
     @Get(uri = "/memory", produces = MediaType.TEXT_PLAIN)
     public String memory(@QueryValue("bites") Integer bites,
                          @QueryValue(value = "db", defaultValue = "false") Boolean db) {
+        LOGGER.log(INFO, "Micronaut: memory: {0} {1}", bites, db);
 
         Instant start = Instant.now();
         if (bites == null) {
@@ -95,7 +102,7 @@ public class MicronautResource {
             statistics.type = Type.MEMORY;
             statistics.parameter = bites.toString();
             statistics.duration = Duration.between(start, Instant.now());
-            statisticsRepository.save(statistics);
+            repository.save(statistics);
         }
 
         String msg = "Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";

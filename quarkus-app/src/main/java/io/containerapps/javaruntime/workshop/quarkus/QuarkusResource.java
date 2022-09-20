@@ -14,10 +14,13 @@ import static java.lang.System.Logger.Level.INFO;
 @Produces(MediaType.TEXT_PLAIN)
 public class QuarkusResource {
 
-    Logger LOGGER = System.getLogger(this.getClass().getName());
+    private final Logger LOGGER = System.getLogger(this.getClass().getName());
 
-    @Inject
-    StatisticsRepository repository;
+    private final StatisticsRepository repository;
+
+    public QuarkusResource(StatisticsRepository statisticsRepository) {
+        this.repository = statisticsRepository;
+    }
 
     /**
      * Says hello.
@@ -27,8 +30,8 @@ public class QuarkusResource {
      */
     @GET
     public String hello() {
-        LOGGER.log(INFO, "hello");
-        return "Hello from Quarkus";
+        LOGGER.log(INFO, "Quarkus: hello");
+        return "Quarkus: hello";
     }
 
     /**
@@ -42,7 +45,7 @@ public class QuarkusResource {
     @Path("/cpu")
     public String cpu(@QueryParam("iterations") Long iterations,
                       @QueryParam("db") @DefaultValue("false") Boolean db) {
-        LOGGER.log(INFO, "cpu: {0} {1}", iterations, db);
+        LOGGER.log(INFO, "Quarkus: cpu: {0} {1}", iterations, db);
 
         Instant start = Instant.now();
         if (iterations == null) {
@@ -68,7 +71,7 @@ public class QuarkusResource {
             repository.persist(statistics);
         }
 
-        String msg = "CPU consumption is done with " + iterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        String msg = "Quarkus: CPU consumption is done with " + iterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
         if (db) {
             msg += " The result is persisted in the database.";
         }
@@ -87,7 +90,7 @@ public class QuarkusResource {
     @Path("/memory")
     public String memory(@QueryParam("bites") Integer bites,
                          @QueryParam("db") @DefaultValue("false") Boolean db) {
-        LOGGER.log(INFO, "memory: {0} {1}", bites, db);
+        LOGGER.log(INFO, "Quarkus: memory: {0} {1}", bites, db);
 
         Instant start = Instant.now();
         if (bites == null) {
@@ -110,7 +113,7 @@ public class QuarkusResource {
             repository.persist(statistics);
         }
 
-        String msg = "Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        String msg = "Quarkus: Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
         if (db) {
             msg += " The result is persisted in the database.";
         }

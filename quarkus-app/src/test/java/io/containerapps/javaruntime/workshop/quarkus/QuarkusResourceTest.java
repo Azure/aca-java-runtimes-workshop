@@ -15,7 +15,7 @@ public class QuarkusResourceTest {
           .when().get("/quarkus")
           .then()
              .statusCode(200)
-             .body(is("Hello from Quarkus"));
+             .body(is("Quarkus: hello"));
     }
 
     @Test
@@ -24,7 +24,7 @@ public class QuarkusResourceTest {
           .when().get("/quarkus/cpu")
           .then()
              .statusCode(200)
-             .body(startsWith("CPU consumption is done with"))
+             .body(startsWith("Quarkus: CPU consumption is done with"))
              .body(endsWith("nano-seconds."));
     }
 
@@ -34,7 +34,7 @@ public class QuarkusResourceTest {
           .when().get("/quarkus/cpu")
           .then()
              .statusCode(200)
-             .body(startsWith("CPU consumption is done with"))
+             .body(startsWith("Quarkus: CPU consumption is done with"))
              .body(endsWith("The result is persisted in the database."));
     }
 
@@ -44,7 +44,7 @@ public class QuarkusResourceTest {
           .when().get("/quarkus/memory")
           .then()
              .statusCode(200)
-             .body(startsWith("Memory consumption is done with"))
+             .body(startsWith("Quarkus: Memory consumption is done with"))
              .body(endsWith("nano-seconds."));
     }
 
@@ -54,7 +54,7 @@ public class QuarkusResourceTest {
           .when().get("/quarkus/memory")
           .then()
              .statusCode(200)
-             .body(startsWith("Memory consumption is done with"))
+             .body(startsWith("Quarkus: Memory consumption is done with"))
              .body(endsWith("The result is persisted in the database."));
     }
 }
