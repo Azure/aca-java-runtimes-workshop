@@ -26,17 +26,17 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="New Fighters" enabled="true"/>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Quarkus" enabled="true"/>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="New fighters/api/fights/randomfighters-01" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="hello" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">${LOAD_HOST}</stringProp>
-            <stringProp name="HTTPSampler.port">${LOAD_PORT}</stringProp>
-            <stringProp name="HTTPSampler.protocol">${LOAD_PROTOCOL}</stringProp>
+            <stringProp name="HTTPSampler.domain">${QUARKUS_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/api/fights/randomfighters</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -53,10 +53,6 @@
                   <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
                   <stringProp name="Header.value">cors</stringProp>
                 </elementProp>
-                <elementProp name="Referer" elementType="Header">
-                  <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io/</stringProp>
-                </elementProp>
                 <elementProp name="Sec-Fetch-Site" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                   <stringProp name="Header.value">same-site</stringProp>
@@ -64,10 +60,6 @@
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
                   <stringProp name="Header.value">fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
-                </elementProp>
-                <elementProp name="Origin" elementType="Header">
-                  <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Encoding" elementType="Header">
                   <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -79,7 +71,7 @@
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
-                  <stringProp name="Header.value">application/json</stringProp>
+                  <stringProp name="Header.value">text/plain</stringProp>
                 </elementProp>
                 <elementProp name="Sec-Fetch-Dest" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -89,15 +81,15 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="New fighters/api/fights/randomfighters-02" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="cpu" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">${LOAD_HOST}</stringProp>
-            <stringProp name="HTTPSampler.port">${LOAD_PORT}</stringProp>
-            <stringProp name="HTTPSampler.protocol">${LOAD_PROTOCOL}</stringProp>
+            <stringProp name="HTTPSampler.domain">${QUARKUS_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/api/fights/randomfighters</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus/cpu?iterations=10</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -114,10 +106,6 @@
                   <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
                   <stringProp name="Header.value">cors</stringProp>
                 </elementProp>
-                <elementProp name="Referer" elementType="Header">
-                  <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io/</stringProp>
-                </elementProp>
                 <elementProp name="Sec-Fetch-Site" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                   <stringProp name="Header.value">same-site</stringProp>
@@ -125,10 +113,6 @@
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
                   <stringProp name="Header.value">fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
-                </elementProp>
-                <elementProp name="Origin" elementType="Header">
-                  <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Encoding" elementType="Header">
                   <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -140,7 +124,7 @@
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
-                  <stringProp name="Header.value">application/json</stringProp>
+                  <stringProp name="Header.value">text/plain</stringProp>
                 </elementProp>
                 <elementProp name="Sec-Fetch-Dest" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -150,15 +134,15 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="New fighters/api/fights/randomfighters-03" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="cpuWithDb" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">${LOAD_HOST}</stringProp>
-            <stringProp name="HTTPSampler.port">${LOAD_PORT}</stringProp>
-            <stringProp name="HTTPSampler.protocol">${LOAD_PROTOCOL}</stringProp>
+            <stringProp name="HTTPSampler.domain">${QUARKUS_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/api/fights/randomfighters</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus/cpu?iterations=10&amp;db=true</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -175,10 +159,6 @@
                   <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
                   <stringProp name="Header.value">cors</stringProp>
                 </elementProp>
-                <elementProp name="Referer" elementType="Header">
-                  <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io/</stringProp>
-                </elementProp>
                 <elementProp name="Sec-Fetch-Site" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                   <stringProp name="Header.value">same-site</stringProp>
@@ -186,10 +166,6 @@
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
                   <stringProp name="Header.value">fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
-                </elementProp>
-                <elementProp name="Origin" elementType="Header">
-                  <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Encoding" elementType="Header">
                   <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -201,7 +177,7 @@
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
-                  <stringProp name="Header.value">application/json</stringProp>
+                  <stringProp name="Header.value">text/plain</stringProp>
                 </elementProp>
                 <elementProp name="Sec-Fetch-Dest" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -211,15 +187,15 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="New fighters/api/fights/randomfighters-04" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="memory" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">${LOAD_HOST}</stringProp>
-            <stringProp name="HTTPSampler.port">${LOAD_PORT}</stringProp>
-            <stringProp name="HTTPSampler.protocol">${LOAD_PROTOCOL}</stringProp>
+            <stringProp name="HTTPSampler.domain">${QUARKUS_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/api/fights/randomfighters</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus/memory?bites=10</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -236,10 +212,6 @@
                   <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
                   <stringProp name="Header.value">cors</stringProp>
                 </elementProp>
-                <elementProp name="Referer" elementType="Header">
-                  <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io/</stringProp>
-                </elementProp>
                 <elementProp name="Sec-Fetch-Site" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                   <stringProp name="Header.value">same-site</stringProp>
@@ -247,10 +219,6 @@
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
                   <stringProp name="Header.value">fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
-                </elementProp>
-                <elementProp name="Origin" elementType="Header">
-                  <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Encoding" elementType="Header">
                   <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -262,7 +230,7 @@
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
-                  <stringProp name="Header.value">application/json</stringProp>
+                  <stringProp name="Header.value">text/plain</stringProp>
                 </elementProp>
                 <elementProp name="Sec-Fetch-Dest" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -272,15 +240,15 @@
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="New fighters/api/fights/randomfighters-05" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="memoryWithDb" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">${LOAD_HOST}</stringProp>
-            <stringProp name="HTTPSampler.port">${LOAD_PORT}</stringProp>
-            <stringProp name="HTTPSampler.protocol">${LOAD_PROTOCOL}</stringProp>
+            <stringProp name="HTTPSampler.domain">${QUARKUS_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/api/fights/randomfighters</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus/memory?bites=10&amp;db=true</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -297,10 +265,6 @@
                   <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
                   <stringProp name="Header.value">cors</stringProp>
                 </elementProp>
-                <elementProp name="Referer" elementType="Header">
-                  <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io/</stringProp>
-                </elementProp>
                 <elementProp name="Sec-Fetch-Site" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                   <stringProp name="Header.value">same-site</stringProp>
@@ -308,10 +272,6 @@
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
                   <stringProp name="Header.value">fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
-                </elementProp>
-                <elementProp name="Origin" elementType="Header">
-                  <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Encoding" elementType="Header">
                   <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -323,82 +283,7 @@
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
-                  <stringProp name="Header.value">application/json</stringProp>
-                </elementProp>
-                <elementProp name="Sec-Fetch-Dest" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
-                  <stringProp name="Header.value">empty</stringProp>
-                </elementProp>
-              </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-          </hashTree>
-        </hashTree>
-        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Fight" enabled="true"/>
-        <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="New fighters/api/fights/fights-01" enabled="true">
-            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;hero&quot;:{&quot;name&quot;:&quot;Jarad&quot;,&quot;level&quot;:719,&quot;picture&quot;:&quot;https://raw.githubusercontent.com/quarkusio/quarkus-super-heroes/characterdata/images/jarad-vod-savo--2332551804562092846.jpg&quot;,&quot;powers&quot;:&quot;Dark Magic, Dexterity, Enhanced Hearing, Marksmanship, Necromancy, Reflexes, Toxin and Disease Resistance, Zombie Physiology, Accelerated Healing, Agility, Death Touch, Endurance, Enhanced Sight, Gadget Usage, Grappling/Climbing, Hunters Instinct, Jump, Longevity, Possession Resistance, Toxin and Disease Control, Weapon-based Powers, Acrobatics, Animal Control, Curse Manipulation, Curse Resistance, Energy Blasts, Energy Manipulation, Immortality, Indomitable Will, Information Analysis, Magic, Magic Resistance, Plant Control, Possession, Shadow Manipulation, Vitakinesis&quot;},&quot;villain&quot;:{&quot;name&quot;:&quot;Highbreed&quot;,&quot;level&quot;:6000,&quot;picture&quot;:&quot;https://raw.githubusercontent.com/quarkusio/quarkus-super-heroes/characterdata/images/atasian--3232496722450034858.jpg&quot;,&quot;powers&quot;:&quot;Accelerated Development, Acrobatics, Agility, Cold Resistance, Durability, Endurance, Flight, Heal, Intelligence, Jump, Marksmanship, Master Tactician, Peak Human Condition, Reflexes, Stamina, Super Speed, Super Strength, Accelerated Healing, Enhanced Hearing, Enhanced Senses, Enhanced Sight, Enhanced Smell, Indomitable Will, Invulnerability, Master Martial Artist, Natural Armor, Natural Weapons, Rage Power, Stealth&quot;}}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <stringProp name="HTTPSampler.domain">${LOAD_HOST}</stringProp>
-            <stringProp name="HTTPSampler.port">${LOAD_PORT}</stringProp>
-            <stringProp name="HTTPSampler.protocol">${LOAD_PROTOCOL}</stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/api/fights</stringProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="Sec-Fetch-Mode" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
-                  <stringProp name="Header.value">cors</stringProp>
-                </elementProp>
-                <elementProp name="Referer" elementType="Header">
-                  <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io/</stringProp>
-                </elementProp>
-                <elementProp name="Sec-Fetch-Site" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                  <stringProp name="Header.value">same-site</stringProp>
-                </elementProp>
-                <elementProp name="Accept-Language" elementType="Header">
-                  <stringProp name="Header.name">Accept-Language</stringProp>
-                  <stringProp name="Header.value">fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
-                </elementProp>
-                <elementProp name="Origin" elementType="Header">
-                  <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://ui-super-heroes.livelydesert-bf281413.eastus2.azurecontainerapps.io</stringProp>
-                </elementProp>
-                <elementProp name="Accept" elementType="Header">
-                  <stringProp name="Header.name">Accept</stringProp>
-                  <stringProp name="Header.value">application/json</stringProp>
-                </elementProp>
-                <elementProp name="Content-Type" elementType="Header">
-                  <stringProp name="Header.name">Content-Type</stringProp>
-                  <stringProp name="Header.value">application/json</stringProp>
-                </elementProp>
-                <elementProp name="Accept-Encoding" elementType="Header">
-                  <stringProp name="Header.name">Accept-Encoding</stringProp>
-                  <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                </elementProp>
-                <elementProp name="User-Agent" elementType="Header">
-                  <stringProp name="Header.name">User-Agent</stringProp>
-                  <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0</stringProp>
+                  <stringProp name="Header.value">text/plain</stringProp>
                 </elementProp>
                 <elementProp name="Sec-Fetch-Dest" elementType="Header">
                   <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -410,7 +295,7 @@
           </hashTree>
         </hashTree>
       </hashTree>
-      <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="Fight Test Script Recorder" enabled="true">
+      <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="Test Script Recorder" enabled="true">
         <stringProp name="ProxyControlGui.port">8888</stringProp>
         <collectionProp name="ProxyControlGui.exclude_list"/>
         <collectionProp name="ProxyControlGui.include_list"/>
@@ -472,21 +357,21 @@
       <hashTree/>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
-          <elementProp name="LOAD_PROTOCOL" elementType="Argument">
-            <stringProp name="Argument.name">LOAD_PROTOCOL</stringProp>
-            <stringProp name="Argument.value">${__P(LOAD_PROTOCOL)}</stringProp>
+          <elementProp name="QUARKUS_PROTOCOL" elementType="Argument">
+            <stringProp name="Argument.name">QUARKUS_PROTOCOL</stringProp>
+            <stringProp name="Argument.value">${__P(QUARKUS_PROTOCOL)}</stringProp>
             <stringProp name="Argument.desc">Can be http or https</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="LOAD_HOST" elementType="Argument">
-            <stringProp name="Argument.name">LOAD_HOST</stringProp>
-            <stringProp name="Argument.value">${__P(LOAD_HOST)}</stringProp>
+          <elementProp name="QUARKUS_HOST" elementType="Argument">
+            <stringProp name="Argument.name">QUARKUS_HOST</stringProp>
+            <stringProp name="Argument.value">${__P(QUARKUS_HOST)}</stringProp>
             <stringProp name="Argument.desc">Base URL of the Fight endpoint</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="LOAD_PORT" elementType="Argument">
-            <stringProp name="Argument.name">LOAD_PORT</stringProp>
-            <stringProp name="Argument.value">${__P(LOAD_PORT)}</stringProp>
+          <elementProp name="QUARKUS_PORT" elementType="Argument">
+            <stringProp name="Argument.name">QUARKUS_PORT</stringProp>
+            <stringProp name="Argument.value">${__P(QUARKUS_PORT)}</stringProp>
             <stringProp name="Argument.desc">Port number</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>

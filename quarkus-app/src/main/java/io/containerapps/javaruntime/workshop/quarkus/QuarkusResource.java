@@ -1,22 +1,33 @@
 package io.containerapps.javaruntime.workshop.quarkus;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.lang.System.Logger;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
+
+import static java.lang.System.Logger.Level.INFO;
 
 @Path("/quarkus")
 @Produces(MediaType.TEXT_PLAIN)
 public class QuarkusResource {
 
+    Logger LOGGER = System.getLogger(this.getClass().getName());
+
     @Inject
     StatisticsRepository repository;
 
+    /**
+     * Says hello.
+     * <code>curl 'localhost:8701/quarkus'</code>
+     *
+     * @return hello
+     */
     @GET
     public String hello() {
+        LOGGER.log(INFO, "hello");
         return "Hello from Quarkus";
     }
 
@@ -31,6 +42,7 @@ public class QuarkusResource {
     @Path("/cpu")
     public String cpu(@QueryParam("iterations") Long iterations,
                       @QueryParam("db") @DefaultValue("false") Boolean db) {
+        LOGGER.log(INFO, "cpu: {0} {1}", iterations, db);
 
         Instant start = Instant.now();
         if (iterations == null) {
@@ -75,6 +87,7 @@ public class QuarkusResource {
     @Path("/memory")
     public String memory(@QueryParam("bites") Integer bites,
                          @QueryParam("db") @DefaultValue("false") Boolean db) {
+        LOGGER.log(INFO, "memory: {0} {1}", bites, db);
 
         Instant start = Instant.now();
         if (bites == null) {
