@@ -7,3 +7,20 @@ netty:
   default:
     allocator:
       max-order: 3
+datasources:
+  default:
+    dialect: POSTGRES
+    url: jdbc:postgresql://localhost:5432/aca_java_runtimes_workshop_database
+    username: super_aca_java_runtimes_db
+    password: super_aca_java_runtimes_db_pwd
+    driverClassName: org.postgresql.Driver
+jpa:
+  default:
+    entity-scan:
+      packages: 'io.containerapps.javaruntime.workshop.micronaut'
+    properties:
+      hibernate:
+        bytecode:
+          provider: none
+        hbm2ddl:
+          auto: update
