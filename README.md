@@ -1,4 +1,4 @@
-# Project
+# Azure Container Apps Java Runtimes Workshop
 
 ## Test
 
