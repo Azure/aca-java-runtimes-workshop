@@ -7,8 +7,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
-
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class SpringbootResourceTest {
 
     @LocalServerPort
@@ -17,7 +16,7 @@ public class SpringbootResourceTest {
     @Test
     public void testHelloEndpoint() {
         given()
-          .when().get("http://localhost:" + port + "/springboot")
+          .when().get("http://localhost:8080/springboot")
           .then()
              .statusCode(200)
              .body(is("Hello from SpringBoot"));
