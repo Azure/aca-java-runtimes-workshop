@@ -3,15 +3,12 @@ package io.containerapps.javaruntime.workshop.quarkus.springboot;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
+
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class SpringbootResourceTest {
-
-    @LocalServerPort
-    private Integer port;
 
     @Test
     public void testHelloEndpoint() {
@@ -19,7 +16,7 @@ public class SpringbootResourceTest {
           .when().get("http://localhost:8080/springboot")
           .then()
              .statusCode(200)
-             .body(is("Hello from SpringBoot"));
+             .body(is("SpringBoot: hello"));
     }
 
     @Test
@@ -28,7 +25,7 @@ public class SpringbootResourceTest {
           .when().get("/springboot/cpu")
           .then()
              .statusCode(200)
-             .body(startsWith("CPU consumption is done with"))
+             .body(startsWith("SpringBoot: CPU consumption is done with"))
              .body(endsWith("nano-seconds."));
     }
 
@@ -38,7 +35,7 @@ public class SpringbootResourceTest {
           .when().get("/springboot/cpu")
           .then()
              .statusCode(200)
-             .body(startsWith("CPU consumption is done with"))
+             .body(startsWith("SpringBoot: CPU consumption is done with"))
              .body(endsWith("The result is persisted in the database."));
     }
 
@@ -48,7 +45,7 @@ public class SpringbootResourceTest {
           .when().get("/springboot/memory")
           .then()
              .statusCode(200)
-             .body(startsWith("Memory consumption is done with"))
+             .body(startsWith("SpringBoot: Memory consumption is done with"))
              .body(endsWith("nano-seconds."));
     }
 
@@ -58,7 +55,7 @@ public class SpringbootResourceTest {
           .when().get("/springboot/memory")
           .then()
              .statusCode(200)
-             .body(startsWith("Memory consumption is done with"))
+             .body(startsWith("SpringBoot: Memory consumption is done with"))
              .body(endsWith("The result is persisted in the database."));
     }
 }
