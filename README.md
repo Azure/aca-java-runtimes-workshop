@@ -1,11 +1,29 @@
 # Azure Container Apps Java Runtimes Workshop
 
-## Test
-
-## Execute
+## Quarkus
 
 ```shell
+mvn test                          # Execute the tests
+mvn quarkus:dev                   # Execute the application
+curl 'localhost:8701/quarkus'     # Invokes the hello endpoint
+```
+
+## Micronaut
+
+```shell
+mvn test                          # Execute the tests
 docker compose -f infrastructure/postgres.yaml up
+mvn mn:run                        # Execute the application
+curl 'localhost:8702/micronaut'   # Invokes the hello endpoint
+```
+
+## SpringBoot
+
+```shell
+mvn test                          # Execute the tests
+docker compose -f infrastructure/postgres.yaml up
+mvn spring-boot:run               # Execute the application
+curl 'localhost:8703/springboot'  # Invokes the hello endpoint
 ```
 
 > This repo has been populated by an initial template to help get you started. Please
