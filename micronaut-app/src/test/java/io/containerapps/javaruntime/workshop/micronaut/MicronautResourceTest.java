@@ -16,7 +16,7 @@ class MicronautResourceTest {
             .when().get("/micronaut")
             .then()
             .statusCode(200)
-            .body(is("Hello from Micronaut"));
+            .body(is("Micronaut: hello"));
     }
 
     @Test
@@ -25,7 +25,7 @@ class MicronautResourceTest {
             .when().get("/micronaut/cpu")
             .then()
             .statusCode(200)
-            .body(startsWith("CPU consumption is done with"))
+            .body(startsWith("Micronaut: CPU consumption is done with"))
             .body(endsWith("nano-seconds."));
     }
 
@@ -36,7 +36,7 @@ class MicronautResourceTest {
             .when().get("/micronaut/cpu")
             .then()
             .statusCode(200)
-            .body(startsWith("CPU consumption is done with"))
+            .body(startsWith("Micronaut: CPU consumption is done with"))
             .body(endsWith("The result is persisted in the database."));
     }
 
@@ -46,7 +46,7 @@ class MicronautResourceTest {
             .when().get("/micronaut/memory")
             .then()
             .statusCode(200)
-            .body(startsWith("Memory consumption is done with"))
+            .body(startsWith("Micronaut: Memory consumption is done with"))
             .body(endsWith("nano-seconds."));
     }
 
@@ -57,7 +57,7 @@ class MicronautResourceTest {
             .when().get("/micronaut/memory")
             .then()
             .statusCode(200)
-            .body(startsWith("Memory consumption is done with"))
+            .body(startsWith("Micronaut: Memory consumption is done with"))
             .body(endsWith("The result is persisted in the database."));
     }
 }
