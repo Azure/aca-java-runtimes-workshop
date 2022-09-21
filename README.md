@@ -3,6 +3,7 @@
 ## Quarkus
 
 ```shell
+cd quarkus-app
 mvn test                          # Execute the tests
 mvn quarkus:dev                   # Execute the application
 curl 'localhost:8701/quarkus'     # Invokes the hello endpoint
@@ -11,6 +12,7 @@ curl 'localhost:8701/quarkus'     # Invokes the hello endpoint
 ## Micronaut
 
 ```shell
+cd micronaut-app
 mvn test                          # Execute the tests
 docker compose -f infrastructure/postgres.yaml up
 mvn mn:run                        # Execute the application
@@ -20,6 +22,7 @@ curl 'localhost:8702/micronaut'   # Invokes the hello endpoint
 ## SpringBoot
 
 ```shell
+cd springboot-app
 mvn test                          # Execute the tests
 docker compose -f infrastructure/postgres.yaml up
 mvn spring-boot:run               # Execute the application
