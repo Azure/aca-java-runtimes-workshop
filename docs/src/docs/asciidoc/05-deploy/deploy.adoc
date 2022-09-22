@@ -1,18 +1,90 @@
-[[scaling]]
-= Scaling
+[[deploy]]
+= Deploying the application
 
-'''
+Now that all our microservices are completed, we need to deploy them to Azure Container Apps. To do this, we'll setup a GitHub Actions CI/CD workflow that will build and deploy our application to Azure Container Apps whenever we push new commits to the main branch of our repository.
 
+== What's CI/CD?
 
-[[scaling-listing-rest-resource]]
-.REST Resource
-[source,indent=0]
+CI/CD stands for _Continuous Integration_ and _Continuous Delivery_.
+
+Continuous Integration is a software development practice that requires developers to integrate code into a shared repository several times a day. Each integration can then be verified by an automated build and automated tests. By doing so, you can detect errors quickly, and locate them more easily.
+
+Continuous Delivery pushes this practice further, by preparing for a release to production after each successful build. By doing so, you can get working software into the hands of users faster.
+
+== What's GitHub Actions?
+
+https://github.com/features/actions[GitHub Actions] is a service that lets you automate your software development workflows. It allows you to run workflows that can be triggered by any event on the GitHub platform, such as opening a pull request or pushing a commit to a repository.
+
+It's a great way to automate your CI/CD pipelines, and it's free for public repositories.
+
+== Setting Up GitHub Actions for deployment
+
+To set up GitHub Actions for deployment, we'll need to create a new workflow file in our repository. This file will contain the instructions for our CI/CD pipeline.
+
+Create a new file in your repository with the path `.github/workflows/deploy.yml` and the following content:
+
+[source,yaml]
 ----
-include::{fights-github-raw}/src/main/java/io/containerapps/quarkus/workshop/superheroes/fight/FightResource.java[]
+name: Build and deploy to Azure Container Apps
+
+# Controls when the action will run.
+# We want to run this workflow every time a commit is pushed to the 'main' branch
+on:
+  push:
+    branches: [main]
+
+# Define environment variables that will be available throughout the workflow
+env:
+  REGISTRY_URL: <put here the value of $REGISTRY_URL>
+  PROJECT: java-runtimes
+  RESOURCE_GROUP: rg-java-runtimes
+  QUARKUS_APP: quarkus-app
+  MICRONAUT_APP: micronaut-app
+  SPRING_APP: spring-app
+
+# A workflow run is made up of one or more jobs.
+# Unless you specify dependencies, jobs run in parallel by default.
+jobs:
+
+  # Define our "build" job, that will be the CI part of our pipeline
+  build:
+    # The type of runner that the job will run on.
+    # Many runners are available, including Windows, macOS, and Linux.
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks (actions) that will be executed as
+    # part of the job.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'microsoft'
+          java-version: '17'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 ----
 
-== Load Testing
+[TIP]
+====
+Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier. You use the command `echo $REGISTRY_URL` to get the value of the variable.
+====
 
-== Scaling
+This workflow will be triggered every time a commit is pushed to the `main` branch. It will then run the following steps:
 
+- Checkout the code from the repository
+- Set up Java environment
+- Set up Docker Buildx for building our images
+- Log in to our container registry
 
+=== Setting up secrets
