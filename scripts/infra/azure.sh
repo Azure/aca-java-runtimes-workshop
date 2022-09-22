@@ -7,11 +7,12 @@
 ##############################################################################
 
 set -e
+cd $(dirname ${BASH_SOURCE[0]})
 
 project_name="java-runtimes"
 environment="prod"
-location="eastus2"
-resource_group_name=rg-${project_name}-${environment}
+location="eastus"
+resource_group_name=rg-${project_name}
 
 showUsage() {
   script_name="$(basename "$0")"
@@ -59,6 +60,7 @@ cleanupRepo() {
 createInfrastructure() {
   echo "Preparing environment '${environment}' of project '${project_name}'..."
 
+  export PROJECT=${project_name}
   export RESOURCE_GROUP=${resource_group_name}
   export LOCATION=${location}
   export TAG="java-runtimes"
@@ -73,11 +75,15 @@ createInfrastructure() {
   export POSTGRES_DB_ADMIN="javaruntimesadmin"
   export POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
   export POSTGRES_DB_VERSION="13"
-  export POSTGRES_SKU="Standard_D2s_v3"
-  export POSTGRES_TIER="GeneralPurpose"
+  export POSTGRES_SKU="Standard_B2s"
+  export POSTGRES_TIER="Burstable"
   export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   export POSTGRES_DB_SCHEMA="stats"
   export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+
+  export QUARKUS_APP="quarkus-app"
+  export MICRONAUT_APP="micronaut-app"
+  export SPRING_APP="spring-app"
 
   az group create \
     --name ${resource_group_name} \
@@ -98,7 +104,7 @@ createInfrastructure() {
     --query customerId  \
     --output tsv | tr -d '[:space:]')
 
-  echo $LOG_ANALYTICS_WORKSPACE_CLIENT_ID
+  echo "LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$LOG_ANALYTICS_WORKSPACE_CLIENT_ID"
 
   export LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(az monitor log-analytics workspace get-shared-keys \
     --resource-group "$RESOURCE_GROUP" \
@@ -106,7 +112,7 @@ createInfrastructure() {
     --query primarySharedKey \
     --output tsv | tr -d '[:space:]')
 
-  echo $LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET
+  echo "LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
 
   az acr create \
     --resource-group "$RESOURCE_GROUP" \
@@ -122,6 +128,14 @@ createInfrastructure() {
     --name "$REGISTRY" \
     --anonymous-pull-enabled true
 
+  REGISTRY_URL=$(az acr show \
+    --resource-group "$RESOURCE_GROUP" \
+    --name "$REGISTRY" \
+    --query "loginServer" \
+    --output tsv)
+
+  echo "REGISTRY_URL=$REGISTRY_URL"
+
   az containerapp env create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
@@ -133,11 +147,12 @@ createInfrastructure() {
   az postgres flexible-server create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
-    --tags system="$TAG" application="$HEROES_APP" \
+    --tags system="$TAG" \
     --name "$POSTGRES_DB" \
     --admin-user "$POSTGRES_DB_ADMIN" \
     --admin-password "$POSTGRES_DB_PWD" \
     --public all \
+    --tier "$POSTGRES_TIER" \
     --sku-name "$POSTGRES_SKU" \
     --storage-size 4096 \
     --version "$POSTGRES_DB_VERSION"
@@ -151,7 +166,20 @@ createInfrastructure() {
     --file-path "infrastructure/db-init/initialize-databases.sql"
   popd
 
-  
+  az containerapp create \
+    --resource-group "$RESOURCE_GROUP" \
+    --tags system="$TAG" application="$QUARKUS_APP" \
+    --image "nginxdemos/hello" \
+    --name "$QUARKUS_APP" \
+    --environment "$CONTAINERAPPS_ENVIRONMENT" \
+    --ingress external \
+    --target-port 8083 \
+    --min-replicas 0 \
+    --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
+              QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
+              QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
+              QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
+              QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
 
 
 

@@ -107,9 +107,10 @@ Let's first set a few environment variables that will help us in creating the Az
 
 [source,shell]
 ----
-RESOURCE_GROUP="rg-java-runtimes"
+PROJECT="java-runtimes"
+RESOURCE_GROUP="rg-${PROJECT}"
 LOCATION="eastus2"
-TAG="java-runtimes"
+TAG="${PROJECT}"
 
 LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
 CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
@@ -121,11 +122,15 @@ IMAGES_TAG="1.0"
 POSTGRES_DB_ADMIN="javaruntimesadmin"
 POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
 POSTGRES_DB_VERSION="13"
-POSTGRES_SKU="Standard_D2s_v3"
-POSTGRES_TIER="GeneralPurpose"
+POSTGRES_SKU="Standard_B2s"
+POSTGRES_TIER="Burstable"
 POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
 POSTGRES_DB_SCHEMA="stats"
 POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+
+QUARKUS_APP="quarkus-app"
+MICRONAUT_APP="micronaut-app"
+SPRING_APP="spring-app"
 ----
 
 Now let's create the Azure resources.
@@ -240,6 +245,34 @@ az containerapp env create \
   --logs-workspace-key "$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
 ----
 
+==== Creating the Container Apps
+
+Now that we have created the container apps environment, we can create the container apps. A container app is a containerized application that is deployed to a container apps environment. We will create threee container apps, one for each of our Java runtimes. Since we don't have any container images ready yet, we'll use a default "Hello World" image just get things running. We'll update the container apps with the actual images later.
+
+[source,shell]
+----
+az containerapp create \
+  --resource-group "$RESOURCE_GROUP" \
+  --tags system="$TAG" application="$QUARKUS_APP" \
+  --name "$QUARKUS_APP" \
+  --environment "$CONTAINERAPPS_ENVIRONMENT" \
+  --image mcr.microsoft.com/azuredocs/containerapps-helloworld:latest \
+  --ingress external \
+  --target-port 80 \
+  --min-replicas 0 \
+  --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
+             QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
+             QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
+             QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
+             QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
+----
+
+// TODO: other apps!
+
+The `create` command returns the URL for the container apps. Copy this location to a web browser, and you should see the following page:
+
+image::../images/aca-hello.png[Screenshot of the Hello World page from the Azure Container Apps]
+
 === Creating the Azure Database for PostgreSQL
 
 We'll use a PostgreSQL database to store analytics data from our microservices. Because we also want to access these database from an external SQL client, we make them available to the outside world thanks to the `-public all` parameter.
@@ -251,11 +284,12 @@ Create the database with the following command:
 az postgres flexible-server create \
   --resource-group "$RESOURCE_GROUP" \
   --location "$LOCATION" \
-  --tags system="$TAG" application="$HEROES_APP" \
+  --tags system="$TAG" \
   --name "$POSTGRES_DB" \
   --admin-user "$POSTGRES_DB_ADMIN" \
   --admin-password "$POSTGRES_DB_PWD" \
   --public all \
+  --tier "$POSTGRES_TIER" \
   --sku-name "$POSTGRES_SKU" \
   --storage-size 4096 \
   --version "$POSTGRES_DB_VERSION"
@@ -273,7 +307,7 @@ az postgres flexible-server db create \
 
 Now that we have our database setup, it's time to create the tables. We'll use a database initialization SQL file for that. Thanks to Azure CLI, we can execute these SQL scripts directly in our newly created database.
 
-Create the tables using the following commands (make sure you are under quarkus-workshop-super-heroes/super-heroes to execute them):
+Create the tables using the following command (make sure you are in the repository root directory before your execute this command):
 
 [source,shell]
 ----
@@ -289,6 +323,3 @@ az postgres flexible-server execute \
 ====
 If you get the error `No module named 'psycopg2._psycopg'` that means that some of your Azure CLI dependencies are not correctly installed. Check https://github.com/Azure/azure-cli/issues/21998 for help.
 ====
-
-// == Setting Up GitHub
-// TODO: Setup CI/CD with GitHub Actions after local run/code
