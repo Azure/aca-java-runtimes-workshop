@@ -1,0 +1,18 @@
+[[scaling]]
+= Scaling
+
+'''
+
+
+[[scaling-listing-rest-resource]]
+.REST Resource
+[source,indent=0]
+----
+include::{fights-github-raw}/src/main/java/io/containerapps/quarkus/workshop/superheroes/fight/FightResource.java[]
+----
+
+== Load Testing
+
+== Scaling
+
+
