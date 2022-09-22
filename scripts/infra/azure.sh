@@ -62,10 +62,22 @@ createInfrastructure() {
   export RESOURCE_GROUP=${resource_group_name}
   export LOCATION=${location}
   export TAG="java-runtimes"
+
   export LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
+  export CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
+
   export UNIQUE_IDENTIFIER=$(whoami)
-  export REGISTRY="javaruntimesregistry"$UNIQUE_IDENTIFIER
+  export REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
   export IMAGES_TAG="1.0"
+
+  export POSTGRES_DB_ADMIN="javaruntimesadmin"
+  export POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
+  export POSTGRES_DB_VERSION="13"
+  export POSTGRES_SKU="Standard_D2s_v3"
+  export POSTGRES_TIER="GeneralPurpose"
+  export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
+  export POSTGRES_DB_SCHEMA="stats"
+  export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
 
   az group create \
     --name ${resource_group_name} \
@@ -110,6 +122,38 @@ createInfrastructure() {
     --name "$REGISTRY" \
     --anonymous-pull-enabled true
 
+  az containerapp env create \
+    --resource-group "$RESOURCE_GROUP" \
+    --location "$LOCATION" \
+    --tags system="$TAG" \
+    --name "$CONTAINERAPPS_ENVIRONMENT" \
+    --logs-workspace-id "$LOG_ANALYTICS_WORKSPACE_CLIENT_ID" \
+    --logs-workspace-key "$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
+
+  az postgres flexible-server create \
+    --resource-group "$RESOURCE_GROUP" \
+    --location "$LOCATION" \
+    --tags system="$TAG" application="$HEROES_APP" \
+    --name "$POSTGRES_DB" \
+    --admin-user "$POSTGRES_DB_ADMIN" \
+    --admin-password "$POSTGRES_DB_PWD" \
+    --public all \
+    --sku-name "$POSTGRES_SKU" \
+    --storage-size 4096 \
+    --version "$POSTGRES_DB_VERSION"
+
+  pushd ../..
+  az postgres flexible-server execute \
+    --name "$POSTGRES_DB" \
+    --admin-user "$POSTGRES_DB_ADMIN" \
+    --admin-password "$POSTGRES_DB_PWD" \
+    --database-name "$POSTGRES_DB_SCHEMA" \
+    --file-path "infrastructure/db-init/initialize-databases.sql"
+  popd
+
+  
+
+
 
 
   echo "Environment '${environment}' of project '${project_name}' ready."
@@ -150,7 +194,7 @@ done
 # restore positional args
 set -- "${args[@]}"
 
-command=${0}
+command=${1}
 
 if ! command -v az &> /dev/null; then
   echo "Azure CLI not found."

@@ -7,8 +7,8 @@ Antonio Goncalves
 include::00-welcome/welcome.adoc[leveloffset=+1]
 <<<
 
-// Introduction
-include::01-introduction/introduction.adoc[leveloffset=+1]
+// Setup
+include::01-setup/setup.adoc[leveloffset=+1]
 <<<
 
 // Quarkus
