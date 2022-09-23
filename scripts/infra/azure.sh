@@ -81,7 +81,7 @@ createInfrastructure() {
   export POSTGRES_TIER="Burstable"
   export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   export POSTGRES_DB_SCHEMA="stats"
-  export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+  export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
 
   export QUARKUS_APP="quarkus-app"
   export MICRONAUT_APP="micronaut-app"
@@ -183,10 +183,10 @@ createInfrastructure() {
     --target-port 80 \
     --min-replicas 0 \
     --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
-              QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
-              QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
-              QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
-              QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
+               QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
+               QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
+               QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
+               QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
 
     az containerapp create \
       --resource-group "$RESOURCE_GROUP" \
@@ -220,7 +220,7 @@ exportEnvironment() {
   export LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
   export CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
 
-  export UNIQUE_IDENTIFIER=$(whoami)
+  export UNIQUE_IDENTIFIER=sinedied #$(whoami)
   export REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
   export IMAGES_TAG="1.0"
 
@@ -231,7 +231,7 @@ exportEnvironment() {
   export POSTGRES_TIER="Burstable"
   export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   export POSTGRES_DB_SCHEMA="stats"
-  export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+  export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
 
   export QUARKUS_APP="quarkus-app"
   export MICRONAUT_APP="micronaut-app"
@@ -301,11 +301,11 @@ if ! command -v az &> /dev/null; then
   exit 1
 fi
 
-if ! command -v gh &> /dev/null; then
-  echo "GitHub CLI not found."
-  echo "See https://cli.github.com for installation instructions."
-  exit 1
-fi
+# if ! command -v gh &> /dev/null; then
+#   echo "GitHub CLI not found."
+#   echo "See https://cli.github.com for installation instructions."
+#   exit 1
+# fi
 
 if [ "$skip_login" = false ]; then
   echo "Logging in to Azure..."
