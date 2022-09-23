@@ -80,11 +80,171 @@ jobs:
 Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier. You use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
 
-This workflow will be triggered every time a commit is pushed to the `main` branch. It will then run the following steps:
+This workflow will be triggered every time a commit is pushed to the `main` branch. It will then run a `build` job the following steps:
 
 - Checkout the code from the repository
 - Set up Java environment
 - Set up Docker Buildx for building our images
 - Log in to our container registry
 
+=== Building the applications
+
+Now we need to add the steps to build and package our apps. Note that our tests will be run as part of the build, to make sure the integration is correct. Add the following step to the `build` job:
+
+[source,yaml]
+----
+      - name: Build apps
+        run: |
+          cd quarkus-app && ./mvnw package
+          cd ../micronaut-app && ./mvnw package
+          cd ../spring-app && ./mvnw package
+----
+
+[WARNING]
+Make sure to keep the correct indentation for the steps. YAML is very sensitive to indentation.
+
+The next step is to build our Docker images. We'll use the https://github.com/marketplace/actions/build-and-push-docker-images[`docker/build-push-action` action] to build and push our images to our container registry. Add the following steps to the `build` job:
+
+[source,yaml]
+----
+      - name: Build and push Quarkus container to registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }}
+          file: ./quarkus-app/src/main/docker/Dockerfile.jvm
+          context: ./quarkus-app/
+
+      - name: Build and push Micronaut container to registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
+          file: ./micronaut-app/Dockerfile
+          context: ./micronaut-app/
+
+      - name: Build and push Spring container to registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
+          file: ./spring-app/Dockerfile
+          context: ./spring-app/
+----
+
+We're using the `github.sha` variable, to tag our images with the commit SHA that triggered the workflow. This way, we can easily identify which version of the application is deployed.
+
+[TIP]
+====
+Here we're building and pushing our images sequentially to keep things simple, but you could also create three separate `build` jobs, one for each image, to run them in parallel which would be faster.
+====
+
+=== Deploying to Azure Container Apps
+
+Our container images are now built and pushed to our container registry, ready to be deployed.
+We'll add a new `deploy` job to our workflow to deploy them to Azure Container Apps. Add these lines after the `build` job:
+
+[source,yaml]
+----
+  # Define our "deploy" job, that will be the CD part of our pipeline
+  deploy:
+    runs-on: ubuntu-latest
+
+    # This job needs to run after the "build" job, so we'll add a dependency on it
+    needs: build
+    
+    steps:
+      # Log in to Azure to be able to deploy our apps
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Use the Azure CLI to deploy our apps
+      - name: Deploy to containerapp
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+            
+            az containerapp update \
+              --name ${{ env.QUARKUS_APP }} \
+              --resource-group ${{ RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }} \
+              --target-port 8701
+
+            az containerapp update \
+              --name ${{ env.MICRONAUT_APP }} \
+              --resource-group ${{ RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }} \
+              --target-port 8702
+
+            az containerapp update \
+              --name ${{ env.SPRING_APP }} \
+              --resource-group ${{ RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }} \
+              --target-port 8703
+----
+
+This job will run after the `build` job, and will use the Azure CLI to deploy our apps to Azure Container Apps. We're using the `github.sha` variable again to make sure we're deploying the correct version of the images.
+
 === Setting up secrets
+
+As you can see in the previous steps, we're using differents secrets in our workflow: `REGISTRY_USERNAME`, `REGISTRY_PASSWORD` and `AZURE_CREDENTIALS`. https://docs.github.com/en/actions/security-guides/encrypted-secrets[Secrets] in GitHub are encryped and allow you to store sensitive information such as passwords or API keys, and use them in your workflows using the `${{ secrets.MY_SECRET }}` syntax.
+
+In GitHub, secrets can be defined at three different levels:
+
+- _Repository level_: secrets defined at the repository level are available in all workflows of the repository.
+- _Organization level_: secrets defined at the organization level are available in all workflows of the https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations[GitHub organization].
+- _Environment level_: secrets defined at the environment level are available only in workflows referencing the specified https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment[environment].
+
+For this workshop, we'll define our secrets at the repository level. To do so, go to the `Settings` tab of your repository, and select `Secrets` then `Actions` under it, in the left menu.
+
+Then select `New repository secret` and create two secrets for `REGISTRY_USERNAME` and `REGISTRY_PASSWORD`.
+
+image::../images/github-secrets.png[Screenshot of GitHub interface showing the New repository secret button]
+
+You can get the value of the `REGISTRY_USERNAME` and `REGISTRY_PASSWORD` secrets by running the following commands:
+
+[source,shell]
+----
+echo $REGISTRY_USERNAME
+echo $REGISTRY_PASSWORD
+----
+
+[TIP]
+You can also use the https://cli.github.com[GitHub CLI] to define your secrets, using the command `gh secret set <MY_SECRET> -b"<SECRET_VALUE>" -R <repository_url>`.
+
+==== Creating an Azure Service Principal
+
+In order to deploy our application to Azure Container Apps, we'll need to create an Azure Service Principal. This is an identity that can be used to authenticate to Azure, and that can be granted access to specific resources.
+
+To create a new Service Principal, run the following commands:
+
+[source,shell]
+----
+SUBSCRIPTION_ID=$(az account show \
+  --query id \
+  --output tsv \
+  --only-show-errors \
+)
+
+AZURE_CREDENTIALS=$(az ad sp create-for-rbac \
+  --name="sp-${PROJECT}" \
+  --role="Contributor" \
+  --scopes="/subscriptions/$SUBSCRIPTION_ID" \
+  --sdk-auth \
+  --only-show-errors \
+)
+
+echo $AZURE_CREDENTIALS
+----
+
+Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value.
+
+=== Running the workflow
+
+Now that we've defined our workflow, we can run it to deploy our application to Azure Container Apps.
+Commit and push your changes to your repository, and go to the `Actions` tab of your repository to see the workflow running. It should take a few minutes to complete.
+
+// image::../images/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
