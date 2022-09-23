@@ -277,7 +277,7 @@ image::../images/aca-hello.png[Screenshot of the Hello World page from the Azure
 
 We'll use a PostgreSQL database to store analytics data from our microservices. Because we also want to access these database from an external SQL client, we make them available to the outside world thanks to the `-public all` parameter.
 
-Create the database with the following command:
+Create the database with the following command (this one will take a few minutes):
 
 [source,shell]
 ----
