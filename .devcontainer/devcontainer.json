@@ -41,6 +41,7 @@
 	"remoteUser": "vscode",
 	"features": {
 		"docker-in-docker": "latest",
-		"azure-cli": "latest"
+		"azure-cli": "latest",
+		"github-cli": "latest"
 	}
 }
