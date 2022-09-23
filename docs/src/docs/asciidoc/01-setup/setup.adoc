@@ -109,7 +109,7 @@ Let's first set a few environment variables that will help us in creating the Az
 ----
 PROJECT="java-runtimes"
 RESOURCE_GROUP="rg-${PROJECT}"
-LOCATION="eastus2"
+LOCATION="eastus"
 TAG="${PROJECT}"
 
 LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
@@ -256,7 +256,7 @@ az containerapp create \
   --tags system="$TAG" application="$QUARKUS_APP" \
   --name "$QUARKUS_APP" \
   --environment "$CONTAINERAPPS_ENVIRONMENT" \
-  --image mcr.microsoft.com/azuredocs/containerapps-helloworld:latest \
+  --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
   --ingress external \
   --target-port 80 \
   --min-replicas 0 \
