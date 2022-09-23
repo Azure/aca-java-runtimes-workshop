@@ -208,7 +208,20 @@ You can get the value of the `REGISTRY_USERNAME` and `REGISTRY_PASSWORD` secrets
 
 [source,shell]
 ----
+REGISTRY_USERNAME=$( \
+  az acr credential show \
+    --name "$REGISTRY" \
+    --query "username" \
+    --output tsv \
+  )
 echo $REGISTRY_USERNAME
+
+REGISTRY_PASSWORD=$( \
+  az acr credential show \
+    --name "$REGISTRY" \
+    --query "passwords[0].value" \
+    --output tsv \
+  )
 echo $REGISTRY_PASSWORD
 ----
 
@@ -242,9 +255,37 @@ echo $AZURE_CREDENTIALS
 
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value.
 
+=== Updating the Container Apps target port
+
+Earlier, we used a test image when we created our Container Apps instance as we didn't have our application images ready yet. The test image use port `80` in the container, but we use a different port in each of our applications so we have to update it before deployment.
+
+Run the following commands to update the target ports:
+
+[source,shell]
+----
+az containerapp ingress enable \
+  --name ${QUARKUS_APP} \
+  --resource-group ${RESOURCE_GROUP} \
+  --target-port 8701 \
+  --type external
+
+az containerapp ingress enable \
+  --name ${MICRONAUT_APP} \
+  --resource-group ${RESOURCE_GROUP} \
+  --target-port 8702 \
+  --type external
+
+az containerapp ingress enable \
+  --name ${SPRING_APP} \
+  --resource-group ${RESOURCE_GROUP} \
+  --target-port 8703 \
+  --type external
+----
+
 === Running the workflow
 
-Now that we've defined our workflow, we can run it to deploy our application to Azure Container Apps.
+Now that we've defined our workflow and prepared everything, we can run it to deploy our application to Azure Container Apps.
 Commit and push your changes to your repository, and go to the `Actions` tab of your repository to see the workflow running. It should take a few minutes to complete.
 
+// TODO
 // image::../images/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
