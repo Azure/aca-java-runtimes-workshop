@@ -7,7 +7,7 @@
 ##############################################################################
 
 set -e
-cd $(dirname ${BASH_SOURCE[0]})
+pushd $(dirname ${BASH_SOURCE[0]})
 
 project_name="java-runtimes"
 environment="prod"
@@ -16,7 +16,7 @@ resource_group_name=rg-${project_name}
 
 showUsage() {
   script_name="$(basename "$0")"
-  echo "Usage: ./$script_name setup|cleanup"
+  echo "Usage: ./$script_name setup|cleanup|env"
   echo "Setup or cleanup the Azure infrastructure for this project."
   echo
   echo "Options:"
@@ -45,6 +45,8 @@ setupRepo() {
   remote_repo=$(git config --get remote.origin.url)
   echo "Setting up GitHub repository secrets..."
   gh secret set AZURE_CREDENTIALS -b"$service_principal" -R $remote_repo
+  gh secret set REGISTRY_USERNAME -b"$REGISTRY_USERNAME" -R $remote_repo
+  gh secret set REGISTRY_PASSWORD -b"$REGISTRY_PASSWORD" -R $remote_repo
 }
 
 cleanupRepo() {
@@ -128,7 +130,7 @@ createInfrastructure() {
     --name "$REGISTRY" \
     --anonymous-pull-enabled true
 
-  REGISTRY_URL=$(az acr show \
+  export REGISTRY_URL=$(az acr show \
     --resource-group "$RESOURCE_GROUP" \
     --name "$REGISTRY" \
     --query "loginServer" \
@@ -157,6 +159,11 @@ createInfrastructure() {
     --storage-size 4096 \
     --version "$POSTGRES_DB_VERSION"
 
+  az postgres flexible-server db create \
+    --resource-group "$RESOURCE_GROUP" \
+    --server-name "$POSTGRES_DB" \
+    --database-name "$POSTGRES_DB_SCHEMA"
+
   pushd ../..
   az postgres flexible-server execute \
     --name "$POSTGRES_DB" \
@@ -169,11 +176,11 @@ createInfrastructure() {
   az containerapp create \
     --resource-group "$RESOURCE_GROUP" \
     --tags system="$TAG" application="$QUARKUS_APP" \
-    --image "nginxdemos/hello" \
+    --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
     --name "$QUARKUS_APP" \
     --environment "$CONTAINERAPPS_ENVIRONMENT" \
     --ingress external \
-    --target-port 8083 \
+    --target-port 80 \
     --min-replicas 0 \
     --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
               QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
@@ -181,15 +188,79 @@ createInfrastructure() {
               QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
               QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
 
+    az containerapp create \
+      --resource-group "$RESOURCE_GROUP" \
+      --tags system="$TAG" application="$MICRONAUT_APP" \
+      --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
+      --name "$MICRONAUT_APP" \
+      --environment "$CONTAINERAPPS_ENVIRONMENT" \
+      --ingress external \
+      --target-port 80 \
+      --min-replicas 0
 
-
+    az containerapp create \
+      --resource-group "$RESOURCE_GROUP" \
+      --tags system="$TAG" application="$SPRING_APP" \
+      --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
+      --name "$SPRING_APP" \
+      --environment "$CONTAINERAPPS_ENVIRONMENT" \
+      --ingress external \
+      --target-port 80 \
+      --min-replicas 0
 
   echo "Environment '${environment}' of project '${project_name}' ready."
 }
 
+exportEnvironment() {
+  export PROJECT=${project_name}
+  export RESOURCE_GROUP=${resource_group_name}
+  export LOCATION=${location}
+  export TAG="java-runtimes"
+
+  export LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
+  export CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
+
+  export UNIQUE_IDENTIFIER=$(whoami)
+  export REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
+  export IMAGES_TAG="1.0"
+
+  export POSTGRES_DB_ADMIN="javaruntimesadmin"
+  export POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
+  export POSTGRES_DB_VERSION="13"
+  export POSTGRES_SKU="Standard_B2s"
+  export POSTGRES_TIER="Burstable"
+  export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
+  export POSTGRES_DB_SCHEMA="stats"
+  export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+
+  export QUARKUS_APP="quarkus-app"
+  export MICRONAUT_APP="micronaut-app"
+  export SPRING_APP="spring-app"
+
+  export LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace show  \
+    --resource-group "$RESOURCE_GROUP" \
+    --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
+    --query customerId  \
+    --output tsv | tr -d '[:space:]')
+
+  export LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(az monitor log-analytics workspace get-shared-keys \
+    --resource-group "$RESOURCE_GROUP" \
+    --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
+    --query primarySharedKey \
+    --output tsv | tr -d '[:space:]')
+
+  export REGISTRY_URL=$(az acr show \
+    --resource-group "$RESOURCE_GROUP" \
+    --name "$REGISTRY" \
+    --query "loginServer" \
+    --output tsv)
+
+  echo "Exported environment variables for project '${project_name}'."
+}
+
 deleteInfrastructure() {
   echo "Deleting environment '${environment}' of project '${project_name}'..."
-  az group delete --yes --name "rg-${project_name}-${environment}"
+  az group delete --yes --name "${resource_group_name}"
   echo "Environment '${environment}' of project '${project_name}' deleted."
 }
 
@@ -245,13 +316,18 @@ if [ "$skip_login" = false ]; then
 fi
 
 if [ "$command" = "setup" ]; then
-  # setupRepo
   createInfrastructure
+  # setupRepo
 elif [ "$command" = "cleanup" ]; then
   deleteInfrastructure
   # cleanupRepo
+elif [ "$command" = "env" ]; then
+  exportEnvironment
 else
   showUsage
   echo "Error, unknown command '${command}'"
   exit 1
 fi
+
+set +e
+popd
