@@ -58,24 +58,40 @@ include::{plantDir}/welcome-physical-architecture.puml[]
 
 === How Does This Workshop Work?
 
+You have this material in your hands, and you can now follow it step by step. The structure of this workshop is as follow :
+
+1. _Installing all the needed tools_: in this section, you will install all the tools and code to be able to bundle, package and deploy our application.
+
+2. _Setup Azure resources_: this section introduces Azure and the Container Apps service to prepare all the needed resources for our application. You will create an entire infrastructure on Azure (Container Registry, Postgres databases, etc.) to make everything ready for deployment.
+
+3. _Running the Application Locally_: in this section, you will build Docker images out of our microservices, execute them locally with Docker compose, push them to Azure Registry, all that using Docker and Azure CLI.
+
+4. _Setup CI/CD and deploy application_: in this section, you will setup a CI/CD pipeline using GitHub Actions so that our application builds and deploy automatically on new commits.
+
+5. _Administrating_: in this section, you will add some load to your microservices, monitor them, scale them, check the logs, etc.
+
 === What Do You Have to Do?
 
-=== Prerequisites
+This workshop should be as self-explanatory as possible. So your job is to follow the instructions by yourself, do what you are supposed to do, and do not hesitate to ask for any clarification or assistance; that's why the team is here.
+
+Oh, and be ready to have some fun!
+
+=== Pre-requisites
 
 [cols="1,1"]
 |===
 | Java                | {jdk-version} https://docs.microsoft.com/java/openjdk/download?WT.mc_id=javascript-0000-yolasors[Get OpenJDK]
 | Maven               | {maven-version} https://maven.apache.org/download.cgi[Get Maven]
 | Docker              | {docker-version} https://docs.docker.com/get-docker/[Get Docker]
+| Azure CLI           | https://learn.microsoft.com/cli/azure/install-azure-cli?WT.mc_id=javascript-0000-yolasors#install[Get Azure CLI]
 | Git                 | https://git-scm.com
 | GitHub account      | https://github.com/join
 | Azure account       | https://azure.microsoft.com/free/?WT.mc_id=javascript-0000-yolasors[https://azure.microsoft.com/free]
 
-If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: https://azcheck.in/dbe221010
-Once you have your code, copy it and click on the button *Get on board with Azure*.
+If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: https://azcheck.in/dbe221010.
+Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
 
 | A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download?WT.mc_id=javascript-0000-yolasors[Get VS Code]
-| A browser           | https://www.microsoft.com/edge
 
 |===
 
@@ -90,44 +106,5 @@ You can test your installation by running the following commands:
 java -version
 mvn --version
 docker --version
+az --version
 ----
-
-=== Setting Up the Project
-
-Open https://github.com/Azure/aca-java-runtimes-workshop[this GitHub repository] and click on `Use this template`. 
-
-image::../images/github-template.png[Screenshot of GitHub showing the "Use this template" button]
-
-You will be redirected to the repository creation page. Enter a name for your new repository, set the repo visibility to `public` and click on `Create repository from template`.
-
-Once the repository is created, clone it locally using git.
-
-If you chose to use the dev container environment, open the project in VS Code, click on the green button in the bottom left corner of the window and select *Reopen in Container*. 
-
-// == Installing Software
-
-// === VS Code
-
-// == Preparing for the Workshop
-
-=== Setting Up Azure
-
-Once you have created your Azure account, go to https://portal.azure.com?WT.mc_id=javascript-0000-yolasors[Azure Portal]
-
-
-==== Setting Up the Environment Variables
-
-==== Setting Up the Azure Environment
-
-==== Creating the Azure Resources
-
-===== Creating the Container Apps environment
-
-===== Resource Group
-
-===== Log Analytics Workspace
-
-===== Azure Container Registry
-
-=== Setting Up GitHub
-

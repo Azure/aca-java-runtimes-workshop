@@ -1,0 +1,98 @@
+name: Build and deploy
+
+on:
+  push:
+    # branches: [main]
+    workflow_dispatch:
+
+env:
+  REGISTRY_URL: <put here the value of $REGISTRY_URL>
+  PROJECT: java-runtimes
+  RESOURCE_GROUP: rg-java-runtimes
+  QUARKUS_APP: quarkus-app
+  MICRONAUT_APP: micronaut-app
+  SPRING_APP: spring-app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'microsoft'
+          java-version: '17'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build apps
+        run: |
+          cd quarkus-app && ./mvnw package
+          # cd ../micronaut-app && ./mvnw package
+          # cd ../spring-app && ./mvnw package
+
+      - name: Build and push Quarkus container to registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }}
+          file: ./quarkus-app/src/main/docker/Dockerfile.jvm
+          context: ./quarkus-app/
+
+      # - name: Build and push Micronaut container to registry
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     push: true
+      #     tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
+      #     file: ./micronaut-app/Dockerfile
+      #     context: ./micronaut-app/
+
+      # - name: Build and push Spring container to registry
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     push: true
+      #     tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
+      #     file: ./spring-app/Dockerfile
+      #     context: ./spring-app/
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to containerapp
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+
+            az containerapp update \
+              --name ${{ env.QUARKUS_APP }} \
+              --resource-group ${{ RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }}
+
+            # az containerapp update \
+            #   --name ${{ env.MICRONAUT_APP }} \
+            #   --resource-group ${{ RESOURCE_GROUP }} \
+            #   --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
+
+            # az containerapp update \
+            #   --name ${{ env.SPRING_APP }} \
+            #   --resource-group ${{ RESOURCE_GROUP }} \
+            #   --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}

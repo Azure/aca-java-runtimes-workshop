@@ -1,5 +1,5 @@
 = Azure Container Apps and Java Runtimes Workshop
-Antonio Goncalves
+Antonio Goncalves, https://twitter.com/sinedied[Yohan Lasorsa]
 :revnumber: {project-version}
 :example-caption!:
 
@@ -7,8 +7,8 @@ Antonio Goncalves
 include::00-welcome/welcome.adoc[leveloffset=+1]
 <<<
 
-// Introduction
-include::01-introduction/introduction.adoc[leveloffset=+1]
+// Setup
+include::01-setup/setup.adoc[leveloffset=+1]
 <<<
 
 // Quarkus
@@ -23,7 +23,14 @@ include::03-micronaut/micronaut.adoc[leveloffset=+1]
 include::04-springboot/springboot.adoc[leveloffset=+1]
 <<<
 
-// Scaling
-include::05-scaling/ui.adoc[leveloffset=+1]
+// Deploy
+include::05-deploy/deploy.adoc[leveloffset=+1]
 <<<
 
+// Scaling
+include::06-scaling/scaling.adoc[leveloffset=+1]
+<<<
+
+// Conclusion
+include::07-conclusion/conclusion.adoc[leveloffset=+1]
+<<<
