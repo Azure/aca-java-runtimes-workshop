@@ -23,8 +23,8 @@ curl 'localhost:8702/micronaut'   # Invokes the hello endpoint
 
 ```shell
 cd springboot-app
-mvn test                          # Execute the tests
 docker compose -f infrastructure/postgres.yaml up
+mvn test                          # Execute the tests
 mvn spring-boot:run               # Execute the application
 curl 'localhost:8703/springboot'  # Invokes the hello endpoint
 ```
