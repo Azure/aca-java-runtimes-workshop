@@ -24,7 +24,7 @@ public class MicronautResource {
 
     /**
      * Says hello.
-     * <code>curl 'localhost:8701/micronaut'</code>
+     * <code>curl 'localhost:8702/micronaut'</code>
      *
      * @return hello
      */
@@ -36,15 +36,18 @@ public class MicronautResource {
 
     /**
      * Simulates requests that use a lot of CPU.
-     * <code>curl 'localhost:8701/micronaut/cpu?iterations=10&db=true'</code>
+     * <code>curl 'localhost:8702/micronaut/cpu'</code>
+     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10'</code>
+     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10&db=true'</code>
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
      */
     @Get(uri = "/cpu", produces = MediaType.TEXT_PLAIN)
-    public String cpu(@QueryValue("iterations") Long iterations,
+    public String cpu(@QueryValue(value = "iterations", defaultValue = "10") Long iterations,
                       @QueryValue(value = "db", defaultValue = "false") Boolean db) {
         LOGGER.log(INFO, "Micronaut: cpu: {0} {1}", iterations, db);
+        Long iterationsDone = iterations;
 
         Instant start = Instant.now();
         if (iterations == null) {
@@ -70,7 +73,7 @@ public class MicronautResource {
             repository.save(statistics);
         }
 
-        String msg = "Micronaut: CPU consumption is done with " + iterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        String msg = "Micronaut: CPU consumption is done with " + iterationsDone + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
         if (db) {
             msg += " The result is persisted in the database.";
         }
@@ -80,13 +83,15 @@ public class MicronautResource {
 
     /**
      * Simulates requests that use a lot of memory.
-     * <code>curl 'localhost:8701/micronaut/memory?bites=10&db=true'</code>
+     * <code>curl 'localhost:8702/micronaut/memory'</code>
+     * <code>curl 'localhost:8702/micronaut/memory?bites=10'</code>
+     * <code>curl 'localhost:8702/micronaut/memory?bites=10&db=true'</code>
      *
      * @param bites the number of megabytes to eat
      * @return the result.
      */
     @Get(uri = "/memory", produces = MediaType.TEXT_PLAIN)
-    public String memory(@QueryValue("bites") Integer bites,
+    public String memory(@QueryValue(value = "bites", defaultValue = "false") Integer bites,
                          @QueryValue(value = "db", defaultValue = "false") Boolean db) {
         LOGGER.log(INFO, "Micronaut: memory: {0} {1}", bites, db);
 

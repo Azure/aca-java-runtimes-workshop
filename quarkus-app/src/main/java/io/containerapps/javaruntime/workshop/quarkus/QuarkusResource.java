@@ -39,6 +39,8 @@ public class QuarkusResource {
 
     /**
      * Simulates requests that use a lot of CPU.
+     * <code>curl 'localhost:8701/quarkus/cpu'</code>
+     * <code>curl 'localhost:8701/quarkus/cpu?iterations=100'</code>
      * <code>curl 'localhost:8701/quarkus/cpu?iterations=10&db=true'</code>
      *
      * @param iterations the number of iterations to run (times 20,000).
@@ -46,9 +48,10 @@ public class QuarkusResource {
      */
     @GET
     @Path("/cpu")
-    public String cpu(@QueryParam("iterations") Long iterations,
+    public String cpu(@QueryParam("iterations") @DefaultValue("10") Long iterations,
                       @QueryParam("db") @DefaultValue("false") Boolean db) {
         LOGGER.log(INFO, "Quarkus: cpu: {0} {1}", iterations, db);
+        Long iterationsDone = iterations;
 
         Instant start = Instant.now();
         if (iterations == null) {
@@ -74,7 +77,7 @@ public class QuarkusResource {
             repository.persist(statistics);
         }
 
-        String msg = "Quarkus: CPU consumption is done with " + iterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        String msg = "Quarkus: CPU consumption is done with " + iterationsDone + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
         if (db) {
             msg += " The result is persisted in the database.";
         }
@@ -84,6 +87,8 @@ public class QuarkusResource {
 
     /**
      * Simulates requests that use a lot of memory.
+     * <code>curl 'localhost:8701/quarkus/memory'</code>
+     * <code>curl 'localhost:8701/quarkus/memory?bites=10'</code>
      * <code>curl 'localhost:8701/quarkus/memory?bites=10&db=true'</code>
      *
      * @param bites the number of megabytes to eat
@@ -91,7 +96,7 @@ public class QuarkusResource {
      */
     @GET
     @Path("/memory")
-    public String memory(@QueryParam("bites") Integer bites,
+    public String memory(@QueryParam("bites") @DefaultValue("10") Integer bites,
                          @QueryParam("db") @DefaultValue("false") Boolean db) {
         LOGGER.log(INFO, "Quarkus: memory: {0} {1}", bites, db);
 

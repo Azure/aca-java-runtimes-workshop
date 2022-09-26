@@ -26,7 +26,7 @@ public class SpringbootResource {
 
     /**
      * Says hello.
-     * <code>curl 'localhost:8701/springboot'</code>
+     * <code>curl 'localhost:8703/springboot'</code>
      *
      * @return hello
      */
@@ -38,15 +38,18 @@ public class SpringbootResource {
 
     /**
      * Simulates requests that use a lot of CPU.
-     * <code>curl 'localhost:8701/springboot/cpu?iterations=10&db=true'</code>
+     * <code>curl 'localhost:8703/springboot/cpu'</code>
+     * <code>curl 'localhost:8703/springboot/cpu?iterations=10'</code>
+     * <code>curl 'localhost:8703/springboot/cpu?iterations=10&db=true'</code>
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
      */
     @GetMapping(path = "/cpu", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String cpu(@RequestParam(value = "iterations", required = false) Long iterations,
+    public String cpu(@RequestParam(value = "iterations", defaultValue = "10") Long iterations,
                       @RequestParam(value = "db", defaultValue = "false") Boolean db) {
         LOGGER.log(INFO, "SpringBoot: cpu: {0} {1}", iterations, db);
+        Long iterationsDone = iterations;
 
         Instant start = Instant.now();
         if (iterations == null) {
@@ -54,9 +57,6 @@ public class SpringbootResource {
         } else {
             iterations *= 20000;
         }
-        // Save # of iterations before decrementing for correct response below
-        long totalIterations = iterations;
-
         while (iterations > 0) {
             if (iterations % 20000 == 0) {
                 try {
@@ -75,7 +75,7 @@ public class SpringbootResource {
             repository.save(statistics);
         }
 
-        String msg = "SpringBoot: CPU consumption is done with " + totalIterations + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        String msg = "SpringBoot: CPU consumption is done with " + iterationsDone + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
         if (db) {
             msg += " The result is persisted in the database.";
         }
@@ -85,13 +85,15 @@ public class SpringbootResource {
 
     /**
      * Simulates requests that use a lot of memory.
-     * <code>curl 'localhost:8701/springboot/memory?bites=10&db=true'</code>
+     * <code>curl 'localhost:8703/springboot/memory'</code>
+     * <code>curl 'localhost:8703/springboot/memory?bites=10'</code>
+     * <code>curl 'localhost:8703/springboot/memory?bites=10&db=true'</code>
      *
      * @param bites the number of megabytes to eat
      * @return the result.
      */
     @GetMapping(path = "/memory", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String memory(@RequestParam(value = "bites", required = false) Integer bites,
+    public String memory(@RequestParam(value = "bites", defaultValue = "10") Integer bites,
                          @RequestParam(value = "db", defaultValue = "false") Boolean db) {
         LOGGER.log(INFO, "SpringBoot: memory: {0} {1}", bites, db);
 
@@ -116,9 +118,7 @@ public class SpringbootResource {
             repository.save(statistics);
         }
 
-        String msg = "SpringBoot: Memory consumption is done with " + bites
-            + ((bites == 1) ? " bite " : " bites ")
-            + "in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        String msg = "SpringBoot: Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
         if (db) {
             msg += " The result is persisted in the database.";
         }
