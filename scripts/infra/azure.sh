@@ -62,6 +62,7 @@ cleanupRepo() {
 createInfrastructure() {
   echo "Preparing environment '${environment}' of project '${project_name}'..."
 
+# tag::adocEnvironmentVariables[]
   PROJECT="java-runtimes"
   RESOURCE_GROUP="rg-${PROJECT}"
   LOCATION="eastus"
@@ -86,20 +87,26 @@ createInfrastructure() {
   QUARKUS_APP="quarkus-app"
   MICRONAUT_APP="micronaut-app"
   SPRING_APP="spring-app"
+# end::adocEnvironmentVariables[]
 
+# tag::adocResourceGroup[]
   az group create \
     --name "$RESOURCE_GROUP" \
     --location "$LOCATION" \
     --tags system="$TAG"
+# end::adocResourceGroup[]
 
   echo "Resource group '$RESOURCE_GROUP' ready."
 
+# tag::adocLogAnalytics[]
   az monitor log-analytics workspace create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
     --tags system="$TAG" \
     --workspace-name "$LOG_ANALYTICS_WORKSPACE"
+# end::adocLogAnalytics[]
 
+# tag::adocLogAnalyticsSecrets[]
   LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace show  \
     --resource-group "$RESOURCE_GROUP" \
     --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
@@ -115,7 +122,9 @@ createInfrastructure() {
     --output tsv | tr -d '[:space:]')
 
   echo "LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
+# end::adocLogAnalyticsSecrets[]
 
+# tag::adocRegistry[]
   az acr create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
@@ -124,12 +133,16 @@ createInfrastructure() {
     --workspace "$LOG_ANALYTICS_WORKSPACE" \
     --sku Standard \
     --admin-enabled true
+# end::adocRegistry[]
 
+# tag::adocRegistryUpdate[]
   az acr update \
     --resource-group "$RESOURCE_GROUP" \
     --name "$REGISTRY" \
     --anonymous-pull-enabled true
+# end::adocRegistryUpdate[]
 
+# tag::adocRegistryShow[]
   REGISTRY_URL=$(az acr show \
     --resource-group "$RESOURCE_GROUP" \
     --name "$REGISTRY" \
@@ -137,15 +150,19 @@ createInfrastructure() {
     --output tsv)
 
   echo "REGISTRY_URL=$REGISTRY_URL"
+# end::adocRegistryShow[]
 
-  az containerapp env create \
+# tag::adocACAEnv[]
+az containerapp env create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
     --tags system="$TAG" \
     --name "$CONTAINERAPPS_ENVIRONMENT" \
     --logs-workspace-id "$LOG_ANALYTICS_WORKSPACE_CLIENT_ID" \
     --logs-workspace-key "$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
+# end::adocACAEnv[]
 
+# tag::adocACACreate[]
   az containerapp create \
     --resource-group "$RESOURCE_GROUP" \
     --tags system="$TAG" application="$QUARKUS_APP" \
@@ -180,7 +197,9 @@ createInfrastructure() {
     --ingress external \
     --target-port 80 \
     --min-replicas 0
+# end::adocACACreate[]
 
+# tag::adocPostgresCreate[]
   az postgres flexible-server create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
@@ -193,20 +212,34 @@ createInfrastructure() {
     --sku-name "$POSTGRES_SKU" \
     --storage-size 4096 \
     --version "$POSTGRES_DB_VERSION"
+# end::adocPostgresCreate[]
 
+# tag::adocPostgresSchema[]
   az postgres flexible-server db create \
     --resource-group "$RESOURCE_GROUP" \
     --server-name "$POSTGRES_DB" \
     --database-name "$POSTGRES_DB_SCHEMA"
+# end::adocPostgresSchema[]
 
   pushd ../..
+# tag::adocPostgresTable[]
   az postgres flexible-server execute \
     --name "$POSTGRES_DB" \
     --admin-user "$POSTGRES_DB_ADMIN" \
     --admin-password "$POSTGRES_DB_PWD" \
     --database-name "$POSTGRES_DB_SCHEMA" \
     --file-path "infrastructure/db-init/initialize-databases.sql"
+# end::adocPostgresTable[]
   popd
+
+# tag::adocPostgresSelect[]
+  az postgres flexible-server execute \
+    --name "$POSTGRES_DB" \
+    --admin-user "$POSTGRES_DB_ADMIN" \
+    --admin-password "$POSTGRES_DB_PWD" \
+    --database-name "$POSTGRES_DB_SCHEMA" \
+    --querytext "select * from Statistics"
+# end::adocPostgresSelect[]
 
   echo "Environment '${environment}' of project '${project_name}' ready."
 }
