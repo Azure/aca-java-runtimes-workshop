@@ -62,45 +62,45 @@ cleanupRepo() {
 createInfrastructure() {
   echo "Preparing environment '${environment}' of project '${project_name}'..."
 
-  export PROJECT=${project_name}
-  export RESOURCE_GROUP=${resource_group_name}
-  export LOCATION=${location}
-  export TAG="java-runtimes"
+  PROJECT="java-runtimes"
+  RESOURCE_GROUP="rg-${PROJECT}"
+  LOCATION="eastus"
+  TAG="java-runtimes"
 
-  export LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
-  export CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
+  LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
+  CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
 
-  export UNIQUE_IDENTIFIER=$(whoami)
-  export REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
-  export IMAGES_TAG="1.0"
+  UNIQUE_IDENTIFIER=$(whoami)
+  REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
+  IMAGES_TAG="1.0"
 
-  export POSTGRES_DB_ADMIN="javaruntimesadmin"
-  export POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
-  export POSTGRES_DB_VERSION="13"
-  export POSTGRES_SKU="Standard_B2s"
-  export POSTGRES_TIER="Burstable"
-  export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
-  export POSTGRES_DB_SCHEMA="stats"
-  export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+  POSTGRES_DB_ADMIN="javaruntimesadmin"
+  POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
+  POSTGRES_DB_VERSION="13"
+  POSTGRES_SKU="Standard_B2s"
+  POSTGRES_TIER="Burstable"
+  POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
+  POSTGRES_DB_SCHEMA="stats"
+  POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
 
-  export QUARKUS_APP="quarkus-app"
-  export MICRONAUT_APP="micronaut-app"
-  export SPRING_APP="spring-app"
+  QUARKUS_APP="quarkus-app"
+  MICRONAUT_APP="micronaut-app"
+  SPRING_APP="spring-app"
 
   az group create \
-    --name ${resource_group_name} \
-    --location ${location} \
-    --tags system=$TAG \
-    --output none
-  echo "Resource group '${resource_group_name}' ready."
+    --name "$RESOURCE_GROUP" \
+    --location "$LOCATION" \
+    --tags system="$TAG"
+
+  echo "Resource group '$RESOURCE_GROUP' ready."
 
   az monitor log-analytics workspace create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
-    --tags system=$TAG \
+    --tags system="$TAG" \
     --workspace-name "$LOG_ANALYTICS_WORKSPACE"
 
-  export LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace show  \
+  LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace show  \
     --resource-group "$RESOURCE_GROUP" \
     --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
     --query customerId  \
@@ -108,7 +108,7 @@ createInfrastructure() {
 
   echo "LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$LOG_ANALYTICS_WORKSPACE_CLIENT_ID"
 
-  export LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(az monitor log-analytics workspace get-shared-keys \
+  LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(az monitor log-analytics workspace get-shared-keys \
     --resource-group "$RESOURCE_GROUP" \
     --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
     --query primarySharedKey \
@@ -130,7 +130,7 @@ createInfrastructure() {
     --name "$REGISTRY" \
     --anonymous-pull-enabled true
 
-  export REGISTRY_URL=$(az acr show \
+  REGISTRY_URL=$(az acr show \
     --resource-group "$RESOURCE_GROUP" \
     --name "$REGISTRY" \
     --query "loginServer" \
@@ -145,6 +145,41 @@ createInfrastructure() {
     --name "$CONTAINERAPPS_ENVIRONMENT" \
     --logs-workspace-id "$LOG_ANALYTICS_WORKSPACE_CLIENT_ID" \
     --logs-workspace-key "$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
+
+  az containerapp create \
+    --resource-group "$RESOURCE_GROUP" \
+    --tags system="$TAG" application="$QUARKUS_APP" \
+    --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
+    --name "$QUARKUS_APP" \
+    --environment "$CONTAINERAPPS_ENVIRONMENT" \
+    --ingress external \
+    --target-port 80 \
+    --min-replicas 0 \
+    --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
+               QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
+               QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
+               QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
+               QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
+
+  az containerapp create \
+    --resource-group "$RESOURCE_GROUP" \
+    --tags system="$TAG" application="$MICRONAUT_APP" \
+    --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
+    --name "$MICRONAUT_APP" \
+    --environment "$CONTAINERAPPS_ENVIRONMENT" \
+    --ingress external \
+    --target-port 80 \
+    --min-replicas 0
+
+  az containerapp create \
+    --resource-group "$RESOURCE_GROUP" \
+    --tags system="$TAG" application="$SPRING_APP" \
+    --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
+    --name "$SPRING_APP" \
+    --environment "$CONTAINERAPPS_ENVIRONMENT" \
+    --ingress external \
+    --target-port 80 \
+    --min-replicas 0
 
   az postgres flexible-server create \
     --resource-group "$RESOURCE_GROUP" \
@@ -173,54 +208,19 @@ createInfrastructure() {
     --file-path "infrastructure/db-init/initialize-databases.sql"
   popd
 
-  az containerapp create \
-    --resource-group "$RESOURCE_GROUP" \
-    --tags system="$TAG" application="$QUARKUS_APP" \
-    --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
-    --name "$QUARKUS_APP" \
-    --environment "$CONTAINERAPPS_ENVIRONMENT" \
-    --ingress external \
-    --target-port 80 \
-    --min-replicas 0 \
-    --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
-               QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
-               QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
-               QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
-               QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
-
-    az containerapp create \
-      --resource-group "$RESOURCE_GROUP" \
-      --tags system="$TAG" application="$MICRONAUT_APP" \
-      --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
-      --name "$MICRONAUT_APP" \
-      --environment "$CONTAINERAPPS_ENVIRONMENT" \
-      --ingress external \
-      --target-port 80 \
-      --min-replicas 0
-
-    az containerapp create \
-      --resource-group "$RESOURCE_GROUP" \
-      --tags system="$TAG" application="$SPRING_APP" \
-      --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
-      --name "$SPRING_APP" \
-      --environment "$CONTAINERAPPS_ENVIRONMENT" \
-      --ingress external \
-      --target-port 80 \
-      --min-replicas 0
-
   echo "Environment '${environment}' of project '${project_name}' ready."
 }
 
 exportEnvironment() {
-  export PROJECT=${project_name}
-  export RESOURCE_GROUP=${resource_group_name}
-  export LOCATION=${location}
+  export PROJECT="java-runtimes"
+  export RESOURCE_GROUP="rg-${PROJECT}"
+  export LOCATION="eastus"
   export TAG="java-runtimes"
 
   export LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
   export CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
 
-  export UNIQUE_IDENTIFIER=sinedied #$(whoami)
+  export UNIQUE_IDENTIFIER=$(whoami)
   export REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
   export IMAGES_TAG="1.0"
 
@@ -260,7 +260,7 @@ exportEnvironment() {
 
 deleteInfrastructure() {
   echo "Deleting environment '${environment}' of project '${project_name}'..."
-  az group delete --yes --name "${resource_group_name}"
+  az group delete --yes --name "${RESOURCE_GROUP}"
   echo "Environment '${environment}' of project '${project_name}' deleted."
 }
 
@@ -301,11 +301,11 @@ if ! command -v az &> /dev/null; then
   exit 1
 fi
 
-# if ! command -v gh &> /dev/null; then
-#   echo "GitHub CLI not found."
-#   echo "See https://cli.github.com for installation instructions."
-#   exit 1
-# fi
+if ! command -v gh &> /dev/null; then
+  echo "GitHub CLI not found."
+  echo "See https://cli.github.com for installation instructions."
+  exit 1
+fi
 
 if [ "$skip_login" = false ]; then
   echo "Logging in to Azure..."
