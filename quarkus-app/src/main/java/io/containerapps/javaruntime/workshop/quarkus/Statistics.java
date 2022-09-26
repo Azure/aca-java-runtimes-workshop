@@ -14,6 +14,7 @@ public class Statistics extends PanacheEntity {
     public Type type;
     public String parameter;
     public Duration duration;
+    public String description;
 }
 
 enum Type {

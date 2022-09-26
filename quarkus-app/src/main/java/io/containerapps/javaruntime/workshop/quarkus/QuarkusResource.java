@@ -42,6 +42,7 @@ public class QuarkusResource {
      * <code>curl 'localhost:8701/quarkus/cpu'</code>
      * <code>curl 'localhost:8701/quarkus/cpu?iterations=100'</code>
      * <code>curl 'localhost:8701/quarkus/cpu?iterations=10&db=true'</code>
+     * <code>curl 'localhost:8701/quarkus/cpu?bites=10&db=true&desc=java17'</code>
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
@@ -49,7 +50,8 @@ public class QuarkusResource {
     @GET
     @Path("/cpu")
     public String cpu(@QueryParam("iterations") @DefaultValue("10") Long iterations,
-                      @QueryParam("db") @DefaultValue("false") Boolean db) {
+                      @QueryParam("db") @DefaultValue("false") Boolean db,
+                      @QueryParam("desc") String desc) {
         LOGGER.log(INFO, "Quarkus: cpu: {0} {1}", iterations, db);
         Long iterationsDone = iterations;
 
@@ -74,6 +76,7 @@ public class QuarkusResource {
             statistics.type = Type.CPU;
             statistics.parameter = iterations.toString();
             statistics.duration = Duration.between(start, Instant.now());
+            statistics.description = desc;
             repository.persist(statistics);
         }
 
@@ -90,6 +93,7 @@ public class QuarkusResource {
      * <code>curl 'localhost:8701/quarkus/memory'</code>
      * <code>curl 'localhost:8701/quarkus/memory?bites=10'</code>
      * <code>curl 'localhost:8701/quarkus/memory?bites=10&db=true'</code>
+     * <code>curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=java17'</code>
      *
      * @param bites the number of megabytes to eat
      * @return the result.
@@ -97,7 +101,8 @@ public class QuarkusResource {
     @GET
     @Path("/memory")
     public String memory(@QueryParam("bites") @DefaultValue("10") Integer bites,
-                         @QueryParam("db") @DefaultValue("false") Boolean db) {
+                         @QueryParam("db") @DefaultValue("false") Boolean db,
+                         @QueryParam("desc") String desc) {
         LOGGER.log(INFO, "Quarkus: memory: {0} {1}", bites, db);
 
         Instant start = Instant.now();
@@ -118,6 +123,7 @@ public class QuarkusResource {
             statistics.type = Type.MEMORY;
             statistics.parameter = bites.toString();
             statistics.duration = Duration.between(start, Instant.now());
+            statistics.description = desc;
             repository.persist(statistics);
         }
 

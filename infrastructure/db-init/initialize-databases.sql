@@ -1,6 +1,15 @@
-CREATE ROLE aca_java_runtimes_db_role WITH LOGIN PASSWORD 'aca_java_runtimes_db_pwd';
+DROP TABLE IF EXISTS Statistics;
+DROP SEQUENCE IF EXISTS hibernate_sequence;
 
-CREATE ROLE super_aca_java_runtimes_db WITH LOGIN PASSWORD 'super_aca_java_runtimes_db_pwd' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
-CREATE DATABASE aca_java_runtimes_workshop_database;
-GRANT ALL PRIVILEGES ON DATABASE aca_java_runtimes_workshop_database TO super_aca_java_runtimes_db ;
-GRANT ALL PRIVILEGES ON DATABASE aca_java_runtimes_workshop_database TO aca_java_runtimes_db_role;
+create sequence hibernate_sequence start 1 increment 1;
+create table Statistics
+(
+    id          int8 not null,
+    description varchar(255),
+    doneAt      timestamp,
+    duration    int8,
+    framework   int4,
+    parameter   varchar(255),
+    type        int4,
+    primary key (id)
+);
