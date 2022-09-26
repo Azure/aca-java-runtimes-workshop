@@ -107,30 +107,7 @@ Let's first set a few environment variables that will help us in creating the Az
 
 [source,shell]
 ----
-PROJECT="java-runtimes"
-RESOURCE_GROUP="rg-${PROJECT}"
-LOCATION="eastus"
-TAG="${PROJECT}"
-
-LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
-CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
-
-UNIQUE_IDENTIFIER=$(whoami)
-REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
-IMAGES_TAG="1.0"
-
-POSTGRES_DB_ADMIN="javaruntimesadmin"
-POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
-POSTGRES_DB_VERSION="13"
-POSTGRES_SKU="Standard_B2s"
-POSTGRES_TIER="Burstable"
-POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
-POSTGRES_DB_SCHEMA="stats"
-POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
-
-QUARKUS_APP="quarkus-app"
-MICRONAUT_APP="micronaut-app"
-SPRING_APP="spring-app"
+include::../../../../../scripts/infra/azure.sh[lines=65..88, indent=0]
 ----
 
 Now let's create the Azure resources.
@@ -143,10 +120,7 @@ Run the following command to create the Java Runtimes resource group:
 
 [source,shell]
 ----
-az group create \
-  --name "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tag system="$TAG"
+include::../../../../../scripts/infra/azure.sh[lines=90..93, indent=0]
 ----
 
 === Log Analytics Workspace
@@ -157,32 +131,14 @@ Create a Log Analytics workspace with the following command:
 
 [source,shell]
 ----
-az monitor log-analytics workspace create \
-  --resource-group "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG" \
-  --workspace-name "$LOG_ANALYTICS_WORKSPACE"
+include::../../../../../scripts/infra/azure.sh[lines=97..101, indent=0]
 ----
 
 Let's also retrieve the Log Analytics Client ID and client secret and store them in environment variables:
 
 [source,shell]
 ----
-LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace show  \
-  --resource-group "$RESOURCE_GROUP" \
-  --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
-  --query customerId  \
-  --output tsv | tr -d '[:space:]')
-
-echo $LOG_ANALYTICS_WORKSPACE_CLIENT_ID
-
-LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(az monitor log-analytics workspace get-shared-keys \
-  --resource-group "$RESOURCE_GROUP" \
-  --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
-  --query primarySharedKey \
-  --output tsv | tr -d '[:space:]')
-
-echo $LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET
+include::../../../../../scripts/infra/azure.sh[lines=103..117, indent=0]
 ----
 
 === Azure Container Registry
@@ -193,37 +149,21 @@ First, let's created an Azure Container Registry with the following command:
 
 [source,shell]
 ----
-az acr create \
-  --resource-group "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG" \
-  --name "$REGISTRY" \
-  --workspace "$LOG_ANALYTICS_WORKSPACE" \
-  --sku Standard \
-  --admin-enabled true
+include::../../../../../scripts/infra/azure.sh[lines=119..126, indent=0]
 ----
 
 Update the repository to allow anonymous users to pull the images:
 
 [source,shell]
 ----
-az acr update \
-  --resource-group "$RESOURCE_GROUP" \
-  --name "$REGISTRY" \
-  --anonymous-pull-enabled true
+include::../../../../../scripts/infra/azure.sh[lines=128..131, indent=0]
 ----
 
 Get the URL of the Azure Container Registry and set it to the REGISTRY_URL variable with the following command:
 
 [source,shell]
 ----
-REGISTRY_URL=$(az acr show \
-  --resource-group "$RESOURCE_GROUP" \
-  --name "$REGISTRY" \
-  --query "loginServer" \
-  --output tsv)
-
-echo $REGISTRY_URL
+include::../../../../../scripts/infra/azure.sh[lines=133..139, indent=0]
 ----
 
 If you log into the https://portal.azure.com?WT.mc_id=javascript-0000-yolasors[Azure Portal] and search for the "java-runtimes" resource group, you should see the following created resources.
@@ -236,13 +176,7 @@ A container apps environment acts as a boundary for our containers. Containers d
 
 [source,shell]
 ----
-az containerapp env create \
-  --resource-group "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG" \
-  --name "$CONTAINERAPPS_ENVIRONMENT" \
-  --logs-workspace-id "$LOG_ANALYTICS_WORKSPACE_CLIENT_ID" \
-  --logs-workspace-key "$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
+include::../../../../../scripts/infra/azure.sh[lines=141..147, indent=0]
 ----
 
 ==== Creating the Container Apps
@@ -251,20 +185,7 @@ Now that we have created the container apps environment, we can create the conta
 
 [source,shell]
 ----
-az containerapp create \
-  --resource-group "$RESOURCE_GROUP" \
-  --tags system="$TAG" application="$QUARKUS_APP" \
-  --name "$QUARKUS_APP" \
-  --environment "$CONTAINERAPPS_ENVIRONMENT" \
-  --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
-  --ingress external \
-  --target-port 80 \
-  --min-replicas 0 \
-  --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
-             QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
-             QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
-             QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
-             QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
+include::../../../../../scripts/infra/azure.sh[lines=149..182, indent=0]
 ----
 
 // TODO: other apps!
@@ -281,28 +202,14 @@ Create the database with the following command (this one will take a few minutes
 
 [source,shell]
 ----
-az postgres flexible-server create \
-  --resource-group "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG" \
-  --name "$POSTGRES_DB" \
-  --admin-user "$POSTGRES_DB_ADMIN" \
-  --admin-password "$POSTGRES_DB_PWD" \
-  --public all \
-  --tier "$POSTGRES_TIER" \
-  --sku-name "$POSTGRES_SKU" \
-  --storage-size 4096 \
-  --version "$POSTGRES_DB_VERSION"
+include::../../../../../scripts/infra/azure.sh[lines=184..195, indent=0]
 ----
 
 Then we create the database schema:
 
 [source,shell]
 ----
-az postgres flexible-server db create \
-    --resource-group "$RESOURCE_GROUP" \
-    --server-name "$POSTGRES_DB" \
-    --database-name "$POSTGRES_DB_SCHEMA"
+include::../../../../../scripts/infra/azure.sh[lines=197..200, indent=0]
 ----
 
 Now that we have our database setup, it's time to create the tables. We'll use a database initialization SQL file for that. Thanks to Azure CLI, we can execute these SQL scripts directly in our newly created database.
@@ -311,12 +218,7 @@ Create the tables using the following command (make sure you are in the reposito
 
 [source,shell]
 ----
-az postgres flexible-server execute \
-  --name "$POSTGRES_DB" \
-  --admin-user "$POSTGRES_DB_ADMIN" \
-  --admin-password "$POSTGRES_DB_PWD" \
-  --database-name "$POSTGRES_DB_SCHEMA" \
-  --file-path "infrastructure/db-init/initialize-databases.sql"
+include::../../../../../scripts/infra/azure.sh[lines=203..208, indent=0]
 ----
 
 [NOTE]
