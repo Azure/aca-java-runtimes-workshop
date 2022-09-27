@@ -33,46 +33,7 @@ on:
   push:
     branches: [main]
 
-# Define environment variables that will be available throughout the workflow
-env:
-  REGISTRY_URL: <put here the value of $REGISTRY_URL>
-  PROJECT: java-runtimes
-  RESOURCE_GROUP: rg-java-runtimes
-  QUARKUS_APP: quarkus-app
-  MICRONAUT_APP: micronaut-app
-  SPRING_APP: spring-app
-
-# A workflow run is made up of one or more jobs.
-# Unless you specify dependencies, jobs run in parallel by default.
-jobs:
-
-  # Define our "build" job, that will be the CI part of our pipeline
-  build:
-    # The type of runner that the job will run on.
-    # Many runners are available, including Windows, macOS, and Linux.
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks (actions) that will be executed as
-    # part of the job.
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'microsoft'
-          java-version: '17'
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Log in to container registry
-        uses: docker/login-action@v1
-        with:
-          registry: ${{ env.REGISTRY_URL }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+include::../../../../../.github/workflows/deploy.yml[tag=adocGitHubActionsWorkflowBase]
 ----
 
 [TIP]
@@ -93,11 +54,7 @@ Now we need to add the steps to build and package our apps. Note that our tests 
 
 [source,yaml]
 ----
-      - name: Build apps
-        run: |
-          cd quarkus-app && ./mvnw package
-          cd ../micronaut-app && ./mvnw package
-          cd ../spring-app && ./mvnw package
+include::../../../../../.github/workflows/deploy.yml[tag=adocBuild]
 ----
 
 [WARNING]
@@ -107,29 +64,7 @@ The next step is to build our Docker images. We'll use the https://github.com/ma
 
 [source,yaml]
 ----
-      - name: Build and push Quarkus container to registry
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }}
-          file: ./quarkus-app/src/main/docker/Dockerfile.jvm
-          context: ./quarkus-app/
-
-      - name: Build and push Micronaut container to registry
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
-          file: ./micronaut-app/Dockerfile
-          context: ./micronaut-app/
-
-      - name: Build and push Spring container to registry
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
-          file: ./spring-app/Dockerfile
-          context: ./spring-app/
+include::../../../../../.github/workflows/deploy.yml[tag=adocPush]
 ----
 
 We're using the `github.sha` variable, to tag our images with the commit SHA that triggered the workflow. This way, we can easily identify which version of the application is deployed.
@@ -146,44 +81,7 @@ We'll add a new `deploy` job to our workflow to deploy them to Azure Container A
 
 [source,yaml]
 ----
-  # Define our "deploy" job, that will be the CD part of our pipeline
-  deploy:
-    runs-on: ubuntu-latest
-
-    # This job needs to run after the "build" job, so we'll add a dependency on it
-    needs: build
-    
-    steps:
-      # Log in to Azure to be able to deploy our apps
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      # Use the Azure CLI to deploy our apps
-      - name: Deploy to containerapp
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            
-            az containerapp update \
-              --name ${{ env.QUARKUS_APP }} \
-              --resource-group ${{ RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }} \
-              --target-port 8701
-
-            az containerapp update \
-              --name ${{ env.MICRONAUT_APP }} \
-              --resource-group ${{ RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }} \
-              --target-port 8702
-
-            az containerapp update \
-              --name ${{ env.SPRING_APP }} \
-              --resource-group ${{ RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }} \
-              --target-port 8703
+include::../../../../../.github/workflows/deploy.yml[tag=adocDeploy]
 ----
 
 This job will run after the `build` job, and will use the Azure CLI to deploy our apps to Azure Container Apps. We're using the `github.sha` variable again to make sure we're deploying the correct version of the images.
@@ -208,21 +106,7 @@ You can get the value of the `REGISTRY_USERNAME` and `REGISTRY_PASSWORD` secrets
 
 [source,shell]
 ----
-REGISTRY_USERNAME=$( \
-  az acr credential show \
-    --name "$REGISTRY" \
-    --query "username" \
-    --output tsv \
-  )
-echo $REGISTRY_USERNAME
-
-REGISTRY_PASSWORD=$( \
-  az acr credential show \
-    --name "$REGISTRY" \
-    --query "passwords[0].value" \
-    --output tsv \
-  )
-echo $REGISTRY_PASSWORD
+include::../../../../../scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]
 ----
 
 [TIP]
@@ -236,21 +120,7 @@ To create a new Service Principal, run the following commands:
 
 [source,shell]
 ----
-SUBSCRIPTION_ID=$(az account show \
-  --query id \
-  --output tsv \
-  --only-show-errors \
-)
-
-AZURE_CREDENTIALS=$(az ad sp create-for-rbac \
-  --name="sp-${PROJECT}" \
-  --role="Contributor" \
-  --scopes="/subscriptions/$SUBSCRIPTION_ID" \
-  --sdk-auth \
-  --only-show-errors \
-)
-
-echo $AZURE_CREDENTIALS
+include::../../../../../scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]
 ----
 
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value.
@@ -263,23 +133,7 @@ Run the following commands to update the target ports:
 
 [source,shell]
 ----
-az containerapp ingress enable \
-  --name ${QUARKUS_APP} \
-  --resource-group ${RESOURCE_GROUP} \
-  --target-port 8701 \
-  --type external
-
-az containerapp ingress enable \
-  --name ${MICRONAUT_APP} \
-  --resource-group ${RESOURCE_GROUP} \
-  --target-port 8702 \
-  --type external
-
-az containerapp ingress enable \
-  --name ${SPRING_APP} \
-  --resource-group ${RESOURCE_GROUP} \
-  --target-port 8703 \
-  --type external
+include::../../../../../scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]
 ----
 
 === Running the workflow

@@ -29,25 +29,32 @@ showUsage() {
 
 setupRepo() {
   echo "Retrieving Azure subscription..."
-  subscription_id=$(
+  echo "Creating Azure service principal..."
+
+  # tag::adocCreatePrincipal[]
+  SUBSCRIPTION_ID=$(
     az account show \
       --query id \
       --output tsv \
-      --only-show-errors \
-    )
-  echo "Creating Azure service principal..."
-  service_principal=$(
+      --only-show-errors
+  )
+
+  AZURE_CREDENTIALS=$(
     az ad sp create-for-rbac \
       --name="sp-${project_name}" \
       --role="Contributor" \
-      --scopes="/subscriptions/$subscription_id" \
+      --scopes="/subscriptions/$SUBSCRIPTION_ID" \
       --sdk-auth \
-      --only-show-errors \
-    )
+      --only-show-errors
+  )
+
+  echo $AZURE_CREDENTIALS
+  # end::adocCreatePrincipal[]
+
   echo "Retrieving GitHub repository URL..."
   remote_repo=$(git config --get remote.origin.url)
   echo "Setting up GitHub repository secrets..."
-  gh secret set AZURE_CREDENTIALS -b"$service_principal" -R $remote_repo
+  gh secret set AZURE_CREDENTIALS -b"$AZURE_CREDENTIALS" -R $remote_repo
   gh secret set REGISTRY_USERNAME -b"$REGISTRY_USERNAME" -R $remote_repo
   gh secret set REGISTRY_PASSWORD -b"$REGISTRY_PASSWORD" -R $remote_repo
 }
@@ -110,20 +117,22 @@ createInfrastructure() {
 # end::adocLogAnalytics[]
 
 # tag::adocLogAnalyticsSecrets[]
-  LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace show  \
-    --resource-group "$RESOURCE_GROUP" \
-    --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
-    --query customerId  \
-    --output tsv | tr -d '[:space:]')
-
+  LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(
+    az monitor log-analytics workspace show \
+      --resource-group "$RESOURCE_GROUP" \
+      --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
+      --query customerId  \
+      --output tsv | tr -d '[:space:]'
+  )
   echo "LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$LOG_ANALYTICS_WORKSPACE_CLIENT_ID"
 
-  LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(az monitor log-analytics workspace get-shared-keys \
-    --resource-group "$RESOURCE_GROUP" \
-    --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
-    --query primarySharedKey \
-    --output tsv | tr -d '[:space:]')
-
+  LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(
+    az monitor log-analytics workspace get-shared-keys \
+      --resource-group "$RESOURCE_GROUP" \
+      --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
+      --query primarySharedKey \
+      --output tsv | tr -d '[:space:]'
+  )
   echo "LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
 # end::adocLogAnalyticsSecrets[]
 
@@ -146,11 +155,13 @@ createInfrastructure() {
 # end::adocRegistryUpdate[]
 
 # tag::adocRegistryShow[]
-  REGISTRY_URL=$(az acr show \
-    --resource-group "$RESOURCE_GROUP" \
-    --name "$REGISTRY" \
-    --query "loginServer" \
-    --output tsv)
+  REGISTRY_URL=$(
+    az acr show \
+      --resource-group "$RESOURCE_GROUP" \
+      --name "$REGISTRY" \
+      --query "loginServer" \
+      --output tsv
+  )
 
   echo "REGISTRY_URL=$REGISTRY_URL"
 # end::adocRegistryShow[]

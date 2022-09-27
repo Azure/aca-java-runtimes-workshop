@@ -5,6 +5,7 @@ on:
     # branches: [main]
     workflow_dispatch:
 
+# tag::adocGitHubActionsWorkflowBase[]
 env:
   REGISTRY_URL: <put here the value of $REGISTRY_URL>
   PROJECT: java-runtimes
@@ -13,9 +14,18 @@ env:
   MICRONAUT_APP: micronaut-app
   SPRING_APP: spring-app
 
+# A workflow run is made up of one or more jobs.
+# Unless you specify dependencies, jobs run in parallel by default.
 jobs:
+
+  # Define our "build" job, that will be the CI part of our pipeline
   build:
+    # The type of runner that the job will run on.
+    # Many runners are available, including Windows, macOS, and Linux.
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks (actions) that will be executed as
+    # part of the job.
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -35,13 +45,17 @@ jobs:
           registry: ${{ env.REGISTRY_URL }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+# end::adocGitHubActionsWorkflowBase[]
 
+      # tag::adocBuild[]
       - name: Build apps
         run: |
           cd quarkus-app && ./mvnw package
           # cd ../micronaut-app && ./mvnw package
           # cd ../spring-app && ./mvnw package
+      # end::adocBuild[]
 
+      # tag::adocPush[]
       - name: Build and push Quarkus container to registry
         uses: docker/build-push-action@v2
         with:
@@ -65,23 +79,30 @@ jobs:
       #     tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
       #     file: ./spring-app/Dockerfile
       #     context: ./spring-app/
+      # end::adocPush[]
 
+  # tag::adocDeploy[]
+  # Define our "deploy" job, that will be the CD part of our pipeline
   deploy:
     runs-on: ubuntu-latest
+
+    # This job needs to run after the "build" job, so we'll add a dependency on it
     needs: build
     
     steps:
+      # Log in to Azure to be able to deploy our apps
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      # Use the Azure CLI to deploy our apps
       - name: Deploy to containerapp
         uses: azure/CLI@v1
         with:
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
-
+            
             az containerapp update \
               --name ${{ env.QUARKUS_APP }} \
               --resource-group ${{ RESOURCE_GROUP }} \
@@ -96,3 +117,4 @@ jobs:
             #   --name ${{ env.SPRING_APP }} \
             #   --resource-group ${{ RESOURCE_GROUP }} \
             #   --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
+  # end::adocDeploy[]
