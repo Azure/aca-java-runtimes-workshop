@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ##############################################################################
-# Usage: ./azure.sh setup|cleanup
+# Usage: ./azure.sh login|setup|cleanup
 # Setup or cleanup the Azure infrastructure for this project.
 ##############################################################################
 # Dependencies: Azure CLI, GitHub CLI, jq
@@ -19,8 +19,11 @@ showUsage() {
   echo "Usage: ./$script_name setup|cleanup|env"
   echo "Setup or cleanup the Azure infrastructure for this project."
   echo
-  echo "Options:"
-  echo "  -s, --skip-login    Skip Azure and GitHub login steps"
+  echo "Commands:"
+  echo "  login    Log in to Azure and GitHub"
+  echo "  setup    Create Azure infrastructure and setup repo"
+  echo "  cleanup  Clean up Azure infrastructure and repo secrets"
+  echo "  env      Export environment variables"
   echo
 }
 
@@ -297,15 +300,10 @@ deleteInfrastructure() {
   echo "Environment '${environment}' of project '${project_name}' deleted."
 }
 
-skip_login=false
 args=()
 
 while [ $# -gt 0 ]; do
   case $1 in
-    -s|--skip-login)
-      skip_login=true
-      shift
-      ;;
     --help)
       showUsage
       exit 0
@@ -340,15 +338,13 @@ if ! command -v gh &> /dev/null; then
   exit 1
 fi
 
-if [ "$skip_login" = false ]; then
+if [ "$command" = "login" ]; then
   echo "Logging in to Azure..."
   az login
   echo "Logging in to GitHub..."
   gh auth login
   echo "Login successful."
-fi
-
-if [ "$command" = "setup" ]; then
+elif [ "$command" = "setup" ]; then
   createInfrastructure
   # setupRepo
 elif [ "$command" = "cleanup" ]; then
