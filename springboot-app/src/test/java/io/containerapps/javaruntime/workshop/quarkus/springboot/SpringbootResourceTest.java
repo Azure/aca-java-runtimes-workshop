@@ -52,6 +52,17 @@ public class SpringbootResourceTest {
     }
 
     @Test
+    public void testCpuWithDBAndDescEndpoint() {
+        given().param("iterations", 1).param("db", true).param("desc", "Java17")
+          .when().get(basePath + "/cpu")
+          .then()
+            .statusCode(200)
+            .body(startsWith("SpringBoot: CPU consumption is done with"))
+            .body(not(containsString("Java17")))
+            .body(endsWith("The result is persisted in the database."));
+    }
+
+    @Test
     public void testMemoryEndpoint() {
         given().param("bites", 1)
           .when().get(basePath + "/memory")
@@ -69,5 +80,16 @@ public class SpringbootResourceTest {
              .statusCode(200)
              .body(startsWith("SpringBoot: Memory consumption is done with"))
              .body(endsWith("The result is persisted in the database."));
+    }
+
+    @Test
+    public void testMemoryWithDBAndDescEndpoint() {
+        given().param("bites", 1).param("db", true).param("desc", "Java17")
+          .when().get(basePath + "/memory")
+          .then()
+            .statusCode(200)
+            .body(startsWith("SpringBoot: Memory consumption is done with"))
+            .body(not(containsString("Java17")))
+            .body(endsWith("The result is persisted in the database."));
     }
 }

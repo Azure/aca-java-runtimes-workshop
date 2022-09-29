@@ -41,14 +41,16 @@ public class SpringbootResource {
      * <code>curl 'localhost:8703/springboot/cpu'</code>
      * <code>curl 'localhost:8703/springboot/cpu?iterations=10'</code>
      * <code>curl 'localhost:8703/springboot/cpu?iterations=10&db=true'</code>
+     * <code>curl 'localhost:8703/springboot/cpu?iterations=10&db=true&desc=java17'</code>
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
      */
     @GetMapping(path = "/cpu", produces = MediaType.TEXT_PLAIN_VALUE)
     public String cpu(@RequestParam(value = "iterations", defaultValue = "10") Long iterations,
-                      @RequestParam(value = "db", defaultValue = "false") Boolean db) {
-        LOGGER.log(INFO, "SpringBoot: cpu: {0} {1}", iterations, db);
+                      @RequestParam(value = "db", defaultValue = "false") Boolean db,
+                      @RequestParam(value = "desc", required = false) String desc) {
+        LOGGER.log(INFO, "SpringBoot: cpu: {0} {1} with desc {2}", iterations, db, desc);
         Long iterationsDone = iterations;
 
         Instant start = Instant.now();
@@ -72,6 +74,7 @@ public class SpringbootResource {
             statistics.type = Type.CPU;
             statistics.parameter = iterations.toString();
             statistics.duration = Duration.between(start, Instant.now());
+            statistics.description = desc;
             repository.save(statistics);
         }
 
@@ -88,14 +91,16 @@ public class SpringbootResource {
      * <code>curl 'localhost:8703/springboot/memory'</code>
      * <code>curl 'localhost:8703/springboot/memory?bites=10'</code>
      * <code>curl 'localhost:8703/springboot/memory?bites=10&db=true'</code>
+     * <code>curl 'localhost:8703/springboot/memory?bites=10&db=true&desc=java17'</code>
      *
      * @param bites the number of megabytes to eat
      * @return the result.
      */
     @GetMapping(path = "/memory", produces = MediaType.TEXT_PLAIN_VALUE)
     public String memory(@RequestParam(value = "bites", defaultValue = "10") Integer bites,
-                         @RequestParam(value = "db", defaultValue = "false") Boolean db) {
-        LOGGER.log(INFO, "SpringBoot: memory: {0} {1}", bites, db);
+                         @RequestParam(value = "db", defaultValue = "false") Boolean db,
+                         @RequestParam(value = "desc", required = false) String desc) {
+        LOGGER.log(INFO, "SpringBoot: memory: {0} {1} with desc {2}", bites, db, desc);
 
         Instant start = Instant.now();
         if (bites == null) {
@@ -115,6 +120,7 @@ public class SpringbootResource {
             statistics.type = Type.MEMORY;
             statistics.parameter = bites.toString();
             statistics.duration = Duration.between(start, Instant.now());
+            statistics.description = desc;
             repository.save(statistics);
         }
 

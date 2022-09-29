@@ -39,6 +39,17 @@ public class QuarkusResourceTest {
     }
 
     @Test
+    public void testCpuWithDBAndDescEndpoint() {
+        given().param("iterations", 1).param("db", true).param("desc", "Java17")
+          .when().get("/quarkus/cpu")
+          .then()
+             .statusCode(200)
+             .body(startsWith("Quarkus: CPU consumption is done with"))
+             .body(not(containsString("Java17")))
+             .body(endsWith("The result is persisted in the database."));
+    }
+
+    @Test
     public void testMemoryEndpoint() {
         given().param("bites", 1)
           .when().get("/quarkus/memory")
@@ -55,6 +66,17 @@ public class QuarkusResourceTest {
           .then()
              .statusCode(200)
              .body(startsWith("Quarkus: Memory consumption is done with"))
+             .body(endsWith("The result is persisted in the database."));
+    }
+
+    @Test
+    public void testMemoryWithDBAndDescEndpoint() {
+        given().param("bites", 1).param("db", true).param("desc", "Java17")
+          .when().get("/quarkus/memory")
+          .then()
+             .statusCode(200)
+             .body(startsWith("Quarkus: Memory consumption is done with"))
+             .body(not(containsString("Java17")))
              .body(endsWith("The result is persisted in the database."));
     }
 }

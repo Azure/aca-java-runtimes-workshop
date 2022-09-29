@@ -40,9 +40,9 @@ public class QuarkusResource {
     /**
      * Simulates requests that use a lot of CPU.
      * <code>curl 'localhost:8701/quarkus/cpu'</code>
-     * <code>curl 'localhost:8701/quarkus/cpu?iterations=100'</code>
+     * <code>curl 'localhost:8701/quarkus/cpu?iterations=10'</code>
      * <code>curl 'localhost:8701/quarkus/cpu?iterations=10&db=true'</code>
-     * <code>curl 'localhost:8701/quarkus/cpu?bites=10&db=true&desc=java17'</code>
+     * <code>curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=java17'</code>
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
@@ -52,7 +52,7 @@ public class QuarkusResource {
     public String cpu(@QueryParam("iterations") @DefaultValue("10") Long iterations,
                       @QueryParam("db") @DefaultValue("false") Boolean db,
                       @QueryParam("desc") String desc) {
-        LOGGER.log(INFO, "Quarkus: cpu: {0} {1}", iterations, db);
+        LOGGER.log(INFO, "Quarkus: cpu: {0} {1} with desc {2}", iterations, db, desc);
         Long iterationsDone = iterations;
 
         Instant start = Instant.now();
@@ -103,7 +103,7 @@ public class QuarkusResource {
     public String memory(@QueryParam("bites") @DefaultValue("10") Integer bites,
                          @QueryParam("db") @DefaultValue("false") Boolean db,
                          @QueryParam("desc") String desc) {
-        LOGGER.log(INFO, "Quarkus: memory: {0} {1}", bites, db);
+        LOGGER.log(INFO, "Quarkus: memory: {0} {1} with desc {2}", bites, db, desc);
 
         Instant start = Instant.now();
         if (bites == null) {

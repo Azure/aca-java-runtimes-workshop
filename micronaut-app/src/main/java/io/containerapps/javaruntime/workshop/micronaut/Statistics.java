@@ -17,6 +17,7 @@ public class Statistics{
     public Type type;
     public String parameter;
     public Duration duration;
+    public String description;
 
     public Long getId() {
         return id;

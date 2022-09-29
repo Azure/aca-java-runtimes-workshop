@@ -39,14 +39,16 @@ public class MicronautResource {
      * <code>curl 'localhost:8702/micronaut/cpu'</code>
      * <code>curl 'localhost:8702/micronaut/cpu?iterations=10'</code>
      * <code>curl 'localhost:8702/micronaut/cpu?iterations=10&db=true'</code>
+     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'</code>
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
      */
     @Get(uri = "/cpu", produces = MediaType.TEXT_PLAIN)
     public String cpu(@QueryValue(value = "iterations", defaultValue = "10") Long iterations,
-                      @QueryValue(value = "db", defaultValue = "false") Boolean db) {
-        LOGGER.log(INFO, "Micronaut: cpu: {0} {1}", iterations, db);
+                      @QueryValue(value = "db", defaultValue = "false") Boolean db,
+                      @QueryValue(value = "desc", defaultValue = "") String desc) {
+        LOGGER.log(INFO, "Micronaut: cpu: {0} {1} with desc {2}", iterations, db, desc);
         Long iterationsDone = iterations;
 
         Instant start = Instant.now();
@@ -70,6 +72,7 @@ public class MicronautResource {
             statistics.type = Type.CPU;
             statistics.parameter = iterations.toString();
             statistics.duration = Duration.between(start, Instant.now());
+            statistics.description = desc;
             repository.save(statistics);
         }
 
@@ -86,14 +89,16 @@ public class MicronautResource {
      * <code>curl 'localhost:8702/micronaut/memory'</code>
      * <code>curl 'localhost:8702/micronaut/memory?bites=10'</code>
      * <code>curl 'localhost:8702/micronaut/memory?bites=10&db=true'</code>
+     * <code>curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'</code>
      *
      * @param bites the number of megabytes to eat
      * @return the result.
      */
     @Get(uri = "/memory", produces = MediaType.TEXT_PLAIN)
     public String memory(@QueryValue(value = "bites", defaultValue = "false") Integer bites,
-                         @QueryValue(value = "db", defaultValue = "false") Boolean db) {
-        LOGGER.log(INFO, "Micronaut: memory: {0} {1}", bites, db);
+                         @QueryValue(value = "db", defaultValue = "false") Boolean db,
+                         @QueryValue(value = "desc", defaultValue = "") String desc) {
+        LOGGER.log(INFO, "Micronaut: memory: {0} {1} with desc {2}", bites, db, desc);
 
         Instant start = Instant.now();
         if (bites == null) {
@@ -113,6 +118,7 @@ public class MicronautResource {
             statistics.type = Type.MEMORY;
             statistics.parameter = bites.toString();
             statistics.duration = Duration.between(start, Instant.now());
+            statistics.description = desc;
             repository.save(statistics);
         }
 

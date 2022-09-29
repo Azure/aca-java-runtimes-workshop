@@ -17,14 +17,7 @@ public class Statistics{
     public Type type;
     public String parameter;
     public Duration duration;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String description;
 }
 
 enum Type {
