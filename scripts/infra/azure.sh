@@ -92,7 +92,7 @@ createInfrastructure() {
   POSTGRES_TIER="Burstable"
   POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   POSTGRES_DB_SCHEMA="stats"
-  POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+  POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
 
   QUARKUS_APP="quarkus-app"
   MICRONAUT_APP="micronaut-app"
@@ -292,7 +292,7 @@ exportEnvironment() {
   export POSTGRES_TIER="Burstable"
   export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   export POSTGRES_DB_SCHEMA="stats"
-  export POSTGRES_DB_CONNECT_STRING="postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+  export POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
 
   export QUARKUS_APP="quarkus-app"
   export MICRONAUT_APP="micronaut-app"
