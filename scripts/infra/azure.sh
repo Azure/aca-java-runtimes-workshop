@@ -288,7 +288,7 @@ exportEnvironment() {
   export POSTGRES_DB_ADMIN="javaruntimesadmin"
   export POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
   export POSTGRES_DB_VERSION="13"
-  export POSTGRES_SKU="Standard_B2s"
+  export POSTGRES_SKU="Standard_B1ms"
   export POSTGRES_TIER="Burstable"
   export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   export POSTGRES_DB_SCHEMA="stats"
