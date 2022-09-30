@@ -56,15 +56,19 @@ az containerapp ingress enable \
   --type external
 # end:adocIngressUpdate[]
 
-echo "Building an deploying Quarkus app..."
+echo "Building the Quarkus app..."
 pushd quarkus-app
 
 ./mvnw package
 
 docker build -f src/main/docker/Dockerfile.jvm -t "$REGISTRY_URL/$PROJECT/$QUARKUS_APP:latest" .
 
+echo "Pushing the Quarkus app..."
+
 docker push "$REGISTRY_URL/$PROJECT/$QUARKUS_APP:latest"
               
+echo "Updating the Quarkus container app..."
+
 az containerapp update \
   --name "$QUARKUS_APP" \
   --resource-group "$RESOURCE_GROUP" \
