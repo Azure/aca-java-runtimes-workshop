@@ -47,6 +47,22 @@ You can then execute your native executable with: `./target/quarkus-app-1.0.0-SN
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
+## Running the app locally with Docker
+
+First package the app, then run these commands:
+
+```sh
+docker build -f src/main/docker/Dockerfile.jvm -t "$PROJECT/$QUARKUS_APP:latest" .
+
+docker run -i --rm -p 8701:8701 \
+  -e QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
+  -e QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
+  -e QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
+  -e QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
+  -e QUARKUS_DATASOURCE_JDBC_URL="$POSTGRES_DB_CONNECT_STRING" \
+  ${PROJECT}/${QUARKUS_APP}:latest
+```
+
 ## Related Guides
 
 - Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
