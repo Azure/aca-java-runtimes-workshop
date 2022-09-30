@@ -92,7 +92,7 @@ createInfrastructure() {
   POSTGRES_TIER="Burstable"
   POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   POSTGRES_DB_SCHEMA="stats"
-  POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+  POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
 
   QUARKUS_APP="quarkus-app"
   MICRONAUT_APP="micronaut-app"
@@ -190,7 +190,7 @@ az containerapp env create \
                QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
                QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
                QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
-               QUARKUS_DATASOURCE_REACTIVE_URL="$POSTGRES_DB_CONNECT_STRING"
+               QUARKUS_DATASOURCE_JDBC_URL="$POSTGRES_DB_CONNECT_STRING"
 
   az containerapp create \
     --resource-group "$RESOURCE_GROUP" \
@@ -219,6 +219,7 @@ az containerapp env create \
     --location "$LOCATION" \
     --tags system="$TAG" \
     --name "$POSTGRES_DB" \
+    --database-name "$POSTGRES_DB_SCHEMA" \
     --admin-user "$POSTGRES_DB_ADMIN" \
     --admin-password "$POSTGRES_DB_PWD" \
     --public all \
@@ -227,13 +228,6 @@ az containerapp env create \
     --storage-size 1024 \
     --version "$POSTGRES_DB_VERSION"
 # end::adocPostgresCreate[]
-
-# tag::adocPostgresSchema[]
-  az postgres flexible-server db create \
-    --resource-group "$RESOURCE_GROUP" \
-    --server-name "$POSTGRES_DB" \
-    --database-name "$POSTGRES_DB_SCHEMA"
-# end::adocPostgresSchema[]
 
   pushd ../..
 # tag::adocPostgresTable[]
@@ -292,7 +286,7 @@ exportEnvironment() {
   export POSTGRES_TIER="Burstable"
   export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   export POSTGRES_DB_SCHEMA="stats"
-  export POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_SCHEMA}?ssl=true&sslmode=require"
+  export POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
 
   export QUARKUS_APP="quarkus-app"
   export MICRONAUT_APP="micronaut-app"

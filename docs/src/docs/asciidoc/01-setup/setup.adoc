@@ -205,13 +205,6 @@ Create the database with the following command (this one will take a few minutes
 include::../../../../../scripts/infra/azure.sh[tag=adocPostgresCreate, indent=0]
 ----
 
-Then we create the database schema:
-
-[source,shell]
-----
-include::../../../../../scripts/infra/azure.sh[tag=adocPostgresSchema, indent=0]
-----
-
 Now that we have our database setup, it's time to create the tables. We'll use a database initialization SQL file for that. Thanks to Azure CLI, we can execute these SQL scripts directly in our newly created database.
 
 Create the tables using the following command (make sure you are in the repository root directory before your execute this command):
