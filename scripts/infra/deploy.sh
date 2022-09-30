@@ -34,22 +34,24 @@ echo "REGISTRY_PASSWORD=$REGISTRY_PASSWORD"
 echo "Logging in to Docker registry..."
 echo $REGISTRY_PASSWORD | docker login --username $REGISTRY_USERNAME --password-stdin $REGISTRY_URL
 
+echo "Enabling ingress for each container app..."
+
 # tag:adocIngressUpdate[]
 az containerapp ingress enable \
-  --name ${QUARKUS_APP} \
-  --resource-group ${RESOURCE_GROUP} \
+  --name "$QUARKUS_APP" \
+  --resource-group "$RESOURCE_GROUP" \
   --target-port 8701 \
   --type external
 
 az containerapp ingress enable \
-  --name ${MICRONAUT_APP} \
-  --resource-group ${RESOURCE_GROUP} \
+  --name "$MICRONAUT_APP" \
+  --resource-group "$RESOURCE_GROUP" \
   --target-port 8702 \
   --type external
 
 az containerapp ingress enable \
-  --name ${SPRING_APP} \
-  --resource-group ${RESOURCE_GROUP} \
+  --name "$SPRING_APP" \
+  --resource-group "$RESOURCE_GROUP" \
   --target-port 8703 \
   --type external
 # end:adocIngressUpdate[]
@@ -64,8 +66,8 @@ docker build -f src/main/docker/Dockerfile.jvm -t "$REGISTRY_URL/$PROJECT/$QUARK
 docker push "$REGISTRY_URL/$PROJECT/$QUARKUS_APP:latest"
               
 az containerapp update \
-  --name ${QUARKUS_APP} \
-  --resource-group ${RESOURCE_GROUP} \
+  --name "$QUARKUS_APP" \
+  --resource-group "$RESOURCE_GROUP" \
   --image "${REGISTRY_URL}/${PROJECT}/${QUARKUS_APP}:latest"
 
 popd

@@ -23,6 +23,7 @@ source ./azure.sh env
 To test deployment without using the CI/CD GitHub Actions workflow, you can use the command:
 
 ```sh
+source ./azure.sh env  # Exports the needed environment variables
 ./deploy.sh
 ```
 
