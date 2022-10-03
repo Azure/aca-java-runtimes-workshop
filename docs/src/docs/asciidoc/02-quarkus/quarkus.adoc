@@ -34,7 +34,7 @@ Nothing outstanding but a good first step to discover Quarkus.
 .REST Resource
 [source,indent=0]
 ----
-include::{villains-github-raw}/src/main/java/com/azure/containerapps/quarkus/workshop/superheroes/villain/VillainResource.java[]
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[]
 ----
 
 == Bootstrapping the Villains Microservice

@@ -33,7 +33,7 @@ on:
   push:
     branches: [main]
 
-include::../../../../../.github/workflows/deploy.yml[tag=adocGitHubActionsWorkflowBase]
+include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocGitHubActionsWorkflowBase]
 ----
 
 [TIP]
@@ -54,7 +54,7 @@ Now we need to add the steps to build and package our apps. Note that our tests 
 
 [source,yaml]
 ----
-include::../../../../../.github/workflows/deploy.yml[tag=adocBuild]
+include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocBuild]
 ----
 
 [WARNING]
@@ -64,7 +64,7 @@ The next step is to build our Docker images. We'll use the https://github.com/ma
 
 [source,yaml]
 ----
-include::../../../../../.github/workflows/deploy.yml[tag=adocPush]
+include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocPush]
 ----
 
 We're using the `github.sha` variable, to tag our images with the commit SHA that triggered the workflow. This way, we can easily identify which version of the application is deployed.
@@ -81,7 +81,7 @@ We'll add a new `deploy` job to our workflow to deploy them to Azure Container A
 
 [source,yaml]
 ----
-include::../../../../../.github/workflows/deploy.yml[tag=adocDeploy]
+include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocDeploy]
 ----
 
 This job will run after the `build` job, and will use the Azure CLI to deploy our apps to Azure Container Apps. We're using the `github.sha` variable again to make sure we're deploying the correct version of the images.
@@ -106,7 +106,7 @@ You can get the value of the `REGISTRY_USERNAME` and `REGISTRY_PASSWORD` secrets
 
 [source,shell]
 ----
-include::../../../../../scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]
+include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]
 ----
 
 [TIP]
@@ -120,7 +120,7 @@ To create a new Service Principal, run the following commands:
 
 [source,shell]
 ----
-include::../../../../../scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]
+include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]
 ----
 
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value.
@@ -133,7 +133,7 @@ Run the following commands to update the target ports:
 
 [source,shell]
 ----
-include::../../../../../scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]
+include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]
 ----
 
 === Running the workflow

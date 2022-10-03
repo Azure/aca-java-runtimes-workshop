@@ -8,7 +8,7 @@
 .REST Resource
 [source,indent=0]
 ----
-include::{heroes-github-raw}/src/main/java/io/containerapps/quarkus/workshop/superheroes/hero/HeroResource.java[]
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[]
 ----
 
 == Bootstrapping the Heroes Microservice

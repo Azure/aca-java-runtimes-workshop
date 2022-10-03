@@ -61,12 +61,7 @@
                         <workshop-github-url>https://github.com/Azure/aca-java-runtimes-workshop</workshop-github-url>
                         <workshop-github-issue>https://github.com/Azure/aca-java-runtimes-workshop/issues</workshop-github-issue>
                         <workshop-github-clone>https://github.com/Azure/aca-java-runtimes-workshop.git</workshop-github-clone>
-                        <!-- Quarkus -->
-                        <quarkus-github-raw>https://raw.githubusercontent.com/amadeus4dev-events/1ahack4sustainability-containerapps-quarkus-workshop/main/fights-app</quarkus-github-raw>
-                        <!-- Micronaut -->
-                        <micronaut-github-raw>https://raw.githubusercontent.com/amadeus4dev-events/1ahack4sustainability-containerapps-quarkus-workshop/main/heroes-app</micronaut-github-raw>
-                        <!-- SpringBoot -->
-                        <springboot-github-raw>https://raw.githubusercontent.com/amadeus4dev-events/1ahack4sustainability-containerapps-quarkus-workshop/main/villains-app</springboot-github-raw>
+                        <workshop-github-raw>https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main</workshop-github-raw>
                     </attributes>
                 </configuration>
                 <executions>

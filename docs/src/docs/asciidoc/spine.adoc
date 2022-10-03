@@ -1,5 +1,5 @@
 = Azure Container Apps and Java Runtimes Workshop
-Antonio Goncalves, https://twitter.com/sinedied[Yohan Lasorsa]
+https://twitter.com/agoncal[Antonio Goncalves], https://twitter.com/sinedied[Yohan Lasorsa]
 :revnumber: {project-version}
 :example-caption!:
 

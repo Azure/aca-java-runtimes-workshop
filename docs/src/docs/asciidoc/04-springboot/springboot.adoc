@@ -8,7 +8,7 @@
 .REST Resource
 [source,indent=0]
 ----
-include::{fights-github-raw}/src/main/java/io/containerapps/quarkus/workshop/superheroes/fight/FightResource.java[]
+include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/springboot/SpringbootResource.java[]
 ----
 
 == Bootstrapping the Fights Microservice
