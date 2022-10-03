@@ -1,53 +1,52 @@
 [[welcome]]
 = Welcome
-Let's start from the beginning.
-Quarkus.
-What's Quarkus?
-That's a pretty good question and probably a good start.
-If you go to the https://quarkus.io[Quarkus web site], you'll read that Quarkus is "_A Kubernetes Native Java stack tailored for OpenJDK HotSpot & GraalVM, crafted from the best of breed Java libraries and standards_."
-This description is somewhat unclear but does an outstanding job at using bankable keywords.
-It's also written: "_Supersonic Subatomic Java_."
-Still very foggy.
-In practice, Quarkus is a stack to develop distributed systems and modern applications in Java, Kotlin, or Scala.
-Quarkus applications are tailored for the Cloud, containers, and Kubernetes.
-That does not mean you can't use Quarkus in other environments, there are no limits, but the principles infused in Quarkus have made containerization of applications more efficient.
-In this workshop, we will explain what Quarkus is and because the best way to understand Quarkus is to use it, build a set of microservices with it.
-Again, Quarkus is not limited to microservices, but it's a generally well-understood type of architecture.
 
-This workshop offers attendees an intro-level, hands-on session with Quarkus, from the first line of code to making services, to consuming them, and finally to assembling everything in a consistent system.
-But, what are we going to build?
-Well, it's going to be a set of microservices:
-
-* Using Quarkus
-* Using HTTP and events (with Apache Kafka)
-* With some parts of the dark side of microservices (resilience, health, monitoring with Prometheus)
-* Answer the ultimate question: are super-heroes stronger than super-villains?
+This workshop offers attendees an intro-level, hands-on session on Cloud performance.
+From developing microservices written in Quarkus/SpringBoot/Micronaut, to packaging them in Docker containers, deploy them in Azure Container Apps and monitor the performances.
 
 This workshop is a BYOL (_Bring Your Own Laptop_) session, so bring your Windows, OSX, or Linux laptop.
-You need JDK {jdk-version} on your machine, Apache Maven ({maven-version}), and Docker.
+You need JDK {jdk-version} on your machine, Apache Maven ({maven-version}), Docker, Azure CLI and other few tools.
 On Mac and Windows, Docker for _x_ is recommended instead of the Docker toolbox setup.
 
-What you are going to learn:
+What you are going to do:
 
-* What is Quarkus, and how you can use it
-* How to build an HTTP endpoint (REST API) with Quarkus
-* How to access a relational database
-* How you can use Swagger and OpenAPI
-* How you test your microservice
-* How to build a reactive microservice, including reactive data access
-* How you improve the resilience of your service
-* How to build event-driven microservices with Kafka
-* How to build native executable
-* How to extend Quarkus with extensions
+* Create your own GitHub Repo based on a GitHub Template
+* Develop one microservice that consumes CPU and memory with Quarkus, another one with SpringBoot and Micronaut
+* Compile, package and containerize these microservices
+* Create an Azure Container Apps environment
+* Deploy your containers to Azure Container Apps
+* Execute and monitor the microservices using different performance parameters
+* Load test the microservices
+* Improve thoughput thanks to scalability
 * And much more!
 
 Ready? Here we go!
 
+image::qrcode-workshop.png[]
+
 == Presenting the Workshop
+
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
 
 === What Is This Workshop About?
 
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+
 === What Will You Be Developing?
+
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
 
 [plantuml,align=center,format=png]
 ----
@@ -56,19 +55,25 @@ include::{plantDir}/welcome-physical-architecture.puml[]
 
 === What Will You Be Deploying?
 
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+xxxxxxx TODO .
+
 === How Does This Workshop Work?
 
 You have this material in your hands, and you can now follow it step by step. The structure of this workshop is as follow :
 
 1. _Installing all the needed tools_: in this section, you will install all the tools and code to be able to bundle, package and deploy our application.
 
-2. _Setup Azure resources_: this section introduces Azure and the Container Apps service to prepare all the needed resources for our application. You will create an entire infrastructure on Azure (Container Registry, Postgres databases, etc.) to make everything ready for deployment.
+2. _Setup Azure resources_: this section introduces Azure and the Container Apps service to prepare all the needed resources for our application. You will create an entire infrastructure on Azure (Container Registry, Postgres database, etc.) to make everything ready for deployment.
 
-3. _Running the Application Locally_: in this section, you will build Docker images out of our microservices, execute them locally with Docker compose, push them to Azure Registry, all that using Docker and Azure CLI.
+3. _Running the Applications Locally_: in this section, you will build Docker images out of our microservices, execute them locally with Docker compose, push them to Azure Registry, all that using Docker and Azure CLI.
 
 4. _Setup CI/CD and deploy application_: in this section, you will setup a CI/CD pipeline using GitHub Actions so that our application builds and deploy automatically on new commits.
 
-5. _Administrating_: in this section, you will add some load to your microservices, monitor them, scale them, check the logs, etc.
+5. _Monitoring_: in this section, you will add some load to your microservices, monitor them, scale them, check the logs, etc.
 
 === What Do You Have to Do?
 
@@ -90,6 +95,8 @@ Oh, and be ready to have some fun!
 
 If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: https://azcheck.in/dbe221010.
 Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
+
+image::qrcode-azure-pass.png[]
 
 | A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download?WT.mc_id=javascript-0000-yolasors[Get VS Code]
 
