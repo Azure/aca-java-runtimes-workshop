@@ -2,12 +2,12 @@ name: Build and deploy
 
 on:
   push:
-    # branches: [main]
+    branches: [main]
     workflow_dispatch:
 
 # tag::adocGitHubActionsWorkflowBase[]
 env:
-  REGISTRY_URL: <put here the value of $REGISTRY_URL>
+  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
   PROJECT: java-runtimes
   RESOURCE_GROUP: rg-java-runtimes
   QUARKUS_APP: quarkus-app
