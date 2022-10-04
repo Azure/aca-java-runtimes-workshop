@@ -51,6 +51,20 @@ setupRepo() {
       --only-show-errors
   )
 
+  REGISTRY_USERNAME=$(
+  az acr credential show \
+    --name "$REGISTRY" \
+    --query "username" \
+    --output tsv
+  )
+
+  REGISTRY_PASSWORD=$(
+    az acr credential show \
+      --name "$REGISTRY" \
+      --query "passwords[0].value" \
+      --output tsv
+  )
+
   echo $AZURE_CREDENTIALS
   # end::adocCreatePrincipal[]
 
