@@ -1,5 +1,5 @@
 // tag::adocHeader[]
-package io.containerapps.javaruntime.workshop.quarkus.springboot;
+package io.containerapps.javaruntime.workshop.springboot;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
