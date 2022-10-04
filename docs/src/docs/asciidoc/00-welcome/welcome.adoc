@@ -1,8 +1,11 @@
 [[welcome]]
 = Welcome
 
-This workshop offers attendees an intro-level, hands-on session on Cloud performance.
+
+This workshop offers attendees an intro-level, hands-on session on Cloud performance using different Java runtimes:
 From developing microservices written in Quarkus/SpringBoot/Micronaut, to packaging them in Docker containers, deploy them in Azure Container Apps and monitor the performances.
+You will analyze CPU load as well as memory usage.
+And then you will establish a baseline, so you can see the impact of scaling out or scaling up containers.
 
 This workshop is a BYOL (_Bring Your Own Laptop_) session, so bring your Windows, OSX, or Linux laptop.
 You need JDK {jdk-version} on your machine, Apache Maven ({maven-version}), Docker, Azure CLI and other few tools.
@@ -17,12 +20,14 @@ What you are going to do:
 * Deploy your containers to Azure Container Apps
 * Execute and monitor the microservices using different performance parameters
 * Load test the microservices
-* Improve thoughput thanks to scalability
+* Analyze CPU load and scale containers appropriately
+* Analyze memory and scale containers appropriately
 * And much more!
 
 Ready? Here we go!
+Check the workshop at https://azure.github.io/aca-java-runtimes-workshop of flash the QR Code if you don't want to type.
 
-image::qrcode-workshop.png[]
+image::../images/qrcode-workshop.png[]
 
 == Presenting the Workshop
 
@@ -39,6 +44,16 @@ xxxxxxx TODO .
 xxxxxxx TODO .
 xxxxxxx TODO .
 xxxxxxx TODO .
+
+[source,java,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoCPU]
+----
+
+[source,java,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoMemory]
+----
 
 === What Will You Be Developing?
 
@@ -85,26 +100,26 @@ Oh, and be ready to have some fun!
 
 [cols="1,1"]
 |===
-| Java                | {jdk-version} https://docs.microsoft.com/java/openjdk/download?WT.mc_id=javascript-0000-yolasors[Get OpenJDK]
-| Maven               | {maven-version} https://maven.apache.org/download.cgi[Get Maven]
-| Docker              | {docker-version} https://docs.docker.com/get-docker/[Get Docker]
-| Azure CLI           | https://learn.microsoft.com/cli/azure/install-azure-cli?WT.mc_id=javascript-0000-yolasors#install[Get Azure CLI]
-| Git                 | https://git-scm.com
-| GitHub account      | https://github.com/join
-| Azure account       | https://azure.microsoft.com/free/?WT.mc_id=javascript-0000-yolasors[https://azure.microsoft.com/free]
+| Java {jdk-version}       | https://learn.microsoft.com/java/openjdk/download[Get OpenJDK]
+| Maven {maven-version}    | https://maven.apache.org/download.cgi[Get Maven]
+| Docker {docker-version}  |  https://docs.docker.com/get-docker/[Get Docker]
+| Azure CLI                | https://learn.microsoft.com/cli/azure/install-azure-cli#install[Get Azure CLI]
+| Git                      | https://git-scm.com
+| GitHub account           | https://github.com/join
+| Azure account            | https://azure.microsoft.com/free/[Get a free Azure account]
 
 If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: https://azcheck.in/dbe221010.
 Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
 
 image::qrcode-azure-pass.png[]
 
-| A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download?WT.mc_id=javascript-0000-yolasors[Get VS Code]
+| A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download[Get VS Code]
 
 |===
 
-If you have VS Code and Docker installed on your machine, the quickest way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers?WT.mc_id=javascript-0000-yolasors[dev container] of the template project. Install the https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack&WT.mc_id=javascript-0000-yolasors[Remote Development extension] in VS Code, and skip to the next section.
+If you have VS Code and Docker installed on your machine, the quickest way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers[dev container] of the template project. Install the https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack[Remote Development extension] in VS Code, and skip to the next section.
 
-TIP: You can learn more about dev containers in https://docs.microsoft.com/shows/beginners-series-to-dev-containers/?WT.mc_id=javascript-0000-yolasors[this video series].
+TIP: You can learn more about dev containers in https://learn.microsoft.com/shows/beginners-series-to-dev-containers/[this video series].
 
 You can test your installation by running the following commands:
 

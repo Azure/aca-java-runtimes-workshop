@@ -1,6 +1,6 @@
 # Provisioning and deployment scripts
 
-Theses script are mainly for testing/proctor usage, it's not meant for usage during the workshop.
+These scripts are mainly for testing/proctor usage, it's not meant for usage during the workshop.
 
 ## Provisioning infrastructure
 
@@ -9,6 +9,9 @@ Theses script are mainly for testing/proctor usage, it's not meant for usage dur
 2. Run `./azure.sh setup` to:
   - Create Azure infrastructure
   - Add GitHub secrets to the repository (for CI/CD)
+
+Alternatively, you can use the `-s` option to only create the Azure infrastructure and skip the repository setup, with
+`./azure.sh setup -s`.
 
 ## Export environment
 

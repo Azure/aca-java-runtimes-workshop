@@ -1,10 +1,7 @@
+// tag::adocHeader[]
 package io.containerapps.javaruntime.workshop.quarkus;
 
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.lang.System.Logger;
 import java.time.Duration;
@@ -24,6 +21,7 @@ public class QuarkusResource {
     public QuarkusResource(StatisticsRepository statisticsRepository) {
         this.repository = statisticsRepository;
     }
+// end::adocHeader[]
 
     /**
      * Says hello.
@@ -31,11 +29,13 @@ public class QuarkusResource {
      *
      * @return hello
      */
+// tag::adocMethodHello[]
     @GET
     public String hello() {
         LOGGER.log(INFO, "Quarkus: hello");
         return "Quarkus: hello";
     }
+// end::adocMethodHello[]
 
     /**
      * Simulates requests that use a lot of CPU.
@@ -47,6 +47,7 @@ public class QuarkusResource {
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
      */
+// tag::adocMethodCPU[]
     @GET
     @Path("/cpu")
     public String cpu(@QueryParam("iterations") @DefaultValue("10") Long iterations,
@@ -61,6 +62,7 @@ public class QuarkusResource {
         } else {
             iterations *= 20000;
         }
+        // tag::adocAlgoCPU[]
         while (iterations > 0) {
             if (iterations % 20000 == 0) {
                 try {
@@ -70,6 +72,7 @@ public class QuarkusResource {
             }
             iterations--;
         }
+        // end::adocAlgoCPU[]
 
         if (db) {
             Statistics statistics = new Statistics();
@@ -85,8 +88,8 @@ public class QuarkusResource {
             msg += " The result is persisted in the database.";
         }
         return msg;
-
     }
+// end::adocMethodCPU[]
 
     /**
      * Simulates requests that use a lot of memory.
@@ -98,6 +101,7 @@ public class QuarkusResource {
      * @param bites the number of megabytes to eat
      * @return the result.
      */
+// tag::adocMethodMemory[]
     @GET
     @Path("/memory")
     public String memory(@QueryParam("bites") @DefaultValue("10") Integer bites,
@@ -109,6 +113,7 @@ public class QuarkusResource {
         if (bites == null) {
             bites = 1;
         }
+        // tag::adocAlgoMemory[]
         HashMap hunger = new HashMap<>();
         for (int i = 0; i < bites * 1024 * 1024; i += 8192) {
             byte[] bytes = new byte[8192];
@@ -117,6 +122,7 @@ public class QuarkusResource {
                 bytes[j] = '0';
             }
         }
+        // end::adocAlgoMemory[]
 
         if (db) {
             Statistics statistics = new Statistics();
@@ -133,4 +139,5 @@ public class QuarkusResource {
         }
         return msg;
     }
+// end::adocMethodMemory[]
 }

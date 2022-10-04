@@ -1,4 +1,4 @@
-package io.containerapps.javaruntime.workshop.quarkus.springboot;
+package io.containerapps.javaruntime.workshop.springboot;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

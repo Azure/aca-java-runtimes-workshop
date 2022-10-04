@@ -25,6 +25,9 @@ showUsage() {
   echo "  cleanup  Clean up Azure infrastructure and repo secrets"
   echo "  env      Export environment variables"
   echo
+  echo "Options:"
+  echo "  -s        Skip repository setup"
+  echo 
 }
 
 setupRepo() {
@@ -46,6 +49,20 @@ setupRepo() {
       --scopes="/subscriptions/$SUBSCRIPTION_ID" \
       --sdk-auth \
       --only-show-errors
+  )
+
+  REGISTRY_USERNAME=$(
+  az acr credential show \
+    --name "$REGISTRY" \
+    --query "username" \
+    --output tsv
+  )
+
+  REGISTRY_PASSWORD=$(
+    az acr credential show \
+      --name "$REGISTRY" \
+      --query "passwords[0].value" \
+      --output tsv
   )
 
   echo $AZURE_CREDENTIALS
@@ -320,9 +337,15 @@ deleteInfrastructure() {
 }
 
 args=()
+skip_repo_setup=false
 
 while [ $# -gt 0 ]; do
   case $1 in
+    -s)
+      echo "Skipping repository setup/cleanup..."
+      skip_repo_setup=true
+      shift
+      ;;
     --help)
       showUsage
       exit 0
@@ -365,10 +388,14 @@ if [ "$command" = "login" ]; then
   echo "Login successful."
 elif [ "$command" = "setup" ]; then
   createInfrastructure
-  # setupRepo
+  if [ "$skip_repo_setup" = false ]; then
+    setupRepo
+  fi
 elif [ "$command" = "cleanup" ]; then
   deleteInfrastructure
-  # cleanupRepo
+  if [ "$skip_repo_setup" = false ]; then
+    cleanupRepo
+  fi
 elif [ "$command" = "env" ]; then
   exportEnvironment
 else

@@ -26,6 +26,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 18
+
     - name: Set up Java
       uses: actions/setup-java@v3
       with:
@@ -35,6 +40,10 @@ jobs:
     - name: Generate docs
       run: |
         cd docs
+        shopt -s globstar
+        npx -y cxa-track -t javascript-0000-yolasors **/*.adoc
+        VERSION="sha.$(git rev-parse --short HEAD)"
+        perl -i -pe "s/1.0.0-SNAPSHOT/$VERSION/g" pom.xml
         mvn generate-resources
 
     - name: Setup GitHub Pages

@@ -36,7 +36,7 @@ echo $REGISTRY_PASSWORD | docker login --username $REGISTRY_USERNAME --password-
 
 echo "Enabling ingress for each container app..."
 
-# tag:adocIngressUpdate[]
+# tag::adocIngressUpdate[]
 az containerapp ingress enable \
   --name "$QUARKUS_APP" \
   --resource-group "$RESOURCE_GROUP" \
@@ -54,7 +54,7 @@ az containerapp ingress enable \
   --resource-group "$RESOURCE_GROUP" \
   --target-port 8703 \
   --type external
-# end:adocIngressUpdate[]
+# end::adocIngressUpdate[]
 
 echo "Building the Quarkus app..."
 pushd quarkus-app

@@ -3,6 +3,30 @@
 
 '''
 
+Our microservices have several endpoints consuming memory or CPU.
+Depending on the number of iterations and bites we pass as parameters to these endpoints, it can take significantly longer to respond.
+We are going to explore the problem by looking at CPU and memory metrics.
+
+== CPU
+
+When you know CPU usage you are better prepared to answer the following questions:
+
+* Is the amount of CPU resources maxed out?
+* Have I over provisioned the amount of CPU resources?
+* What does the baseline of usage looks like?
+* Is there room to grow without scaling out or up?
+* How much of the available CPU resources is it really using?
+* What type of load is it?
+
+== Memory
+
+When you know memory usage you are better prepared to answer the following questions:
+
+* Is the amount of memory used close to the maximum available memory?
+* Have I over provisioned the amount of memory resources?
+* What does the baseline of usage look like?
+* Is there room to grow without scaling out or up?
+* How much of the available memory resources is it really using?
 
 [[scaling-listing-rest-resource]]
 .REST Resource

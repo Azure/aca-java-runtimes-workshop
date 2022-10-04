@@ -1,4 +1,4 @@
-package io.containerapps.javaruntime.workshop.quarkus.springboot;
+package io.containerapps.javaruntime.workshop.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

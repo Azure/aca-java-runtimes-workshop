@@ -1,4 +1,4 @@
-package io.containerapps.javaruntime.workshop.quarkus.springboot;
+package io.containerapps.javaruntime.workshop.springboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

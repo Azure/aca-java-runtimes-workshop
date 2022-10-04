@@ -4,71 +4,54 @@
 '''
 
 
-[[micronaut-listing-rest-resource]]
-.REST Resource
+== The Micronaut REST Resource
+
+[[micronaut-listing-rest-resource-1]]
+.Header of the Micronaut REST Resource
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[]
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocHeader]
 ----
 
-== Bootstrapping the Heroes Microservice
+[[micronaut-listing-rest-resource-2]]
+.Hello Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodHello]
+----
 
-=== Directory Structure
+[[micronaut-listing-rest-resource-3]]
+.CPU Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodCPU]
+----
 
-=== The Hero REST Resource
-
-=== Running the Application
-
-=== Debugging the Application
-
-=== Testing the Application
+[[micronaut-listing-rest-resource-4]]
+.Memory Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodMemory]
+----
 
 == Transactions and ORM
 
-=== Directory Structure
+[[micronaut-listing-entity]]
+.Statistics Entity
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Statistics.java[]
+----
 
-=== Installing the PostgreSQL Dependency, Hibernate with Panache and Hibernate Validator
+[[micronaut-listing-repository]]
+.Statistics Repository
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/StatisticsRepository.java[]
+----
 
-=== The Hero Entity
+== Testing the Application
 
-=== Configuring Hibernate
+== Running the Application
 
-=== Accessing a database in dev mode
-
-=== Refactoring the Hero REST Resource
-
-=== Dependency Injection
-
-=== Adding Data
-
-=== Testing the Hero REST Resource
-
-== Configuring the Heroes Microservice
-
-=== Configuring Logging
-
-=== Configuring Quarkus Listening Port
-
-== Open API
-
-=== Directory Structure
-
-=== Installing the OpenAPI extension
-
-=== Default Open API Contract
-
-=== Customizing the Open API Contract
-
-==== Customizing Methods
-
-==== Customizing the Application
-
-==== Customized Contract
-
-== Deploying the Heroes Microservice
-
-=== Creating the Managed Postgres Database
-
-=== Refactoring the CI/CD Pipeline
-
-=== Deploying the Heroes Microservice
+== Deploying the Application
