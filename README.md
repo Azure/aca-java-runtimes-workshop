@@ -29,6 +29,17 @@ mvn spring-boot:run               # Execute the application
 curl 'localhost:8703/springboot'  # Invokes the hello endpoint
 ```
 
+To build a native image (you need GraalVM installed):
+```shell
+mvn -Pnative clean package
+./target/springboot-app
+```
+
+To build a Docker image (you need Docker running):
+```shell
+ mvn spring-boot:build-image 
+```
+
 > This repo has been populated by an initial template to help get you started. Please
 > make sure to update the content to build a great experience for community-building.
 
