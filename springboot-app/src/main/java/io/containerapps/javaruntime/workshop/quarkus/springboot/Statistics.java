@@ -13,7 +13,7 @@ public class Statistics{
     @Id
     private Long id;
     public Instant doneAt = Instant.now();
-    public Framework framework = Framework.QUARKUS;
+    public Framework framework = Framework.SPRINGBOOT;
     public Type type;
     public String parameter;
     public Duration duration;
