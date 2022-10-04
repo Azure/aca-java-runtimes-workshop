@@ -105,16 +105,16 @@ jobs:
             
             az containerapp update \
               --name ${{ env.QUARKUS_APP }} \
-              --resource-group ${{ RESOURCE_GROUP }} \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
               --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }}
 
             # az containerapp update \
             #   --name ${{ env.MICRONAUT_APP }} \
-            #   --resource-group ${{ RESOURCE_GROUP }} \
+            #   --resource-group ${{ env.RESOURCE_GROUP }} \
             #   --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
 
             # az containerapp update \
             #   --name ${{ env.SPRING_APP }} \
-            #   --resource-group ${{ RESOURCE_GROUP }} \
+            #   --resource-group ${{ env.RESOURCE_GROUP }} \
             #   --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
   # end::adocDeploy[]
