@@ -21,6 +21,7 @@ What you are going to do:
 * And much more!
 
 Ready? Here we go!
+Check the workshop at https://azure.github.io/aca-java-runtimes-workshop of flash the QR Code if you don't want to type.
 
 image::../images/qrcode-workshop.png[]
 
