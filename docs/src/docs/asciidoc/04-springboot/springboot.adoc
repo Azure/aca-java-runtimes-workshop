@@ -4,51 +4,54 @@
 '''
 
 
-[[springboot-listing-rest-resource]]
-.REST Resource
+== The SpringBoot REST Resource
+
+[[springboot-listing-rest-resource-1]]
+.Header of the SpringBoot REST Resource
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/springboot/SpringbootResource.java[]
+include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocHeader]
 ----
 
-== Bootstrapping the Fights Microservice
+[[springboot-listing-rest-resource-2]]
+.Hello Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocHeader]
+----
 
-=== Directory Structure
+[[springboot-listing-rest-resource-3]]
+.CPU Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocHeader]
+----
 
-=== The Fight REST Resource
+[[springboot-listing-rest-resource-4]]
+.Memory Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocHeader]
+----
 
-=== The Fight Entity
+== Transactions and ORM
 
-=== Installing the Mongo DB Dependency, Hibernate with Panache and Hibernate Validator
+[[springboot-listing-entity]]
+.Statistics Entity
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/Statistics.java[]
+----
 
-=== Configuring
+[[springboot-listing-repository]]
+.Statistics Repository
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/StatisticsRepository.java[]
+----
 
-=== Accessing a database in dev mode
+== Testing the Application
 
-=== Testing the Fight REST Resource
+== Running the Application
 
-== Configuring the Fights Microservice
-
-== Open API
-
-=== Directory Structure
-
-=== Installing the OpenAPI extension
-
-=== Default Open API Contract
-
-=== Customizing the Open API Contract
-
-==== Customizing Methods
-
-==== Customizing the Application
-
-==== Customized Contract
-
-== Deploying the Fights Microservice
-
-=== Creating the Managed Mongo DB Database
-
-=== Refactoring the CI/CD Pipeline
-
-=== Deploying the Fights Microservice
+== Deploying the Application

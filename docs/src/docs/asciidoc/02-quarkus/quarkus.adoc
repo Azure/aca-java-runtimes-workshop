@@ -3,98 +3,75 @@
 
 '''
 
-At the heart of the Super-Hero application comes Villains!
-You can't have superheroes without super-villains.
-
 We need to expose a REST API allowing CRUD operations on villains.
 This microservice is, let's say, a _classical_ REST microservice.
 It uses HTTP to expose a REST API and internally store data into a database.
 It's using the _imperative_ development model.
 
-The _fight_ microservice will use this service.
+In the following section you will:
 
+* xxxx
+* xxxx
+* xxxx
+* xxxx
+* xxxx
+* xxxx
 
-In the following sections, you learn:
-
-* How to create a new Quarkus application
-* How to implement REST API using JAX-RS and the RESTEasy Reactive extensionfootnote:[RESTEasy Reactive support the reactive and imperative development models.]
-* How to compose your application using beans
-* How to access your database using Hibernate ORM with Panache
-* How to use transactions
-* How to enable OpenAPI and Swagger-UI
-
-IMPORTANT: This service is exposed on the port 8084.
+IMPORTANT: This service is exposed on the port 8701.
 
 But first, let's describe our service.
 The Super-Villains microservice manages villains with their names, powers, and so on.
 The REST API allows adding, removing, listing, and picking a random villain from the stored set.
 Nothing outstanding but a good first step to discover Quarkus.
 
-[[quarkus-listing-rest-resource]]
-.REST Resource
+== The Quarkus REST Resource
+
+[[quarkus-listing-rest-resource-1]]
+.Header of the Quarkus REST Resource
 [source,indent=0]
 ----
-include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[]
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocHeader]
 ----
 
-== Bootstrapping the Villains Microservice
+[[quarkus-listing-rest-resource-2]]
+.Hello Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodHello]
+----
 
-=== Directory Structure
+[[quarkus-listing-rest-resource-3]]
+.CPU Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodCPU]
+----
 
-=== The Villain REST Resource
-
-=== Running the Application
-
-=== Development Mode
-
-=== Testing the Application
+[[quarkus-listing-rest-resource-4]]
+.Memory Method
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodMemory]
+----
 
 == Transactions and ORM
 
-=== Directory Structure
+[[quarkus-listing-entity]]
+.Statistics Entity
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/Statistics.java[]
+----
 
-=== Installing the PostgreSQL Dependency, Hibernate with Panache and Hibernate Validator
+[[quarkus-listing-repository]]
+.Statistics Repository
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/StatisticsRepository.java[]
+----
 
-=== The Villain Entity
+== Testing the Application
 
-=== Configuring Hibernate
+== Running the Application
 
-=== Accessing a database in dev mode
-
-=== Refactoring the Villain REST Resource
-
-=== Dependency Injection
-
-=== Adding Data
-
-=== Testing the Villain REST Resource
-
-== Configuring the Villains Microservice
-
-=== Configuring Logging
-
-=== Configuring Quarkus Listening Port
-
-== Open API
-
-=== Directory Structure
-
-=== Installing the OpenAPI extension
-
-=== Default Open API Contract
-
-=== Customizing the Open API Contract
-
-==== Customizing Methods
-
-==== Customizing the Application
-
-==== Customized Contract
-
-== Deploying the Villains Microservice
-
-=== Creating the Managed Postgres Database
-
-=== Refactoring the CI/CD Pipeline
-
-=== Deploying the Villains Microservice
+== Deploying the Application

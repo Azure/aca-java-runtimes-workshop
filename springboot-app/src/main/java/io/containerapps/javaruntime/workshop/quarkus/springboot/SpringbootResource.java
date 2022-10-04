@@ -1,3 +1,4 @@
+// tag::adocHeader[]
 package io.containerapps.javaruntime.workshop.quarkus.springboot;
 
 import org.springframework.http.MediaType;
@@ -23,6 +24,7 @@ public class SpringbootResource {
     public SpringbootResource(StatisticsRepository statisticsRepository) {
         this.repository = statisticsRepository;
     }
+// end::adocHeader[]
 
     /**
      * Says hello.
@@ -30,11 +32,13 @@ public class SpringbootResource {
      *
      * @return hello
      */
+// tag::adocMethodHello[]
     @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
     public String hello() {
         LOGGER.log(INFO, "SpringBoot: hello");
         return "SpringBoot: hello";
     }
+// end::adocMethodHello[]
 
     /**
      * Simulates requests that use a lot of CPU.
@@ -46,6 +50,7 @@ public class SpringbootResource {
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
      */
+// tag::adocMethodCPU[]
     @GetMapping(path = "/cpu", produces = MediaType.TEXT_PLAIN_VALUE)
     public String cpu(@RequestParam(value = "iterations", defaultValue = "10") Long iterations,
                       @RequestParam(value = "db", defaultValue = "false") Boolean db,
@@ -83,8 +88,8 @@ public class SpringbootResource {
             msg += " The result is persisted in the database.";
         }
         return msg;
-
     }
+// end::adocMethodCPU[]
 
     /**
      * Simulates requests that use a lot of memory.
@@ -96,6 +101,7 @@ public class SpringbootResource {
      * @param bites the number of megabytes to eat
      * @return the result.
      */
+// tag::adocMethodMemory[]
     @GetMapping(path = "/memory", produces = MediaType.TEXT_PLAIN_VALUE)
     public String memory(@RequestParam(value = "bites", defaultValue = "10") Integer bites,
                          @RequestParam(value = "db", defaultValue = "false") Boolean db,
@@ -130,4 +136,5 @@ public class SpringbootResource {
         }
         return msg;
     }
+// end::adocMethodMemory[]
 }

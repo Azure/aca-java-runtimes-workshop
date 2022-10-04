@@ -1,3 +1,4 @@
+// tag::adocHeader[]
 package io.containerapps.javaruntime.workshop.micronaut;
 
 import io.micronaut.http.MediaType;
@@ -21,6 +22,7 @@ public class MicronautResource {
     public MicronautResource(StatisticsRepository statisticsRepository) {
         this.repository = statisticsRepository;
     }
+// end::adocHeader[]
 
     /**
      * Says hello.
@@ -28,11 +30,13 @@ public class MicronautResource {
      *
      * @return hello
      */
+// tag::adocMethodHello[]
     @Get(produces = MediaType.TEXT_PLAIN)
     public String hello() {
         LOGGER.log(INFO, "Micronaut: hello");
         return "Micronaut: hello";
     }
+// end::adocMethodHello[]
 
     /**
      * Simulates requests that use a lot of CPU.
@@ -44,6 +48,7 @@ public class MicronautResource {
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
      */
+// tag::adocMethodCPU[]
     @Get(uri = "/cpu", produces = MediaType.TEXT_PLAIN)
     public String cpu(@QueryValue(value = "iterations", defaultValue = "10") Long iterations,
                       @QueryValue(value = "db", defaultValue = "false") Boolean db,
@@ -81,8 +86,8 @@ public class MicronautResource {
             msg += " The result is persisted in the database.";
         }
         return msg;
-
     }
+// end::adocMethodCPU[]
 
     /**
      * Simulates requests that use a lot of memory.
@@ -94,6 +99,7 @@ public class MicronautResource {
      * @param bites the number of megabytes to eat
      * @return the result.
      */
+// tag::adocMethodMemory[]
     @Get(uri = "/memory", produces = MediaType.TEXT_PLAIN)
     public String memory(@QueryValue(value = "bites", defaultValue = "false") Integer bites,
                          @QueryValue(value = "db", defaultValue = "false") Boolean db,
@@ -128,4 +134,5 @@ public class MicronautResource {
         }
         return msg;
     }
+// end::adocMethodMemory[]
 }
