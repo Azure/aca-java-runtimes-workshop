@@ -3,6 +3,7 @@ package io.containerapps.javaruntime.workshop.springboot;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+
 import java.time.Duration;
 import java.time.Instant;
 
