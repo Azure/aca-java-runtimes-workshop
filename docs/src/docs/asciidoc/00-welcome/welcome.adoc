@@ -22,7 +22,7 @@ What you are going to do:
 
 Ready? Here we go!
 
-image::qrcode-workshop.png[]
+image::../images/qrcode-workshop.png[]
 
 == Presenting the Workshop
 
