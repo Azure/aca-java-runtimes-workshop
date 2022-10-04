@@ -55,6 +55,7 @@ public class QuarkusResource {
         LOGGER.log(INFO, "Quarkus: cpu: {0} {1} with desc {2}", iterations, db, desc);
         Long iterationsDone = iterations;
 
+        // tag::adocAlgoCPU[]
         Instant start = Instant.now();
         if (iterations == null) {
             iterations = 20000L;
@@ -70,6 +71,7 @@ public class QuarkusResource {
             }
             iterations--;
         }
+        // end::adocAlgoCPU[]
 
         if (db) {
             Statistics statistics = new Statistics();
@@ -109,6 +111,7 @@ public class QuarkusResource {
         if (bites == null) {
             bites = 1;
         }
+        // tag::adocAlgoMemory[]
         HashMap hunger = new HashMap<>();
         for (int i = 0; i < bites * 1024 * 1024; i += 8192) {
             byte[] bytes = new byte[8192];
@@ -117,6 +120,7 @@ public class QuarkusResource {
                 bytes[j] = '0';
             }
         }
+        // end::adocAlgoMemory[]
 
         if (db) {
             Statistics statistics = new Statistics();

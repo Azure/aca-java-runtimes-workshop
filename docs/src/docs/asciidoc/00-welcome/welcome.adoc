@@ -40,6 +40,16 @@ xxxxxxx TODO .
 xxxxxxx TODO .
 xxxxxxx TODO .
 
+[source,java,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoCPU]
+----
+
+[source,java,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoMemory]
+----
+
 === What Will You Be Developing?
 
 xxxxxxx TODO .
