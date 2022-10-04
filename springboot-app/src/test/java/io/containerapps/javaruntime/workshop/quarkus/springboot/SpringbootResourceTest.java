@@ -1,26 +1,21 @@
 package io.containerapps.javaruntime.workshop.quarkus.springboot;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, properties = {
+    "server.port=8803",
+    "spring.datasource.url=jdbc:tc:postgresql:14-alpine://testcontainers/postgres",
+    "spring.datasource.username=postgres",
+    "spring.datasource.password=password"
+})
 public class SpringbootResourceTest {
-    @LocalServerPort
-    private int port;
-    private String basePath;
 
-    @BeforeAll
-    public void setup() {
-        basePath = "http://localhost:" + port + "/springboot";
-    }
+    private static String basePath = "http://localhost:8803/springboot";
 
     @Test
     public void testHelloEndpoint() {
