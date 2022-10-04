@@ -1,6 +1,6 @@
 # Provisioning and deployment scripts
 
-Theses script are mainly for testing/proctor usage, it's not meant for usage during the workshop.
+These scripts are mainly for testing/proctor usage, it's not meant for usage during the workshop.
 
 ## Provisioning infrastructure
 
