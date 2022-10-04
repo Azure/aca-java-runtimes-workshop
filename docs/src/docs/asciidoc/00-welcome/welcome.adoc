@@ -85,13 +85,13 @@ Oh, and be ready to have some fun!
 
 [cols="1,1"]
 |===
-| Java                | {jdk-version} https://docs.microsoft.com/java/openjdk/download?WT.mc_id=javascript-0000-yolasors[Get OpenJDK]
-| Maven               | {maven-version} https://maven.apache.org/download.cgi[Get Maven]
-| Docker              | {docker-version} https://docs.docker.com/get-docker/[Get Docker]
-| Azure CLI           | https://learn.microsoft.com/cli/azure/install-azure-cli?WT.mc_id=javascript-0000-yolasors#install[Get Azure CLI]
-| Git                 | https://git-scm.com
-| GitHub account      | https://github.com/join
-| Azure account       | https://azure.microsoft.com/free/?WT.mc_id=javascript-0000-yolasors[https://azure.microsoft.com/free]
+| Java {jdk-version}       | https://docs.microsoft.com/java/openjdk/download?WT.mc_id=javascript-0000-yolasors[Get OpenJDK]
+| Maven {maven-version}    | https://maven.apache.org/download.cgi[Get Maven]
+| Docker {docker-version}  |  https://docs.docker.com/get-docker/[Get Docker]
+| Azure CLI                | https://learn.microsoft.com/cli/azure/install-azure-cli?WT.mc_id=javascript-0000-yolasors#install[Get Azure CLI]
+| Git                      | https://git-scm.com
+| GitHub account           | https://github.com/join
+| Azure account            | https://azure.microsoft.com/free/?WT.mc_id=javascript-0000-yolasors[https://azure.microsoft.com/free]
 
 If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: https://azcheck.in/dbe221010.
 Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
