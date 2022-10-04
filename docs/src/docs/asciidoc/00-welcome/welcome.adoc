@@ -1,8 +1,11 @@
 [[welcome]]
 = Welcome
 
-This workshop offers attendees an intro-level, hands-on session on Cloud performance.
+
+This workshop offers attendees an intro-level, hands-on session on Cloud performance using different Java runtimes:
 From developing microservices written in Quarkus/SpringBoot/Micronaut, to packaging them in Docker containers, deploy them in Azure Container Apps and monitor the performances.
+You will analyze CPU load as well as memory usage.
+And then you will establish a baseline, so you can see the impact of scaling out or scaling up containers.
 
 This workshop is a BYOL (_Bring Your Own Laptop_) session, so bring your Windows, OSX, or Linux laptop.
 You need JDK {jdk-version} on your machine, Apache Maven ({maven-version}), Docker, Azure CLI and other few tools.
@@ -17,7 +20,8 @@ What you are going to do:
 * Deploy your containers to Azure Container Apps
 * Execute and monitor the microservices using different performance parameters
 * Load test the microservices
-* Improve thoughput thanks to scalability
+* Analyze CPU load and scale containers appropriately
+* Analyze memory and scale containers appropriately
 * And much more!
 
 Ready? Here we go!
