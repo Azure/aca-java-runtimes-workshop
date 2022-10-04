@@ -10,6 +10,9 @@ These scripts are mainly for testing/proctor usage, it's not meant for usage dur
   - Create Azure infrastructure
   - Add GitHub secrets to the repository (for CI/CD)
 
+Alternatively, you can use the `-s` option to only create the Azure infrastructure and skip the repository setup, with
+`./azure.sh setup -s`.
+
 ## Export environment
 
 To export all environment variables needed for the workshop in your current shell, you can use the command:
