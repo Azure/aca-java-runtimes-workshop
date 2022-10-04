@@ -101,7 +101,7 @@ public class MicronautResource {
      */
 // tag::adocMethodMemory[]
     @Get(uri = "/memory", produces = MediaType.TEXT_PLAIN)
-    public String memory(@QueryValue(value = "bites", defaultValue = "false") Integer bites,
+    public String memory(@QueryValue(value = "bites", defaultValue = "10") Integer bites,
                          @QueryValue(value = "db", defaultValue = "false") Boolean db,
                          @QueryValue(value = "desc", defaultValue = "") String desc) {
         LOGGER.log(INFO, "Micronaut: memory: {0} {1} with desc {2}", bites, db, desc);
