@@ -56,7 +56,7 @@ jobs:
       # end::adocBuild[]
 
       # tag::adocPush[]
-      - name: Build and push Quarkus container to registry
+      - name: Build and push Quarkus image to registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -64,7 +64,7 @@ jobs:
           file: ./quarkus-app/src/main/docker/Dockerfile.jvm
           context: ./quarkus-app/
 
-      # - name: Build and push Micronaut container to registry
+      # - name: Build and push Micronaut image to registry
       #   uses: docker/build-push-action@v2
       #   with:
       #     push: true
@@ -72,13 +72,13 @@ jobs:
       #     file: ./micronaut-app/Dockerfile
       #     context: ./micronaut-app/
 
-      - name: Build and push Spring container to registry
+      - name: Build and push Spring Boot image to registry
         uses: docker/build-push-action@v2
         with:
           push: true
           tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
-          file: ./spring-app/src/main/docker/Dockerfile.jvm
-          context: ./spring-app/
+          file: ./springboot-app/src/main/docker/Dockerfile.jvm
+          context: ./springboot-app/
       # end::adocPush[]
 
   # tag::adocDeploy[]
