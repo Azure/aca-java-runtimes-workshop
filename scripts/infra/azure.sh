@@ -217,7 +217,10 @@ az containerapp env create \
     --environment "$CONTAINERAPPS_ENVIRONMENT" \
     --ingress external \
     --target-port 80 \
-    --min-replicas 0
+    --min-replicas 0 \
+    --env-vars DATASOURCES_DEFAULT_USERNAME="$POSTGRES_DB_ADMIN" \
+               DATASOURCES_DEFAULT_PASSWORD="$POSTGRES_DB_PWD" \
+               DATASOURCES_DEFAULT_URL="$POSTGRES_DB_CONNECT_STRING"
 
   az containerapp create \
     --resource-group "$RESOURCE_GROUP" \
@@ -227,7 +230,11 @@ az containerapp env create \
     --environment "$CONTAINERAPPS_ENVIRONMENT" \
     --ingress external \
     --target-port 80 \
-    --min-replicas 0
+    --min-replicas 0 \
+    --env-vars SPRING_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
+               SPRING_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
+               SPRING_DATASOURCE_URL="$POSTGRES_DB_CONNECT_STRING"
+
 # end::adocACACreate[]
 
 # tag::adocPostgresCreate[]
