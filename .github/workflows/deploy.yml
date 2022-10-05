@@ -52,7 +52,7 @@ jobs:
         run: |
           cd quarkus-app && ./mvnw package
           # cd ../micronaut-app && ./mvnw package
-          # cd ../spring-app && ./mvnw package
+          cd ../spring-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
       # end::adocBuild[]
 
       # tag::adocPush[]
@@ -72,13 +72,13 @@ jobs:
       #     file: ./micronaut-app/Dockerfile
       #     context: ./micronaut-app/
 
-      # - name: Build and push Spring container to registry
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     push: true
-      #     tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
-      #     file: ./spring-app/Dockerfile
-      #     context: ./spring-app/
+      - name: Build and push Spring container to registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
+          file: ./spring-app/src/main/docker/Dockerfile.jvm
+          context: ./spring-app/
       # end::adocPush[]
 
   # tag::adocDeploy[]
@@ -113,8 +113,8 @@ jobs:
             #   --resource-group ${{ env.RESOURCE_GROUP }} \
             #   --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
 
-            # az containerapp update \
-            #   --name ${{ env.SPRING_APP }} \
-            #   --resource-group ${{ env.RESOURCE_GROUP }} \
-            #   --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
+            az containerapp update \
+              --name ${{ env.SPRING_APP }} \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
   # end::adocDeploy[]
