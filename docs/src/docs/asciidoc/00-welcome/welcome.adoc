@@ -64,7 +64,7 @@ xxxxxxx TODO .
 
 [plantuml,align=center,format=png]
 ----
-include::{plantDir}/welcome-physical-architecture.puml[]
+include::../plantuml/welcome-physical-architecture.puml[]
 ----
 
 === What Will You Be Deploying?
