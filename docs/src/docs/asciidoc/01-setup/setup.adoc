@@ -66,9 +66,6 @@ image::../images/vscode-install.png[Screenshot of the VSCode Marketplace showing
 Click on the green *Install* button.
 This opens VSCode on the plugin page, ready to install the Remote Development extension.
 Click on *Install*
-
-image::../images/vscode-install-plugin.png[Installing the Remote Development extension]
-
 Then, open your project in VSCode.
 Open the *Command Palette* (View -> Command Palette) and enter "Rebuild and Reopen in Container".
 
@@ -77,6 +74,10 @@ image::../images/vscode-command-pallette.png[]
 The first time it will take some time to download and setup the container image, meanwhile you can go ahead and read the next sections.
 
 image::../images/vscode-install-containers.png[]
+
+Once the container is ready, you will see the following message in the bottom right corner of VSCode:
+
+image::../images/vscode-connected.png[]
 
 == Setting Up Azure
 
