@@ -96,11 +96,11 @@ include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/jav
 We need to configure the default Postgres database and Hibernate ORM.
 This service is exposed on the port 8703.
 
-[[micronaut-listing-config]]
+[[springboot-listing-config]]
 .Configuration Properties
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/resources/application.properties[]
+include::{workshop-github-raw}/springboot-app/src/main/resources/application.properties[]
 ----
 
 == Testing the Application Locally
@@ -113,7 +113,7 @@ For that, we need to configure TestContainers in a separate class (`SpringbootAp
 .Test Class Configuring TestContainers
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplicationTest.java[]
+include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplicationTests.java[]
 ----
 
 Then, all our tests go into the `SpringbootResourceTest` class.
