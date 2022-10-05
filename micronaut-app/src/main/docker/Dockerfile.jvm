@@ -1,6 +1,6 @@
 FROM --platform=linux/amd64 eclipse-temurin:19-jre-alpine
 RUN addgroup -S micronaut && adduser -S micronaut -G micronaut
 USER micronaut:micronaut
-COPY build/libs/micronaut-app-*.jar micronaut-app.jar
+COPY target/micronaut-app-*.jar micronaut-app.jar
 EXPOSE 8702
 CMD java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar micronaut-app.jar
