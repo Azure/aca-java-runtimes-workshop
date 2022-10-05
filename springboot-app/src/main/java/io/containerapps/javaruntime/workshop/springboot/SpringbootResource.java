@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static java.lang.System.Logger.Level.INFO;
 
@@ -137,4 +139,16 @@ public class SpringbootResource {
         return msg;
     }
 // end::adocMethodMemory[]
+
+// tag::adocMethodStats[]
+    @GetMapping(path = "/stats", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Statistics> stats() {
+        LOGGER.log(INFO, "SpringBoot: retrieving statistics");
+        List<Statistics> result = new ArrayList<Statistics>();
+        for (Statistics stats : repository.findAll()) {
+            result.add(stats);
+        }
+        return result;
+    }
+// end::adocMethodStats[]
 }
