@@ -8,7 +8,9 @@ import io.micronaut.http.annotation.QueryValue;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static java.lang.System.Logger.Level.INFO;
 
@@ -135,4 +137,17 @@ public class MicronautResource {
         return msg;
     }
 // end::adocMethodMemory[]
+
+    // tag::adocMethodStats[]
+
+    @Get(uri = "/stats", produces = MediaType.APPLICATION_JSON)
+    public List<Statistics> stats() {
+        LOGGER.log(INFO, "Micronaut: retrieving statistics");
+        List<Statistics> result = new ArrayList<Statistics>();
+        for (Statistics stats : repository.findAll()) {
+            result.add(stats);
+        }
+        return result;
+    }
+// end::adocMethodStats[]
 }

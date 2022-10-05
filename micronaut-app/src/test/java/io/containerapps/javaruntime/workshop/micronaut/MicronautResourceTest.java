@@ -104,4 +104,14 @@ class MicronautResourceTest {
             .body(endsWith("The result is persisted in the database."));
     }
 // end::adocTestMemory[]
+
+// tag::adocTestStats[]
+    @Test
+    public void testStats() {
+        given()
+            .when().get(basePath + "/stats")
+            .then()
+            .statusCode(200);
+    }
+// end::adocTestStats[]
 }
