@@ -72,6 +72,58 @@ include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaru
 
 == Testing the Application
 
+[[quarkus-listing-test-1]]
+.Header of the Test Class
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocHeader]
+----
+
+[[quarkus-listing-test-2]]
+.Testing the Hello Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestHello]
+----
+
+[[quarkus-listing-test-3]]
+.Testing the CPU Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestCPU]
+----
+
+[[quarkus-listing-test-4]]
+.Testing the Memory Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestMemory]
+----
+
+[source,shell]
+----
+mvn test
+----
+
 == Running the Application
 
-== Deploying the Application
+[source,shell]
+----
+mvn quarkus:dev
+----
+
+[source,shell]
+----
+curl 'localhost:8701/quarkus'
+
+curl 'localhost:8701/quarkus/cpu'
+curl 'localhost:8701/quarkus/cpu?iterations=10'
+curl 'localhost:8701/quarkus/cpu?iterations=10&db=true'
+curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=java17'
+
+curl 'localhost:8701/quarkus/memory'
+curl 'localhost:8701/quarkus/memory?bites=10'
+curl 'localhost:8701/quarkus/memory?bites=10&db=true'
+curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=java17'
+----
+

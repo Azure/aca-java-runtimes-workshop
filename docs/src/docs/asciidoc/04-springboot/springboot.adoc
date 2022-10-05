@@ -52,6 +52,58 @@ include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/jav
 
 == Testing the Application
 
+[[springboot-listing-test-1]]
+.Header of the Test Class
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocHeader]
+----
+
+[[springboot-listing-test-2]]
+.Testing the Hello Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestHello]
+----
+
+[[springboot-listing-test-3]]
+.Testing the CPU Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestCPU]
+----
+
+[[springboot-listing-test-4]]
+.Testing the Memory Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestMemory]
+----
+
+[source,shell]
+----
+mvn test
+----
+
 == Running the Application
 
-== Deploying the Application
+[source,shell]
+----
+mvn ......
+----
+
+[source,shell]
+----
+curl 'localhost:8703/springboot'
+
+curl 'localhost:8703/springboot/cpu'
+curl 'localhost:8703/springboot/cpu?iterations=10'
+curl 'localhost:8703/springboot/cpu?iterations=10&db=true'
+curl 'localhost:8703/springboot/cpu?iterations=10&db=true&desc=java17'
+
+curl 'localhost:8703/springboot/memory'
+curl 'localhost:8703/springboot/memory?bites=10'
+curl 'localhost:8703/springboot/memory?bites=10&db=true'
+curl 'localhost:8703/springboot/memory?bites=10&db=true&desc=java17'
+----
+

@@ -52,6 +52,58 @@ include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/java
 
 == Testing the Application
 
+[[micronaut-listing-test-1]]
+.Header of the Test Class
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocHeader]
+----
+
+[[micronaut-listing-test-2]]
+.Testing the Hello Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestHello]
+----
+
+[[micronaut-listing-test-3]]
+.Testing the CPU Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestCPU]
+----
+
+[[micronaut-listing-test-4]]
+.Testing the Memory Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestMemory]
+----
+
+[source,shell]
+----
+mvn test
+----
+
 == Running the Application
 
-== Deploying the Application
+[source,shell]
+----
+mvn ......
+----
+
+[source,shell]
+----
+curl 'localhost:8702/micronaut'
+
+curl 'localhost:8702/micronaut/cpu'
+curl 'localhost:8702/micronaut/cpu?iterations=10'
+curl 'localhost:8702/micronaut/cpu?iterations=10&db=true'
+curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'
+
+curl 'localhost:8702/micronaut/memory'
+curl 'localhost:8702/micronaut/memory?bites=10'
+curl 'localhost:8702/micronaut/memory?bites=10&db=true'
+curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'
+----
+
