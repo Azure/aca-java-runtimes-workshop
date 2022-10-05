@@ -12,7 +12,7 @@ env:
   RESOURCE_GROUP: rg-java-runtimes
   QUARKUS_APP: quarkus-app
   MICRONAUT_APP: micronaut-app
-  SPRING_APP: spring-app
+  SPRING_APP: springboot-app
 
 # A workflow run is made up of one or more jobs.
 # Unless you specify dependencies, jobs run in parallel by default.
@@ -52,7 +52,7 @@ jobs:
         run: |
           cd quarkus-app && ./mvnw package
           # cd ../micronaut-app && ./mvnw package
-          cd ../spring-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+          cd ../springboot-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
       # end::adocBuild[]
 
       # tag::adocPush[]

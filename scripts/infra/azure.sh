@@ -113,7 +113,7 @@ createInfrastructure() {
 
   QUARKUS_APP="quarkus-app"
   MICRONAUT_APP="micronaut-app"
-  SPRING_APP="spring-app"
+  SPRING_APP="springboot-app"
 # end::adocEnvironmentVariables[]
 
 # tag::adocResourceGroup[]
@@ -307,7 +307,7 @@ exportEnvironment() {
 
   export QUARKUS_APP="quarkus-app"
   export MICRONAUT_APP="micronaut-app"
-  export SPRING_APP="spring-app"
+  export SPRING_APP="springboot-app"
 
   export LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace show  \
     --resource-group "$RESOURCE_GROUP" \
