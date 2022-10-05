@@ -34,8 +34,110 @@ When you know memory usage you are better prepared to answer the following quest
 ----
 ----
 
+== Monitoring
+
+// Set up monitoring dashboard on azure: CPU/Memory/Scale/Replica
+
+== Logs
+
+// Open console/system logs from the CLI for each service
+// Laius on Kustus/log queries/log tracing/correlation ID
+
 == Load Testing
+
+Now it's time to add some load to the application. This will allow us to see how the auto-scaling features works in Azure Container Apps.
+
+To add some load to an application, you can do it locally using https://jmeter.apache.org[JMeter], but you can also do it remotely on Azure using https://azure.microsoft.com/services/load-testing[Azure Load Testing] and JMeter.
+
+Azure Load Testing is a fully managed load-testing service built for Azure that makes it easy to generate high-scale load and identify app performance bottlenecks.
+It is available on the https://azuremarketplace.microsoft.com[Azure Marketplace].
+
+=== Setting up Azure Load Testing
+
+To use Azure Load Testing, go to the https://portal.azure.com[Azure Portal], select *Create a resource* in the sidebar and search for "_Azure Load Testing_".
+
+image::../images/portal-create-resource-load-testing.png[Screenshot of searching for Azure Load Testing in Azure Portal]
+
+1. Select *Create*:
++
+image::../images/load-testing-create.png[Azure Load Testing creation screen]
+
+2. In the **Resource group** field, select the `rg-java-runtimes` that we created previously.
+
+3. Set the name `lt-java-runtimes` for the load testing instance.
+
+4. Set the location to match our previously created resources (East US).
+
+5. Select **Review + Create**, then **Create**.
+
+Creating a load testing resource can take a few moment.
+Once created, you should see the Azure Load Testing available in your resource group: 
+
+image::../images/load-testing-group.png[Screenshot of Azure Load Testing in Resource group]
+
+Select `lt-java-runtimes`, and then click on *Tests* and then *Create*.
+
+image::../images/load-testing-create-test.png[Screenshot of test creation]
+
+1. You can either create a quick load test using a wizard, or create a load test using a JMeter script. Choose this second option.
+
+2. Before uploading a JMeter script, create a load test by entering a name (eg. "_Make them fight_"), a description and select **Next**: 
++
+image::../images/load-testing-jmeter.png[Screenshot of test setup]
+
+3. Now that you are on the "Test plan" tab, you can upload the JMeter file (located under `scripts/jmeter/src/test/jmeter/load.jmx`) as well as the `user.properties` file. 
++
+The JMeter file sets up a load campaign targetting the "cpu" endpoint.
++
+Before uploading the `user.properties` file, make sure you change the properties so you target the `FightResource` endpoint URL:
++
+[source,properties]
+----
+# Change these numbers depending on the load you want to add to the application
+LOOPS=20
+THREADS=2
+RAMP=1
+
+# Put your quarkus host here
+QUARKUS_HOST=quarkus-app.mangodesert-f75fa955.eastus.azurecontainerapps.io
+QUARKUS_PROTOCOL=https
+QUARKUS_PORT=443
+
+# Put your spring host here
+SPRING_HOST=springboot-app.mangodesert-f75fa955.eastus.azurecontainerapps.io
+SPRING_PROTOCOL=https
+SPRING_PORT=443
+
+# Put your micronaut host here
+MICRONAUT_PROTOCOL=https
+MICRONAUT_HOST=micronaut-app.mangodesert-f75fa955.eastus.azurecontainerapps.io
+MICRONAUT_PORT=443
+----
+
+4. Select *Upload*, and choose "_User properties_" in the *File relevance* field of the `user.properties` file.
++
+image::../images/load-testing-upload.png[Screenshot of test plan setup]
+
+5. Select *Review + Create*, then *Create*.
+
+=== Running the tests
+
+After the test creation, it will start automatically after a short time.
+When the test run finishes, you will get some metrics:
+
+image::../images/load-testing-metrics.png[Screenshot of test run]
+
+In the Azure portal sidebard, select *Dashboards* and choose the "_Java Runtimes_" dashboard we created earlier.
+
+image::../images/dashboard-select.png[Screenshot of Azure portal dashboard selection]
+
+If you take a look at the charts, you can see CPU and memory usage increase, and also that the number of replicas has increased from 1 replica to 10.
+Azure Container Apps has scaled automatically the application depending on the load.
+
+// TODO: update with 3 services
+image::../images/dashboard-scale.png[Screenshot of dashboard showing load testing results]
 
 == Scaling
 
-
+// Set up CPU/Memory scaling
+// Run load tests again with updated parameters
