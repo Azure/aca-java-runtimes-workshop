@@ -16,6 +16,8 @@ import static org.hamcrest.CoreMatchers.*;
 class MicronautResourceTest {
 // end::adocHeader[]
 
+    private static String basePath = "http://localhost:8802/micronaut";
+
     private PostgreSQLContainer postgreSQLContainer;
 
     @BeforeEach
@@ -30,7 +32,7 @@ class MicronautResourceTest {
     @Test
     public void testHelloEndpoint(RequestSpecification spec) {
         spec
-          .when().get("/micronaut")
+          .when().get(basePath)
           .then()
             .statusCode(200)
             .body(is("Micronaut: hello"));
@@ -40,7 +42,7 @@ class MicronautResourceTest {
     @Test
     public void testCpuEndpoint(RequestSpecification spec) {
         spec.param("iterations", 1)
-          .when().get("/micronaut/cpu")
+          .when().get(basePath + "/cpu")
           .then()
             .statusCode(200)
             .body(startsWith("Micronaut: CPU consumption is done with"))
@@ -50,7 +52,7 @@ class MicronautResourceTest {
     @Test
     public void testCpuWithDBEndpoint(RequestSpecification spec) {
         spec.param("iterations", 1).param("db", true)
-          .when().get("/micronaut/cpu")
+          .when().get(basePath + "/cpu")
           .then()
             .statusCode(200)
             .body(startsWith("Micronaut: CPU consumption is done with"))
@@ -61,7 +63,7 @@ class MicronautResourceTest {
     @Test
     public void testCpuWithDBAndDescEndpoint() {
         given().param("iterations", 1).param("db", true).param("desc", "Java17")
-          .when().get("/micronaut/cpu")
+          .when().get(basePath + "/cpu")
           .then()
             .statusCode(200)
             .body(startsWith("Micronaut: CPU consumption is done with"))
@@ -73,7 +75,7 @@ class MicronautResourceTest {
     @Test
     public void testMemoryEndpoint(RequestSpecification spec) {
         spec.param("bites", 1)
-          .when().get("/micronaut/memory")
+          .when().get(basePath + "/memory")
           .then()
             .statusCode(200)
             .body(startsWith("Micronaut: Memory consumption is done with"))
@@ -83,7 +85,7 @@ class MicronautResourceTest {
     @Test
     public void testMemoryWithDBEndpoint(RequestSpecification spec) {
         spec.param("bites", 1).param("db", true)
-          .when().get("/micronaut/memory")
+          .when().get(basePath + "/memory")
           .then()
             .statusCode(200)
             .body(startsWith("Micronaut: Memory consumption is done with"))
@@ -94,7 +96,7 @@ class MicronautResourceTest {
     @Test
     public void testMemoryWithDBAndDescEndpoint() {
         given().param("bites", 1).param("db", true).param("desc", "Java17")
-          .when().get("/micronaut/memory")
+          .when().get(basePath + "/memory")
           .then()
             .statusCode(200)
             .body(startsWith("Micronaut: Memory consumption is done with"))

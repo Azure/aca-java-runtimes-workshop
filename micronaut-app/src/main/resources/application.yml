@@ -24,4 +24,3 @@ jpa:
           provider: none
         hbm2ddl:
           auto: create-drop
-        show_sql: true
