@@ -3,8 +3,21 @@
 
 '''
 
+In this section you will:
+
+* Develop a REST API with Micronaut that consumes memory and CPU (the exact same algorithm than before)
+* Add a Statistics persistent entity to store metrics in a Postgres database
+* Configure the application
+* Develop some tests to validate the behavior of the application
+* Test the application locally
+* Run the application locally
+* Check a few metrics locally
 
 == The Micronaut REST Resource
+
+The Micronaut application is a simple REST resource that exposes a single endpoint to consume memory and CPU.
+The resource is defined in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java` file:
+As you can see in the header of the class, the resource is exposed on the `/micronaut` path.
 
 [[micronaut-listing-rest-resource-1]]
 .Header of the Micronaut REST Resource
@@ -13,12 +26,20 @@
 include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocHeader]
 ----
 
+The resource exposes a `hello` method returning _Hello World_ so we can quickly check if our endpoint responds or not.
+
 [[micronaut-listing-rest-resource-2]]
 .Hello Method
 [source,indent=0]
 ----
 include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodHello]
 ----
+
+The `cpu` method consumes CPU depending on a few optional parameters.
+
+* `iterations` the more iterations you have, the more CPU it consumes.
+* `db` if this parameter is set to true, the statistics are stored in the database. That allows us to check the impact of the database on the CPU consumption.
+* `desc` any optional description you want to persist in the database
 
 [[micronaut-listing-rest-resource-3]]
 .CPU Method
@@ -27,6 +48,12 @@ include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/java
 include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodCPU]
 ----
 
+The `memory` method consumes memory depending on a few optional parameters.
+
+* `bites` the more bits you have, the more memory it consumes.
+* `db` if this parameter is set to true, the statistics are stored in the database.
+* `desc` any optional description you want to persist in the database
+
 [[micronaut-listing-rest-resource-4]]
 .Memory Method
 [source,indent=0]
@@ -34,7 +61,19 @@ include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/java
 include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodMemory]
 ----
 
+Let's also create a method to retrieve the statistics from the database.
+
+[[micronaut-listing-rest-resource-5]]
+.Method Returning all the Statistics
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodStats]
+----
+
 == Transactions and ORM
+
+When the database is enabled, the statistics are stored in the database.
+For that we need a `Statistics` entity with a few enumerations.
 
 [[micronaut-listing-entity]]
 .Statistics Entity
@@ -43,6 +82,8 @@ include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/java
 include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Statistics.java[]
 ----
 
+For manipulating the entity, we need a repository
+
 [[micronaut-listing-repository]]
 .Statistics Repository
 [source,indent=0]
@@ -50,7 +91,32 @@ include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/java
 include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/StatisticsRepository.java[]
 ----
 
+== Configuring the Application
+
+We need to configure the default Postgres database and Hibernate ORM.
+This service is exposed on the port 8702.
+
+[[micronaut-listing-config]]
+.Configuration Properties
+[source,yaml,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/main/resources/application.yml[]
+----
+
 == Testing the Application Locally
+
+Now, to make sure that the application works as expected, we need to write some tests.
+Remember that the tests need a Postgres database to run.
+For that, we need to configure TestContainers in a separate class (`MicronautApplicationTest`)
+
+[[micronaut-listing-test]]
+.Test Class Configuring TestContainers
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautApplicationTest.java[]
+----
+
+Then, all our tests go into the `MicronautResourceTest` class.
 
 [[micronaut-listing-test-1]]
 .Header of the Test Class
@@ -59,12 +125,16 @@ include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/java
 include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocHeader]
 ----
 
+First, let's write a test to check that the `hello` method returns the right _Hello World_ string.
+
 [[micronaut-listing-test-2]]
 .Testing the Hello Endpoint
 [source,indent=0]
 ----
 include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestHello]
 ----
+
+Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
 
 [[micronaut-listing-test-3]]
 .Testing the CPU Endpoint
@@ -73,12 +143,25 @@ include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/java
 include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestCPU]
 ----
 
+And we do the same for the `memory` method.
+
 [[micronaut-listing-test-4]]
 .Testing the Memory Endpoint
 [source,indent=0]
 ----
 include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestMemory]
 ----
+
+Let's also create a simple test to make sure the statistics are stored in the database.
+
+[[micronaut-listing-test-5]]
+.Testing the Memory Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestMemory]
+----
+
+Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a Postgres database) and run them with the following command:
 
 [source,shell]
 ----
@@ -87,23 +170,28 @@ mvn test
 
 == Running the Application Locally
 
+Now that the tests are all green, let's execute the application locally and execute a few `curl` commands.
+Make sure you still have Docker up and running and execute:
+
 [source,shell]
 ----
 mvn ......
 ----
 
+In another terminal you can execute the following `curl` commands to invoke the endpoint:
+
 [source,shell]
 ----
 curl 'localhost:8702/micronaut'
 
-curl 'localhost:8702/micronaut/cpu'
-curl 'localhost:8702/micronaut/cpu?iterations=10'
-curl 'localhost:8702/micronaut/cpu?iterations=10&db=true'
 curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'
 
-curl 'localhost:8702/micronaut/memory'
-curl 'localhost:8702/micronaut/memory?bites=10'
-curl 'localhost:8702/micronaut/memory?bites=10&db=true'
 curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'
 ----
 
+You can check the content of the database with:
+
+[source,shell]
+----
+curl 'localhost:8702/micronaut/stats' | jq
+----
