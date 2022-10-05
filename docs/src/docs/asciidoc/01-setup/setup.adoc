@@ -1,6 +1,14 @@
 [[setup]]
 = Setting Up the Project
 
+Before starting the development, you need to setup the project.
+This includes:
+
+* Creating a new project on GitHub based on an existing GitHub template
+* Setting up your development environment, either by installing all the needed tools manually, or installing a few tools and relying on VSCode and DevContainers (easier as everything is setup for you).
+
+== Using the GitHub Template
+
 Open https://github.com/Azure/aca-java-runtimes-workshop[this GitHub repository] and click on `Use this template`.
 
 image::../images/github-template.png[Screenshot of GitHub showing the "Use this template" button]
@@ -20,49 +28,41 @@ image::../images/github-clone.png[Screenshot of GitHub showing the repository UR
 git clone <your_repo_url>
 ----
 
-If you chose to use the dev container environment, open the project in VS Code, click on the green button in the bottom left corner of the window and select *Reopen in Container*. The first time it will take some time to download and setup the container image, meanwhile you can go ahead and read the next sections.
+== Setting Up Your Development Environment Manually
 
-== Azure and Cloud Services
+If you decide not to use VSCode and DevContainers, you will need to install the following tools:
 
-Azure is Microsoft's cloud platform. It provides a wide range of services, from compute to storage, from databases to AI, from IoT to containers, from networking to security, and much more.
+[cols="1,1"]
+|===
+| Java {jdk-version}       | https://learn.microsoft.com/java/openjdk/download[Get OpenJDK]
+| Maven {maven-version}    | https://maven.apache.org/download.cgi[Get Maven]
+| Docker {docker-version}  |  https://docs.docker.com/get-docker/[Get Docker]
+| Azure CLI                | https://learn.microsoft.com/cli/azure/install-azure-cli#install[Get Azure CLI]
+| Git                      | https://git-scm.com
+| GitHub account           | https://github.com/join
+| Azure account            | https://azure.microsoft.com/free/[Get a free Azure account]
+| A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download[Get VS Code]
+|===
 
-For this workshop, we'll use in particular the following services:
+You can test your installation by running the following commands:
 
-- Azure Container Apps: a managed container service to run our microservices.
-- Azure Container Registry: a private container registry to store our Docker images.
-- Azure Database for PostgreSQL: a managed PostgreSQL database.
+[source,shell]
+----
+java -version
+mvn --version
+docker --version
+az --version
+----
 
-=== What's Azure Container Apps?
+== Setting Up Your VSCode Environment
 
-https://azure.microsoft.com/products/container-apps/[Azure Container Apps] is a fully managed serverless container service on Azure. It allows you to run containerized applications without worrying about orchestration or managing complex infrastructure such as Kubernetes. You write code using your preferred programming language or framework (in this workshop it's Java and Quarkus, but it can be anything), and build microservices with full support for Distributed Application Runtime (https://dapr.io/[Dapr]). Then, your containers will scale dynamically based on HTTP traffic or events powered by Kubernetes Event-Driven Autoscaling (https://keda.sh[KEDA]).
+If you have VS Code and Docker installed on your machine, the quickest way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers[dev container] of the template project.
+Install the https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack[Remote Development extension] in VS Code, and skip to the next section.
 
-There are already a few compute resources on Azure: from IAAS to FAAS. Azure Container Apps sits between PAAS and FAAS. On one hand, it feels more PaaS, because you are not forced into a specific programming model and you can control the rules on which to scale out / scale in. On the other hand, it has quite some serverless characteristics like scaling to zero, event-driven scaling, per second pricing and the ability to leverage Dapr's event-based bindings.
+TIP: You can learn more about dev containers in https://learn.microsoft.com/shows/beginners-series-to-dev-containers/[this video series].
 
-image::../images/azure-compute-services.png[Diagram showing the different compute resources on Azure]
-
-Container Apps is built on top of Azure Kubernetes Service, including a deep integration with KEDA (event-driven auto scaling for Kubernetes), Dapr (distributed application runtime) and Envoy (a service proxy designed for cloud-native applications). The underlying complexity is completely abstracted for the end-user. So no need to configure your K8S service, deployment, ingress, volume manifests… You get a very simple API and user interface to configure the desired configuration for your containerized application. This simplification means also less control, hence the difference with AKS.
-
-image::../images/azure-container-apps.png[Diagram showing the architecture of Azure Container Apps]
-
-Azure Container Apps has the following features:
-
-- _Revisions_: automatic versioning that helps to manage the application lifecycle of your container apps
-- _Traffic control_: split incoming HTTP traffic across multiple revisions for Blue/Green deployments and A/B testing
-- _Ingress_: simple HTTPS ingress configuration, without the need to worry about DNS and certificates
-- _Autoscaling_: leverage all KEDA-supported scale triggers to scale your app based on external metrics
-- _Secrets_: deploy secrets that are securely shared between containers, scale rules and Dapr sidecars
-- _Monitoring_: the standard output and error streams are automatically written to Log Analytics
-- _Dapr_: through a simple flag, you can enable native Dapr integration for your Container Apps
-
-Azure Container Apps introduces the following concepts:
-
-- _Environment_: this is a secure boundary around a group of Container Apps. They are deployed in the same virtual network, these apps can easily intercommunicate easily with each other and they write logs to the same Log Analytics workspace. An environment can be compared with a Kubernetes namespace.
-
-- _Container App_: this is a group of containers (pod) that is deployed and scale together. They share the same disk space and network.
-
-- _Revision_: this is an immutable snapshot of a Container App. New revisions are automatically created and are valuable for HTTP traffic redirection strategies, such as A/B testing.
-
-image::../images/aca-environment.png[Diagram showing the environment concept in Azure Container Apps]
+If you chose to use the dev container environment, open the project in VS Code, click on the green button in the bottom left corner of the window and select *Reopen in Container*.
+The first time it will take some time to download and setup the container image, meanwhile you can go ahead and read the next sections.
 
 == Setting Up Azure
 
