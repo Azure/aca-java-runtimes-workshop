@@ -141,5 +141,4 @@ include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressUpdate, in
 Now that we've defined our workflow and prepared everything, we can run it to deploy our application to Azure Container Apps.
 Commit and push your changes to your repository, and go to the `Actions` tab of your repository to see the workflow running. It should take a few minutes to complete.
 
-// TODO
-// image::../images/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
+image::../images/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
