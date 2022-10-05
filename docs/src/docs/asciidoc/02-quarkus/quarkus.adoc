@@ -61,6 +61,16 @@ The `memory` method consumes memory depending on a few optional parameters.
 include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodMemory]
 ----
 
+Let's also create a method to retrieve the statistics from the database.
+This is very easy to do with Panache.
+
+[[quarkus-listing-rest-resource-5]]
+.Method Returning all the Statistics
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodStats]
+----
+
 == Transactions and ORM
 
 When the database is enabled, the statistics are stored in the database.
@@ -134,7 +144,16 @@ And we do the same for the `memory` method.
 include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestMemory]
 ----
 
-Now that you have your tests, make sure you have Docker Desktop up and running (as it needs to start a Postgres database) and run them with the following command:
+Let's also create a simple test to make sure the statistics are stored in the database.
+
+[[quarkus-listing-test-5]]
+.Testing the Memory Endpoint
+[source,indent=0]
+----
+include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestMemory]
+----
+
+Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a Postgres database) and run them with the following command:
 
 [source,shell]
 ----
@@ -160,5 +179,12 @@ curl 'localhost:8701/quarkus'
 curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=java17'
 
 curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=java17'
+----
+
+You can check the content of the database with:
+
+[source,shell]
+----
+curl 'localhost:8701/quarkus/stats' | jq
 ----
 
