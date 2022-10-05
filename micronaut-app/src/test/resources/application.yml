@@ -1,0 +1,7 @@
+datasources:
+  default:
+    dialect: POSTGRES
+    url: jdbc:tc:postgresql:14-alpine://testcontainers/postgres
+    username: postgres
+    password: password
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver

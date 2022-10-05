@@ -23,4 +23,5 @@ jpa:
         bytecode:
           provider: none
         hbm2ddl:
-          auto: update
+          auto: create-drop
+        show_sql: true

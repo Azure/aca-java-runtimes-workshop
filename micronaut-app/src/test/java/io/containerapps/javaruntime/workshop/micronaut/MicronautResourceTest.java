@@ -2,14 +2,27 @@ package io.containerapps.javaruntime.workshop.micronaut;
 
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
+@Testcontainers
 @MicronautTest
 class MicronautResourceTest {
+
+    private PostgreSQLContainer postgreSQLContainer;
+
+    @BeforeEach
+    public void setUp() {
+        postgreSQLContainer = new PostgreSQLContainer("postgres:14")
+            .withDatabaseName("postgres")
+            .withUsername("postgres")
+            .withPassword("password");
+    }
 
     @Test
     public void testHelloEndpoint(RequestSpecification spec) {
@@ -31,7 +44,6 @@ class MicronautResourceTest {
     }
 
     @Test
-    @Disabled
     public void testCpuWithDBEndpoint(RequestSpecification spec) {
         spec.param("iterations", 1).param("db", true)
           .when().get("/micronaut/cpu")
@@ -42,7 +54,6 @@ class MicronautResourceTest {
     }
 
     @Test
-    @Disabled
     public void testCpuWithDBAndDescEndpoint() {
         given().param("iterations", 1).param("db", true).param("desc", "Java17")
           .when().get("/micronaut/cpu")
@@ -64,7 +75,6 @@ class MicronautResourceTest {
     }
 
     @Test
-    @Disabled
     public void testMemoryWithDBEndpoint(RequestSpecification spec) {
         spec.param("bites", 1).param("db", true)
           .when().get("/micronaut/memory")
@@ -75,7 +85,6 @@ class MicronautResourceTest {
     }
 
     @Test
-    @Disabled
     public void testMemoryWithDBAndDescEndpoint() {
         given().param("bites", 1).param("db", true).param("desc", "Java17")
           .when().get("/micronaut/memory")
