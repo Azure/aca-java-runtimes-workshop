@@ -142,3 +142,22 @@ Now that we've defined our workflow and prepared everything, we can run it to de
 Commit and push your changes to your repository, and go to the `Actions` tab of your repository to see the workflow running. It should take a few minutes to complete.
 
 image::../images/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
+
+=== Testing the deployed application
+
+Once your workflow is completed, let's make a quick test on our deployed apps.
+First we need to get the ingress URL by running the following command:
+
+[source,shell]
+----
+include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
+----
+
+Then we can use `curl` to test our apps:
+
+[source,shell]
+----
+curl https://${QUARKUS_HOST}/quarkus
+curl https://${MICRONAUT_HOST}/micronaut
+curl https://${SPRING_HOST}/spring
+----
