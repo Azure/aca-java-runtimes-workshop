@@ -16,7 +16,7 @@ In this section you will:
 == The Quarkus REST Resource
 
 The Quarkus application is a simple REST resource that exposes a single endpoint to consume memory and CPU.
-The resource is defined in the `src/main/java/org/acme/quarkus/sample/QuarkusResource.java` file:
+The resource is defined in the `src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java` file:
 As you can see in the header of the class, it is a JAX-RS resource that is exposed on the `/quarkus` path.
 
 [[quarkus-listing-rest-resource-1]]
@@ -126,7 +126,7 @@ First, let's write a test to check that the `hello` method returns the right _He
 include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestHello]
 ----
 
-Then, we right another test to check that the `cpu` method consumes CPU and takes the right parameters.
+Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
 
 [[quarkus-listing-test-3]]
 .Testing the CPU Endpoint
