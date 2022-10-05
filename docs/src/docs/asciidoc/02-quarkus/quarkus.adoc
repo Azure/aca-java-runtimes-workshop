@@ -70,7 +70,7 @@ include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaru
 include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/StatisticsRepository.java[]
 ----
 
-== Testing the Application
+== Testing the Application Locally
 
 [[quarkus-listing-test-1]]
 .Header of the Test Class
@@ -105,7 +105,7 @@ include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaru
 mvn test
 ----
 
-== Running the Application
+== Running the Application Locally
 
 [source,shell]
 ----

@@ -50,7 +50,7 @@ include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/java
 include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/StatisticsRepository.java[]
 ----
 
-== Testing the Application
+== Testing the Application Locally
 
 [[micronaut-listing-test-1]]
 .Header of the Test Class
@@ -85,7 +85,7 @@ include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/java
 mvn test
 ----
 
-== Running the Application
+== Running the Application Locally
 
 [source,shell]
 ----
