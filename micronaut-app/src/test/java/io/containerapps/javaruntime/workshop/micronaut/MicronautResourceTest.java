@@ -1,3 +1,4 @@
+// tag::adocHeader[]
 package io.containerapps.javaruntime.workshop.micronaut;
 
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -13,6 +14,7 @@ import static org.hamcrest.CoreMatchers.*;
 @Testcontainers
 @MicronautTest
 class MicronautResourceTest {
+// end::adocHeader[]
 
     private PostgreSQLContainer postgreSQLContainer;
 
@@ -24,6 +26,7 @@ class MicronautResourceTest {
             .withPassword("password");
     }
 
+// tag::adocTestHello[]
     @Test
     public void testHelloEndpoint(RequestSpecification spec) {
         spec
@@ -32,6 +35,7 @@ class MicronautResourceTest {
             .statusCode(200)
             .body(is("Micronaut: hello"));
     }
+// end::adocTestHello[]
 
     @Test
     public void testCpuEndpoint(RequestSpecification spec) {
@@ -53,6 +57,7 @@ class MicronautResourceTest {
             .body(endsWith("The result is persisted in the database."));
     }
 
+// tag::adocTestCPU[]
     @Test
     public void testCpuWithDBAndDescEndpoint() {
         given().param("iterations", 1).param("db", true).param("desc", "Java17")
@@ -63,6 +68,7 @@ class MicronautResourceTest {
             .body(not(containsString("Java17")))
             .body(endsWith("The result is persisted in the database."));
     }
+// end::adocTestCPU[]
 
     @Test
     public void testMemoryEndpoint(RequestSpecification spec) {
@@ -84,6 +90,7 @@ class MicronautResourceTest {
             .body(endsWith("The result is persisted in the database."));
     }
 
+// tag::adocTestMemory[]
     @Test
     public void testMemoryWithDBAndDescEndpoint() {
         given().param("bites", 1).param("db", true).param("desc", "Java17")
@@ -94,4 +101,5 @@ class MicronautResourceTest {
             .body(not(containsString("Java17")))
             .body(endsWith("The result is persisted in the database."));
     }
+// end::adocTestMemory[]
 }
