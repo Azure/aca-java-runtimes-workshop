@@ -51,7 +51,7 @@ jobs:
       - name: Build apps
         run: |
           cd quarkus-app && ./mvnw package
-          # cd ../micronaut-app && ./mvnw package
+          cd ../micronaut-app && ./mvnw package
           cd ../springboot-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
       # end::adocBuild[]
 
@@ -64,13 +64,13 @@ jobs:
           file: ./quarkus-app/src/main/docker/Dockerfile.jvm
           context: ./quarkus-app/
 
-      # - name: Build and push Micronaut image to registry
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     push: true
-      #     tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
-      #     file: ./micronaut-app/Dockerfile
-      #     context: ./micronaut-app/
+      - name: Build and push Micronaut image to registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
+          file: ./micronaut-app/Dockerfile.jvm
+          context: ./micronaut-app/
 
       - name: Build and push Spring Boot image to registry
         uses: docker/build-push-action@v2
@@ -108,10 +108,10 @@ jobs:
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }}
 
-            # az containerapp update \
-            #   --name ${{ env.MICRONAUT_APP }} \
-            #   --resource-group ${{ env.RESOURCE_GROUP }} \
-            #   --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
+            az containerapp update \
+              --name ${{ env.MICRONAUT_APP }} \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
 
             az containerapp update \
               --name ${{ env.SPRING_APP }} \
