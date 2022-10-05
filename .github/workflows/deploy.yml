@@ -69,7 +69,7 @@ jobs:
         with:
           push: true
           tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
-          file: ./micronaut-app/Dockerfile.jvm
+          file: ./micronaut-app/src/main/docker/Dockerfile.jvm
           context: ./micronaut-app/
 
       - name: Build and push Spring Boot image to registry
