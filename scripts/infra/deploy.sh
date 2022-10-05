@@ -56,7 +56,7 @@ az containerapp ingress enable \
   --type external
 # end::adocIngressUpdate[]
 
-echo "Building the Quarkus app..."
+echo "Building and deploying Quarkus app..."
 pushd quarkus-app
 
 ./mvnw package
@@ -72,9 +72,41 @@ echo "Updating the Quarkus container app..."
 az containerapp update \
   --name "$QUARKUS_APP" \
   --resource-group "$RESOURCE_GROUP" \
-  --image "${REGISTRY_URL}/${PROJECT}/${QUARKUS_APP}:latest"
+  --image "${REGISTRY_URL}/${PROJECT}/${QUARKUS_APP}:latest" \
+  --query "properties.configuration.ingress.fqdn" \
+  --output tsv
 
 popd
 
-echo "Done."
+echo "Retrieving the public URLs..."
 
+# tag::adocIngressHosts[]
+QUARKUS_HOST=$(
+  az containerapp show \
+    --name "$QUARKUS_APP" \
+    --resource-group "$RESOURCE_GROUP" \
+    --query "properties.configuration.ingress.fqdn" \
+    --output tsv \
+)
+echo "QUARKUS_HOST=$QUARKUS_HOST"
+
+MICRONAUT_HOST=$(
+  az containerapp show \
+    --name "$MICRONAUT_APP" \
+    --resource-group "$RESOURCE_GROUP" \
+    --query "properties.configuration.ingress.fqdn" \
+    --output tsv \
+)
+echo "MICRONAUT_HOST=$MICRONAUT_HOST"
+
+SPRING_HOST=$(
+  az containerapp show \
+    --name "$SPRING_APP" \
+    --resource-group "$RESOURCE_GROUP" \
+    --query "properties.configuration.ingress.fqdn" \
+    --output tsv \
+)
+echo "SPRING_HOST=$SPRING_HOST"
+# end::adocIngressHosts[]
+
+echo "Done."

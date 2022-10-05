@@ -7,6 +7,7 @@ import java.lang.System.Logger;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 
 import static java.lang.System.Logger.Level.INFO;
 
@@ -140,4 +141,14 @@ public class QuarkusResource {
         return msg;
     }
 // end::adocMethodMemory[]
+
+// tag::adocMethodStats[]
+    @GET
+    @Path("/stats")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Statistics> stats() {
+        LOGGER.log(INFO, "Quarkus: retrieving statistics");
+        return Statistics.findAll().list();
+    }
+// end::adocMethodStats[]
 }

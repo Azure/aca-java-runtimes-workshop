@@ -87,4 +87,14 @@ public class QuarkusResourceTest {
             .body(endsWith("The result is persisted in the database."));
     }
 // end::adocTestMemory[]
+
+// tag::adocTestStats[]
+    @Test
+    public void testStats() {
+        given()
+          .when().get("/quarkus/stats")
+          .then()
+            .statusCode(200);
+    }
+// end::adocTestStats[]
 }
