@@ -10,9 +10,9 @@ netty:
 datasources:
   default:
     dialect: POSTGRES
-    url: jdbc:postgresql://localhost:5432/aca_java_runtimes_workshop_database
-    username: super_aca_java_runtimes_db
-    password: super_aca_java_runtimes_db_pwd
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
     driverClassName: org.postgresql.Driver
 jpa:
   default:
