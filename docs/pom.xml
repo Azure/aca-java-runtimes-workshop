@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.containerapps.javaruntime.workshop</groupId>
     <artifactId>docs</artifactId>
@@ -12,6 +12,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
+        <asciidoctorj.diagram.version>2.2.3</asciidoctorj.diagram.version>
+        <asciidoctorj.plantuml.version>1.2022.5</asciidoctorj.plantuml.version>
     </properties>
 
     <build>
@@ -22,14 +24,22 @@
                 <artifactId>asciidoctor-maven-plugin</artifactId>
                 <version>${asciidoctor.maven.plugin.version}</version>
                 <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-diagram</artifactId>
+                        <version>${asciidoctorj.diagram.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-diagram-plantuml</artifactId>
+                        <version>${asciidoctorj.plantuml.version}</version>
+                    </dependency>
                 </dependencies>
                 <configuration>
                     <!-- Attributes common to all output formats -->
                     <attributes>
                         <project-version>${project.version}</project-version>
                         <allow-uri-read/>
-                        <imagesdir>./images</imagesdir>
-                        <plantDir>./plantuml</plantDir>
                         <revdate>${revision.date}</revdate>
                         <attribute-missing>warn</attribute-missing>
                         <doctype>book</doctype>
