@@ -36,7 +36,45 @@ When you know memory usage you are better prepared to answer the following quest
 
 == Monitoring
 
-// Set up monitoring dashboard on azure: CPU/Memory/Scale/Replica
+One of the first thing you usually want to do once your application is deployed is to configure monitoring.
+We'll use the https://portal.azure.com[Azure portal] to create a nice dashboard for monitoring our application metrics.
+
+Open the Azure portal and navigate to the resource group `rg-java-runtimes` you created for your application. Select the `quarkus-app` container app, then select *Metrics* from the left menu, under the *Monitoring* group.
+
+image::../images/aca-metrics.png[Screenshot of the Azure portal showing the metrics panel for the container app]
+
+Using the *Metrics* panel, you can select which metrics you want to observe, and the time range for the data. Under the _Standard Metrics_ namespace, you can see the list of available built-in metrics for your application. You can also create https://learn.microsoft.com/azure/azure-monitor/essentials/metrics-custom-overview?[your own custom metrics].
+
+image::../images/standard-metrics.png[Screenshot of the Azure portal showing the list of standard metrics]
+
+Select "_CPU Usage_" from the list of metrics, and select the last 30 minutes hours for the time range. You can see the CPU and memory usage for your application.
+
+image::../images/metrics-cpu.png[Screenshot of the Azure portal showing the list of standard metrics]
+
+=== Creating charts for all services
+
+Now let's add the CPU metrics of the Micronaut and Spring apps to the same chart.
+Select *Add metric* and select "_CPU Usage_" again. Then click on the *Scope* setting, unselect `quarkus-app` and pick the `micronaut-app`. Select *Apply*, and repeat the same for the `spring-app`.
+
+Now you should see a nice chart with the CPU usage of all three applications. Let's save this chart on the dashboard!
+
+Select *Save to dashboard* and choose *Pin to dashboard*:
+
+image::../images/metrics-save.png[Screenshot of the Azure portal showing the save to dashboard options]
+
+In the _Pin to dashboard_ dialog, select *Create new* and give it a name, for example "Java Runtimes" then click *Create and pin*.
+
+image::../images/dashboard-create.png[Screenshot of the Azure portal showing the dashboard creation dialog]
+
+We'll also add charts to monitor the memory usage and number of replicas of our applications.
+
+Select *Add chart* and repeat the same steps as before to create a chart with "_Memory Working Set Bytes_" metrics and another one with the "_Replica Count_" metric. Don't forget to save them to the dashboard we created earlier!
+
+When you're finished, in the Azure portal sidebar select *Dashboards* and choose the "_Java Runtimes_" dashboard we created earlier.
+
+image::../images/dashboard-select.png[Screenshot of Azure portal dashboard selection]
+
+You should now see the 3 charts you just created. You can rearrange the charts by dragging them around, and resize them by dragging the bottom right corner.
 
 == Logs
 
@@ -127,9 +165,7 @@ When the test run finishes, you will get some metrics:
 
 image::../images/load-testing-metrics.png[Screenshot of test run]
 
-In the Azure portal sidebard, select *Dashboards* and choose the "_Java Runtimes_" dashboard we created earlier.
-
-image::../images/dashboard-select.png[Screenshot of Azure portal dashboard selection]
+In the Azure portal sidebar, select *Dashboards* and go back to the "_Java Runtimes_" dashboard we created earlier.
 
 If you take a look at the charts, you can see CPU and memory usage increase, and also that the number of replicas has increased from 1 replica to 10.
 Azure Container Apps has scaled automatically the application depending on the load.
