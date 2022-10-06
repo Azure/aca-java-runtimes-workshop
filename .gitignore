@@ -48,3 +48,5 @@ nb-configuration.xml
 # SQL files
 create.sql
 drop.sql
+
+*.dylib
