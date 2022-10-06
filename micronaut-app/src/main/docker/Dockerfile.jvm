@@ -3,4 +3,4 @@ RUN addgroup -S micronaut && adduser -S micronaut -G micronaut
 USER micronaut:micronaut
 COPY target/micronaut-app-*.jar micronaut-app.jar
 EXPOSE 8702
-CMD java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar micronaut-app.jar
+CMD java -Dcom.sun.management.jmxremote ${JAVA_OPTS} -jar micronaut-app.jar
