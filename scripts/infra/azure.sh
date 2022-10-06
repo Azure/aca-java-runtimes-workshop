@@ -307,7 +307,7 @@ exportEnvironment() {
   export LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
   export CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
 
-  export UNIQUE_IDENTIFIER=$(whoami)
+  export UNIQUE_IDENTIFIER=${FORCE_UID:-$(whoami)}
   export REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
   export IMAGES_TAG="1.0"
 
