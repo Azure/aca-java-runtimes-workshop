@@ -30,11 +30,10 @@ image::../images/qrcode-workshop.png[]
 
 == Presenting the Workshop
 
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
+Today, most of us containerize our Java applications and then deploy them to the cloud.
+This workshop is about understanding the performance of Java runtimes in a containerized environment in the cloud.
+
+It is a hands-on workshop, so you will be doing a lot of things.
 
 === What Is This Workshop About?
 
@@ -56,21 +55,26 @@ include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaru
 
 === What Will You Be Developing?
 
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
+You will be developing 3 microservices, each doing the exact same thing (consuming CPU and memory), but using a different Java runtime: Quarkus, SpringBoot and Micronaut:
 
-image::../images/welcome-physical-architecture.png[]
+* A REST endpoint (used as an entry point) that will execute our CPU and memory consuming algorithms
+* A repository used to store the results of the CPU and memory consuming algorithms
+* A statistics entity mapped to the relational database
+
+image::../images/welcome-develop.png[]
 
 === What Will You Be Deploying?
 
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
+Once developed and tested locally, you will be packaging your microservices in Docker containers and deploy them to Azure Container Apps:
+
+* You will first create an Azure Container Apps environment (a.k.a. _ACA_) in Azure
+* You will create a managed Postgres database in Azure (one single database for all 3 microservices but one table per microservice)
+* You will create an Azure Registry to manage the Docker images
+* You will package each microservice in Docker images and configure them so they can connect to the Postgres database
+* You will then push these images to Azure Container Registry
+* Then you will deploy the Docker images of your microservices into the ACA environment
+
+image::../images/welcome-deploy.png[]
 
 === How Does This Workshop Work?
 

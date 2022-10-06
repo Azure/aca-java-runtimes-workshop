@@ -1,6 +1,16 @@
 @startuml
 
+skinparam dpi 300
+allow_mixing
 left to right direction
+
+node "Azure Registry" as registry {
+    agent "Quarkus" as quarkus
+    agent "SpringBoot" as spring
+    agent "Micronaut" as micronaut
+    quarkus -[hidden]-> spring
+    spring -[hidden]-> micronaut
+}
 
 node "Azure Load Testing" as load {
     agent "JMeter" as jmeter
