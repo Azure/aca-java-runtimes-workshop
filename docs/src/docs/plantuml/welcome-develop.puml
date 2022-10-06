@@ -1,0 +1,37 @@
+@startuml
+
+skinparam dpi 300
+allow_mixing
+left to right direction
+
+node "Java Runtime" as runtime {
+    class "Resource" as resource <<REST>> {
+        -Logger LOGGER
+        -Repository repository
+        +String hello() <<GET>>
+        +String cpu(iterations, db, desc) <<GET>>
+        +String memory(iterations, db, desc) <<GET>>
+        +List<Statistics> stats() <<GET>>
+    }
+
+    class "Repository" as repository <<JPA>> {
+    }
+
+    class "Statistics" as entity <<Entity>> {
+        +Instant doneAt
+        +Framework framework
+        +Type type;
+        +String parameter;
+        +Duration duration;
+        +String description;
+    }
+
+    database "Postgresql" as postgresql
+
+}
+
+resource ..> repository
+repository ..> entity
+repository .left.> postgresql
+
+@enduml
