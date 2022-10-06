@@ -30,23 +30,31 @@ image::../images/qrcode-workshop.png[]
 
 == Presenting the Workshop
 
-Today, most of us containerize our Java applications and then deploy them to the cloud.
 This workshop is about understanding the performance of Java runtimes in a containerized environment in the cloud.
+It is a hands-on workshop, so you will be doing a lot of things in your local machine as well as on https://learn.microsoft.com/azure/container-apps/overview[Azure Container Apps].
 
-It is a hands-on workshop, so you will be doing a lot of things.
+Today, most of us containerize our Java applications and then deploy them to the cloud.
+But how do we know if our application is performing well?
+What do we do if we see a spike in CPU or memory usage?
+Do we scale out or scale up?
+Do we change the JVM parameters?
+Do we change the container size?
+And what about having native binaries and compiling our code with GraalVM?
 
 === What Is This Workshop About?
 
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
-xxxxxxx TODO .
+To understand performance in a containerized environment we need a few simple algorithms that consume CPU and memory.
+We will then develop these same algorithms in Quarkus, SpringBoot and Micronaut, deploy them to Azure Container Apps and monitor their performance.
+The algorithm consuming CPU will be a simple loop.
+The higher the iteration, the more CPU it uses:
 
 [source,java,indent=0]
 ----
 include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoCPU]
 ----
+
+The algorithm consuming memory will be a simple hashmap that we will fill with bites.
+The more bits you have, the more memory it uses:
 
 [source,java,indent=0]
 ----
