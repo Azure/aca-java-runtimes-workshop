@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ##############################################################################
 # Usage: ./create-github-template.sh
-# Creates a temporary folder with all the needed files to create a new project template.
+# Creates a temporary folder in ~/temp/template with all the needed files to create a new project template.
 ##############################################################################
 
 TEMPLATE_HOME=~/temp/template
