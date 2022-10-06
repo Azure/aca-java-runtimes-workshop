@@ -150,7 +150,7 @@ az containerapp revision list \
 
 Select *Run* to execute the query. You should see the logs of the `quarkus-app` container app.
 
-image::../images/log-query.png[Screenshot of the logs results in Azure portal]
+image::../images/logs-query.png[Screenshot of the logs results in Azure portal]
 
 For now, it's not very useful as it's the same logs we saw in the previous section. Let's add some filters to the query to search for error messages from the logs:
 
@@ -174,7 +174,7 @@ Oops! We're trying to allocate more memory than the container has available, res
 
 If you run the query again, you should see the error message in the logs:
 
-image::../images/log-query-error.png[Screenshot of the logs results in Azure portal]
+image::../images/logs-query-error.png[Screenshot of the logs results in Azure portal]
 
 [TIP]
 ====
@@ -196,14 +196,29 @@ ContainerAppConsoleLogs_CL
 
 And here we can quickly see our `OutOfMemoryError` error message.
 
-image::../images/log-query-error-2.png[Screenshot of the logs results in Azure portal]
+image::../images/logs-query-error-2.png[Screenshot of the logs results in Azure portal]
 
 We can save the query for later use by clicking on the *Save* button. You can then give it a name and a description, and a category to quickly find it later.
 
 === Viewing the system logs
 
-//  Navigate to the `quarkus-app` container app, then select *Logs* from the left menu, under the *Monitoring* group.
-// Open console/system logs from the CLI for each service
+While console logs are very useful to troubleshoot issues with your application, it won't be much help if your container is not running. In this case, you need to troubleshoot the container host itself. This is where the _system logs_ come in handy.
+
+The system logs are the logs of the container host. They are very useful to troubleshoot issues with the container host itself and monitor its activity during provisioning operations.
+
+System logs can be accessed the same way as console logs. Change the previous query in the editor to get the system logs:
+
+[source,sql]
+----
+ContainerAppSystemLogs_CL
+| where RevisionName_s == "quarkus-app--<REVISION_ID>"
+| project TimeGenerated, Reason_s, Log_s
+| sort by TimeGenerated desc
+----
+
+You should see the system logs of the `quarkus-app` container app, covering the whole lifecycle of the container.
+
+image::../images/logs-system.png[Screenshot of the logs results in Azure portal]
 
 == Load Testing
 
