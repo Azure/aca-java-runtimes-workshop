@@ -6,7 +6,7 @@ create table Statistics
 (
     id          int8 not null,
     description varchar(255),
-    doneAt      timestamp,
+    done_at     timestamp,
     duration    int8,
     framework   int4,
     parameter   varchar(255),

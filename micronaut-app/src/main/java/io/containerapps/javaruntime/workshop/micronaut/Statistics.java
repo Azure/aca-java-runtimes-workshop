@@ -1,9 +1,6 @@
 package io.containerapps.javaruntime.workshop.micronaut;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -13,6 +10,7 @@ public class Statistics{
     @GeneratedValue
     @Id
     private Long id;
+    @Column(name = "done_at")
     public Instant doneAt = Instant.now();
     public Framework framework = Framework.MICRONAUT;
     public Type type;
