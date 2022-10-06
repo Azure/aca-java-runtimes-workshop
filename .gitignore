@@ -44,3 +44,7 @@ nb-configuration.xml
 
 # OSX
 .DS_Store
+
+# SQL files
+create.sql
+drop.sql
