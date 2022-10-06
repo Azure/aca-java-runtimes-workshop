@@ -159,5 +159,5 @@ Then we can use `curl` to test our apps:
 ----
 curl https://${QUARKUS_HOST}/quarkus
 curl https://${MICRONAUT_HOST}/micronaut
-curl https://${SPRING_HOST}/spring
+curl https://${SPRING_HOST}/springboot
 ----

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ##############################################################################
 # Usage: ./create-github-template.sh
-# Creates a temporary folder with all the needed files to create a new project template.
+# Creates a temporary folder in ~/temp/template with all the needed files to create a new project template.
 ##############################################################################
 
 TEMPLATE_HOME=~/temp/template
@@ -12,6 +12,7 @@ cp -r ../ $TEMPLATE_HOME
 rm -rf $TEMPLATE_HOME/.idea
 rm -rf $TEMPLATE_HOME/.vscode
 rm -rf $TEMPLATE_HOME/docs
+rm -rf $TEMPLATE_HOME/scripts/infra
 rm -rf $TEMPLATE_HOME/scripts/create-github-template.sh
 rm -rf $TEMPLATE_HOME/bootstrap.sh
 rm -rf $TEMPLATE_HOME/CODE_OF_CONDUCT.md
@@ -21,7 +22,7 @@ rm -rf $TEMPLATE_HOME/SUPPORT.md
 
 ### Fix the registry name of the workflow
 rm -rf $TEMPLATE_HOME/.github/workflows/docs.yml
-sed 's/javaruntimesregistrysinedied/javaruntimesregistryxxxxxxxx/' $TEMPLATE_HOME/.github/workflows/deploy.yml >> $TEMPLATE_HOME/.github/workflows/deploy-new.yml
+sed 's/javaruntimesregistrysinedied/<YOUR_REGISTRY_URL>/' $TEMPLATE_HOME/.github/workflows/deploy.yml >> $TEMPLATE_HOME/.github/workflows/deploy-new.yml
 rm $TEMPLATE_HOME/.github/workflows/deploy.yml
 mv $TEMPLATE_HOME/.github/workflows/deploy-new.yml $TEMPLATE_HOME/.github/workflows/deploy.yml
 
@@ -93,5 +94,4 @@ echo -e "<?xml version=\"1.0\"?>
 " >> $TEMPLATE_HOME/pom.xml
 
 ### Removing the .git folder
-sudo rm -rf $TEMPLATE_HOME/.git
-
+rm -rf $TEMPLATE_HOME/.git
