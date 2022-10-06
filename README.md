@@ -9,6 +9,17 @@ mvn quarkus:dev                   # Execute the application
 curl 'localhost:8701/quarkus'     # Invokes the hello endpoint
 ```
 
+To build a native application (you need GraalVM installed):
+```shell
+mvn -Pnative clean package
+./target/*-runner
+```
+
+To build a Docker image with the native application (you need to build the native image on Linux):
+```shell
+docker build -t quarkus-app-native -f src/main/docker/Dockerfile.native .
+```
+
 ## Micronaut
 
 ```shell
@@ -17,6 +28,17 @@ mvn test                          # Execute the tests
 docker compose -f infrastructure/postgres.yaml up
 mvn mn:run                        # Execute the application
 curl 'localhost:8702/micronaut'   # Invokes the hello endpoint
+```
+
+To build a native application (you need GraalVM installed):
+```shell
+mvn package -Dpackaging=native-image
+./target/micronaut-app
+```
+
+To build a Docker image with the native application (you need to build the native image on Linux):
+```shell
+docker build -t micronaut-app-native -f src/main/docker/Dockerfile.native .
 ```
 
 ## SpringBoot
@@ -29,26 +51,16 @@ mvn spring-boot:run               # Execute the application
 curl 'localhost:8703/springboot'  # Invokes the hello endpoint
 ```
 
-To build a native image (you need GraalVM installed):
+To build a native application (you need GraalVM installed):
 ```shell
 mvn -Pnative clean package
 ./target/springboot-app
 ```
 
-To build a Docker image (you need Docker running):
+To build a Docker image with the native application (you need to build the native image on Linux):
 ```shell
- mvn spring-boot:build-image 
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=springboot-app-native
 ```
-
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
-
-As the maintainer of this project, please make a few updates:
-
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
 
 ## Contributing
 

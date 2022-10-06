@@ -1,0 +1,11 @@
+FROM alpine:3
+WORKDIR /work/
+RUN chown 1001 /work \
+    && chmod "g+rwX" /work \
+    && chown 1001:root /work
+COPY --chown=1001:root target/micronaut-app /work/application
+
+EXPOSE 8702
+USER 1001
+
+CMD ["./application"]

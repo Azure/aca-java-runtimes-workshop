@@ -48,15 +48,19 @@ jobs:
 # end::adocGitHubActionsWorkflowBase[]
 
       # tag::adocBuild[]
-      - name: Build apps
+      - name: Build Quarkus with Java
         run: |
           cd quarkus-app && ./mvnw package
-          cd ../micronaut-app && ./mvnw package
-          cd ../springboot-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+      - name: Build Micronaut with Java
+        run: |
+          cd micronaut-app && ./mvnw package
+       - name: Build Spring Boot with Java
+        run: |
+          cd springboot-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
       # end::adocBuild[]
 
       # tag::adocPush[]
-      - name: Build and push Quarkus image to registry
+      - name: Build and push Quarkus Java image to registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -64,7 +68,7 @@ jobs:
           file: ./quarkus-app/src/main/docker/Dockerfile.jvm
           context: ./quarkus-app/
 
-      - name: Build and push Micronaut image to registry
+      - name: Build and push Micronaut Java image to registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -72,7 +76,7 @@ jobs:
           file: ./micronaut-app/src/main/docker/Dockerfile.jvm
           context: ./micronaut-app/
 
-      - name: Build and push Spring Boot image to registry
+      - name: Build and push Spring Boot Java image to registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -81,13 +85,40 @@ jobs:
           context: ./springboot-app/
       # end::adocPush[]
 
+  build-native:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'latest'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build Quarkus with GraalVM
+        run: |
+          cd quarkus-app && ./mvnw -Pnative package
+      - name: Build Micronaut with GraalVM
+        run: |
+          cd micronaut-app && ./mvnw package -Dpackaging=native-image
+       - name: Build Spring Boot with GraalVM
+        run: |
+          cd springboot-app && ./mvnw -Pnative package
+
   # tag::adocDeploy[]
   # Define our "deploy" job, that will be the CD part of our pipeline
   deploy:
     runs-on: ubuntu-latest
 
     # This job needs to run after the "build" job, so we'll add a dependency on it
-    needs: build
+    needs: build, build-native
     
     steps:
       # Log in to Azure to be able to deploy our apps

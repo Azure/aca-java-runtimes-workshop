@@ -1,6 +1,5 @@
 package io.containerapps.javaruntime.workshop.springboot;
 
-import org.springframework.aot.hint.ExecutableMode;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
@@ -21,7 +20,7 @@ public class SpringbootApplication {
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
             hints.reflection()
-                .registerType(org.hibernate.dialect.PostgreSQLDialect.class, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);
+                .registerType(org.hibernate.dialect.PostgreSQL95Dialect.class, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);
         }
 
     }
