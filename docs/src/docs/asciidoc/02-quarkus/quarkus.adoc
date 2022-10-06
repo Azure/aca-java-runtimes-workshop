@@ -102,7 +102,7 @@ This service is exposed on the port 8701.
 .Configuration Properties
 [source,indent=0]
 ----
-include::{workshop-github-raw}/quarkus-app/src/main/resources/application.properties[]
+include::{workshop-github-raw}/quarkus-app/src/main/resources/application.properties[tags=adocProperties]
 ----
 
 == Testing the Application Locally
