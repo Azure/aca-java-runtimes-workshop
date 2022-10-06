@@ -355,6 +355,7 @@ Go back to the Azure portal, and search for `lt-java-runtimes` to open again our
 
 Once the test is finished, go back to the "_Java Runtimes_" dashboard and take a look at the number of replicas chart again. You should see that the number of replicas has increased to 10, and that the CPU usage has increased as well.
 
+// TODO
 image::../images/dashboard-scale-cpu.png[Screenshot of dashboard showing CPU scaler results]
 
 [NOTE]
@@ -372,11 +373,11 @@ This we will set the scale rule for our Micronaut app using the command:
 [source,shell]
 ----
 az containerapp update \
-  --name "$QUARKUS_APP" \
+  --name "$MICRONAUT_APP" \
   --resource-group "$RESOURCE_GROUP" \
   --scale-rule-name "memory-scaling" \
   --scale-rule-type "memory" \
-  --scale-rule-metadata type=Utilization value=20 \
+  --scale-rule-metadata type=Utilization value=10 \
   --min-replicas 1 \
   --max-replicas 10
 ----
@@ -387,4 +388,5 @@ Again, go back to the Azure portal and run the load tests again. Open the dashbo
 
 You can now compare how the CPU (Quarkus), memory (Micronaut), and HTTP (Spring) triggers behave when scaling the application, under the same load.
 
+// TODO
 image::../images/dashboard-scale-memory.png[Screenshot of dashboard showing CPU scaler results]
