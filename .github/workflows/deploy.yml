@@ -118,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # This job needs to run after the "build" job, so we'll add a dependency on it
-    needs: build, build-native
+    needs: [build, build-native]
     
     steps:
       # Log in to Azure to be able to deploy our apps
