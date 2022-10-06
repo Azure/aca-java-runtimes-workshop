@@ -5,10 +5,10 @@ import java.time.Duration;
 import java.time.Instant;
 
 @Entity
-public class Statistics{
+@Table(name = "Statistics_Micronaut")
+public class Statistics {
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "statistics_generator")
-    @SequenceGenerator(name="statistics_generator", sequenceName = "statistics_seq")
+    @GeneratedValue
     @Id
     private Long id;
     @Column(name = "done_at")
@@ -16,7 +16,6 @@ public class Statistics{
     public Framework framework = Framework.MICRONAUT;
     public Type type;
     public String parameter;
-    @Column(name = "duration", columnDefinition = "NUMERIC", length = 21)
     public Duration duration;
     public String description;
 

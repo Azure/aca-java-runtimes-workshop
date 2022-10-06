@@ -4,10 +4,12 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.Duration;
 import java.time.Instant;
 
 @Entity
+@Table(name = "Statistics_Quarkus")
 public class Statistics extends PanacheEntity {
 
     @Column(name = "done_at")
