@@ -1,13 +1,13 @@
 DROP TABLE IF EXISTS Statistics;
-DROP SEQUENCE IF EXISTS hibernate_sequence;
+DROP SEQUENCE IF EXISTS statistics_seq;
 
-create sequence hibernate_sequence start 1 increment 1;
+create sequence statistics_seq start 1 increment 50;
 create table Statistics
 (
     id          int8 not null,
     description varchar(255),
     done_at     timestamp,
-    duration    int8,
+    duration    numeric(21,0),
     framework   int4,
     parameter   varchar(255),
     type        int4,
