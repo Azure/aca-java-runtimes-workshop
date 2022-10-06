@@ -76,10 +76,56 @@ image::../images/dashboard-select.png[Screenshot of Azure portal dashboard selec
 
 You should now see the 3 charts you just created. You can rearrange the charts by dragging them around, and resize them by dragging the bottom right corner.
 
+image::../images/dashboard-scale.png[Screenshot of dashboard showing metrics for our applications]
+
 == Logs
 
-// Open console/system logs from the CLI for each service
+The Azure portal also provides a nice interface to view the logs of your application. This is crucial to troubleshoot issues when something goes wrong.
+
+You have multiple options to view the different logs of your application:
+
+- You can connect to a given container apps instance and gets the stream of console logs. This is useful to troubleshoot issues with a specific instance of your application in real time.
+
+- You can also access the console logs in Azure portal. You get access to all logs from the https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview[Log Analytics] workspace we created earlier. Using SQL-like queries, you can filter the logs and get the information you need across all your applications, revisions, and instances.
+
+- Finally, you also have access to the _system logs_, which are the logs of the container host. It's very useful to troubleshoot issues with the container host itself and find out why your container is not running.
+
+=== Streaming logs of a container instance
+
+The most straightforward way to access the logs of your application is to connect to a given container instance and get the stream of console logs.
+You can directly access the stream of logs from the latest revision of a running instance of your application with this command:
+
+[source,shell]
+----
+ az containerapp logs show \
+  --name "$QUARKUS_APP" \
+  --resource-group "$RESOURCE_GROUP" \
+  --format text \
+  --follow
+----
+
+[TIP]
+====
+Don't forget that by default, containers apps scale out to 0 instances when they are not used. You can use the command `curl https://${QUARKUS_HOST}/quarkus` to wake up the container app first if the connections fails.
+====
+
+Once you're connected, you can see the logs of your application in real time. The `--follow` option keeps the connection open to see the new logs in real time.
+
+In a different terminal, you can use the `curl` command to generate some load on the application. You should see the logs of the application being updated in real time.
+
+[source,shell]
+----
+curl https://${QUARKUS_HOST}/quarkus/cpu?iterations=10
+----
+
+=== Viewing the console logs in Azure portal
+
 // Laius on Kustus/log queries/log tracing/correlation ID
+
+=== Viewing the system logs
+
+//  Navigate to the `quarkus-app` container app, then select *Logs* from the left menu, under the *Monitoring* group.
+// Open console/system logs from the CLI for each service
 
 == Load Testing
 
