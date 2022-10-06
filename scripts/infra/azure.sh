@@ -98,6 +98,8 @@ createInfrastructure() {
   LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
   CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
 
+  # If you're using a dev container, you should manually set this to
+  # a unique value (like your name) to avoid conflicts with other users.
   UNIQUE_IDENTIFIER=$(whoami)
   REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
   IMAGES_TAG="1.0"
@@ -252,6 +254,12 @@ az containerapp env create \
     --storage-size 1024 \
     --version "$POSTGRES_DB_VERSION"
 # end::adocPostgresCreate[]
+
+  # In case Julien deletes the database again :-)
+  # az postgres flexible-server db create \
+  #     --resource-group "$RESOURCE_GROUP" \
+  #     --server-name "$POSTGRES_DB" \
+  #     --database-name "$POSTGRES_DB_SCHEMA"
 
   pushd ../..
 # tag::adocPostgresTable[]
