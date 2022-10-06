@@ -377,12 +377,12 @@ az containerapp update \
   --resource-group "$RESOURCE_GROUP" \
   --scale-rule-name "memory-scaling" \
   --scale-rule-type "memory" \
-  --scale-rule-metadata type=Utilization value=10 \
+  --scale-rule-metadata type=Utilization value=15 \
   --min-replicas 1 \
   --max-replicas 10
 ----
 
-This will automatically scale out the application when the memory usage is above 20%.
+This will automatically scale out the application when the memory usage is above 15% (we set it low deliberately to make it easy to go up).
 
 Again, go back to the Azure portal and run the load tests again. Open the dashboard when the test is finished, and take a look at the number of replicas chart again.
 
