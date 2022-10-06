@@ -21,7 +21,7 @@ rm -rf $TEMPLATE_HOME/SUPPORT.md
 
 ### Fix the registry name of the workflow
 rm -rf $TEMPLATE_HOME/.github/workflows/docs.yml
-sed 's/javaruntimesregistrysinedied/javaruntimesregistryxxxxxxxx/' $TEMPLATE_HOME/.github/workflows/deploy.yml >> $TEMPLATE_HOME/.github/workflows/deploy-new.yml
+sed 's/javaruntimesregistrysinedied/<YOUR_REGISTRY_URL>/' $TEMPLATE_HOME/.github/workflows/deploy.yml >> $TEMPLATE_HOME/.github/workflows/deploy-new.yml
 rm $TEMPLATE_HOME/.github/workflows/deploy.yml
 mv $TEMPLATE_HOME/.github/workflows/deploy-new.yml $TEMPLATE_HOME/.github/workflows/deploy.yml
 
@@ -93,5 +93,4 @@ echo -e "<?xml version=\"1.0\"?>
 " >> $TEMPLATE_HOME/pom.xml
 
 ### Removing the .git folder
-sudo rm -rf $TEMPLATE_HOME/.git
-
+rm -rf $TEMPLATE_HOME/.git
