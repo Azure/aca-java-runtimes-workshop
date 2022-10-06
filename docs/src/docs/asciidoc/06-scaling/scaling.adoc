@@ -120,7 +120,85 @@ curl https://${QUARKUS_HOST}/quarkus/cpu?iterations=10
 
 === Viewing the console logs in Azure portal
 
-// Laius on Kustus/log queries/log tracing/correlation ID
+You can also access the console logs in Azure portal. Using https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview[Log Analytics], you get access to all logs from all your applications, revisions, and instances. This means you can troubleshoot issues across all your applications, tracing requests as needed, which is crucial if your application use a microservices architecture.
+
+Open the Azure portal and navigate to the resource group `rg-java-runtimes` you created for your application. Select the `logs-java-runtimes` container app, then select *Logs* from the left menu, under the *General* group.
+
+By default, you are presented a list of pre-defined queries. Close this panel by clicking on the *X* button on the top right corner, as we'll create our own query.
+
+image::../images/log-analytics.png[Screenshot of the Azure portal showing the logs analytics panel]
+
+Log analytics queries use the https://docs.microsoft.com/en-us/azure/azure-monitor/log-query/query-language[Kusto query language], which is a SQL-like language. You can use the query language to filter the logs and get the information you need.
+
+Let's start by creating a query to get the logs of the `quarkus-app` container app. Enter this query in the editor:
+
+[source,sql]
+----
+ContainerAppConsoleLogs_CL
+| where RevisionName_s == "quarkus-app--<REVISION_ID>"
+----
+
+You can get the app revision name by running the following command:
+
+[source,shell]
+----
+az containerapp revision list \
+  --name "$QUARKUS_APP" \
+  --resource-group "$RESOURCE_GROUP" \
+  --query "[0].name" --output tsv
+----
+
+Select *Run* to execute the query. You should see the logs of the `quarkus-app` container app.
+
+image::../images/log-query.png[Screenshot of the logs results in Azure portal]
+
+For now, it's not very useful as it's the same logs we saw in the previous section. Let's add some filters to the query to search for error messages from the logs:
+
+[source,sql]
+----
+ContainerAppConsoleLogs_CL
+| where RevisionName_s == "quarkus-app--<REVISION_ID>"
+| where Log_s !has "INFO"
+| where Log_s contains "error"
+----
+
+Select *Run* to execute the query. If your application is working fine, you should not see any results.
+Let's generate some errors by crashing the application with the following command:
+
+[source,shell]
+----
+curl https://${QUARKUS_HOST}/quarkus/memory?bites=1000
+----
+
+Oops! We're trying to allocate more memory than the container has available, resulting in a crash because of our (crude) memory allocation algorithm.
+
+If you run the query again, you should see the error message in the logs:
+
+image::../images/log-query-error.png[Screenshot of the logs results in Azure portal]
+
+[TIP]
+====
+Of course, you can go much further with the query language. You can have a look at the https://learn.microsoft.com/en-us/azure/data-explorer/kql-quick-reference[quick reference] to play a bit with the queries.
+====
+
+We can make it easier to read by making the latest logs appear at the top of the results, and only show the time and message of the last 10 logs:
+
+[source,sql]
+----
+ContainerAppConsoleLogs_CL
+| where RevisionName_s == "quarkus-app--<REVISION_ID>"
+| where Log_s !has "INFO"
+| where Log_s contains "error"
+| project TimeGenerated, Log_s
+| sort by TimeGenerated desc
+| take 10
+----
+
+And here we can quickly see our `OutOfMemoryError` error message.
+
+image::../images/log-query-error-2.png[Screenshot of the logs results in Azure portal]
+
+We can save the query for later use by clicking on the *Save* button. You can then give it a name and a description, and a category to quickly find it later.
 
 === Viewing the system logs
 
