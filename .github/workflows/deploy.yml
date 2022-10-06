@@ -54,7 +54,7 @@ jobs:
       - name: Build Micronaut with Java
         run: |
           cd micronaut-app && ./mvnw package
-       - name: Build Spring Boot with Java
+      - name: Build Spring Boot with Java
         run: |
           cd springboot-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
       # end::adocBuild[]
@@ -108,7 +108,7 @@ jobs:
       - name: Build Micronaut with GraalVM
         run: |
           cd micronaut-app && ./mvnw package -Dpackaging=native-image
-       - name: Build Spring Boot with GraalVM
+      - name: Build Spring Boot with GraalVM
         run: |
           cd springboot-app && ./mvnw -Pnative package
 
