@@ -110,7 +110,7 @@ jobs:
           cd micronaut-app && ./mvnw package -Dpackaging=native-image
       - name: Build Spring Boot with GraalVM
         run: |
-          cd springboot-app && ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}-native:${{ github.sha }}
+          cd springboot-app && ./mvnw -Pnative package
 
       - name: Build and push Quarkus native image to registry
         uses: docker/build-push-action@v2
@@ -127,8 +127,12 @@ jobs:
           file: ./micronaut-app/src/main/docker/Dockerfile.native
           context: ./micronaut-app/
       - name: Build and push Spring Boot native image to registry
-        run: |
-          docker push ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}-native:${{ github.sha }}
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}-native:${{ github.sha }}
+          file: ./springboot-app/src/main/docker/Dockerfile.native
+          context: ./springboot-app/
 
   # tag::adocDeploy[]
   # Define our "deploy" job, that will be the CD part of our pipeline
