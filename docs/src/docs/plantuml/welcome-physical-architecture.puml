@@ -1,0 +1,26 @@
+@startuml
+
+left to right direction
+
+node "Azure Load Testing" as load {
+    agent "JMeter" as jmeter
+}
+
+node "Azure Monitoring" as monitor {
+    agent "Monitoring" as monitoring
+}
+
+node "Azure Container Apps" as aca {
+    agent "Quarkus" as appQuarkus
+    agent "SpringBoot" as appSpringBoot
+    agent "Micronaut" as appMicronaut
+    database "Postgresql" as fightPostgresql
+    appQuarkus ..> fightPostgresql
+    appSpringBoot ..> fightPostgresql
+    appMicronaut ..> fightPostgresql
+}
+
+jmeter ..> aca
+monitoring ..> aca
+
+@enduml

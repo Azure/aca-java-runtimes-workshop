@@ -14,6 +14,8 @@
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <asciidoctorj.diagram.version>2.2.3</asciidoctorj.diagram.version>
         <asciidoctorj.plantuml.version>1.2022.5</asciidoctorj.plantuml.version>
+        <plantuml.maven.plugin.version>1.2</plantuml.maven.plugin.version>
+        <plantuml.version>1.2021.2</plantuml.version>
     </properties>
 
     <build>
@@ -40,6 +42,7 @@
                     <attributes>
                         <project-version>${project.version}</project-version>
                         <allow-uri-read/>
+                        <imagesdir>./images</imagesdir>
                         <revdate>${revision.date}</revdate>
                         <attribute-missing>warn</attribute-missing>
                         <doctype>book</doctype>
@@ -90,6 +93,35 @@
                                 <idseparator>-</idseparator>
                             </attributes>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.jeluard</groupId>
+                <artifactId>plantuml-maven-plugin</artifactId>
+                <version>${plantuml.maven.plugin.version}</version>
+                <configuration>
+                    <outputDirectory>${basedir}/src/docs/asciidoc/images</outputDirectory>
+                    <sourceFiles>
+                        <directory>${basedir}/src/docs/plantuml</directory>
+                        <includes>
+                            <include>**/*.puml</include>
+                        </includes>
+                    </sourceFiles>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sourceforge.plantuml</groupId>
+                        <artifactId>plantuml</artifactId>
+                        <version>${plantuml.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
