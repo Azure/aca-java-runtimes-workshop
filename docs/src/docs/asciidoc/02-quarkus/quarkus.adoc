@@ -181,6 +181,20 @@ curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=java17'
 curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=java17'
 ----
 
+You can change the parameters to see how the application behaves.
+Change the number of iterations and the number of bites to see how the performance is impacted (with and without database).
+
+[source,shell]
+----
+curl 'localhost:8701/quarkus/cpu?iterations=100'
+curl 'localhost:8701/quarkus/cpu?iterations=1000'
+curl 'localhost:8701/quarkus/cpu?iterations=1000&db=true'
+
+curl 'localhost:8701/quarkus/memory?bites=100'
+curl 'localhost:8701/quarkus/memory?bites=1000'
+curl 'localhost:8701/quarkus/memory?bites=1000&db=true'
+----
+
 You can check the content of the database with:
 
 [source,shell]

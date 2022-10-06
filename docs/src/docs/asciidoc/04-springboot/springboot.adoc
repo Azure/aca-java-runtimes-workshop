@@ -189,6 +189,17 @@ curl 'localhost:8703/springboot/cpu?iterations=10&db=true&desc=java17'
 curl 'localhost:8703/springboot/memory?bites=10&db=true&desc=java17'
 ----
 
+[source,shell]
+----
+curl 'localhost:8703/springboot/cpu?iterations=100'
+curl 'localhost:8703/springboot/cpu?iterations=1000'
+curl 'localhost:8703/springboot/cpu?iterations=1000&db=true'
+
+curl 'localhost:8703/springboot/memory?bites=100'
+curl 'localhost:8703/springboot/memory?bites=1000'
+curl 'localhost:8703/springboot/memory?bites=1000&db=true'
+----
+
 You can check the content of the database with:
 
 [source,shell]

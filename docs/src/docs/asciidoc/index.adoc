@@ -1,5 +1,5 @@
 = Azure Container Apps and Java Runtimes Workshop
-https://twitter.com/agoncal[Antonio Goncalves], https://twitter.com/sinedied[Yohan Lasorsa]
+Antonio Goncalves, Julien Dubois, Yohan Lasorsa
 :revnumber: {project-version}
 :example-caption!:
 
@@ -31,6 +31,10 @@ include::05-deploy/deploy.adoc[leveloffset=+1]
 include::06-scaling/scaling.adoc[leveloffset=+1]
 <<<
 
+// Native
+include::07-native/native.adoc[leveloffset=+1]
+<<<
+
 // Conclusion
-include::07-conclusion/conclusion.adoc[leveloffset=+1]
+include::08-conclusion/conclusion.adoc[leveloffset=+1]
 <<<

@@ -24,7 +24,7 @@ What you are going to do:
 * And much more!
 
 Ready? Here we go!
-Check the workshop at https://azure.github.io/aca-java-runtimes-workshop of flash the QR Code if you don't want to type.
+Check the workshop at {workshop-url} of flash the QR Code if you don't want to type.
 
 image::../images/qrcode-workshop.png[]
 
@@ -44,7 +44,8 @@ And what about having native binaries and compiling our code with GraalVM?
 === What Is This Workshop About?
 
 To understand performance in a containerized environment we need a few simple algorithms that consume CPU and memory.
-We will then develop these same algorithms in Quarkus, SpringBoot and Micronaut, deploy them to Azure Container Apps and monitor their performance.
+We will then develop these same algorithms in https://quarkus.io[Quarkus], https://spring.io/projects/spring-boot[SpringBoot] and https://micronaut.io[Micronaut], deploy them to https://learn.microsoft.com/azure/container-apps/overview[Azure Container Apps] and monitor their performance.
+
 The algorithm consuming CPU will be a simple loop.
 The higher the iteration, the more CPU it uses:
 
