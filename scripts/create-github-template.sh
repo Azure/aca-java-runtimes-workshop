@@ -12,6 +12,7 @@ cp -r ../ $TEMPLATE_HOME
 rm -rf $TEMPLATE_HOME/.idea
 rm -rf $TEMPLATE_HOME/.vscode
 rm -rf $TEMPLATE_HOME/docs
+rm -rf $TEMPLATE_HOME/scripts/infra
 rm -rf $TEMPLATE_HOME/scripts/create-github-template.sh
 rm -rf $TEMPLATE_HOME/bootstrap.sh
 rm -rf $TEMPLATE_HOME/CODE_OF_CONDUCT.md
