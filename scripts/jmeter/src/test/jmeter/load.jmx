@@ -89,7 +89,7 @@
             <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/quarkus/cpu?iterations=10</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus/cpu?iterations=${CPU_ITERATIONS}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -142,7 +142,7 @@
             <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/quarkus/cpu?iterations=10&amp;db=true</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus/cpu?iterations=${CPU_ITERATIONS}&amp;db=true</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -195,7 +195,7 @@
             <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/quarkus/memory?bites=10</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus/memory?bites=${MEMORY_BITES}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -248,7 +248,7 @@
             <stringProp name="HTTPSampler.port">${QUARKUS_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${QUARKUS_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/quarkus/memory?bites=10&amp;db=true</stringProp>
+            <stringProp name="HTTPSampler.path">/quarkus/memory?bites=${MEMORY_BITES}&amp;db=true</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -357,6 +357,18 @@
       <hashTree/>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
+          <elementProp name="CPU_ITERATIONS" elementType="Argument">
+            <stringProp name="Argument.name">CPU_ITERATIONS</stringProp>
+            <stringProp name="Argument.value">${__P(CPU_ITERATIONS)}</stringProp>
+            <stringProp name="Argument.desc">Number of CPU iterations</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MEMORY_BITES" elementType="Argument">
+            <stringProp name="Argument.name">MEMORY_BITES</stringProp>
+            <stringProp name="Argument.value">${__P(MEMORY_BITES)}</stringProp>
+            <stringProp name="Argument.desc">Number of memory bites</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="QUARKUS_PROTOCOL" elementType="Argument">
             <stringProp name="Argument.name">QUARKUS_PROTOCOL</stringProp>
             <stringProp name="Argument.value">${__P(QUARKUS_PROTOCOL)}</stringProp>
@@ -372,6 +384,42 @@
           <elementProp name="QUARKUS_PORT" elementType="Argument">
             <stringProp name="Argument.name">QUARKUS_PORT</stringProp>
             <stringProp name="Argument.value">${__P(QUARKUS_PORT)}</stringProp>
+            <stringProp name="Argument.desc">Port number</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MICRONAUT_PROTOCOL" elementType="Argument">
+            <stringProp name="Argument.name">MICRONAUT_PROTOCOL</stringProp>
+            <stringProp name="Argument.value">${__P(MICRONAUT_PROTOCOL)}</stringProp>
+            <stringProp name="Argument.desc">Can be http or https</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MICRONAUT_HOST" elementType="Argument">
+            <stringProp name="Argument.name">MICRONAUT_HOST</stringProp>
+            <stringProp name="Argument.value">${__P(MICRONAUT_HOST)}</stringProp>
+            <stringProp name="Argument.desc">Base URL of the Fight endpoint</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MICRONAUT_PORT" elementType="Argument">
+            <stringProp name="Argument.name">MICRONAUT_PORT</stringProp>
+            <stringProp name="Argument.value">${__P(MICRONAUT_PORT)}</stringProp>
+            <stringProp name="Argument.desc">Port number</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SPRING_PROTOCOL" elementType="Argument">
+            <stringProp name="Argument.name">SPRING_PROTOCOL</stringProp>
+            <stringProp name="Argument.value">${__P(SPRING_PROTOCOL)}</stringProp>
+            <stringProp name="Argument.desc">Can be http or https</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SPRING_HOST" elementType="Argument">
+            <stringProp name="Argument.name">SPRING_HOST</stringProp>
+            <stringProp name="Argument.value">${__P(SPRING_HOST)}</stringProp>
+            <stringProp name="Argument.desc">Base URL of the Fight endpoint</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SPRING_PORT" elementType="Argument">
+            <stringProp name="Argument.name">SPRING_PORT</stringProp>
+            <stringProp name="Argument.value">${__P(SPRING_PORT)}</stringProp>
             <stringProp name="Argument.desc">Port number</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>

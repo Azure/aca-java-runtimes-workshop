@@ -47,7 +47,7 @@ Using the *Metrics* panel, you can select which metrics you want to observe, and
 
 image::../images/standard-metrics.png[Screenshot of the Azure portal showing the list of standard metrics]
 
-Select "_CPU Usage_" from the list of metrics, and select the last 30 minutes hours for the time range. You can see the CPU and memory usage for your application.
+Select "_CPU Usage_" from the list of metrics, choose "_Max_" for the *Aggregation* and select the last 30 minutes hours for the time range (in the top right of the panel). You can see the CPU and memory usage for your application.
 
 image::../images/metrics-cpu.png[Screenshot of the Azure portal showing the list of standard metrics]
 
@@ -258,7 +258,7 @@ image::../images/load-testing-create-test.png[Screenshot of test creation]
 
 1. You can either create a quick load test using a wizard, or create a load test using a JMeter script. Choose this second option.
 
-2. Before uploading a JMeter script, create a load test by entering a name (eg. "_Make them fight_"), a description and select **Next**: 
+2. Before uploading a JMeter script, create a load test by entering a name (eg. "_Add some load!_"), a description and select **Next**: 
 +
 image::../images/load-testing-jmeter.png[Screenshot of test setup]
 
@@ -314,5 +314,77 @@ image::../images/dashboard-scale.png[Screenshot of dashboard showing load testin
 
 == Scaling
 
-// Set up CPU/Memory scaling
-// Run load tests again with updated parameters
+Now that we have seen the auto-scaling in action, let's dive a bit into fine-tuning its configuration.
+
+[NOTE]
+====
+Azure Container Apps only support automatic _horizontal_ scaling, meaning that it will only scale the number of replicas of your application.
+Vertical scaling (increasing the amount of available CPU and memory) is supported, but you need to do it manually.
+====
+
+Azure Container Apps support different types of https://learn.microsoft.com/azure/container-apps/scale-app[scaling rules], implemented using the KEDA https://keda.sh/docs/concepts/scaling-deployments/#scaledobject-spec[Scaling Object]. It supports the following triggers:
+
+- _HTTP traffic_: Scaling based on the number of concurrent HTTP requests to your revision. This is the default scaling rule.
+- _TCP traffic_: Scaling based on the number of concurrent TCP requests to your revision.
+- _Event-driven_: Event-based triggers such as messages in an Azure Service Bus.
+- _CPU_ or _Memory usage_: Scaling based on the amount of CPU or memory consumed by a replica.
+
+As our applications provides endpoints to load either the CPU or the memory, we will explore usage of the _CPU_ and _Memory usage_ triggers to scale our application.
+
+=== Scaling based on CPU usage
+
+To scale based on CPU usage, we need to update the scale rule of the application to use the `cpu` trigger. This will create a new revision of the application, and will start a new deployment.
+
+We will set a new scale rule for our Quarkus app using the Azure CLI:
+
+[source,shell]
+----
+az containerapp update \
+  --name "$QUARKUS_APP" \
+  --resource-group "$RESOURCE_GROUP" \
+  --scale-rule-name "cpu-scaling" \
+  --scale-rule-type "cpu" \
+  --scale-rule-metadata type=Utilization value=10 \
+  --min-replicas 1 \
+  --max-replicas 10
+----
+
+This will automatically scale out the application when the CPU usage is above 10% (we set it low deliberately to make it easy to go up).
+
+Go back to the Azure portal, and search for `lt-java-runtimes` to open again our load testing instance. Select *Tests* in the left sidebar, open the test we created earlier and select *Run* to run the load tests again.
+
+Once the test is finished, go back to the "_Java Runtimes_" dashboard and take a look at the number of replicas chart again. You should see that the number of replicas has increased to 10, and that the CPU usage has increased as well.
+
+image::../images/dashboard-scale-cpu.png[Screenshot of dashboard showing CPU scaler results]
+
+[NOTE]
+====
+When using either the _CPU_ or _Memory usage_ triggers, the minimum number of replicas will always be 1.
+Only the HTTP trigger allows you to scale to 0.
+====
+
+=== Scaling based on memory usage
+
+Another option that we can use is to scale based on the memory usage, with the `memory` trigger.
+
+This we will set the scale rule for our Micronaut app using the command:
+
+[source,shell]
+----
+az containerapp update \
+  --name "$QUARKUS_APP" \
+  --resource-group "$RESOURCE_GROUP" \
+  --scale-rule-name "memory-scaling" \
+  --scale-rule-type "memory" \
+  --scale-rule-metadata type=Utilization value=20 \
+  --min-replicas 1 \
+  --max-replicas 10
+----
+
+This will automatically scale out the application when the memory usage is above 20%.
+
+Again, go back to the Azure portal and run the load tests again. Open the dashboard when the test is finished, and take a look at the number of replicas chart again.
+
+You can now compare how the CPU (Quarkus), memory (Micronaut), and HTTP (Spring) triggers behave when scaling the application, under the same load.
+
+image::../images/dashboard-scale-memory.png[Screenshot of dashboard showing CPU scaler results]
