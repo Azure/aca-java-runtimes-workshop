@@ -59,7 +59,7 @@ mvn -Pnative clean package
 
 To build a Docker image with the native application (you need to build the native image on Linux):
 ```shell
-docker build -t springboot-app-native -f src/main/docker/Dockerfile.native .
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=springboot-app-native
 ```
 
 ## Contributing
