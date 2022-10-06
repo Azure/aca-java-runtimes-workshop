@@ -150,7 +150,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Use the Azure CLI to deploy our apps
-      - name: Deploy to containerapp
+      - name: Deploy to Azure Container Apps
         uses: azure/CLI@v1
         with:
           inlineScript: |
