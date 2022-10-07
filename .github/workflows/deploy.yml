@@ -85,62 +85,13 @@ jobs:
           context: ./springboot-app/
       # end::adocPush[]
 
-  build-native:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: graalvm/setup-graalvm@v1
-        with:
-          version: 'latest'
-          java-version: '17'
-          components: 'native-image'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Log in to container registry
-        uses: docker/login-action@v1
-        with:
-          registry: ${{ env.REGISTRY_URL }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build Quarkus with GraalVM
-        run: |
-          cd quarkus-app && ./mvnw -Pnative package
-      - name: Build Micronaut with GraalVM
-        run: |
-          cd micronaut-app && ./mvnw package -Dpackaging=native-image
-      - name: Build Spring Boot with GraalVM
-        run: |
-          cd springboot-app && ./mvnw -Pnative package
-
-      - name: Build and push Quarkus native image to registry
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}-native:${{ github.sha }}
-          file: ./quarkus-app/src/main/docker/Dockerfile.native
-          context: ./quarkus-app/
-      - name: Build and push Micronaut native image to registry
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}-native:${{ github.sha }}
-          file: ./micronaut-app/src/main/docker/Dockerfile.native
-          context: ./micronaut-app/
-      - name: Build and push Spring Boot native image to registry
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}-native:${{ github.sha }}
-          file: ./springboot-app/src/main/docker/Dockerfile.native
-          context: ./springboot-app/
-
   # tag::adocDeploy[]
   # Define our "deploy" job, that will be the CD part of our pipeline
   deploy:
     runs-on: ubuntu-latest
 
     # This job needs to run after the "build" job, so we'll add a dependency on it
-    needs: [build, build-native]
+    needs: build
     
     steps:
       # Log in to Azure to be able to deploy our apps
@@ -159,21 +110,21 @@ jobs:
             az containerapp update \
               --name ${{ env.QUARKUS_APP }} \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}-native:${{ github.sha }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }} \
               --query "properties.configuration.ingress.fqdn" \
               --output tsv
 
             az containerapp update \
               --name ${{ env.MICRONAUT_APP }} \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}-native:${{ github.sha }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }} \
               --query "properties.configuration.ingress.fqdn" \
               --output tsv
 
             az containerapp update \
               --name ${{ env.SPRING_APP }} \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}-native:${{ github.sha }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }} \
               --query "properties.configuration.ingress.fqdn" \
               --output tsv
   # end::adocDeploy[]
