@@ -69,12 +69,23 @@ image::../images/dashboard-create.png[Screenshot of the Azure portal showing the
 
 We'll also add charts to monitor the memory usage and number of replicas of our applications.
 
-Select *Add chart* and repeat the same steps as before to create a chart with "_Memory Working Set Bytes_" metrics and another one with the "_Replica Count_" metric.
-Don't forget to save them to the dashboard we created earlier!
+Click on *+New chart* (top left corner) and repeat the same steps as before to create a chart with "_Memory Working Set Bytes_" metrics.
+Select *Save to dashboard*, choose *Pin to dashboard*, and select the existing "Java Runtimes" dashboard.
+
+Click on *+New chart* again, and create another chart with the "_Replica Count_" metric.
+Don't forget to save this dashboard as well (select *Save to dashboard*, choose *Pin to dashboard*, and select the existing "Java Runtimes" dashboard).
 
 When you're finished, in the http://portal.azure.com[Azure Portal] sidebar select *Dashboards* and choose the "_Java Runtimes_" dashboard we created earlier.
 
 image::../images/dashboard-select.png[Screenshot of Azure portal dashboard selection]
+
+[NOTE]
+====
+Depending on your setup, you might see the Azure Portal sidebar menu or not.
+If not, click on the burger menu at the very top left of the portal and you will see the Dashboard menu.
+
+image::../images/dashboard-burger.png[Screenshot of Azure portal burger menu]
+====
 
 You should now see the 3 charts you just created.
 You can rearrange the charts by dragging them around, and resize them by dragging the bottom right corner.
@@ -168,7 +179,7 @@ az containerapp revision list \
 Select *Run* to execute the query.
 You should see the logs of the `quarkus-app` container app.
 
-image::../images/logs-query.png[Screenshot of the logs results in Azure portal]
+image::../images/log-analytics-query.png[Screenshot of the logs results in Azure portal]
 
 For now, it's not very useful as it's the same logs we saw in the previous section.
 Let's add some filters to the query to search for error messages from the logs:
@@ -194,7 +205,7 @@ Oops! We're trying to allocate more memory than the container has available, res
 
 If you run the query again, you should see the error message in the logs:
 
-image::../images/logs-query-error.png[Screenshot of the logs results in Azure portal]
+image::../images/log-analytics-error.png[Screenshot of the logs results in Azure portal]
 
 [TIP]
 ====
@@ -217,7 +228,7 @@ ContainerAppConsoleLogs_CL
 
 And here we can quickly see our `OutOfMemoryError` error message.
 
-image::../images/logs-query-error-2.png[Screenshot of the logs results in Azure portal]
+image::../images/log-analytics-error-2.png[Screenshot of the logs results in Azure portal]
 
 We can save the query for later use by clicking on the *Save* button.
 You can then give it a name and a description, and a category to quickly find it later.
@@ -244,7 +255,7 @@ ContainerAppSystemLogs_CL
 
 You should see the system logs of the `quarkus-app` container app, covering the whole lifecycle of the container.
 
-image::../images/logs-system.png[Screenshot of the logs results in Azure portal]
+image::../images/log-analytics-system.png[Screenshot of the logs results in Azure portal]
 
 == Load Testing
 
