@@ -339,4 +339,5 @@ include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresConnection
 > You need to append `ssl=true&sslmode=require` to the end of each connect string to force the driver to use ssl.
 
 That's it for the Azure infrastructure setup.
-Now that we have our Azure Container Apps ready to host our microservices... let's develop our microservices.
+Now that we have our Azure Container Apps ready to host our microservices...
+let's develop our microservices.

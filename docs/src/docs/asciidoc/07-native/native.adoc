@@ -14,7 +14,8 @@ The 3 native image builds are extremely similar, so don't be surprised if there 
 == What is GraalVM
 
 GraalVM is a new technology, allowing to create a native build of a Java application: your application
-will be compiled to a native executable, and will not need a JVM to run. That executable will be specific
+will be compiled to a native executable, and will not need a JVM to run.
+That executable will be specific
 to your operation system, and will start much faster than with a JVM.
 
 You can find more information on GraalVM at https://www.graalvm.org/[https://www.graalvm.org/].
@@ -40,7 +41,8 @@ alias graalvm="export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-jav
 
 == GitHub Actions setup
 
-We are going to create 3 new GitHub Actions, one per native build. As native builds are much slower than JVM builds,
+We are going to create 3 new GitHub Actions, one per native build.
+As native builds are much slower than JVM builds,
 this will allow us to have a faster feedback loop.
 
 As native builds will replace the JVM builds, you need to disable the existing GitHub Action:
@@ -58,7 +60,8 @@ First, let's build a local native build of the Quarkus application.
 mvn -Pnative package
 ----
 
-In your `target` folder, this should create a binary called `quarkus-app-1.0.0-SNAPSHOT-runner`. You can execute it
+In your `target` folder, this should create a binary called `quarkus-app-1.0.0-SNAPSHOT-runner`.
+You can execute it
 directly, for example:
 
 [source,shell]
@@ -79,7 +82,8 @@ include::{workshop-github-raw}/.github/workflows/deploy-quarkus-native.yml[]
 
 [TIP]
 ====
-Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier. You use the command `echo $REGISTRY_URL` to get the value of the variable.
+Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
+You use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
@@ -94,7 +98,8 @@ Let's build a local native build of the Micronaut application.
 mvn package -Dpackaging=native-image
 ----
 
-In your `target` folder, this should create a binary called `./target/micronaut-app`. You can execute it
+In your `target` folder, this should create a binary called `./target/micronaut-app`.
+You can execute it
 directly, for example:
 
 [source,shell]
@@ -115,7 +120,8 @@ include::{workshop-github-raw}/.github/workflows/deploy-micronaut-native.yml[]
 
 [TIP]
 ====
-Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier. You use the command `echo $REGISTRY_URL` to get the value of the variable.
+Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
+You use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
@@ -130,7 +136,8 @@ Let's build a local native build of the Spring Boot application.
 mvn -Pnative package
 ----
 
-In your `target` folder, this should create a binary called `springboot-app`. You can execute it
+In your `target` folder, this should create a binary called `springboot-app`.
+You can execute it
 directly, for example:
 
 [source,shell]
@@ -151,7 +158,8 @@ include::{workshop-github-raw}/.github/workflows/deploy-springboot-native.yml[]
 
 [TIP]
 ====
-Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier. You use the command `echo $REGISTRY_URL` to get the value of the variable.
+Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
+You use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead

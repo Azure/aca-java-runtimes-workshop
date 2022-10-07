@@ -76,7 +76,8 @@ image::../images/welcome-develop.png[]
 
 Once developed and tested locally, you will be packaging your microservices in Docker containers and deploy them to Azure Container Apps:
 
-* You will first create an Azure Container Apps environment (a.k.a. _ACA_) in Azure
+* You will first create an Azure Container Apps environment (a.k.a.
+_ACA_) in Azure
 * You will create a managed Postgres database in Azure (one single database for all 3 microservices but one table per microservice)
 * You will create an Azure Registry to manage the Docker images
 * You will package each microservice in Docker images and configure them so they can connect to the Postgres database
@@ -87,21 +88,29 @@ image::../images/welcome-deploy.png[]
 
 === How Does This Workshop Work?
 
-You have this material in your hands, and you can now follow it step by step. The structure of this workshop is as follow :
+You have this material in your hands, and you can now follow it step by step.
+The structure of this workshop is as follow :
 
-1. _Installing all the needed tools_: in this section, you will install all the tools and code to be able to bundle, package and deploy our application.
+1.
+_Installing all the needed tools_: in this section, you will install all the tools and code to be able to bundle, package and deploy our application.
 
-2. _Setup Azure resources_: this section introduces Azure and the Container Apps service to prepare all the needed resources for our application. You will create an entire infrastructure on Azure (Container Registry, Postgres database, etc.) to make everything ready for deployment.
+2.
+_Setup Azure resources_: this section introduces Azure and the Container Apps service to prepare all the needed resources for our application.
+You will create an entire infrastructure on Azure (Container Registry, Postgres database, etc.) to make everything ready for deployment.
 
-3. _Running the Applications Locally_: in this section, you will build Docker images out of our microservices, execute them locally with Docker compose, push them to Azure Registry, all that using Docker and Azure CLI.
+3.
+_Running the Applications Locally_: in this section, you will build Docker images out of our microservices, execute them locally with Docker compose, push them to Azure Registry, all that using Docker and Azure CLI.
 
-4. _Setup CI/CD and deploy application_: in this section, you will setup a CI/CD pipeline using GitHub Actions so that our application builds and deploy automatically on new commits.
+4.
+_Setup CI/CD and deploy application_: in this section, you will setup a CI/CD pipeline using GitHub Actions so that our application builds and deploy automatically on new commits.
 
-5. _Monitoring_: in this section, you will add some load to your microservices, monitor them, scale them, check the logs, etc.
+5.
+_Monitoring_: in this section, you will add some load to your microservices, monitor them, scale them, check the logs, etc.
 
 === What Do You Have to Do?
 
-This workshop should be as self-explanatory as possible. So your job is to follow the instructions by yourself, do what you are supposed to do, and do not hesitate to ask for any clarification or assistance; that's why the team is here.
+This workshop should be as self-explanatory as possible.
+So your job is to follow the instructions by yourself, do what you are supposed to do, and do not hesitate to ask for any clarification or assistance; that's why the team is here.
 
 Oh, and be ready to have some fun!
 
@@ -112,7 +121,8 @@ image::../images/qrcode-azure-pass.png[]
 
 == Presenting Azure and Cloud Services
 
-Azure is Microsoft's cloud platform. It provides a wide range of services, from compute to storage, from databases to AI, from IoT to containers, from networking to security, and much more.
+Azure is Microsoft's cloud platform.
+It provides a wide range of services, from compute to storage, from databases to AI, from IoT to containers, from networking to security, and much more.
 
 For this workshop, we'll use in particular the following services:
 
@@ -122,13 +132,22 @@ For this workshop, we'll use in particular the following services:
 
 === What's Azure Container Apps?
 
-https://azure.microsoft.com/products/container-apps/[Azure Container Apps] is a fully managed serverless container service on Azure. It allows you to run containerized applications without worrying about orchestration or managing complex infrastructure such as Kubernetes. You write code using your preferred programming language or framework (in this workshop it's Java and Quarkus, but it can be anything), and build microservices with full support for Distributed Application Runtime (https://dapr.io/[Dapr]). Then, your containers will scale dynamically based on HTTP traffic or events powered by Kubernetes Event-Driven Autoscaling (https://keda.sh[KEDA]).
+https://azure.microsoft.com/products/container-apps/[Azure Container Apps] is a fully managed serverless container service on Azure.
+It allows you to run containerized applications without worrying about orchestration or managing complex infrastructure such as Kubernetes.
+You write code using your preferred programming language or framework (in this workshop it's Java and Quarkus, but it can be anything), and build microservices with full support for Distributed Application Runtime (https://dapr.io/[Dapr]).
+Then, your containers will scale dynamically based on HTTP traffic or events powered by Kubernetes Event-Driven Autoscaling (https://keda.sh[KEDA]).
 
-There are already a few compute resources on Azure: from IAAS to FAAS. Azure Container Apps sits between PAAS and FAAS. On one hand, it feels more PaaS, because you are not forced into a specific programming model and you can control the rules on which to scale out / scale in. On the other hand, it has quite some serverless characteristics like scaling to zero, event-driven scaling, per second pricing and the ability to leverage Dapr's event-based bindings.
+There are already a few compute resources on Azure: from IAAS to FAAS.
+Azure Container Apps sits between PAAS and FAAS.
+On one hand, it feels more PaaS, because you are not forced into a specific programming model and you can control the rules on which to scale out / scale in.
+On the other hand, it has quite some serverless characteristics like scaling to zero, event-driven scaling, per second pricing and the ability to leverage Dapr's event-based bindings.
 
 image::../images/azure-compute-services.png[Diagram showing the different compute resources on Azure]
 
-Container Apps is built on top of Azure Kubernetes Service, including a deep integration with KEDA (event-driven auto scaling for Kubernetes), Dapr (distributed application runtime) and Envoy (a service proxy designed for cloud-native applications). The underlying complexity is completely abstracted for the end-user. So no need to configure your K8S service, deployment, ingress, volume manifests… You get a very simple API and user interface to configure the desired configuration for your containerized application. This simplification means also less control, hence the difference with AKS.
+Container Apps is built on top of Azure Kubernetes Service, including a deep integration with KEDA (event-driven auto scaling for Kubernetes), Dapr (distributed application runtime) and Envoy (a service proxy designed for cloud-native applications).
+The underlying complexity is completely abstracted for the end-user.
+So no need to configure your K8S service, deployment, ingress, volume manifests… You get a very simple API and user interface to configure the desired configuration for your containerized application.
+This simplification means also less control, hence the difference with AKS.
 
 image::../images/azure-container-apps.png[Diagram showing the architecture of Azure Container Apps]
 
@@ -144,11 +163,15 @@ Azure Container Apps has the following features:
 
 Azure Container Apps introduces the following concepts:
 
-- _Environment_: this is a secure boundary around a group of Container Apps. They are deployed in the same virtual network, these apps can easily intercommunicate easily with each other and they write logs to the same Log Analytics workspace. An environment can be compared with a Kubernetes namespace.
+- _Environment_: this is a secure boundary around a group of Container Apps.
+They are deployed in the same virtual network, these apps can easily intercommunicate easily with each other and they write logs to the same Log Analytics workspace.
+An environment can be compared with a Kubernetes namespace.
 
-- _Container App_: this is a group of containers (pod) that is deployed and scale together. They share the same disk space and network.
+- _Container App_: this is a group of containers (pod) that is deployed and scale together.
+They share the same disk space and network.
 
-- _Revision_: this is an immutable snapshot of a Container App. New revisions are automatically created and are valuable for HTTP traffic redirection strategies, such as A/B testing.
+- _Revision_: this is an immutable snapshot of a Container App.
+New revisions are automatically created and are valuable for HTTP traffic redirection strategies, such as A/B testing.
 
 image::../images/aca-environment.png[Diagram showing the environment concept in Azure Container Apps]
 
