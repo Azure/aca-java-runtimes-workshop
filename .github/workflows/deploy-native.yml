@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
     workflow_dispatch:
+    paths:
+      - .github/workflows/*.yml
+      - micronaut-app/**
+      - springboot-app/**
+      - quarkus-app/**
 
 env:
   REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
