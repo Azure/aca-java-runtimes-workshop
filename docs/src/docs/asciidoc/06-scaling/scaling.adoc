@@ -28,12 +28,6 @@ When you know memory usage you are better prepared to answer the following quest
 * Is there room to grow without scaling out or up?
 * How much of the available memory resources is it really using?
 
-[[scaling-listing-rest-resource]]
-.REST Resource
-[source,indent=0]
-----
-----
-
 == Monitoring
 
 One of the first thing you usually want to do once your application is deployed is to configure monitoring.
