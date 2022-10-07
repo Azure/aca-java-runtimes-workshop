@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Build and deploy GraalVM native images
 
 on:
   push:
