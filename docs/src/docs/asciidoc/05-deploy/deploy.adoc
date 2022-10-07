@@ -25,10 +25,10 @@ Create a new file in your repository with the path `.github/workflows/deploy.yml
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocGitHubActionsWorkflowBase]
+include::{workshop-github-raw}/.github/workflows/deploy.yml[tags=adocGitHubActionsWorkflowBase;!adocSkipPath]
 ----
 
-[TIP]
+[WARNING]
 ====
 Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier. You use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
@@ -101,6 +101,10 @@ You can get the value of the `REGISTRY_USERNAME` and `REGISTRY_PASSWORD` secrets
 include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]
 ----
 
+You will end up with something like this:
+
+image::../images/github-secrets-added.png[Screenshot of GitHub interface showing the added secrets]
+
 [TIP]
 You can also use the https://cli.github.com[GitHub CLI] to define your secrets, using the command `gh secret set <MY_SECRET> -b"<SECRET_VALUE>" -R <repository_url>`.
 
@@ -116,6 +120,8 @@ include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocCreatePrincipal, i
 ----
 
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value.
+
+image::../images/github-secrets-added-2.png[Screenshot of GitHub interface showing the added secrets]
 
 === Updating the Container Apps target port
 
