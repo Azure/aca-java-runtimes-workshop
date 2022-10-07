@@ -19,7 +19,10 @@ rm -rf $TEMPLATE_HOME/CODE_OF_CONDUCT.md
 rm -rf $TEMPLATE_HOME/LICENSE
 rm -rf $TEMPLATE_HOME/SECURITY.md
 rm -rf $TEMPLATE_HOME/SUPPORT.md
+
+### Removing the Workflow files
 rm -rf $TEMPLATE_HOME/.github/workflows/*
+touch $TEMPLATE_HOME/.github/workflows/.gitkeep
 
 ### Removing the Micronaut files
 rm -rf $TEMPLATE_HOME/micronaut-app/target

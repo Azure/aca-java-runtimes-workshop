@@ -1,14 +1,17 @@
-name: Build and deploy Java images
+name: Build and deploy to Azure Container Apps
 
+# Controls when the action will run.
+# We want to run this workflow every time a commit is pushed to the 'main' branch
 on:
   push:
     branches: [main]
-    workflow_dispatch:
+# tag::adocSkipPath[]
     paths:
       - .github/workflows/*.yml
       - micronaut-app/**
       - springboot-app/**
       - quarkus-app/**
+# end::adocSkipPath[]
 
 # tag::adocGitHubActionsWorkflowBase[]
 env:

@@ -1,5 +1,5 @@
 [[deploy]]
-= Deploying the application
+= Deploying the Applications
 
 Now that all our microservices are completed, we need to deploy them to Azure Container Apps. To do this, we'll setup a GitHub Actions CI/CD workflow that will build and deploy our application to Azure Container Apps whenever we push new commits to the main branch of our repository.
 
@@ -25,13 +25,6 @@ Create a new file in your repository with the path `.github/workflows/deploy.yml
 
 [source,yaml]
 ----
-name: Build and deploy to Azure Container Apps
-
-# Controls when the action will run.
-# We want to run this workflow every time a commit is pushed to the 'main' branch
-on:
-  push:
-    branches: [main]
 
 include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocGitHubActionsWorkflowBase]
 ----
