@@ -278,7 +278,7 @@ az containerapp env create \
     --admin-user "$POSTGRES_DB_ADMIN" \
     --admin-password "$POSTGRES_DB_PWD" \
     --database-name "$POSTGRES_DB_SCHEMA" \
-    --querytext "select * from Statistics"
+    --querytext "select * from Statistics_Quarkus"
 # end::adocPostgresSelect[]
 
 # tag::adocPostgresConnectionString[]

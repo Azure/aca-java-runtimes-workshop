@@ -229,7 +229,7 @@ Create the tables using the following command (make sure you are in the reposito
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresTable, indent=0]
 ----
 
-You can execute a SQL statement directly in the database with the following command to check the content of the `Statistics` table (which should be empty at this stage):
+You can execute a SQL statement directly in the database with the following command to check the content of the `Statistics_Quarkus` table (which should be empty at this stage):
 
 [source,shell]
 ----
