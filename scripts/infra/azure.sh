@@ -203,7 +203,7 @@ az containerapp env create \
     --name "$QUARKUS_APP" \
     --environment "$CONTAINERAPPS_ENVIRONMENT" \
     --ingress external \
-    --target-port 80 \
+    --target-port 8701 \
     --min-replicas 0 \
     --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
                QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
@@ -218,7 +218,7 @@ az containerapp env create \
     --name "$MICRONAUT_APP" \
     --environment "$CONTAINERAPPS_ENVIRONMENT" \
     --ingress external \
-    --target-port 80 \
+    --target-port 8702 \
     --min-replicas 0 \
     --env-vars DATASOURCES_DEFAULT_USERNAME="$POSTGRES_DB_ADMIN" \
                DATASOURCES_DEFAULT_PASSWORD="$POSTGRES_DB_PWD" \
@@ -231,7 +231,7 @@ az containerapp env create \
     --name "$SPRING_APP" \
     --environment "$CONTAINERAPPS_ENVIRONMENT" \
     --ingress external \
-    --target-port 80 \
+    --target-port 8703 \
     --min-replicas 0 \
     --env-vars SPRING_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
                SPRING_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
