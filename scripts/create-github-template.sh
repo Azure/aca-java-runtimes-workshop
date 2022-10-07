@@ -19,12 +19,15 @@ rm -rf $TEMPLATE_HOME/CODE_OF_CONDUCT.md
 rm -rf $TEMPLATE_HOME/LICENSE
 rm -rf $TEMPLATE_HOME/SECURITY.md
 rm -rf $TEMPLATE_HOME/SUPPORT.md
-
-### Fix the registry name of the workflow
 rm -rf $TEMPLATE_HOME/.github/workflows/docs.yml
+
+### Fix the registry name of the workflows
 sed 's/javaruntimesregistrysinedied/<YOUR_REGISTRY_URL>/' $TEMPLATE_HOME/.github/workflows/deploy.yml >> $TEMPLATE_HOME/.github/workflows/deploy-new.yml
 rm $TEMPLATE_HOME/.github/workflows/deploy.yml
 mv $TEMPLATE_HOME/.github/workflows/deploy-new.yml $TEMPLATE_HOME/.github/workflows/deploy.yml
+sed 's/javaruntimesregistrysinedied/<YOUR_REGISTRY_URL>/' $TEMPLATE_HOME/.github/workflows/deploy-native.yml >> $TEMPLATE_HOME/.github/workflows/deploy-native-new.yml
+rm $TEMPLATE_HOME/.github/workflows/deploy-native.yml
+mv $TEMPLATE_HOME/.github/workflows/deploy-native-new.yml $TEMPLATE_HOME/.github/workflows/deploy-native.yml
 
 ### Removing the Micronaut files
 rm -rf $TEMPLATE_HOME/micronaut-app/target
