@@ -19,7 +19,7 @@ rm -rf $TEMPLATE_HOME/CODE_OF_CONDUCT.md
 rm -rf $TEMPLATE_HOME/LICENSE
 rm -rf $TEMPLATE_HOME/SECURITY.md
 rm -rf $TEMPLATE_HOME/SUPPORT.md
-rm -rf $TEMPLATE_HOME/.github/workflows/docs.yml
+rm -rf $TEMPLATE_HOME/.github/workflows/*
 
 ### Fix the registry name of the workflows
 sed 's/javaruntimesregistrysinedied/<YOUR_REGISTRY_URL>/' $TEMPLATE_HOME/.github/workflows/deploy.yml >> $TEMPLATE_HOME/.github/workflows/deploy-new.yml
