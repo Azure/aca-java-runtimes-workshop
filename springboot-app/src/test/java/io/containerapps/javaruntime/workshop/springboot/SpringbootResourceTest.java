@@ -96,7 +96,7 @@ public class SpringbootResourceTest {
     }
 // end::adocTestMemory[]
 
-    // tag::adocTestStats[]
+// tag::adocTestStats[]
     @Test
     public void testStats() {
         given()

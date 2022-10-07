@@ -22,6 +22,5 @@ public class SpringbootApplication {
             hints.reflection()
                 .registerType(org.hibernate.dialect.PostgreSQL95Dialect.class, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);
         }
-
     }
 }
