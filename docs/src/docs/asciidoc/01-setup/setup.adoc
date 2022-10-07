@@ -273,8 +273,6 @@ We'll update the container apps with the actual images later.
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocACACreate, indent=0]
 ----
 
-// TODO: other apps!
-
 The `create` command returns the URL for the container apps.
 You can also get the URLs with the following commands:
 
@@ -283,7 +281,7 @@ You can also get the URLs with the following commands:
 include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
 ----
 
-Get these locations amd copy them into a web browser.
+Get these locations and copy them into a web browser.
 You should see the following page:
 
 image::../images/aca-hello.png[Screenshot of the Hello World page from the Azure Container Apps]
