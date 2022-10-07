@@ -17,7 +17,7 @@ to your operation system, and will start much faster than with a JVM.
 
 You can find more information on GraalVM at https://www.graalvm.org/[https://www.graalvm.org/].
 
-As those builds are specific to your OS, you will be able to create a specific one on your machine, but 
+As those builds are specific to your OS, you will be able to create a specific one on your machine, but
 unless you're using Linux, that executable will not work on Docker, or in Azure Container Apps.
 
 In order to have a native executable build on Linux, we will use again GitHub Actions.
@@ -26,7 +26,7 @@ In order to have a native executable build on Linux, we will use again GitHub Ac
 
 We're going to use GraalVM Community Edition, which is free to use.
 
-In order to use GraalVM, you will need to set it up using the instructions available at https://www.graalvm.org/22.2/docs/getting-started/#install-graalvm[https://www.graalvm.org/22.2/docs/getting-started/#install-graalvm]. 
+In order to use GraalVM, you will need to set it up using the instructions available at https://www.graalvm.org/22.2/docs/getting-started/#install-graalvm[https://www.graalvm.org/22.2/docs/getting-started/#install-graalvm].
 
 As you will probably need to set up the JAVA_HOME and the PATH environment variables several times,
 you can set up an alias that would make this easier, for example:
@@ -72,7 +72,7 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-quarkus-native.yml[tag=adocBuild]
+include::{workshop-github-raw}/.github/workflows/deploy-quarkus-native.yml[]
 ----
 
 [TIP]
@@ -108,7 +108,7 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-micronaut-native.yml[tag=adocBuild]
+include::{workshop-github-raw}/.github/workflows/deploy-micronaut-native.yml[]
 ----
 
 [TIP]
@@ -144,7 +144,7 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-springboot-native.yml[tag=adocBuild]
+include::{workshop-github-raw}/.github/workflows/deploy-springboot-native.yml[]
 ----
 
 [TIP]
