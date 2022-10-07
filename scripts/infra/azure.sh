@@ -342,6 +342,30 @@ exportEnvironment() {
     --query "loginServer" \
     --output tsv)
 
+  export QUARKUS_HOST=$(
+    az containerapp show \
+      --name "$QUARKUS_APP" \
+      --resource-group "$RESOURCE_GROUP" \
+      --query "properties.configuration.ingress.fqdn" \
+      --output tsv \
+  )
+
+  export MICRONAUT_HOST=$(
+    az containerapp show \
+      --name "$MICRONAUT_APP" \
+      --resource-group "$RESOURCE_GROUP" \
+      --query "properties.configuration.ingress.fqdn" \
+      --output tsv \
+  )
+
+  export SPRING_HOST=$(
+    az containerapp show \
+      --name "$SPRING_APP" \
+      --resource-group "$RESOURCE_GROUP" \
+      --query "properties.configuration.ingress.fqdn" \
+      --output tsv \
+  )
+
   echo "Exported environment variables for project '${project_name}'."
 }
 

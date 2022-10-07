@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.containerapps.javaruntime.workshop</groupId>
     <artifactId>springboot-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <description>Azure Container Apps and Java Runtimes Workshop :: SpringBoot</description>
     <properties>
         <java.version>17</java.version>
