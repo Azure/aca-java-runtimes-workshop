@@ -29,6 +29,13 @@ Add the following code to the `SpringbootApplication` under the `io/containerapp
 include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplication.java[]
 ----
 
+[NOTE]
+====
+Notice that you need the `registerHints` method for native GraalVM image build (that we will do later).
+This method is used to register the classes that will be used by the application at runtime.
+We are also using an older PostgreSQL release as there is a bug in the latest version that prevents it to work.
+====
+
 The REST resource is defined in the `src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java` file.
 Create this new `SpringbootResource` class under the `io.containerapps.javaruntime.workshop.springboot` package.
 As you can see in the header of the class, the resource is exposed on the `/springboot` path.

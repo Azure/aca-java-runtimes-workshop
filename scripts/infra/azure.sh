@@ -44,7 +44,7 @@ setupRepo() {
 
   AZURE_CREDENTIALS=$(
     az ad sp create-for-rbac \
-      --name="sp-${project_name}" \
+      --name="sp-${PROJECT}-${UNIQUE_IDENTIFIER}" \
       --role="Contributor" \
       --scopes="/subscriptions/$SUBSCRIPTION_ID" \
       --sdk-auth \
@@ -52,11 +52,11 @@ setupRepo() {
   )
 
   REGISTRY_USERNAME=$(
-  az acr credential show \
-    --name "$REGISTRY" \
-    --query "username" \
-    --output tsv
-  )
+    az acr credential show \
+      --name "$REGISTRY" \
+      --query "username" \
+      --output tsv
+    )
 
   REGISTRY_PASSWORD=$(
     az acr credential show \
