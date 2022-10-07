@@ -28,22 +28,22 @@
 			"extensions": [
 				"vscjava.vscode-java-pack",
 				"GitHub.vscode-pull-request-github",
-				"ms-azuretools.vscode-docker"
+				"ms-azuretools.vscode-docker",
+				"asciidoctor.asciidoctor-vscode"
 			]
 		}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [8701, 8702, 8703],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "az config set extension.use_dynamic_install=yes_without_prompt",
+	// "postCreateCommand": "",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"features": {
-		"docker-in-docker": "latest",
-		"azure-cli": "latest",
-		"github-cli": "latest"
+		"git": "os-provided",
+		"docker-in-docker": "latest"
 	}
 }

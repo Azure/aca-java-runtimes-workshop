@@ -299,6 +299,8 @@ az containerapp env create \
 }
 
 exportEnvironment() {
+  echo "Exporting environment variables..." 
+
   export PROJECT="java-runtimes"
   export RESOURCE_GROUP="rg-${PROJECT}"
   export LOCATION="eastus"
