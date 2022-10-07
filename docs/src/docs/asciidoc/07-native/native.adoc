@@ -70,7 +70,10 @@ Now, let's create a GitHub Action that will build a native image of the Quarkus 
 
 First, create a new workflow: create a new file called `.github/workflows/deploy-quarkus-native.yml`:
 
-
+[source,yaml]
+----
+include::{workshop-github-raw}/.github/workflows/deploy-quarkus-native.yml[tag=adocBuild]
+----
 
 [TIP]
 ====
@@ -82,5 +85,72 @@ of the JVM image.
 
 == Native build of the Micronaut application
 
+Let's build a local native build of the Micronaut application.
+
+[source,shell]
+----
+mvn package -Dpackaging=native-image
+----
+
+In your `target` folder, this should create a binary called `./target/micronaut-app`. You can execute it
+directly, for example:
+
+[source,shell]
+----
+./target/./target/micronaut-app
+----
+
+You should see the application starting very fast, and work in a similar way as the JVM build.
+
+Now, let's create a GitHub Action that will build a native image of the Micronaut application, and deploy it.
+
+First, create a new workflow: create a new file called `.github/workflows/deploy-micronaut-native.yml`:
+
+[source,yaml]
+----
+include::{workshop-github-raw}/.github/workflows/deploy-micronaut-native.yml[tag=adocBuild]
+----
+
+[TIP]
+====
+Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier. You use the command `echo $REGISTRY_URL` to get the value of the variable.
+====
+
+You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
+of the JVM image.
+
 == Native build of the Spring Boot application
 
+Let's build a local native build of the Spring Boot application.
+
+[source,shell]
+----
+mvn -Pnative package
+----
+
+In your `target` folder, this should create a binary called `springboot-app`. You can execute it
+directly, for example:
+
+[source,shell]
+----
+./target/springboot-app
+----
+
+You should see the application starting very fast, and work in a similar way as the JVM build.
+
+Now, let's create a GitHub Action that will build a native image of the Spring Boot application, and deploy it.
+
+First, create a new workflow: create a new file called `.github/workflows/deploy-springboot-native.yml`:
+
+[source,yaml]
+----
+include::{workshop-github-raw}/.github/workflows/deploy-springboot-native.yml[tag=adocBuild]
+----
+
+[TIP]
+====
+Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier. You use the command `echo $REGISTRY_URL` to get the value of the variable.
+====
+
+You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
+of the JVM image.
