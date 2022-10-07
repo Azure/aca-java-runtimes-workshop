@@ -9,6 +9,8 @@ In this section you will:
 * Build a GraalVM native image of the Micronaut application, and deploy it
 * Build a GraalVM native image of the Spring Boot application, and deploy it
 
+The 3 native image builds are extremely similar, so don't be surprised if there is some repetition in the instructions.
+
 == What is GraalVM
 
 GraalVM is a new technology, allowing to create a native build of a Java application: your application
