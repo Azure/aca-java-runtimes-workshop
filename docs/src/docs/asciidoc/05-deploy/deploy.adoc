@@ -25,7 +25,6 @@ Create a new file in your repository with the path `.github/workflows/deploy.yml
 
 [source,yaml]
 ----
-
 include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocGitHubActionsWorkflowBase]
 ----
 
