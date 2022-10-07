@@ -1,0 +1,59 @@
+name: Quarkus native image
+
+on:
+  push:
+    branches: [main]
+    workflow_dispatch:
+    paths:
+      - .github/workflows/*.yml
+      - quarkus-app/**
+
+env:
+  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
+  PROJECT: java-runtimes
+  RESOURCE_GROUP: rg-java-runtimes
+
+jobs:
+  build-native:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'latest'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build quarkus-app with GraalVM
+        run: |
+          cd quarkus-app && ./mvnw -Pnative package
+      - name: Build quarkus-app native Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/quarkus-app-native:${{ github.sha }}
+          file: ./quarkus-app/src/main/docker/Dockerfile.native
+          context: ./quarkus-app/
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Deploy quarkus-app native Docker image to Azure Container Apps
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+            
+            az containerapp update \
+              --name quarkus-app \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/quarkus-app-native:${{ github.sha }} \
+              --query "properties.configuration.ingress.fqdn" \
+              --output tsv

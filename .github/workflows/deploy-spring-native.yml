@@ -1,4 +1,4 @@
-name: Build and deploy GraalVM native images
+name: Spring Boot native image
 
 on:
   push:
@@ -6,28 +6,16 @@ on:
     workflow_dispatch:
     paths:
       - .github/workflows/*.yml
-      - micronaut-app/**
       - springboot-app/**
-      - quarkus-app/**
 
 env:
   REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
-  PROJECT: native-runtimes
+  PROJECT: java-runtimes
   RESOURCE_GROUP: rg-java-runtimes
 
 jobs:
   build-native:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: ['quarkus-app', 'micronaut-app', 'springboot-app']
-        include:
-          - app: 'quarkus-app'
-            build-command: 'cd quarkus-app && ./mvnw -Pnative package'
-          - app: 'micronaut-app'
-            build-command: 'cd micronaut-app && ./mvnw package -Dpackaging=native-image'
-          - app: 'springboot-app'
-            build-command: 'cd springboot-app && ./mvnw -Pnative package'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -43,29 +31,29 @@ jobs:
           registry: ${{ env.REGISTRY_URL }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build ${{ matrix.app }} with GraalVM
+      - name: Build springboot-app with GraalVM
         run: |
-          ${{ matrix.build-command }}
-      - name: Build and push ${{ matrix.app }} native image to registry
+          cd springboot-app && ./mvnw -Pnative package
+      - name: Build springboot-app native Docker image
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ matrix.app }}-native:${{ github.sha }}
-          file: ./${{ matrix.app }}/src/main/docker/Dockerfile.native
-          context: ./${{ matrix.app }}/
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }}
+          file: ./springboot-app/src/main/docker/Dockerfile.native
+          context: ./springboot-app/
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Deploy ${{ matrix.app }} native image to Azure Container Apps
+      - name: Deploy springboot-app native Docker image to Azure Container Apps
         uses: azure/CLI@v1
         with:
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
             
             az containerapp update \
-              --name ${{ matrix.app }} \
+              --name springboot-app \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ matrix.app }}-native:${{ github.sha }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }} \
               --query "properties.configuration.ingress.fqdn" \
               --output tsv

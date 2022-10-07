@@ -1,0 +1,61 @@
+name: Micronaut native image
+
+on:
+  push:
+    branches: [main]
+    workflow_dispatch:
+    paths:
+      - .github/workflows/*.yml
+      - micronaut-app/**
+
+env:
+  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
+  PROJECT: java-runtimes
+  RESOURCE_GROUP: rg-java-runtimes
+
+jobs:
+  build-native:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: graalvm/setup-graalvm@v1
+        if: matrix.app != 'spring-app'
+        with:
+          version: 'latest'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build micronaut-app with GraalVM
+        run: |
+          cd micronaut-app && ./mvnw package -Dpackaging=native-image
+      - name: Build micronaut-app native Docker image
+        if: matrix.app != 'spring-app'
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/micronaut-app-native:${{ github.sha }}
+          file: ./micronaut-app/src/main/docker/Dockerfile.native
+          context: ./micronaut-app/
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Deploy micronaut-app native Docker image to Azure Container Apps
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+            
+            az containerapp update \
+              --name micronaut-app \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/micronaut-app-native:${{ github.sha }} \
+              --query "properties.configuration.ingress.fqdn" \
+              --output tsv
