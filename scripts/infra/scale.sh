@@ -44,7 +44,7 @@ if [ "$command" == "setup" ]; then
     --scale-rule-metadata type=Utilization value=10 \
     --min-replicas 1 \
     --max-replicas 10
-# tag::adocAutoScalingCpu[]
+# end::adocAutoScalingCpu[]
 
 # tag::adocAutoScalingMemory[]
   az containerapp update \
@@ -55,7 +55,7 @@ if [ "$command" == "setup" ]; then
     --scale-rule-metadata type=Utilization value=15 \
     --min-replicas 1 \
     --max-replicas 10
-# tag::adocAutoScalingMemory[]
+# end::adocAutoScalingMemory[]
 
   echo "Done."
 

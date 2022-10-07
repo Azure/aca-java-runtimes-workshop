@@ -114,7 +114,7 @@ You should see the following output:
 
 == Setting Up Azure
 
-Ok, now that you have the project built, let's first setup Azure before starting coding our microservices.
+Ok, now that you have the initial project built, let's first setup Azure before starting coding our microservices.
 
 To be able to deploy the application to Azure, you first need an Azure subscription.
 If you don't have one, go to https://azure.microsoft.com/free/[azure.microsoft.com/free] and register.
