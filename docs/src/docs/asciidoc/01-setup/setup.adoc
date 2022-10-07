@@ -100,10 +100,10 @@ You should see the following output:
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary:
 [INFO]
-[INFO] Azure Container Apps and Java Runtimes Workshop :: Micronaut 1.0.0-SNAPSHOT SUCCESS [  5.131 s]
-[INFO] springboot-app 0.0.1-SNAPSHOT ...................... SUCCESS [  1.841 s]
-[INFO] Azure Container Apps and Java Runtimes Workshop 1.0.0-SNAPSHOT SUCCESS [  0.102 s]
-[INFO] Azure Container Apps and Java Runtimes Workshop :: Quarkus 1.0.0-SNAPSHOT SUCCESS [  5.528 s]
+[INFO] Azure Container Apps and Java Runtimes Workshop 1.0.0-SNAPSHOT SUCCESS
+[INFO] Azure Container Apps and Java Runtimes Workshop :: Micronaut 1.0.0-SNAPSHOT SUCCESS
+[INFO] Azure Container Apps and Java Runtimes Workshop :: Springboot 1.0.0-SNAPSHOT  SUCCESS
+[INFO] Azure Container Apps and Java Runtimes Workshop :: Quarkus 1.0.0-SNAPSHOT SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
