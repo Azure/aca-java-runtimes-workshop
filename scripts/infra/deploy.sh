@@ -4,7 +4,7 @@
 # Build & deploy apps manually (for testing)
 # Make sure you have the correct environment variables set. For that, first run: source ./azure.sh env
 ##############################################################################
-# Dependencies: Azure CLI, GitHub CLI, jq
+# Dependencies: Azure CLI, jq
 ##############################################################################
 
 set -e
