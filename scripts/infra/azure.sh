@@ -251,7 +251,7 @@ az containerapp env create \
     --public all \
     --tier "$POSTGRES_TIER" \
     --sku-name "$POSTGRES_SKU" \
-    --storage-size 1024 \
+    --storage-size 256 \
     --version "$POSTGRES_DB_VERSION"
 # end::adocPostgresCreate[]
 

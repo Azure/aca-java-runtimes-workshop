@@ -309,18 +309,19 @@ Create the tables using the following command (make sure you are in the reposito
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresTable, indent=0]
 ----
 
-You can execute a SQL statement directly in the database with the following command to check the content of the `Statistics_Quarkus` table (which should be empty at this stage):
+[NOTE]
+====
+If you get the error `No module named 'psycopg2._psycopg'` that means that some of your Azure CLI dependencies are not correctly installed.
+Check https://github.com/Azure/azure-cli/issues/21998 for help.
+Try removing the `rdbms-connect` extension (`rm -rf ~/.azure/cliextensions/rdbms-connect`) and reinstalling it again (`az extension add --name rdbms-connect`).
+====
+
+You can execute a few SQL statements directly in the database with the following commands to check the content of the three `Statistics` tables (which should be empty at this stage):
 
 [source,shell]
 ----
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresSelect, indent=0]
 ----
-
-[NOTE]
-====
-If you get the error `No module named 'psycopg2._psycopg'` that means that some of your Azure CLI dependencies are not correctly installed.
-Check https://github.com/Azure/azure-cli/issues/21998 for help.
-====
 
 If you'd like to see the connection string to the database (so you can access your database from an external SQL client), use the following command:
 
@@ -332,3 +333,6 @@ include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresConnection
 > **NOTE:**
 >
 > You need to append `ssl=true&sslmode=require` to the end of each connect string to force the driver to use ssl.
+
+That's it for the Azure infrastructure setup.
+Now that we have our Azure Container Apps ready to host our microservices... let's develop our microservices.
