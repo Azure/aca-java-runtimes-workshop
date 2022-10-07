@@ -264,16 +264,17 @@ image::../images/load-testing-jmeter.png[Screenshot of test setup]
 
 3. Now that you are on the "Test plan" tab, you can upload the JMeter file (located under `scripts/jmeter/src/test/jmeter/load.jmx`) as well as the `user.properties` file. 
 +
-The JMeter file sets up a load campaign targetting the "cpu" endpoint.
+The JMeter file sets up a load campaign targetting the various endpoints.
 +
-Before uploading the `user.properties` file, make sure you change the properties so you target the `FightResource` endpoint URL:
+Before uploading the `user.properties` file, make sure you change the properties to match your deployed applications:
 +
 [source,properties]
 ----
-# Change these numbers depending on the load you want to add to the application
-LOOPS=20
-THREADS=2
+LOOPS=50
+THREADS=16
 RAMP=1
+CPU_ITERATIONS=5
+MEMORY_BITES=20
 
 # Put your quarkus host here
 QUARKUS_HOST=quarkus-app.mangodesert-f75fa955.eastus.azurecontainerapps.io
@@ -306,10 +307,14 @@ image::../images/load-testing-metrics.png[Screenshot of test run]
 
 In the Azure portal sidebar, select *Dashboards* and go back to the "_Java Runtimes_" dashboard we created earlier.
 
+[TIP]
+====
+There might be a slight delay before the metrics are visible in the dashboard.
+====
+
 If you take a look at the charts, you can see CPU and memory usage increase, and also that the number of replicas has increased from 1 replica to 10.
 Azure Container Apps has scaled automatically the application depending on the load.
 
-// TODO: update with 3 services
 image::../images/dashboard-scale.png[Screenshot of dashboard showing load testing results]
 
 == Scaling
@@ -348,7 +353,6 @@ Go back to the Azure portal, and search for `lt-java-runtimes` to open again our
 
 Once the test is finished, go back to the "_Java Runtimes_" dashboard and take a look at the number of replicas chart again. You should see that the number of replicas has increased to 10, and that the CPU usage has increased as well.
 
-// TODO
 image::../images/dashboard-scale-cpu.png[Screenshot of dashboard showing CPU scaler results]
 
 [NOTE]
@@ -374,5 +378,12 @@ Again, go back to the Azure portal and run the load tests again. Open the dashbo
 
 You can now compare how the CPU (Quarkus), memory (Micronaut), and HTTP (Spring) triggers behave when scaling the application, under the same load.
 
-// TODO
 image::../images/dashboard-scale-memory.png[Screenshot of dashboard showing CPU scaler results]
+
+As you can see, using different scaling triggers allows to tune the scaling behavior of your application, depending on the type of load you want to handle. Note that you're not limited to only one scaling trigger, you can use multiple triggers at the same time.
+
+[TIP]
+====
+Fine tuning the scaling rules is a key factor to get the best performance/cost ratio for your application.
+You want to make sure that you don't scale too early, and that you don't scale too much to avoid paying for resources that are not needed.
+====
