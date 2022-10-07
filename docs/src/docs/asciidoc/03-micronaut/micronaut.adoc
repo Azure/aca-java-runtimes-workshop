@@ -175,7 +175,7 @@ Make sure you still have Docker up and running and execute:
 
 [source,shell]
 ----
-mvn ......
+mvn mn:run
 ----
 
 In another terminal you can execute the following `curl` commands to invoke the endpoint:
