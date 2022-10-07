@@ -26,7 +26,7 @@ Create the `MicronautApplication` under the `io/containerapps/javaruntime/worksh
 .Bootstrapping Micronaut Class
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautApplication.java[tag=adocHeader]
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautApplication.java[]
 ----
 
 The REST resource is defined in the `MicronautResource` class.
@@ -91,7 +91,7 @@ Let's create them now.
 
 When the database is enabled, the statistics are stored in the database.
 For that we need a `Statistics` entity with a few enumerations that will be mapped to the Postgres database.
-Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` package.
+Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
 
 [[micronaut-listing-entity]]
 .Statistics Entity
