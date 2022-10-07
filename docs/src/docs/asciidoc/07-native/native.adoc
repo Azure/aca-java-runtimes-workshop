@@ -1,3 +1,36 @@
 [[native]]
 = Native
+'''
+
+In this section you will:
+
+* Learn what GraalVM is, and what is a native build
+* Build a GraalVM native image of the Quarkus application, and deploy it
+* Build a GraalVM native image of the Micronaut application, and deploy it
+* Build a GraalVM native image of the Spring Boot application, and deploy it
+
+== What is GraalVM
+
+GraalVM is a new technology, allowing to create a native build of a Java application: your application
+will be compiled to a native executable, and will not need a JVM to run. That executable will be specific
+to your operation system, and will start much faster than with a JVM.
+
+You can find more information on GraalVM at https://www.graalvm.org/[https://www.graalvm.org/].
+
+As those builds are specific to your OS, you will be able to create a specific one on your machine, but 
+unless you're using Linux, that executable will not work on Docker, or in Azure Container Apps.
+
+In order to have a native executable build on Linux, we will use again GitHub Actions.
+
+== Installing GraalVM locally
+
+We're going to use GraalVM Community Edition, available at https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-22.2.0
+
+In order to use GraalVM, you will need to set it up using the instructions available at https://www.graalvm.org/22.2/docs/getting-started/#install-graalvm[https://www.graalvm.org/22.2/docs/getting-started/#install-graalvm]. 
+
+== Native build of the Quarkus application
+
+== Native build of the Micronaut application
+
+== Native build of the Spring Boot application
 
