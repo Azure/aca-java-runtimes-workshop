@@ -105,7 +105,7 @@ This workshop should be as self-explanatory as possible. So your job is to follo
 
 Oh, and be ready to have some fun!
 
-If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: https://azcheck.in/dbe221010.
+If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: {azure-pass-url}.
 Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
 
 image::../images/qrcode-azure-pass.png[]
