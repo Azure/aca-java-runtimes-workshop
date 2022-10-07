@@ -14,7 +14,6 @@ import static org.hamcrest.CoreMatchers.*;
 @Testcontainers
 @MicronautTest
 class MicronautResourceTest {
-// end::adocHeader[]
 
     private static String basePath = "http://localhost:8802/micronaut";
 
@@ -27,6 +26,7 @@ class MicronautResourceTest {
             .withUsername("postgres")
             .withPassword("password");
     }
+// end::adocHeader[]
 
 // tag::adocTestHello[]
     @Test
