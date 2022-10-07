@@ -31,5 +31,4 @@ class MicronautApplicationTest {
     void testItWorks() {
         Assertions.assertTrue(application.isRunning());
     }
-
 }

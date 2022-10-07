@@ -85,8 +85,6 @@ When the database is enabled, the statistics are stored in the database.
 For that we need a `Statistics` entity with a few enumerations that will be mapped to the Postgres database.
 Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/quarkus` package.
 
-[[quarkus-listing-statistics-entity-1]]
-
 [[quarkus-listing-entity]]
 .Statistics Entity
 [source,indent=0]
@@ -173,7 +171,7 @@ include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaru
 Let's also create a simple test to make sure the statistics are stored in the database.
 
 [[quarkus-listing-test-5]]
-.Testing the Memory Endpoint
+.Testing Retrieving the Statistics from the Database
 [source,indent=0]
 ----
 include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestStats]
@@ -239,3 +237,5 @@ You can check the content of the database with:
 curl 'localhost:8701/quarkus/stats' | jq
 ----
 
+That's it for the Quarkus application.
+Now, let's move to the Micronaut application.
