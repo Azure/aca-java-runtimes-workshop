@@ -1,0 +1,66 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+    workflow_dispatch:
+
+env:
+  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
+  PROJECT: native-runtimes
+  RESOURCE_GROUP: rg-java-runtimes
+
+jobs:
+  build-native:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: ['quarkus-app', 'micronaut-app', 'springboot-app']
+        include:
+          - app: 'quarkus-app'
+            build-command: 'cd quarkus-app && ./mvnw -Pnative package'
+          - app: 'micronaut-app'
+            build-command: 'cd micronaut-app && ./mvnw package -Dpackaging=native-image'
+          - app: 'springboot-app'
+            build-command: 'cd springboot-app && ./mvnw -Pnative package'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'latest'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build ${{ matrix.app }} with GraalVM
+        run: |
+          ${{ matrix.build-command }}
+      - name: Build and push ${{ matrix.app }} native image to registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ matrix.app }}-native:${{ github.sha }}
+          file: ./${{ matrix.app }}/src/main/docker/Dockerfile.native
+          context: ./${{ matrix.app }}/
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Deploy ${{ matrix.app }} native image to Azure Container Apps
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+            
+            az containerapp update \
+              --name ${{ matrix.app }} \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ matrix.app }}-native:${{ github.sha }} \
+              --query "properties.configuration.ingress.fqdn" \
+              --output tsv
