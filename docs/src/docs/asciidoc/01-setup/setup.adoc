@@ -298,6 +298,10 @@ Create the database with the following command (this one will take a few minutes
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresCreate, indent=0]
 ----
 
+At this stage, if you go back to the http://portal.azure.com[Azure Portal] you'll see the database deployed as well as the 3 container apps.
+
+image::../images/azure-rg-2.png[Screenshot of Azure Portal showing the database and apps]
+
 Now that we have our database setup, it's time to create the tables.
 We'll use a database initialization SQL file for that.
 Thanks to Azure CLI, we can execute these SQL scripts directly in our newly created database.

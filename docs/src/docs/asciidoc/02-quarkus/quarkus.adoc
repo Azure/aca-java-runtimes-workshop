@@ -13,6 +13,9 @@ In this section you will:
 * Run the application locally
 * Check a few metrics locally
 
+When you created your repository from the GitHub template, you should have a directory called `quarkus-app` in your current directory.
+This is the root of the Quarkus microservice source code that we will be using in this section.
+
 == The Quarkus REST Resource
 
 The Quarkus application is a simple REST resource that exposes a single endpoint to consume memory and CPU.

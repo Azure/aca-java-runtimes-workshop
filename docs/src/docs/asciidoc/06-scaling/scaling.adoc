@@ -39,7 +39,7 @@ When you know memory usage you are better prepared to answer the following quest
 One of the first thing you usually want to do once your application is deployed is to configure monitoring.
 We'll use the https://portal.azure.com[Azure portal] to create a nice dashboard for monitoring our application metrics.
 
-Open the Azure portal and navigate to the resource group `rg-java-runtimes` you created for your application. Select the `quarkus-app` container app, then select *Metrics* from the left menu, under the *Monitoring* group.
+Open the http://portal.azure.com[Azure Portal] and navigate to the resource group `rg-java-runtimes` you created for your application. Select the `quarkus-app` container app, then select *Metrics* from the left menu, under the *Monitoring* group.
 
 image::../images/aca-metrics.png[Screenshot of the Azure portal showing the metrics panel for the container app]
 
@@ -70,7 +70,7 @@ We'll also add charts to monitor the memory usage and number of replicas of our 
 
 Select *Add chart* and repeat the same steps as before to create a chart with "_Memory Working Set Bytes_" metrics and another one with the "_Replica Count_" metric. Don't forget to save them to the dashboard we created earlier!
 
-When you're finished, in the Azure portal sidebar select *Dashboards* and choose the "_Java Runtimes_" dashboard we created earlier.
+When you're finished, in the http://portal.azure.com[Azure Portal] sidebar select *Dashboards* and choose the "_Java Runtimes_" dashboard we created earlier.
 
 image::../images/dashboard-select.png[Screenshot of Azure portal dashboard selection]
 
@@ -80,13 +80,13 @@ image::../images/dashboard-scale.png[Screenshot of dashboard showing metrics for
 
 == Logs
 
-The Azure portal also provides a nice interface to view the logs of your application. This is crucial to troubleshoot issues when something goes wrong.
+The http://portal.azure.com[Azure Portal] also provides a nice interface to view the logs of your application. This is crucial to troubleshoot issues when something goes wrong.
 
 You have multiple options to view the different logs of your application:
 
 - You can connect to a given container apps instance and gets the stream of console logs. This is useful to troubleshoot issues with a specific instance of your application in real time.
 
-- You can also access the console logs in Azure portal. You get access to all logs from the https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview[Log Analytics] workspace we created earlier. Using SQL-like queries, you can filter the logs and get the information you need across all your applications, revisions, and instances.
+- You can also access the console logs in http://portal.azure.com[Azure Portal]. You get access to all logs from the https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview[Log Analytics] workspace we created earlier. Using SQL-like queries, you can filter the logs and get the information you need across all your applications, revisions, and instances.
 
 - Finally, you also have access to the _system logs_, which are the logs of the container host. It's very useful to troubleshoot issues with the container host itself and find out why your container is not running.
 
@@ -120,9 +120,9 @@ curl https://${QUARKUS_HOST}/quarkus/cpu?iterations=10
 
 === Viewing the console logs in Azure portal
 
-You can also access the console logs in Azure portal. Using https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview[Log Analytics], you get access to all logs from all your applications, revisions, and instances. This means you can troubleshoot issues across all your applications, tracing requests as needed, which is crucial if your application use a microservices architecture.
+You can also access the console logs in http://portal.azure.com[Azure Portal]. Using https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview[Log Analytics], you get access to all logs from all your applications, revisions, and instances. This means you can troubleshoot issues across all your applications, tracing requests as needed, which is crucial if your application use a microservices architecture.
 
-Open the Azure portal and navigate to the resource group `rg-java-runtimes` you created for your application. Select the `logs-java-runtimes` container app, then select *Logs* from the left menu, under the *General* group.
+Open the http://portal.azure.com[Azure Portal] and navigate to the resource group `rg-java-runtimes` you created for your application. Select the `logs-java-runtimes` container app, then select *Logs* from the left menu, under the *General* group.
 
 By default, you are presented a list of pre-defined queries. Close this panel by clicking on the *X* button on the top right corner, as we'll create our own query.
 
@@ -248,7 +248,7 @@ image::../images/load-testing-create.png[Azure Load Testing creation screen]
 5. Select **Review + Create**, then **Create**.
 
 Creating a load testing resource can take a few moment.
-Once created, you should see the Azure Load Testing available in your resource group: 
+Once created, you should see the Azure Load Testing available in your resource group:
 
 image::../images/load-testing-group.png[Screenshot of Azure Load Testing in Resource group]
 
@@ -258,11 +258,11 @@ image::../images/load-testing-create-test.png[Screenshot of test creation]
 
 1. You can either create a quick load test using a wizard, or create a load test using a JMeter script. Choose this second option.
 
-2. Before uploading a JMeter script, create a load test by entering a name (eg. "_Add some load!_"), a description and select **Next**: 
+2. Before uploading a JMeter script, create a load test by entering a name (eg. "_Add some load!_"), a description and select **Next**:
 +
 image::../images/load-testing-jmeter.png[Screenshot of test setup]
 
-3. Now that you are on the "Test plan" tab, you can upload the JMeter file (located under `scripts/jmeter/src/test/jmeter/load.jmx`) as well as the `user.properties` file. 
+3. Now that you are on the "Test plan" tab, you can upload the JMeter file (located under `scripts/jmeter/src/test/jmeter/load.jmx`) as well as the `user.properties` file.
 +
 The JMeter file sets up a load campaign targetting the various endpoints.
 +
@@ -305,7 +305,7 @@ When the test run finishes, you will get some metrics:
 
 image::../images/load-testing-metrics.png[Screenshot of test run]
 
-In the Azure portal sidebar, select *Dashboards* and go back to the "_Java Runtimes_" dashboard we created earlier.
+In the http://portal.azure.com[Azure Portal] sidebar, select *Dashboards* and go back to the "_Java Runtimes_" dashboard we created earlier.
 
 [TIP]
 ====
@@ -349,7 +349,7 @@ include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocAutoScalingCpu, in
 
 This will automatically scale out the application when the CPU usage is above 10% (we set it low deliberately to make it easy to go up).
 
-Go back to the Azure portal, and search for `lt-java-runtimes` to open again our load testing instance. Select *Tests* in the left sidebar, open the test we created earlier and select *Run* to run the load tests again.
+Go back to the http://portal.azure.com[Azure Portal], and search for `lt-java-runtimes` to open again our load testing instance. Select *Tests* in the left sidebar, open the test we created earlier and select *Run* to run the load tests again.
 
 Once the test is finished, go back to the "_Java Runtimes_" dashboard and take a look at the number of replicas chart again. You should see that the number of replicas has increased to 10, and that the CPU usage has increased as well.
 
@@ -374,7 +374,7 @@ include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocAutoScalingMemory,
 
 This will automatically scale out the application when the memory usage is above 15% (we set it low deliberately to make it easy to go up).
 
-Again, go back to the Azure portal and run the load tests again. Open the dashboard when the test is finished, and take a look at the number of replicas chart again.
+Again, go back to the http://portal.azure.com[Azure Portal] and run the load tests again. Open the dashboard when the test is finished, and take a look at the number of replicas chart again.
 
 You can now compare how the CPU (Quarkus), memory (Micronaut), and HTTP (Spring) triggers behave when scaling the application, under the same load.
 

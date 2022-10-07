@@ -13,6 +13,9 @@ In this section you will:
 * Run the application locally
 * Check a few metrics locally
 
+In your repository you should have a directory called `springboot-app-app` .
+This is the root of the SpringBoot microservice source code that we will be using in this section.
+
 == The SpringBoot REST Resource
 
 The SpringBoot application is a simple REST resource that exposes a single endpoint to consume memory and CPU.
