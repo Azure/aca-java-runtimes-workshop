@@ -119,7 +119,7 @@ To create a new Service Principal, run the following commands:
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]
 ----
 
-Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value.
+Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value (copy the entire JSon).
 
 image::../images/github-secrets-added-2.png[Screenshot of GitHub interface showing the added secrets]
 
@@ -134,7 +134,7 @@ Run the following commands to update the target ports:
 include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]
 ----
 
-If you want you can have a look at the Azure Portal to check that the target port has been updated.
+If you want you can have a look at the https://portal.azure.com[Azure portal] to check that the target port has been updated.
 
 image::../images/portal-update-port.png[Screenshot of Azure Portal showing the updated target port]
 
@@ -144,6 +144,12 @@ Now that we've defined our workflow and prepared everything, we can run it to de
 Commit and push your changes to your repository, and go to the `Actions` tab of your repository to see the workflow running. It should take a few minutes to complete.
 
 image::../images/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
+
+If you want, you can check the Registry in the https://portal.azure.com[Azure portal].
+You will see that the images have been pushed to the registry.
+You can even check the content of the images by clicking on the `Tags` tab.
+
+image::../images/portal-registry.png[Screenshot of Azure Portal showing the container registry]
 
 === Testing the deployed application
 
