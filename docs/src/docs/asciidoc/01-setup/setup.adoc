@@ -9,11 +9,12 @@ This includes:
 
 == Using the GitHub Template
 
-Open https://github.com/Azure/aca-java-runtimes-workshop[this GitHub repository] and click on `Use this template`.
+Open {template-github-url}[this GitHub repository,window=_blank] and click on `Use this template`.
 
 image::../images/github-template.png[Screenshot of GitHub showing the "Use this template" button]
 
-You will be redirected to the repository creation page. Enter a name for your new repository, set the repo visibility to `public` and click on `Create repository from template`.
+You will be redirected to the repository creation page.
+Select the owner of the repository, enter a name for your new repository (eg. `aca-java-runtimes-workshop`), set the repo visibility to `public` and click on `Create repository from template`.
 
 Once the repository is created, clone it locally using git.
 
@@ -54,6 +55,8 @@ docker --version
 az --version
 ----
 
+If everything is installed correctly, you should see the version of each tool.
+
 == Setting Up Your VSCode Environment
 
 If you have VS Code and Docker installed on your machine, the quickest way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers[dev container] of the template project.
@@ -79,9 +82,42 @@ Once the container is ready, you will see the following message in the bottom ri
 
 image::../images/vscode-connected.png[]
 
+== Building the Inital Project
+
+No matter if you have installed the tools manually or used the dev container, you can now build the initial project.
+Go to the directory where you cloned the repository and build the code with the following Maven command:
+
+[source,shell]
+----
+cd <your_repo_url>
+mvn install
+----
+
+You should see the following output:
+
+[source,shell]
+----
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Azure Container Apps and Java Runtimes Workshop :: Micronaut 1.0.0-SNAPSHOT SUCCESS [  5.131 s]
+[INFO] springboot-app 0.0.1-SNAPSHOT ...................... SUCCESS [  1.841 s]
+[INFO] Azure Container Apps and Java Runtimes Workshop 1.0.0-SNAPSHOT SUCCESS [  0.102 s]
+[INFO] Azure Container Apps and Java Runtimes Workshop :: Quarkus 1.0.0-SNAPSHOT SUCCESS [  5.528 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.097 s
+[INFO] Finished at: 2022-10-07T09:46:16+02:00
+[INFO] ------------------------------------------------------------------------
+----
+
 == Setting Up Azure
 
-To be able to deploy the application to Azure, you first need an Azure subscription. If you don't have one, go to https://azure.microsoft.com/free/[azure.microsoft.com/free] and register.
+Ok, now that you have the project built, let's first setup Azure before starting coding our microservices.
+
+To be able to deploy the application to Azure, you first need an Azure subscription.
+If you don't have one, go to https://azure.microsoft.com/free/[azure.microsoft.com/free] and register.
 
 [NOTE]
 ====

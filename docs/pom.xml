@@ -73,6 +73,7 @@
                         <!-- ============= -->
                         <workshop-url>https://azure.github.io/aca-java-runtimes-workshop/</workshop-url>
                         <workshop-github-url>https://github.com/Azure/aca-java-runtimes-workshop</workshop-github-url>
+                        <template-github-url>https://github.com/Azure/aca-java-runtimes-workshop-template</template-github-url>
                         <workshop-github-issue>https://github.com/Azure/aca-java-runtimes-workshop/issues</workshop-github-issue>
                         <workshop-github-clone>https://github.com/Azure/aca-java-runtimes-workshop.git</workshop-github-clone>
                         <workshop-github-raw>https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main</workshop-github-raw>
