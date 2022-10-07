@@ -72,7 +72,7 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-quarkus-native.yml[tag=adocBuild]
+include::{workshop-github-raw}/.github/workflows/deploy-quarkus-native.yml[]
 ----
 
 [TIP]
@@ -108,7 +108,7 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-micronaut-native.yml[tag=adocBuild]
+include::{workshop-github-raw}/.github/workflows/deploy-micronaut-native.yml[]
 ----
 
 [TIP]
@@ -144,7 +144,7 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-springboot-native.yml[tag=adocBuild]
+include::{workshop-github-raw}/.github/workflows/deploy-springboot-native.yml[]
 ----
 
 [TIP]
