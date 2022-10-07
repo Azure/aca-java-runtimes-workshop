@@ -65,7 +65,7 @@
                         <toclevels>3</toclevels>
                         <toc>left</toc>
                         <!-- Java -->
-                        <jdk-version>11</jdk-version>
+                        <jdk-version>17</jdk-version>
                         <maven-version>3.8.x</maven-version>
                         <docker-version>20.x</docker-version>
                         <!-- ============= -->
