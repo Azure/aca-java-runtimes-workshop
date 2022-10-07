@@ -51,6 +51,9 @@ setupRepo() {
       --only-show-errors
   )
 
+  echo $AZURE_CREDENTIALS
+  # end::adocCreatePrincipal[]
+
   REGISTRY_USERNAME=$(
     az acr credential show \
       --name "$REGISTRY" \
@@ -64,9 +67,6 @@ setupRepo() {
       --query "passwords[0].value" \
       --output tsv
   )
-
-  echo $AZURE_CREDENTIALS
-  # end::adocCreatePrincipal[]
 
   echo "Retrieving GitHub repository URL..."
   remote_repo=$(git config --get remote.origin.url)
