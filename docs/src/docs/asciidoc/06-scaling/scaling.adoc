@@ -275,14 +275,14 @@ image::../images/portal-create-resource-load-testing.png[Screenshot of searching
 
 1.
 Select *Create*:
-+
+
 image::../images/load-testing-create.png[Azure Load Testing creation screen]
 
 2.
 In the **Resource group** field, select the `rg-java-runtimes` that we created previously.
 
 3.
-Set the name `lt-java-runtimes` for the load testing instance.
+Set the name `lt-java-runtimes-<Your unique identifier>` for the load testing instance (the name has to be unique).
 
 4.
 Set the location to match our previously created resources (East US).
@@ -304,18 +304,16 @@ You can either create a quick load test using a wizard, or create a load test us
 Choose this second option.
 
 2.
-Before uploading a JMeter script, create a load test by entering a name (eg.
-"_Add some load!_"), a description and select **Next**:
-+
+Before uploading a JMeter script, create a load test by entering a name (eg. "_Add some load_"), a description and click on the "Test plan" tab:
+
 image::../images/load-testing-jmeter.png[Screenshot of test setup]
 
 3.
 Now that you are on the "Test plan" tab, you can upload the JMeter file (located under `scripts/jmeter/src/test/jmeter/load.jmx`) as well as the `user.properties` file.
-+
-The JMeter file sets up a load campaign targetting the various endpoints.
-+
-Before uploading the `user.properties` file, make sure you change the properties to match your deployed applications:
-+
+The JMeter file sets up a load campaign targeting the various endpoints.
+
+But before uploading the `user.properties` file, make sure you change the properties (`QUARKUS_HOST`, `SPRING_HOST` and `MICRONAUT_HOST`) to match your deployed applications:
+
 [source,properties]
 ----
 LOOPS=50
@@ -325,24 +323,24 @@ CPU_ITERATIONS=5
 MEMORY_BITES=20
 
 # Put your quarkus host here
-QUARKUS_HOST=quarkus-app.mangodesert-f75fa955.eastus.azurecontainerapps.io
+QUARKUS_HOST=<Your QUARKUS_HOST>
 QUARKUS_PROTOCOL=https
 QUARKUS_PORT=443
 
 # Put your spring host here
-SPRING_HOST=springboot-app.mangodesert-f75fa955.eastus.azurecontainerapps.io
+SPRING_HOST=<Your SPRING_HOST>
 SPRING_PROTOCOL=https
 SPRING_PORT=443
 
 # Put your micronaut host here
 MICRONAUT_PROTOCOL=https
-MICRONAUT_HOST=micronaut-app.mangodesert-f75fa955.eastus.azurecontainerapps.io
+MICRONAUT_HOST=<Your MICRONAUT_HOST>
 MICRONAUT_PORT=443
 ----
 
 4.
 Select *Upload*, and choose "_User properties_" in the *File relevance* field of the `user.properties` file.
-+
+
 image::../images/load-testing-upload.png[Screenshot of test plan setup]
 
 5.
