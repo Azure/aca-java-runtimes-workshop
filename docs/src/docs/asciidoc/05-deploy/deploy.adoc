@@ -134,6 +134,10 @@ Run the following commands to update the target ports:
 include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]
 ----
 
+If you want you can have a look at the Azure Portal to check that the target port has been updated.
+
+image::../images/portal-update-port.png[Screenshot of Azure Portal showing the updated target port]
+
 === Running the workflow
 
 Now that we've defined our workflow and prepared everything, we can run it to deploy our application to Azure Container Apps.
