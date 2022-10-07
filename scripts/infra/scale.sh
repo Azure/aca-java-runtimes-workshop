@@ -92,12 +92,14 @@ elif [ "$command" == "restore" ]; then
 elif [ "$command" == "ping" ]; then
 
   echo "Pinging apps..."
+# tag::adocPingApps[]  
   curl https://${QUARKUS_HOST}/quarkus
   echo 
   curl https://${MICRONAUT_HOST}/micronaut
   echo 
   curl https://${SPRING_HOST}/springboot
   echo 
+# end::adocPingApps[]
 
 else
   showUsage

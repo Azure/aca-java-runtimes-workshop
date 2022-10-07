@@ -157,7 +157,5 @@ Then we can use `curl` to test our apps:
 
 [source,shell]
 ----
-curl https://${QUARKUS_HOST}/quarkus
-curl https://${MICRONAUT_HOST}/micronaut
-curl https://${SPRING_HOST}/springboot
+include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocPingApps, indent=0]
 ----
