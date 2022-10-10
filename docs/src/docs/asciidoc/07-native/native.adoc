@@ -174,7 +174,8 @@ You can now `git push` your changes, and this new workflow should build a native
 
 == Native Build of the Spring Boot Application
 
-Now that we have our Quarkus and Micronaut native applications running, let's build a local native build for the the Spring Boot application.
+Now that we have our Quarkus and Micronaut native applications running, let's build a local native build for the Spring Boot application.
+Go to the `springboot-app` directory and execute the following command:
 
 [source,shell]
 ----
@@ -182,15 +183,24 @@ mvn -Pnative package
 ----
 
 In your `target` folder, this should create a binary called `springboot-app`.
-You can execute it
-directly, for example:
+Make sure you have the Postgres database still up and running, and execute:
 
 [source,shell]
 ----
 ./target/springboot-app
 ----
 
-You should see the application starting very fast, and work in a similar way as the JVM build.
+You should see the application starting faster than its JVM counter part.
+Execute the following curl commands to make sure it works:
+
+[source,shell]
+----
+curl 'localhost:8703/springboot'
+
+curl 'localhost:8703/springboot/cpu?iterations=10&db=true&desc=java17'
+
+curl 'localhost:8703/springboot/memory?bites=10&db=true&desc=java17'
+----
 
 === Deploying the Native Build of the Spring Boot Application
 
@@ -209,8 +219,7 @@ Don't forget to replace the value of the `REGISTRY_URL` environment variable wit
 Use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
 
-You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
-of the JVM image.
+You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead of the JVM image.
 
 == Load Testing the Native Images
 
