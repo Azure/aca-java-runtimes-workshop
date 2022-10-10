@@ -199,7 +199,7 @@ All the tests should pass and you should see the following output:
 == Running the Application Locally
 
 Now that the tests are all green, let's execute the application locally and execute a few `curl` commands.
-Make sure you still have Docker up and running and execute:
+Make sure you still have Docker up and running and execute the following command under the `quarkus-app` directory:
 
 [source,shell]
 ----
