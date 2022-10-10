@@ -163,3 +163,7 @@ You use the command `echo $REGISTRY_URL` to get the value of the variable.
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
 of the JVM image.
+
+== Load Testing the Native Images
+
+== Monitoring the Native Images
