@@ -124,7 +124,9 @@ Let's now create the same workflow for the Micronaut and SpringBoot applications
 
 == Native Build of the Micronaut Application
 
+Now, Let's do the same for Micronaut.
 Let's build a local native build of the Micronaut application.
+Go to the `micronaut-app` directory and execute the following command:
 
 [source,shell]
 ----
@@ -132,21 +134,30 @@ mvn package -Dpackaging=native-image
 ----
 
 In your `target` folder, this should create a binary called `./target/micronaut-app`.
-You can execute it
-directly, for example:
+You can execute it with the following command (make sure the Postgres database is running `docker compose -f postgres.yaml up`):
 
 [source,shell]
 ----
-./target/./target/micronaut-app
+./target/micronaut-app
 ----
 
 You should see the application starting very fast, and work in a similar way as the JVM build.
+Execute the following curl commands to make sure it works:
+
+[source,shell]
+----
+curl 'localhost:8702/micronaut'
+
+curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'
+
+curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'
+----
 
 === Deploying the Native Build of the Micronaut Application
 
 Now, let's create a GitHub Action that will build a native image of the Micronaut application, and deploy it.
 
-First, create a new workflow: create a new file called `.github/workflows/deploy-micronaut-native.yml`:
+Create a new workflow in the `.github/workflows/deploy-micronaut-native.yml` file:
 
 [source,yaml]
 ----
@@ -159,12 +170,11 @@ Don't forget to replace the value of the `REGISTRY_URL` environment variable wit
 Use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
 
-You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
-of the JVM image.
+You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead of the JVM image.
 
 == Native Build of the Spring Boot Application
 
-Let's build a local native build of the Spring Boot application.
+Now that we have our Quarkus and Micronaut native applications running, let's build a local native build for the the Spring Boot application.
 
 [source,shell]
 ----
