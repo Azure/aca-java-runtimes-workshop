@@ -44,7 +44,7 @@ You can also create https://learn.microsoft.com/azure/azure-monitor/essentials/m
 
 image::../images/standard-metrics.png[Screenshot of the Azure portal showing the list of standard metrics]
 
-Select "_CPU Usage_" from the list of metrics, choose "_Max_" for the *Aggregation* and select the last 30 minutes hours for the time range (in the top right of the panel).
+Select "_CPU Usage_" from the list of metrics, choose "_Max_" for the *Aggregation* and select the last 30 minutes for the time range (in the top right of the panel).
 You can see the CPU and memory usage for your application.
 
 image::../images/metrics-cpu.png[Screenshot of the Azure portal showing the list of standard metrics]
