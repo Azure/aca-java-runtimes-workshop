@@ -235,7 +235,10 @@ You can check the content of the database with:
 
 [source,shell]
 ----
-curl 'localhost:8701/quarkus/stats' | jq
+curl 'localhost:8701/quarkus/stats'
+
+# or if you have "jq" installed you can make it prettier with
+# curl 'localhost:8701/quarkus/stats' | jq
 ----
 
 That's it for the Quarkus application.

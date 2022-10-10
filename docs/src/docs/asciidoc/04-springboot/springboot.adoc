@@ -266,7 +266,10 @@ You can check the content of the database with:
 
 [source,shell]
 ----
-curl 'localhost:8703/springboot/stats' | jq
+curl 'localhost:8703/springboot/stats'
+
+# or if you have "jq" installed you can make it prettier with
+# curl 'localhost:8703/springboot/stats' | jq
 ----
 
 That's it.

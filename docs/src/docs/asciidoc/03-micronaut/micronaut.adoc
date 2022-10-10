@@ -259,7 +259,10 @@ You can check the content of the database with:
 
 [source,shell]
 ----
-curl 'localhost:8702/micronaut/stats' | jq
+curl 'localhost:8702/micronaut/stats'
+
+# or if you have "jq" installed you can make it prettier with
+# curl 'localhost:8702/micronaut/stats' | jq
 ----
 
 That's it for the Micronaut application.
