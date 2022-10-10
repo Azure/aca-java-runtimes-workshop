@@ -9,6 +9,7 @@ on:
       - springboot-app/**
 
 env:
+  # Replace with your registry URL
   REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
   PROJECT: java-runtimes
   RESOURCE_GROUP: rg-java-runtimes
