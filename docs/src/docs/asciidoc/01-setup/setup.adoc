@@ -40,12 +40,14 @@ If you decide not to use VSCode and DevContainers, you will need to install the 
 |===
 | Java {jdk-version}       | https://learn.microsoft.com/java/openjdk/download[Get OpenJDK]
 | Maven {maven-version}    | https://maven.apache.org/download.cgi[Get Maven]
-| Docker {docker-version}  |  https://docs.docker.com/get-docker/[Get Docker]
+| Docker {docker-version}  |  https://docs.docker.com/get-docker[Get Docker]
 | Azure CLI                | https://learn.microsoft.com/cli/azure/install-azure-cli#install[Get Azure CLI]
 | Git                      | https://git-scm.com
 | GitHub account           | https://github.com/join
-| Azure account            | https://azure.microsoft.com/free/[Get a free Azure account]
+| Azure account            | https://azure.microsoft.com/free[Get a free Azure account]
 | A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download[Get VS Code]
+| cURL (or any other HTTP client) | https://curl.se/download.html[Get cURL]
+| jq     | https://stedolan.github.io/jq/download[Get jq]
 |===
 
 You can test your installation by running the following commands:
@@ -56,6 +58,9 @@ java -version
 mvn --version
 docker --version
 az --version
+git --version
+curl --version
+jq --version
 ----
 
 If everything is installed correctly, you should see the version of each tool.
