@@ -132,6 +132,8 @@ include::{workshop-github-raw}/quarkus-app/src/main/resources/application.proper
 
 Now, to make sure that the application works as expected, we need to write some tests.
 For that, we will use https://quarkus.io/guides/getting-started-testing[Quarkus Test Framework] that is based on https://junit.org/junit5/[JUnit 5] and use https://github.com/rest-assured/rest-assured[RESTAssured].
+Behind the scene, Quarkus uses https://www.testcontainers.org[TestContainers] with its https://quarkus.io/guides/dev-services[DevServices] feature.
+That's why we need Docker to run the tests and run the application.
 
 Create the `QuarkusResourceTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/quarkus` package.
 Then, add the following to the header of the class.
@@ -180,7 +182,7 @@ Let's also create a simple test to make sure the statistics are stored in the da
 include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestStats]
 ----
 
-Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a Postgres database) and run them with the following command:
+Now that you have your tests methods, make sure you have *Docker Desktop up and running* (as it needs to start a Postgres database) and run them with the following command (the first Quarkus test can take a while as TestContainers needs to download the Postgres image):
 
 [source,shell]
 ----
