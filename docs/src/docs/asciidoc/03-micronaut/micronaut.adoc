@@ -38,6 +38,7 @@ As you can see in the header of the class, the resource is exposed on the `/micr
 [source,indent=0]
 ----
 include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocHeader]
+}
 ----
 
 Let's add a `hello` method returning _Hello World_ so we can quickly check if our endpoint responds or not.
@@ -156,6 +157,7 @@ Create the `MicronautResourceTest` class under the same package that `MicronautA
 [source,indent=0]
 ----
 include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocHeader]
+}
 ----
 
 First, let's write a test to check that the `hello` method returns the right _Hello World_ string.

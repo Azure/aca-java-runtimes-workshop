@@ -93,7 +93,7 @@ image::../images/vscode-connected.png[]
 == Building the Initial Project
 
 No matter if you have installed the tools manually or used the dev container, you can now build the initial project.
-Go to the directory where you cloned the repository and build the code with the following Maven command:
+Go to the directory where you cloned the repository and build the code with the following Maven command (careful, the first invocation of `mvn install` can take a while):
 
 [source,shell]
 ----
@@ -181,9 +181,9 @@ Let's first set a few environment variables that will help us in creating the Az
 
 [IMPORTANT]
 ====
-Some resources in Azure need to have a unique name across the globe (for example Azure Registry).
+Some resources in Azure need to have a unique name across the globe (for example Azure Registry or Azure Load Testing).
 For that, we use the `UNIQUE_IDENTIFIER` environment variable to make sure we don't have any name collision.
-If you are developping in your local machine, the `UNIQUE_IDENTIFIER` will be your username (which is not totally unique, but it's a good start).
+If you are developing in your local machine, the `UNIQUE_IDENTIFIER` will be your username (which is not totally unique, but it's a good start).
 On the other hand, if you're using the DevContainer, you must manually set this to a unique value (like your name) to avoid conflicts with other users
 So, if you use DevContainer, make sure to set the `UNIQUE_IDENTIFIER` environment variable to a unique value.
 ====
@@ -235,14 +235,14 @@ In the next chapters we will be creating Docker containers and pushing them to t
 https://azure.microsoft.com/products/container-registry/[Azure Container Registry] is a private registry for hosting container images.
 Using the Azure Container Registry, you can store Docker-formatted images for all types of container deployments.
 
-First, let's created an Azure Container Registry with the following command:
+First, let's created an Azure Container Registry with the following command (notice that we create the registry with admin rights `--admin-enabled true` which is not suited for real production):
 
 [source,shell]
 ----
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistry, indent=0]
 ----
 
-Update the repository to allow anonymous users to pull the images:
+Update the repository to allow anonymous users to pull the images (this is optional but can be useful if you want other attendees to deploy to your registry):
 
 [source,shell]
 ----

@@ -29,6 +29,7 @@ As you can see, it is a JAX-RS resource that is exposed on the `/quarkus` path.
 [source,indent=0]
 ----
 include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocHeader]
+}
 ----
 
 Let's add a `hello` method returning _Hello World_ so we can quickly check if our endpoint responds or not.
@@ -140,6 +141,7 @@ Then, add the following to the header of the class.
 [source,indent=0]
 ----
 include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocHeader]
+}
 ----
 
 First, let's write a test to check that the `hello` method returns the right _Hello World_ string.
