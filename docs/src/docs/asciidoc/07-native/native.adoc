@@ -117,10 +117,10 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 include::{workshop-github-raw}/.github/workflows/deploy-micronaut-native.yml[]
 ----
 
-[TIP]
+[WARNING]
 ====
 Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
-You use the command `echo $REGISTRY_URL` to get the value of the variable.
+Use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
@@ -155,10 +155,10 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 include::{workshop-github-raw}/.github/workflows/deploy-springboot-native.yml[]
 ----
 
-[TIP]
+[WARNING]
 ====
 Don't forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
-You use the command `echo $REGISTRY_URL` to get the value of the variable.
+Use the command `echo $REGISTRY_URL` to get the value of the variable.
 ====
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead
