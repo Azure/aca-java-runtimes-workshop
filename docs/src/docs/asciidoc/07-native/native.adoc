@@ -246,6 +246,6 @@ Once the load tests are done, let's take a look at the results.
 
 In the Azure Portal, select the *Dashboard* in the side menu, and select the "Java Runtimes" dashboard we created earlier.
 
-You should now see the results of the load tests for the native images, and you can compare them to the results of the JVM images.
+You should now see the results of the load tests for the native images, and you can compare them to the previous results of the JVM images.
 
-//image::../images/java-runtimes-dashboard-native.png[Screenshot of the Java Runtimes dashboard]
+image::../images/java-runtimes-dashboard-native.png[Screenshot of the Java Runtimes dashboard with JVM vs native tests]
