@@ -90,7 +90,7 @@ Once the container is ready, you will see the following message in the bottom ri
 
 image::../images/vscode-connected.png[]
 
-== Building the Inital Project
+== Building the Initial Project
 
 No matter if you have installed the tools manually or used the dev container, you can now build the initial project.
 Go to the directory where you cloned the repository and build the code with the following Maven command:
@@ -149,6 +149,19 @@ Make sure you are using the right subscription with:
 ----
 az account show
 ----
+
+[NOTE]
+====
+If you have several Azure subscription, make sure you are using the right one.
+For that, you can execute the following command to list all your subscriptions and set the one you want to use:
+
+[source,shell]
+----
+az login
+az account list --output table
+az account set --subscription ${SUBSCRIPTION}
+----
+====
 
 Now we'll configure the CLI to automatically install extensions when needed.
 The Azure CLI is extensible, some commands are part of the core, but others are provided by extensions, such as the `az containerapp` command we'll be using later.
