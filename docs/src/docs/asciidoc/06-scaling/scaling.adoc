@@ -411,7 +411,7 @@ image::../images/dashboard-scale-cpu.png[Screenshot of dashboard showing CPU sca
 [NOTE]
 ====
 When using either the _CPU_ or _Memory usage_ triggers, the minimum number of replicas will always be 1.
-Only the HTTP trigger allows you to scale to 0.
+Use HTTP or event based triggers to allow scaling to 0.
 ====
 
 === Scaling based on memory usage
