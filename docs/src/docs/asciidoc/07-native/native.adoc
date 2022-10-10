@@ -221,6 +221,31 @@ Use the command `echo $REGISTRY_URL` to get the value of the variable.
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead of the JVM image.
 
+[NOTE]
+====
+Building native images is very resource intensive, so it will take some time for all GitHub workflows to complete. Take a short break, you earned it 🙂!
+====
+
 == Load Testing the Native Images
 
+After all your native images are built and deployed, let's run our load tests again.
+
+In the Azure Portal, search for `lt-java-runtimes` and select the Azure Load Testing instance we created before.
+
+image::../images/search-load-testing.png[Search for the Load Testing instance]
+
+Select *Tests* in the left menu, then select the test we created earlier.
+
+image::../images/load-testing-run.png[Screenshot of the Load Testing interface showing the "run" button]
+
+Click *Run* to start the tests again.
+
 == Monitoring the Native Images
+
+Once the load tests are done, let's take a look at the results.
+
+In the Azure Portal, select the *Dashboard* in the side menu, and select the "Java Runtimes" dashboard we created earlier.
+
+You should now see the results of the load tests for the native images, and you can compare them to the results of the JVM images.
+
+//image::../images/java-runtimes-dashboard-native.png[Screenshot of the Java Runtimes dashboard]
