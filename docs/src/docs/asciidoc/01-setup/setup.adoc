@@ -214,6 +214,20 @@ So, if you use DevContainer, make sure to set the `UNIQUE_IDENTIFIER` environmen
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocEnvironmentVariables, indent=0]
 ----
 
+[NOTE]
+====
+Notice that we are using a specific location.
+This means that all the Azure resources that we are creating will be created in the same location.
+Depending on your geographical location, the resources might be created in different datacenters closer to you.
+If you want to know the list of available locations, you can execute the following command:
+
+[source,shell]
+----
+az account list-locations --query "[].name"
+----
+
+====
+
 Now let's create the Azure resources.
 
 === Resource Group
