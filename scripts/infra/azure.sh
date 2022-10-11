@@ -92,7 +92,7 @@ createInfrastructure() {
 # tag::adocEnvironmentVariables[]
   PROJECT="java-runtimes"
   RESOURCE_GROUP="rg-${PROJECT}"
-  LOCATION="eastus"
+  LOCATION="northeurope"
   TAG="java-runtimes"
 
   LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
@@ -156,8 +156,7 @@ createInfrastructure() {
 # end::adocLogAnalyticsSecrets[]
 
 # tag::adocRegistry[]
-  # This command should only be needed if you're using an Azure Pass subscription.
-  az provider register --namespace microsoft.insights
+  az provider register --namespace microsoft.insights --wait
 
   az acr create \
     --resource-group "$RESOURCE_GROUP" \
@@ -189,7 +188,6 @@ createInfrastructure() {
 # end::adocRegistryShow[]
 
 # tag::adocACAEnv[]
-# This command should only be needed if you're using an Azure Pass subscription.
 az provider register -n Microsoft.App --wait
 
 az containerapp env create \
