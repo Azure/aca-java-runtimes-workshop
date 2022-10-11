@@ -206,7 +206,7 @@ Some resources in Azure need to have a unique name across the globe (for example
 For that, we use the `UNIQUE_IDENTIFIER` environment variable to make sure we don't have any name collision.
 If you are developing in your local machine, the `UNIQUE_IDENTIFIER` will be your username (which is not totally unique, but it's a good start).
 On the other hand, if you're using the DevContainer, you must manually set this to a unique value (like your name) to avoid conflicts with other users
-So, if you use DevContainer, make sure to set the `UNIQUE_IDENTIFIER` environment variable to a unique value.
+So, if you use DevContainer, make sure to set the `UNIQUE_IDENTIFIER` environment variable to a unique value (in lower case).
 ====
 
 [source,shell]
