@@ -47,6 +47,7 @@ If you decide not to use VSCode and DevContainers, you will need to install the 
 | Azure account            | https://azure.microsoft.com/free[Get a free Azure account]
 | A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download[Get VS Code]
 | cURL (or any other HTTP client) | https://curl.se/download.html[Get cURL]
+| GraalVM (optional)       | https://www.graalvm.org/downloads[Get GraalVM]
 | jq (optional)            | https://stedolan.github.io/jq/download[Get jq]
 |===
 
