@@ -156,6 +156,10 @@ createInfrastructure() {
 # end::adocLogAnalyticsSecrets[]
 
 # tag::adocRegistry[]
+  # This command should only be needed if you're using an
+  # Azure Pass subscription.
+  az provider register --namespace microsoft.insights
+
   az acr create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
