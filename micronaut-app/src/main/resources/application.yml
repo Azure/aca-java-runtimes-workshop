@@ -3,6 +3,7 @@ micronaut:
     name: MicronautApp
   server:
     port: 8702
+    thread-selection: IO
 netty:
   default:
     allocator:
