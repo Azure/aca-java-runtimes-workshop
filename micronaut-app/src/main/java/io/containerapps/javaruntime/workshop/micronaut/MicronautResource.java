@@ -5,6 +5,7 @@ import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
+import org.hibernate.AssertionFailure;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -13,11 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import static java.lang.System.Logger.Level.INFO;
+import static java.lang.invoke.MethodHandles.*;
 
 @Controller("/micronaut")
 public class MicronautResource {
 
-    private final System.Logger LOGGER = System.getLogger(this.getClass().getName());
+    private static final System.Logger LOGGER = System.getLogger(lookup().lookupClass().getName());
 
     private final StatisticsRepository repository;
 
@@ -28,7 +30,7 @@ public class MicronautResource {
 
     /**
      * Says hello.
-     * <code>curl 'localhost:8702/micronaut'</code>
+     * {@code curl 'localhost:8702/micronaut'}
      *
      * @return hello
      */
@@ -42,10 +44,10 @@ public class MicronautResource {
 
     /**
      * Simulates requests that use a lot of CPU.
-     * <code>curl 'localhost:8702/micronaut/cpu'</code>
-     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10'</code>
-     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10&db=true'</code>
-     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'</code>
+     * {@code curl 'localhost:8702/micronaut/cpu'}
+     * {@code curl 'localhost:8702/micronaut/cpu?iterations=10'}
+     * {@code curl 'localhost:8702/micronaut/cpu?iterations=10&db=true'}
+     * {@code curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'}
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
@@ -69,6 +71,7 @@ public class MicronautResource {
                 try {
                     Thread.sleep(20);
                 } catch (InterruptedException ie) {
+                    throw new AssertionError(ie);
                 }
             }
             iterations--;
@@ -93,10 +96,10 @@ public class MicronautResource {
 
     /**
      * Simulates requests that use a lot of memory.
-     * <code>curl 'localhost:8702/micronaut/memory'</code>
-     * <code>curl 'localhost:8702/micronaut/memory?bites=10'</code>
-     * <code>curl 'localhost:8702/micronaut/memory?bites=10&db=true'</code>
-     * <code>curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'</code>
+     * {@code curl 'localhost:8702/micronaut/memory'}
+     * {@code curl 'localhost:8702/micronaut/memory?bites=10'}
+     * {@code curl 'localhost:8702/micronaut/memory?bites=10&db=true'}
+     * {@code curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'}
      *
      * @param bites the number of megabytes to eat
      * @return the result.
@@ -112,7 +115,7 @@ public class MicronautResource {
         if (bites == null) {
             bites = 1;
         }
-        HashMap hunger = new HashMap<>();
+        HashMap<Integer, byte[]> hunger = new HashMap<>();
         for (int i = 0; i < bites * 1024 * 1024; i += 8192) {
             byte[] bytes = new byte[8192];
             hunger.put(i, bytes);
