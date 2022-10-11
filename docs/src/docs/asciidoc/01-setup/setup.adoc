@@ -66,6 +66,12 @@ jq --version
 
 If everything is installed correctly, you should see the version of each tool.
 
+[WARNING]
+====
+If you are on Windows, you will need to either install the Windows Subsystem for Linux (WSL) and use a Linux distribution (eg. Ubuntu), or use DevContainers.
+https://learn.microsoft.com/en-us/windows/wsl/install[Follow the instruction to install WSL] on Windows.
+====
+
 == Setting Up Your VSCode Environment
 
 If you have VS Code and Docker installed on your machine, the quickest way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers[dev container] of the template project.
