@@ -277,7 +277,7 @@ First, let's created an Azure Container Registry with the following command (not
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistry, indent=0]
 ----
 
-Update the repository to allow anonymous users to pull the images (this is optional but can be useful if you want other attendees to deploy to your registry):
+Update the repository to allow anonymous users to pull the images:
 
 [source,shell]
 ----
