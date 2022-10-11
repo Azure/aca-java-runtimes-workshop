@@ -126,6 +126,7 @@ mvn compile
 
 We need to configure the default Postgres database and Hibernate ORM.
 We also need this service to be exposed on the port 8702 (different port from the Quarkus application).
+Notice that we use non-blocking threads (`thread-selection: IO`).
 Add the following to the `src/main/resources/application.yml` file.
 
 [[micronaut-listing-config]]
