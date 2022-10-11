@@ -133,6 +133,14 @@ You should see the following output:
 [INFO] ------------------------------------------------------------------------
 ----
 
+[WARNING]
+====
+If `mvn install` doesn't manage to download the dependencies, you might need to configure your proxy settings or you might have a different `settings.xml`.
+Check if you have a file called `settings.xml` in your `~/.m2` directory.
+If you do, check if it contains a `<proxies>` section and if it's the right one.
+If you are not sure, try removing (or renaming) the `settings.xml` file and try again doing a `mvn install`.
+====
+
 == Setting Up Azure
 
 Ok, now that you have the initial project built, let's first setup Azure before starting coding our microservices.
