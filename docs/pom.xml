@@ -76,7 +76,7 @@
                         <template-github-url>https://github.com/Azure/aca-java-runtimes-workshop-template</template-github-url>
                         <workshop-github-issue>https://github.com/Azure/aca-java-runtimes-workshop/issues</workshop-github-issue>
                         <workshop-github-clone>https://github.com/Azure/aca-java-runtimes-workshop.git</workshop-github-clone>
-                        <workshop-github-raw>https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main</workshop-github-raw>
+                        <workshop-github-raw>../../../../..</workshop-github-raw>
                         <azure-pass-url>https://azcheck.in/dbe221010</azure-pass-url>
                     </attributes>
                 </configuration>
