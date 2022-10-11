@@ -156,8 +156,7 @@ createInfrastructure() {
 # end::adocLogAnalyticsSecrets[]
 
 # tag::adocRegistry[]
-  # This command should only be needed if you're using an
-  # Azure Pass subscription.
+  # This command should only be needed if you're using an Azure Pass subscription.
   az provider register --namespace microsoft.insights
 
   az acr create \
@@ -190,6 +189,9 @@ createInfrastructure() {
 # end::adocRegistryShow[]
 
 # tag::adocACAEnv[]
+# This command should only be needed if you're using an Azure Pass subscription.
+az provider register -n Microsoft.App --wait
+
 az containerapp env create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
