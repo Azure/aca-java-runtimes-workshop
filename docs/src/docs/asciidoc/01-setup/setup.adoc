@@ -21,12 +21,12 @@ Once the repository is created, clone it locally using git.
 
 1.
 Select the **Code** button, then copy your repository url.
-+
+
 image::../images/github-clone.png[Screenshot of GitHub showing the repository URL]
 
 2.
 Open a terminal and run:
-+
+
 [source,shell]
 ----
 git clone <your_repo_url>
