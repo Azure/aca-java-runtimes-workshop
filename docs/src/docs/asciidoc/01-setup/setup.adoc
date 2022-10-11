@@ -68,14 +68,11 @@ If everything is installed correctly, you should see the version of each tool.
 
 [WARNING]
 ====
-If you are on Windows, you will need to either install the Windows Subsystem for Linux (WSL) and use a Linux distribution (eg. Ubuntu), or use DevContainers.
-https://learn.microsoft.com/en-us/windows/wsl/install[Follow the instruction to install WSL] on Windows.
-Here a snipped of a Windows script to setup the environment variables:
-
-[source,shell]
-----
-include::{workshop-github-raw}/scripts/infra/azure.cmd[]
-----
+If you are on Windows, you will need to run *bash* commands. You have multiples way to do that:
+- Use the *Git Bash* command line that comes with Git. Open the start menu, and search for "Git Bash".
+- Install the *Windows Subsystem for Linux* (WSL) with a Linux distribution (eg. Ubuntu). You can follow the instructions https://learn.microsoft.com/en-us/windows/wsl/install[here].
+- Use *Visual Studio Code* with the dev container setup.
+ on Windows.
 ====
 
 == Setting Up Your VSCode Environment
