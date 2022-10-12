@@ -114,7 +114,7 @@ createInfrastructure() {
   POSTGRES_DB_ADMIN="javaruntimesadmin"
   POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
   POSTGRES_DB_VERSION="13"
-  POSTGRES_SKU="Standard_B2s"
+  POSTGRES_SKU="Standard_B1ms"
   POSTGRES_TIER="Burstable"
   POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
   POSTGRES_DB_SCHEMA="stats"
