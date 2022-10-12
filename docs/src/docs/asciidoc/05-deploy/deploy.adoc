@@ -138,6 +138,30 @@ To create a new Service Principal, run the following commands:
 include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]
 ----
 
+[IMPORTANT]
+====
+If you're on windows and using *Git Bash*, you might run into an error when running the previous command.
+In that case, run instead the following command using the regular *Windows Command Prompt* (`cmd.exe`)  to get your service principal.
+
+[source,shell]
+----  
+az account show ^
+  --query id ^
+  --output tsv ^
+  --only-show-errors > sub_id
+set /p SUBSCRIPTION_ID=<sub_id
+del sub_id
+
+REM Don't forget to update the unique identifier!
+az ad sp create-for-rbac ^
+  --name="sp-java-runtimes-UNIQUE_IDENTIFIER" ^
+  --role="Contributor" ^
+  --scopes="/subscriptions/%SUBSCRIPTION_ID%" ^
+  --sdk-auth ^
+  --only-show-errors
+----
+====
+
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value (copy the entire JSon).
 
 image::../images/github-secrets-added-2.png[Screenshot of GitHub interface showing the added secrets]
