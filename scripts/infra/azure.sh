@@ -89,6 +89,13 @@ cleanupRepo() {
 createInfrastructure() {
   echo "Preparing environment '${environment}' of project '${project_name}'..."
 
+# tag::adocSetupAzCli[]
+  az config set extension.use_dynamic_install=yes_without_prompt
+  az provider register --namespace Microsoft.App
+  az provider register --namespace Microsoft.OperationalInsights
+  az provider register --namespace Microsoft.Insights
+# end::adocSetupAzCli[]
+
 # tag::adocEnvironmentVariables[]
   PROJECT="java-runtimes"
   RESOURCE_GROUP="rg-${PROJECT}"
@@ -156,8 +163,6 @@ createInfrastructure() {
 # end::adocLogAnalyticsSecrets[]
 
 # tag::adocRegistry[]
-  az provider register --namespace microsoft.insights --wait
-
   az acr create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \
@@ -188,8 +193,6 @@ createInfrastructure() {
 # end::adocRegistryShow[]
 
 # tag::adocACAEnv[]
-az provider register -n Microsoft.App --wait
-
 az containerapp env create \
     --resource-group "$RESOURCE_GROUP" \
     --location "$LOCATION" \

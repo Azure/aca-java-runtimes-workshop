@@ -181,12 +181,12 @@ az account set --subscription ${SUBSCRIPTION}
 ----
 ====
 
-Now we'll configure the CLI to automatically install extensions when needed.
+Now we'll configure the CLI to automatically install extensions when needed, and allow the different resource providers to be used in your subscription.
 The Azure CLI is extensible, some commands are part of the core, but others are provided by extensions, such as the `az containerapp` command we'll be using later.
 
 [source,shell]
 ----
-az config set extension.use_dynamic_install=yes_without_prompt
+include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocSetupAzCli, indent=0]
 ----
 
 == Creating the Azure Resources
