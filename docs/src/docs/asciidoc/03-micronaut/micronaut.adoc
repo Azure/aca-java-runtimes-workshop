@@ -140,11 +140,11 @@ include::{workshop-github-raw}/micronaut-app/src/main/resources/application.yml[
 
 Now, to make sure that the application works as expected, we need to write some tests.
 Remember that the tests need a Postgres database to run.
-For that, we need to configure TestContainers in a separate class (`MicronautApplicationTest`)
+For that, we need to configure Testcontainers in a separate class (`MicronautApplicationTest`)
 Create the `MicronautApplicationTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` package.
 
 [[micronaut-listing-test]]
-.Test Class Configuring TestContainers
+.Test Class Configuring Testcontainers
 [source,indent=0]
 ----
 include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautApplicationTest.java[]
