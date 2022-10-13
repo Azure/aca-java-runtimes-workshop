@@ -124,7 +124,9 @@ You will end up with something like this:
 image::../images/github-secrets-added.png[Screenshot of GitHub interface showing the added secrets]
 
 [TIP]
+====
 You can also use the https://cli.github.com[GitHub CLI] to define your secrets, using the command `gh secret set <MY_SECRET> -b"<SECRET_VALUE>" -R <repository_url>`.
+====
 
 ==== Creating an Azure Service Principal
 
@@ -144,7 +146,7 @@ If you're on windows and using *Git Bash*, you might run into an error when runn
 In that case, run instead the following command using the regular *Windows Command Prompt* (`cmd.exe`)  to get your service principal.
 
 [source,shell]
-----  
+----
 az account show ^
   --query id ^
   --output tsv ^

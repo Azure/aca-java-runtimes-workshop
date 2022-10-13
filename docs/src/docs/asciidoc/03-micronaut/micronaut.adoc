@@ -1,5 +1,5 @@
 [[micronaut]]
-= Micronaut
+= Developing the Micronaut Application
 
 '''
 

@@ -1,4 +1,4 @@
-= Azure Container Apps and Java Runtimes Workshop
+= Java Runtimes and Azure Container Apps Workshop
 Antonio Goncalves, Julien Dubois, Yohan Lasorsa
 :revnumber: {project-version}
 :example-caption!:
@@ -7,8 +7,8 @@ Antonio Goncalves, Julien Dubois, Yohan Lasorsa
 include::00-welcome/welcome.adoc[leveloffset=+1]
 <<<
 
-// Setup
-include::01-setup/setup.adoc[leveloffset=+1]
+// Setup the Project
+include::01-setup-project/setup-project.adoc[leveloffset=+1]
 <<<
 
 // Quarkus
@@ -23,18 +23,22 @@ include::03-micronaut/micronaut.adoc[leveloffset=+1]
 include::04-springboot/springboot.adoc[leveloffset=+1]
 <<<
 
+// Setup Azure
+include::05-setup-azure/setup-azure.adoc[leveloffset=+1]
+<<<
+
 // Deploy
-include::05-deploy/deploy.adoc[leveloffset=+1]
+include::06-deploy/deploy.adoc[leveloffset=+1]
 <<<
 
 // Scaling
-include::06-scaling/scaling.adoc[leveloffset=+1]
+include::07-scaling/scaling.adoc[leveloffset=+1]
 <<<
 
 // Native
-include::07-native/native.adoc[leveloffset=+1]
+include::08-native/native.adoc[leveloffset=+1]
 <<<
 
 // Conclusion
-include::08-conclusion/conclusion.adoc[leveloffset=+1]
+include::09-conclusion/conclusion.adoc[leveloffset=+1]
 <<<

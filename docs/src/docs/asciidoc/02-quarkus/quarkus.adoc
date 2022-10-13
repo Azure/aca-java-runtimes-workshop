@@ -1,5 +1,5 @@
 [[quarkus]]
-= Quarkus
+= Developing the Quarkus Application
 
 '''
 

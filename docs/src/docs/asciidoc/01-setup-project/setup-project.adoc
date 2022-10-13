@@ -1,0 +1,147 @@
+[[setup-project]]
+= Setting Up the Project
+
+Before starting the development, you need to set up the project.
+This includes:
+
+* Creating a new project on GitHub based on an existing GitHub template
+* Setting up your development environment, either by installing all the needed tools manually, or installing a few tools and relying on VSCode and Dev Containers (easier as everything is set up for you).
+
+== Using the GitHub Template
+
+Open {template-github-url}[this GitHub repository,window=_blank] and click on `Use this template`.
+
+image::../images/github-template.png[Screenshot of GitHub showing the "Use this template" button]
+
+You will be redirected to the repository creation page.
+Select the owner of the repository, enter a name for your new repository (eg.
+`aca-java-runtimes-workshop`), set the repo visibility to `public` and click on `Create repository from template`.
+
+Once the repository is created, clone it locally using git.
+
+1.
+Select the **Code** button, then copy your repository url.
+
+image::../images/github-clone.png[Screenshot of GitHub showing the repository URL]
+
+2.
+Open a terminal and run:
+
+[source,shell]
+----
+git clone <your_repo_url>
+----
+
+== Setting Up Your Development Environment Manually
+
+If you decide not to use VSCode and Dev Containers, you will need to install the following tools:
+
+[cols="1,1"]
+|===
+| Java {jdk-version}       | https://learn.microsoft.com/java/openjdk/download[Get OpenJDK]
+| Maven {maven-version}    | https://maven.apache.org/download.cgi[Get Maven]
+| Docker {docker-version}  |  https://docs.docker.com/get-docker[Get Docker]
+| Azure CLI                | https://learn.microsoft.com/cli/azure/install-azure-cli#install[Get Azure CLI]
+| Git                      | https://git-scm.com
+| GitHub account           | https://github.com/join
+| Azure account            | https://azure.microsoft.com/free[Get a free Azure account]
+| A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download[Get VS Code]
+| cURL (or any other HTTP client) | https://curl.se/download.html[Get cURL]
+| GraalVM (optional)       | https://www.graalvm.org/downloads[Get GraalVM]
+| jq (optional)            | https://stedolan.github.io/jq/download[Get jq]
+|===
+
+You can test your installation by running the following commands:
+
+[source,shell]
+----
+java -version
+mvn --version
+docker --version
+az --version
+git --version
+curl --version
+jq --version
+----
+
+If everything is installed correctly, you should see the version of each tool.
+
+[WARNING]
+====
+If you are on Windows, you will need to run *bash* commands.
+You have multiples way to do that:
+
+* Use the *Git Bash* command line that comes with Git. Open the start menu, and search for "Git Bash".
+* Install the *Windows Subsystem for Linux* (WSL) with a Linux distribution (eg. Ubuntu).
+You can follow the instructions https://learn.microsoft.com/en-us/windows/wsl/install[here].
+* Use *Visual Studio Code* with the Dev Containers setup (see below).
+====
+
+== Setting Up Your VSCode Environment
+
+If you have VS Code and Docker installed on your machine, the quickest way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers[Dev Containers] of the template project.
+Install the https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack[Remote Development extension] in VS Code, and skip to the next section.
+
+[TIP]
+====
+You can learn more about Dev Containers in https://learn.microsoft.com/shows/beginners-series-to-dev-containers/[this video series].
+https://containers.dev[Check the website] and https://github.com/devcontainers/spec[the specification] if you want to know all the details of Dev Containers.
+====
+
+image::../images/vscode-install.png[Screenshot of the VSCode Marketplace showing the Remote Development extension]
+
+Click on the green *Install* button.
+This opens VSCode on the plugin page, ready to install the Remote Development extension.
+Click on *Install*
+Then, open your project in VSCode.
+Open the *Command Palette* (View -> Command Palette) and enter "Rebuild and Reopen in Container".
+
+image::../images/vscode-command-pallette.png[]
+
+The first time it will take some time to download and setup the container image, meanwhile you can go ahead and read the next sections.
+
+image::../images/vscode-install-containers.png[]
+
+Once the container is ready, you will see the following message in the bottom right corner of VSCode:
+
+image::../images/vscode-connected.png[]
+
+== Building the Initial Project
+
+No matter if you have installed the tools manually or used the Dev Containers, you can now build the initial project.
+Go to the directory where you cloned the repository and build the code with the following Maven command (careful, the first invocation of `mvn install` can take a while):
+
+[source,shell]
+----
+cd <your_repo_url>
+mvn install
+----
+
+You should see the following output:
+
+[source,shell]
+----
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Azure Container Apps and Java Runtimes Workshop 1.0.0-SNAPSHOT SUCCESS
+[INFO] Azure Container Apps and Java Runtimes Workshop :: Micronaut 1.0.0-SNAPSHOT SUCCESS
+[INFO] Azure Container Apps and Java Runtimes Workshop :: Springboot 1.0.0-SNAPSHOT  SUCCESS
+[INFO] Azure Container Apps and Java Runtimes Workshop :: Quarkus 1.0.0-SNAPSHOT SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.097 s
+[INFO] Finished at: 2022-10-07T09:46:16+02:00
+[INFO] ------------------------------------------------------------------------
+----
+
+[WARNING]
+====
+If `mvn install` doesn't manage to download the dependencies, you might need to configure your proxy settings, or you might have a different `settings.xml`.
+Check if you have a file called `settings.xml` in your `~/.m2` directory.
+If you do, check if it contains a `<proxies>` section and if it's the right one.
+If you are not sure, try removing (or renaming) the `settings.xml` file and try again doing a `mvn install`.
+====
+
+Now that you have your development environment setup and that you can build the initial code, let's develop our three microservices.

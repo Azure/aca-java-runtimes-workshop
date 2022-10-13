@@ -1,11 +1,11 @@
-[[setup]]
-= Setting Up the Project
+[[setup-azure]]
+= Setting Up Azure
 
 Before starting the development, you need to setup the project.
 This includes:
 
 * Creating a new project on GitHub based on an existing GitHub template
-* Setting up your development environment, either by installing all the needed tools manually, or installing a few tools and relying on VSCode and DevContainers (easier as everything is setup for you).
+* Setting up your development environment, either by installing all the needed tools manually, or installing a few tools and relying on VSCode and Dev Containers (easier as everything is setup for you).
 
 == Using the GitHub Template
 
@@ -34,7 +34,7 @@ git clone <your_repo_url>
 
 == Setting Up Your Development Environment Manually
 
-If you decide not to use VSCode and DevContainers, you will need to install the following tools:
+If you decide not to use VSCode and Dev Containers, you will need to install the following tools:
 
 [cols="1,1"]
 |===
@@ -71,16 +71,19 @@ If everything is installed correctly, you should see the version of each tool.
 If you are on Windows, you will need to run *bash* commands. You have multiples way to do that:
 - Use the *Git Bash* command line that comes with Git. Open the start menu, and search for "Git Bash".
 - Install the *Windows Subsystem for Linux* (WSL) with a Linux distribution (eg. Ubuntu). You can follow the instructions https://learn.microsoft.com/en-us/windows/wsl/install[here].
-- Use *Visual Studio Code* with the dev container setup.
+- Use *Visual Studio Code* with the Dev Containers setup.
  on Windows.
 ====
 
 == Setting Up Your VSCode Environment
 
-If you have VS Code and Docker installed on your machine, the quickest way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers[dev container] of the template project.
+If you have VS Code and Docker installed on your machine, the quickest way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers[Dev Containers] of the template project.
 Install the https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack[Remote Development extension] in VS Code, and skip to the next section.
 
-TIP: You can learn more about dev containers in https://learn.microsoft.com/shows/beginners-series-to-dev-containers/[this video series].
+[TIP]
+====
+You can learn more about Dev Containers in https://learn.microsoft.com/shows/beginners-series-to-dev-containers/[this video series].
+====
 
 image::../images/vscode-install.png[Screenshot of the VSCode Marketplace showing the Remote Development extension]
 
@@ -102,7 +105,7 @@ image::../images/vscode-connected.png[]
 
 == Building the Initial Project
 
-No matter if you have installed the tools manually or used the dev container, you can now build the initial project.
+No matter if you have installed the tools manually or used the Dev Containers, you can now build the initial project.
 Go to the directory where you cloned the repository and build the code with the following Maven command (careful, the first invocation of `mvn install` can take a while):
 
 [source,shell]
@@ -202,8 +205,8 @@ Let's first set a few environment variables that will help us in creating the Az
 Some resources in Azure need to have a unique name across the globe (for example Azure Registry or Azure Load Testing).
 For that, we use the `UNIQUE_IDENTIFIER` environment variable to make sure we don't have any name collision.
 If you are developing in your local machine, the `UNIQUE_IDENTIFIER` will be your username (which is not totally unique, but it's a good start).
-On the other hand, if you're using the DevContainer, you must manually set this to a unique value (like your name) to avoid conflicts with other users
-So, if you use DevContainer, make sure to set the `UNIQUE_IDENTIFIER` environment variable to a unique value (in lower case).
+On the other hand, if you're using the Dev Containers, you must manually set this to a unique value (like your name) to avoid conflicts with other users
+So, if you use Dev Containers, make sure to set the `UNIQUE_IDENTIFIER` environment variable to a unique value (in lower case).
 ====
 
 [source,shell]

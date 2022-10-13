@@ -1,5 +1,5 @@
 [[springboot]]
-= Spring Boot
+= Developing the Spring Boot Application
 
 '''
 

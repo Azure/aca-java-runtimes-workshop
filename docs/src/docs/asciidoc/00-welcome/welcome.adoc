@@ -15,6 +15,7 @@ What you are going to do:
 * Create your own GitHub Repo based on a GitHub Template
 * Develop one microservice that consumes CPU and memory with Quarkus, another one with SpringBoot and Micronaut
 * Compile, package and containerize these microservices
+* Run these microservices locally on your machine
 * Create an Azure Container Apps environment
 * Deploy your containers to Azure Container Apps
 * Execute and monitor the microservices using different performance parameters
@@ -76,8 +77,7 @@ image::../images/welcome-develop.png[]
 
 Once developed and tested locally, you will be packaging your microservices in Docker containers and deploy them to Azure Container Apps:
 
-* You will first create an Azure Container Apps environment (a.k.a.
-_ACA_) in Azure
+* You will first create an Azure Container Apps environment (a.k.a. _ACA_) in Azure
 * You will create a managed Postgres database in Azure (one single database for all 3 microservices but one table per microservice)
 * You will create an Azure Registry to manage the Docker images
 * You will package each microservice in Docker images and configure them so they can connect to the Postgres database
@@ -86,26 +86,29 @@ _ACA_) in Azure
 
 image::../images/welcome-deploy.png[]
 
-=== How Does This Workshop Work?
+=== Structure of the Workshop
 
 You have this material in your hands, and you can now follow it step by step.
-The structure of this workshop is as follow :
+The structure of this workshop is as follows:
 
-1.
-_Installing all the needed tools_: in this section, you will install all the tools and code to be able to bundle, package and deploy our application.
-
-2.
-_Setup Azure resources_: this section introduces Azure and the Container Apps service to prepare all the needed resources for our application.
+* _Setting Up the Project_:
+In this section, you will install all the tools and code to be able to bundle, package and deploy our application.
+* _Developing the Quarkus Application_:
+In this section, you will develop a microservice using Quarkus, test it and run it locally.
+* _Developing the Micronaut Application_:
+In this section, you will develop a microservice using Micronaut.
+* _Developing the Spring Boot Application_:
+In this section, you will develop a microservice using Spring Boot.
+* _Setting Up Azure_:
+This section introduces Azure and the Container Apps service to prepare all the needed resources for our application.
 You will create an entire infrastructure on Azure (Container Registry, Postgres database, etc.) to make everything ready for deployment.
-
-3.
-_Running the Applications Locally_: in this section, you will build Docker images out of our microservices, execute them locally with Docker compose, push them to Azure Registry, all that using Docker and Azure CLI.
-
-4.
-_Setup CI/CD and deploy application_: in this section, you will setup a CI/CD pipeline using GitHub Actions so that our application builds and deploy automatically on new commits.
-
-5.
-_Monitoring_: in this section, you will add some load to your microservices, monitor them, scale them, check the logs, etc.
+* _Deploying the Applications_:
+In this section, you will set up a CI/CD pipeline using GitHub Actions so that our application builds and deploy automatically on new commits.
+You will build Docker images out of our microservices, push them to Azure Registry, all that using Docker and Azure CLI.
+* _Load Testing, Scaling and Monitoring the Applications_:
+In this section, you will add some load to your microservices, monitor them, scale them, check the logs, etc.
+* _Going Native_:
+In this section you will compile your microservices with GraalVM, package them, deploy them on ACA, and see how it impacts the performance.
 
 === What Do You Have to Do?
 
@@ -114,10 +117,10 @@ So your job is to follow the instructions by yourself, do what you are supposed 
 
 Oh, and be ready to have some fun!
 
-If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: {azure-pass-url}.
-Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
-
-image::../images/qrcode-azure-pass.png[]
+// If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: {azure-pass-url}.
+// Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
+//
+// image::../images/qrcode-azure-pass.png[]
 
 == Presenting Azure and Cloud Services
 
@@ -126,9 +129,9 @@ It provides a wide range of services, from compute to storage, from databases to
 
 For this workshop, we'll use in particular the following services:
 
-- Azure Container Apps: a managed container service to run our microservices.
-- Azure Container Registry: a private container registry to store our Docker images.
-- Azure Database for PostgreSQL: a managed PostgreSQL database.
+* Azure Container Apps: a managed container service to run our microservices.
+* Azure Container Registry: a private container registry to store our Docker images.
+* Azure Database for PostgreSQL: a managed PostgreSQL database.
 
 === What's Azure Container Apps?
 
