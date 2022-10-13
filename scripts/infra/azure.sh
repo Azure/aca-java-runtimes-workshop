@@ -305,79 +305,6 @@ az containerapp env create \
   echo "Environment '${environment}' of project '${project_name}' ready."
 }
 
-exportEnvironment() {
-  echo "Exporting environment variables..." 
-
-  export PROJECT="java-runtimes"
-  export RESOURCE_GROUP="rg-${PROJECT}"
-  export LOCATION="eastus"
-  export TAG="java-runtimes"
-
-  export LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
-  export CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
-
-  export UNIQUE_IDENTIFIER=${FORCE_UID:-$(whoami)}
-  export REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
-  export IMAGES_TAG="1.0"
-
-  export POSTGRES_DB_ADMIN="javaruntimesadmin"
-  export POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
-  export POSTGRES_DB_VERSION="13"
-  export POSTGRES_SKU="Standard_B1ms"
-  export POSTGRES_TIER="Burstable"
-  export POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
-  export POSTGRES_DB_SCHEMA="stats"
-  export POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
-
-  export QUARKUS_APP="quarkus-app"
-  export MICRONAUT_APP="micronaut-app"
-  export SPRING_APP="springboot-app"
-
-  export LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace show  \
-    --resource-group "$RESOURCE_GROUP" \
-    --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
-    --query customerId  \
-    --output tsv | tr -d '[:space:]')
-
-  export LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(az monitor log-analytics workspace get-shared-keys \
-    --resource-group "$RESOURCE_GROUP" \
-    --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
-    --query primarySharedKey \
-    --output tsv | tr -d '[:space:]')
-
-  export REGISTRY_URL=$(az acr show \
-    --resource-group "$RESOURCE_GROUP" \
-    --name "$REGISTRY" \
-    --query "loginServer" \
-    --output tsv)
-
-  export QUARKUS_HOST=$(
-    az containerapp show \
-      --name "$QUARKUS_APP" \
-      --resource-group "$RESOURCE_GROUP" \
-      --query "properties.configuration.ingress.fqdn" \
-      --output tsv \
-  )
-
-  export MICRONAUT_HOST=$(
-    az containerapp show \
-      --name "$MICRONAUT_APP" \
-      --resource-group "$RESOURCE_GROUP" \
-      --query "properties.configuration.ingress.fqdn" \
-      --output tsv \
-  )
-
-  export SPRING_HOST=$(
-    az containerapp show \
-      --name "$SPRING_APP" \
-      --resource-group "$RESOURCE_GROUP" \
-      --query "properties.configuration.ingress.fqdn" \
-      --output tsv \
-  )
-
-  echo "Exported environment variables for project '${project_name}'."
-}
-
 deleteInfrastructure() {
   echo "Deleting environment '${environment}' of project '${project_name}'..."
   az group delete --yes --name "${RESOURCE_GROUP}"
@@ -444,8 +371,6 @@ elif [ "$command" = "cleanup" ]; then
   if [ "$skip_repo_setup" = false ]; then
     cleanupRepo
   fi
-elif [ "$command" = "env" ]; then
-  exportEnvironment
 else
   showUsage
   echo "Error, unknown command '${command}'"

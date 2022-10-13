@@ -18,8 +18,10 @@ Alternatively, you can use the `-s` option to only create the Azure infrastructu
 To export all environment variables needed for the workshop in your current shell, you can use the command:
 
 ```sh
-source ./azure.sh env
+source ./env.sh
 ```
+
+> Note: if you want to force a specific `UNIQUE_IDENTIFIER`, you can set it before running the command with `export UNIQUE_IDENTIFIER=<your-unique-identifier>`.
 
 ## Manual deployment
 
