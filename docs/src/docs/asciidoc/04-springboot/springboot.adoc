@@ -119,7 +119,7 @@ Create the `StatisticsRepository` class under the same package.
 include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/StatisticsRepository.java[]
 ----
 
-== Compiling the Application
+== Compiling the Spring Boot Application
 
 You should have all the code to compile the application.
 To make sure you have all the code and dependencies, run the following command:
@@ -129,7 +129,7 @@ To make sure you have all the code and dependencies, run the following command:
 mvn compile
 ----
 
-== Configuring the Application
+== Configuring the Spring Boot Application
 
 We need to configure the default Postgres database and Hibernate ORM.
 This service is exposed on the port 8703.
@@ -142,7 +142,7 @@ Add the following to the `src/main/resources/application.properties` file.
 include::{workshop-github-raw}/springboot-app/src/main/resources/application.properties[]
 ----
 
-== Testing the Application Locally
+== Testing the Spring Boot Application Locally
 
 Now, to make sure that the application works as expected, we need to write some tests.
 Remember that the tests need a Postgres database to run.
@@ -221,7 +221,7 @@ All the tests should pass and you should see the following output:
 [INFO] ------------------------------------------------------------------------
 ----
 
-== Running the Application Locally
+== Running the Spring Boot Application Locally
 
 Now that the tests are all green, let's execute the application locally and execute a few `curl` commands.
 To run the application, we first need to have our Postgres database up and running.
@@ -276,4 +276,4 @@ curl 'localhost:8703/springboot/stats'
 
 That's it.
 We now have developed and tested locally our three microservices.
-Time to containerize them and deploy them to the Azure Container Apps that we have previsouly created.
+Time to containerize them and deploy them to Azure Container Apps.

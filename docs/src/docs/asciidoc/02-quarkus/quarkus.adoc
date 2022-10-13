@@ -105,7 +105,7 @@ Notice that `StatisticsRepository` is a https://quarkus.io/guides/hibernate-orm-
 include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/StatisticsRepository.java[]
 ----
 
-== Compiling the Application
+== Compiling the Quarkus Application
 
 You should have all the code to compile the application.
 To make sure you have all the code and dependencies, run the following command:
@@ -115,7 +115,7 @@ To make sure you have all the code and dependencies, run the following command:
 mvn compile
 ----
 
-== Configuring the Application
+== Configuring the Quarkus Application
 
 There is not much to configure as Quarkus is configured by default to use the Postgres database (thanks to https://quarkus.io/guides/dev-services[DevService]).
 To make sure our 3 microservices can run side by side, we need to configure the listening port of the Quarkus application.
@@ -128,7 +128,7 @@ To have this service exposed on the port 8701, add the following configuration i
 include::{workshop-github-raw}/quarkus-app/src/main/resources/application.properties[tags=adocProperties]
 ----
 
-== Testing the Application Locally
+== Testing the Quarkus Application Locally
 
 Now, to make sure that the application works as expected, we need to write some tests.
 For that, we will use https://quarkus.io/guides/getting-started-testing[Quarkus Test Framework] that is based on https://junit.org/junit5/[JUnit 5] and use https://github.com/rest-assured/rest-assured[RESTAssured].
@@ -200,7 +200,7 @@ All the tests should pass and you should see the following output:
 [INFO] ------------------------------------------------------------------------
 ----
 
-== Running the Application Locally
+== Running the Quarkus Application Locally
 
 Now that the tests are all green, let's execute the application locally and execute a few `curl` commands.
 Make sure you still have Docker up and running and execute the following command under the `quarkus-app` directory:
