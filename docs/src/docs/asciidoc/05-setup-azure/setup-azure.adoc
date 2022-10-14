@@ -15,7 +15,7 @@ If you don't have one, go to https://azure.microsoft.com/free/[azure.microsoft.c
 // Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
 // ====
 
-Once you have created your Azure subscription, let's use a few Azure CLI to login and make sure you are using the right subscription.
+Once you have created your Azure subscription, let's use a few Azure CLI commands to login and make sure you are using the right subscription.
 Also remember that, at any point, you can go to the https://portal.azure.com[Azure Portal] to have a visual look at the resources we'll be configuring.
 
 First, sign in to your Azure account using the Azure CLI:
@@ -87,6 +87,18 @@ If you want to know the list of available locations, you can execute the followi
 az account list-locations --query "[].name"
 ----
 
+====
+
+[TIP]
+====
+If you use multiple terminal or if you get interrupted during the workshop, you can use a script to re-set all the environment variables in your current shell:
+
+[source,shell]
+----
+source ./scripts/infra/env.sh
+----
+
+If you need to force a specific `UNIQUE_IDENTIFIER`, you can set it before running the command with `export UNIQUE_IDENTIFIER=<your-unique-identifier>`.
 ====
 
 Now let's create the Azure resources.

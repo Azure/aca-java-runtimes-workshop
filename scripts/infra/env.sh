@@ -18,7 +18,7 @@ export CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
 
 export UNIQUE_IDENTIFIER=${UNIQUE_IDENTIFIER:-$(whoami)}
 
-echo "Using unique identifier: ${UNIQUE_IDENTIFIER}"
+echo "Using unique identifier is: ${UNIQUE_IDENTIFIER}"
 echo "You can override it by setting it manually before running this script:"
 echo "export UNIQUE_IDENTIFIER=<your-unique-identifier>"
 
@@ -42,19 +42,25 @@ export LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(az monitor log-analytics workspace sh
   --resource-group "$RESOURCE_GROUP" \
   --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
   --query customerId  \
-  --output tsv | tr -d '[:space:]')
+  --output tsv \
+  2>/dev/null | tr -d '[:space:]' \
+)
 
 export LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(az monitor log-analytics workspace get-shared-keys \
   --resource-group "$RESOURCE_GROUP" \
   --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
   --query primarySharedKey \
-  --output tsv | tr -d '[:space:]')
+  --output tsv \
+  2>/dev/null | tr -d '[:space:]' \
+)
 
 export REGISTRY_URL=$(az acr show \
   --resource-group "$RESOURCE_GROUP" \
   --name "$REGISTRY" \
   --query "loginServer" \
-  --output tsv)
+  --output tsv \
+  2>/dev/null \
+)
 
 export QUARKUS_HOST=$(
   az containerapp show \
@@ -62,6 +68,7 @@ export QUARKUS_HOST=$(
     --resource-group "$RESOURCE_GROUP" \
     --query "properties.configuration.ingress.fqdn" \
     --output tsv \
+    2>/dev/null \
 )
 
 export MICRONAUT_HOST=$(
@@ -70,6 +77,7 @@ export MICRONAUT_HOST=$(
     --resource-group "$RESOURCE_GROUP" \
     --query "properties.configuration.ingress.fqdn" \
     --output tsv \
+    2>/dev/null \
 )
 
 export SPRING_HOST=$(
@@ -78,6 +86,7 @@ export SPRING_HOST=$(
     --resource-group "$RESOURCE_GROUP" \
     --query "properties.configuration.ingress.fqdn" \
     --output tsv \
+    2>/dev/null \
 )
 
 echo "Exported environment variables for project '${PROJECT}'."
