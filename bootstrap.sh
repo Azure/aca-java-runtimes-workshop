@@ -39,8 +39,8 @@ mn create-app io.containerapps.javaruntime.workshop.micronaut.micronaut-app  \
 
 
 echo "### Bootstraps the Quarkus App"
-mvn io.quarkus:quarkus-maven-plugin:2.12.1.Final:create \
-    -DplatformVersion=2.12.1.Final \
+mvn io.quarkus:quarkus-maven-plugin:2.12.3.Final:create \
+    -DplatformVersion=2.12.3.Final \
     -DprojectGroupId=io.containerapps.javaruntime.workshop \
     -DprojectArtifactId=quarkus-app \
     -DclassName="io.containerapps.javaruntime.workshop.quarkus.QuarkusResource" \
