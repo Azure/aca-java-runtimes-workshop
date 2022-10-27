@@ -99,7 +99,7 @@ In this section, you will develop a microservice using Quarkus, test it and run 
 In this section, you will develop a microservice using Micronaut.
 * _Developing the Spring Boot Application_:
 In this section, you will develop a microservice using Spring Boot.
-* _Setting Up Azure_:
+* _Setting Up Azure Container Apps_:
 This section introduces Azure and the Container Apps service to prepare all the needed resources for our application.
 You will create an entire infrastructure on Azure (Container Registry, Postgres database, etc.) to make everything ready for deployment.
 * _Deploying the Applications_:

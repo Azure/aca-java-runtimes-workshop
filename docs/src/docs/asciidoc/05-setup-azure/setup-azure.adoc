@@ -1,5 +1,5 @@
 [[setup-azure]]
-= Setting Up Azure
+= Setting Up Azure Container Apps
 
 Ok, now that you have the three microservices up and running, time to deploy them on Azure Container Apps.
 But before, you need an Azure subscription, and then you have to set up the Azure environment.
