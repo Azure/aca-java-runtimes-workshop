@@ -1,7 +1,11 @@
 // tag::adocHeader[]
 package io.containerapps.javaruntime.workshop.quarkus;
 
-import javax.ws.rs.*;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.lang.System.Logger;
 import java.time.Duration;
@@ -10,12 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import static java.lang.System.Logger.Level.INFO;
+import static java.lang.invoke.MethodHandles.lookup;
 
 @Path("/quarkus")
 @Produces(MediaType.TEXT_PLAIN)
 public class QuarkusResource {
 
-    private final Logger LOGGER = System.getLogger(this.getClass().getName());
+    private static final Logger LOGGER = System.getLogger(lookup().lookupClass().getName());
 
     private final StatisticsRepository repository;
 
@@ -26,7 +31,7 @@ public class QuarkusResource {
 
     /**
      * Says hello.
-     * <code>curl 'localhost:8701/quarkus'</code>
+     * {@code curl 'localhost:8701/quarkus'}
      *
      * @return hello
      */
@@ -40,10 +45,10 @@ public class QuarkusResource {
 
     /**
      * Simulates requests that use a lot of CPU.
-     * <code>curl 'localhost:8701/quarkus/cpu'</code>
-     * <code>curl 'localhost:8701/quarkus/cpu?iterations=10'</code>
-     * <code>curl 'localhost:8701/quarkus/cpu?iterations=10&db=true'</code>
-     * <code>curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=java17'</code>
+     * {@code curl 'localhost:8701/quarkus/cpu'}
+     * {@code curl 'localhost:8701/quarkus/cpu?iterations=10'}
+     * {@code curl 'localhost:8701/quarkus/cpu?iterations=10&db=true'}
+     * {@code curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=java17'}
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
@@ -94,10 +99,10 @@ public class QuarkusResource {
 
     /**
      * Simulates requests that use a lot of memory.
-     * <code>curl 'localhost:8701/quarkus/memory'</code>
-     * <code>curl 'localhost:8701/quarkus/memory?bites=10'</code>
-     * <code>curl 'localhost:8701/quarkus/memory?bites=10&db=true'</code>
-     * <code>curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=java17'</code>
+     * {@code curl 'localhost:8701/quarkus/memory'}
+     * {@code curl 'localhost:8701/quarkus/memory?bites=10'}
+     * {@code curl 'localhost:8701/quarkus/memory?bites=10&db=true'}
+     * {@code curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=java17'}
      *
      * @param bites the number of megabytes to eat
      * @return the result.
@@ -142,6 +147,12 @@ public class QuarkusResource {
     }
 // end::adocMethodMemory[]
 
+    /**
+     * Returns what's in the database.
+     * {@code curl 'localhost:8701/quarkus/stats'}
+     *
+     * @return the list of Statistics.
+     */
 // tag::adocMethodStats[]
     @GET
     @Path("/stats")

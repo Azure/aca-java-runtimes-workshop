@@ -6,6 +6,7 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
 
+import java.lang.System.Logger;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,11 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import static java.lang.System.Logger.Level.INFO;
+import static java.lang.invoke.MethodHandles.lookup;
 
 @Controller("/micronaut")
 public class MicronautResource {
 
-    private final System.Logger LOGGER = System.getLogger(this.getClass().getName());
+    private static final Logger LOGGER = System.getLogger(lookup().lookupClass().getName());
 
     private final StatisticsRepository repository;
 
@@ -28,7 +30,7 @@ public class MicronautResource {
 
     /**
      * Says hello.
-     * <code>curl 'localhost:8702/micronaut'</code>
+     * {@code curl 'localhost:8702/micronaut'}
      *
      * @return hello
      */
@@ -42,10 +44,10 @@ public class MicronautResource {
 
     /**
      * Simulates requests that use a lot of CPU.
-     * <code>curl 'localhost:8702/micronaut/cpu'</code>
-     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10'</code>
-     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10&db=true'</code>
-     * <code>curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'</code>
+     * {@code curl 'localhost:8702/micronaut/cpu'}
+     * {@code curl 'localhost:8702/micronaut/cpu?iterations=10'}
+     * {@code curl 'localhost:8702/micronaut/cpu?iterations=10&db=true'}
+     * {@code curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'}
      *
      * @param iterations the number of iterations to run (times 20,000).
      * @return the result
@@ -93,10 +95,10 @@ public class MicronautResource {
 
     /**
      * Simulates requests that use a lot of memory.
-     * <code>curl 'localhost:8702/micronaut/memory'</code>
-     * <code>curl 'localhost:8702/micronaut/memory?bites=10'</code>
-     * <code>curl 'localhost:8702/micronaut/memory?bites=10&db=true'</code>
-     * <code>curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'</code>
+     * {@code curl 'localhost:8702/micronaut/memory'}
+     * {@code curl 'localhost:8702/micronaut/memory?bites=10'}
+     * {@code curl 'localhost:8702/micronaut/memory?bites=10&db=true'}
+     * {@code curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'}
      *
      * @param bites the number of megabytes to eat
      * @return the result.
@@ -138,8 +140,13 @@ public class MicronautResource {
     }
 // end::adocMethodMemory[]
 
-    // tag::adocMethodStats[]
-
+    /**
+     * Returns what's in the database.
+     * {@code curl 'localhost:8702/micronaut/stats'}
+     *
+     * @return the list of Statistics.
+     */
+// tag::adocMethodStats[]
     @Get(uri = "/stats", produces = MediaType.APPLICATION_JSON)
     public List<Statistics> stats() {
         LOGGER.log(INFO, "Micronaut: retrieving statistics");
