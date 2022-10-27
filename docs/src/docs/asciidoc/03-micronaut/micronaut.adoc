@@ -226,6 +226,20 @@ Make sure you still have Docker up and running and execute under the `infrastruc
 docker compose -f postgres.yaml up
 ----
 
+[WARNING]
+====
+If you find that the `docker compose` command is sending you back strange error messages, check if you are on the default context.
+You might have created several Docker context and could be on a specific one instead of the default.
+You can check the context you are using and switch to the default one if needed:
+
+[source,shell]
+----
+docker context ls
+docker context use default
+docker context ls
+----
+====
+
 Under the `micronaut-app` directory, execute the following command:
 
 [source,shell]
