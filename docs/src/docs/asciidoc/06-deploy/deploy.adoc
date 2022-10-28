@@ -208,7 +208,9 @@ First we need to get the ingress URL by running the following command:
 include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
 ----
 
-Then we can use `curl` to test our apps:
+Then we can use `curl` to test our three applications.
+The first invocation can take long as Azure Container Apps needs to scale from 0.
+But then, the following `curl` invocations should be faster.
 
 [source,shell]
 ----
