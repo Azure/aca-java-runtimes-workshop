@@ -164,7 +164,7 @@ az ad sp create-for-rbac ^
 ----
 ====
 
-Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value (copy the entire JSon).
+Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value (make sure to *copy the entire JSon*).
 
 image::../images/github-secrets-added-2.png[Screenshot of GitHub interface showing the added secrets]
 
