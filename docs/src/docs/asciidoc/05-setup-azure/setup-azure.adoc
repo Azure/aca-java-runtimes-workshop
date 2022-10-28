@@ -4,6 +4,17 @@
 Ok, now that you have the three microservices up and running, time to deploy them on Azure Container Apps.
 But before, you need an Azure subscription, and then you have to set up the Azure environment.
 
+[WARNING]
+====
+Azure Container Apps is not available in all the regions.
+To make sure you can follow this workshop, check if the region you are in supports Azure Container Apps by executing the following commandaz provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+
+[source,shell]
+----
+az provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+----
+====
+
 == Getting an Azure Subscription
 
 To be able to deploy the application to Azure, you first need an Azure subscription.
