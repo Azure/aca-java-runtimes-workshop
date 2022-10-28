@@ -2,11 +2,12 @@
 package io.containerapps.javaruntime.workshop.springboot;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
 
+import java.lang.System.Logger;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;

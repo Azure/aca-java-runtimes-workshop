@@ -1,13 +1,17 @@
 package io.containerapps.javaruntime.workshop.springboot;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.Duration;
 import java.time.Instant;
 
 @Entity
 @Table(name = "Statistics_Springboot")
-public class Statistics{
+public class Statistics {
 
     @GeneratedValue
     @Id
