@@ -202,7 +202,7 @@ And then, come back to this one when the command is done and execute the next on
 
 Now that we have created the container apps environment, we can create the container apps.
 A container app is a containerized application that is deployed to a container apps environment.
-We will create threee container apps, one for each of our Java runtimes.
+We will create three container apps, one for each of our Java runtimes (Quarkus, Micronaut and SpringBoot).
 Since we don't have any container images ready yet, we'll use a default "_Hello World_" image just to get things running.
 We'll update the container apps with the actual images later.
 

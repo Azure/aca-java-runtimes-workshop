@@ -45,7 +45,7 @@ It will then run a `build` job the following steps:
 
 - Checkout the code from the repository
 - Set up Java environment
-- Set up Docker Buildx for building our images
+- Set up https://docs.docker.com/engine/reference/commandline/buildx[Docker Buildx] for building our images
 - Log in to our container registry
 
 === Building the applications
