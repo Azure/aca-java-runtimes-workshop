@@ -1,5 +1,5 @@
 [[setup-azure]]
-= Setting Up Azure Container Apps
+= Setting Up the Azure Container Apps Environment
 
 Ok, now that you have the three microservices up and running, time to deploy them on Azure Container Apps.
 But before, you need an Azure subscription, and then you have to set up the Azure environment.
@@ -67,7 +67,8 @@ Some resources in Azure need to have a unique name across the globe (for example
 For that, we use the `UNIQUE_IDENTIFIER` environment variable to make sure we don't have any name collision.
 If you are developing in your local machine, the `UNIQUE_IDENTIFIER` will be your username (which is not totally unique, but it's a good start).
 On the other hand, if you're using the Dev Containers, you must manually set this to a unique value (like your name) to avoid conflicts with other users
-So, if you use Dev Containers, make sure to set the `UNIQUE_IDENTIFIER` environment variable to a unique value (in lower case).
+So, if you use Dev Containers, make sure to set the `UNIQUE_IDENTIFIER` environment variable to a unique value.
+Please make sure to use a lowercase value, as it's used as a suffix to create resources that cannot stand uppercase.
 ====
 
 [source,shell]
