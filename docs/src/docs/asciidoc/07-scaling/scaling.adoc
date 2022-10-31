@@ -52,7 +52,7 @@ image::../images/metrics-cpu.png[Screenshot of the Azure portal showing the list
 === Creating charts for all services
 
 Now let's add the CPU metrics of the Micronaut and Spring apps to the same chart.
-Select *Add metric* and select "_CPU Usage_" again.
+Select *Add metric* and select "_CPU Usage_" and aggregation "_Max_" again.
 Then click on the *Scope* setting, unselect `quarkus-app` and pick the `micronaut-app`.
 Select *Apply*, and repeat the same for the `spring-app`.
 
@@ -69,10 +69,11 @@ image::../images/dashboard-create.png[Screenshot of the Azure portal showing the
 
 We'll also add charts to monitor the memory usage and number of replicas of our applications.
 
-Click on *+New chart* (top left corner) and repeat the same steps as before to create a chart with "_Memory Working Set Bytes_" metrics.
+Click on *+New chart* (top left corner) and repeat the same steps as before to create a chart with "_Memory Working Set Bytes_" metrics with aggregation "_Max_".
+Do this for the three applications (Quarkus, Micronaut and SpringBoot).
 Select *Save to dashboard*, choose *Pin to dashboard*, and select the existing "Java Runtimes" dashboard.
 
-Click on *+New chart* again, and create another chart with the "_Replica Count_" metric.
+Click on *+New chart* again, and create another chart with the "_Replica Count_" metric with aggregation "_Max_".
 Don't forget to save this dashboard as well (select *Save to dashboard*, choose *Pin to dashboard*, and select the existing "Java Runtimes" dashboard).
 
 When you're finished, in the http://portal.azure.com[Azure Portal] sidebar select *Dashboards* and choose the "_Java Runtimes_" dashboard we created earlier.
