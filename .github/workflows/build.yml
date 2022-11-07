@@ -34,7 +34,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY_URL }}
-          username: ${{ env.GITHUB_ACTOR }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Quarkus with Java
@@ -66,7 +66,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY_URL }}
-          username: ${{ env.GITHUB_ACTOR }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build quarkus-app with GraalVM
@@ -97,7 +97,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY_URL }}
-          username: ${{ env.GITHUB_ACTOR }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Micronaut with Java
@@ -129,7 +129,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY_URL }}
-          username: ${{ env.GITHUB_ACTOR }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build micronaut-app with GraalVM
@@ -160,7 +160,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY_URL }}
-          username: ${{ env.GITHUB_ACTOR }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Spring Boot with Java
@@ -196,7 +196,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY_URL }}
-          username: ${{ env.GITHUB_ACTOR }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build springboot-app with GraalVM
