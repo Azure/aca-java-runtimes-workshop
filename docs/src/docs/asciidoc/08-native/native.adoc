@@ -54,7 +54,7 @@ As native builds will replace the JVM builds, you need to disable the existing G
 
 image::../images/github-actions-disable.png[Disable GitHub Actions]
 
-== Native Build of the Quarkus Application
+== Building the Native Image of the Quarkus Application
 
 First, let's build a local native build of the Quarkus application.
 Go to the `quarkus-app` directory, and run the following command:
@@ -124,7 +124,7 @@ You can now `git push` your changes, and this new workflow should build a native
 Good.
 Let's now create the same workflow for the Micronaut and SpringBoot applications before we do some performance tuning again.
 
-== Native Build of the Micronaut Application
+== Building the Native Image of the Micronaut Application
 
 Now, Let's do the same for Micronaut.
 Let's build a local native build of the Micronaut application.
@@ -174,7 +174,7 @@ Use the command `echo $REGISTRY_URL` to get the value of the variable.
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy it instead of the JVM image.
 
-== Native Build of the Spring Boot Application
+== Building the Native Image of the Spring Boot Application
 
 Now that we have our Quarkus and Micronaut native applications running, let's build a local native build for the Spring Boot application.
 Go to the `springboot-app` directory and execute the following command:
