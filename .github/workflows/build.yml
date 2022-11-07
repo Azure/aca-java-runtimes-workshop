@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY_URL: ghcr.io
-  PROJECT: ${{ github.repository_owner }}/${{ github.repository }}
+  PROJECT: ${{ github.repository }}
   QUARKUS_APP: quarkus-app
   MICRONAUT_APP: micronaut-app
   SPRING_APP: springboot-app
