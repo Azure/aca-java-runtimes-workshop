@@ -43,7 +43,7 @@ setupRepo() {
   )
 
   AZURE_CREDENTIALS=$(
-    az ad sp create-for-rbac \
+    MSYS_NO_PATHCONV=1 az ad sp create-for-rbac \
       --name="sp-${PROJECT}-${UNIQUE_IDENTIFIER}" \
       --role="Contributor" \
       --scopes="/subscriptions/$SUBSCRIPTION_ID" \
