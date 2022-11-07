@@ -470,3 +470,35 @@ Note that you're not limited to only one scaling trigger, you can use multiple t
 Fine tuning the scaling rules is a key factor to get the best performance/cost ratio for your application.
 You want to make sure that you don't scale too early, and that you don't scale too much to avoid paying for resources that are not needed.
 ====
+
+== Checking the Metrics in the Database
+
+Remember that we have a Postgres Database with three tables where we store our metrics.
+You can execute the following SQL statements so you get all the metrics for Quarkus, Micronaut and SpringBoot.
+
+[source,shell]
+----
+az postgres flexible-server execute \
+  --name "$POSTGRES_DB" \
+  --admin-user "$POSTGRES_DB_ADMIN" \
+  --admin-password "$POSTGRES_DB_PWD" \
+  --database-name "$POSTGRES_DB_SCHEMA" \
+  --querytext "select Duration, Parameter, Description from Statistics_Quarkus" \
+  --output table
+
+az postgres flexible-server execute \
+  --name "$POSTGRES_DB" \
+  --admin-user "$POSTGRES_DB_ADMIN" \
+  --admin-password "$POSTGRES_DB_PWD" \
+  --database-name "$POSTGRES_DB_SCHEMA" \
+  --querytext "select Duration, Parameter, Description from Statistics_Micronaut" \
+  --output table
+
+az postgres flexible-server execute \
+  --name "$POSTGRES_DB" \
+  --admin-user "$POSTGRES_DB_ADMIN" \
+  --admin-password "$POSTGRES_DB_PWD" \
+  --database-name "$POSTGRES_DB_SCHEMA" \
+  --querytext "select Duration, Parameter, Description from Statistics_Springboot" \
+  --output table
+----
