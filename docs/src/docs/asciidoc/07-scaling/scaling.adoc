@@ -143,7 +143,7 @@ curl https://${QUARKUS_HOST}/quarkus/cpu?iterations=10
 
 === Viewing the console logs in Azure portal
 
-You can also access the console logs in http://portal.azure.com[Azure Portal].
+You can also access the console logs in the http://portal.azure.com[Azure Portal] or via CLI.
 Using https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview[Log Analytics], you get access to all logs from all your applications, revisions, and instances.
 This means you can troubleshoot issues across all your applications, tracing requests as needed, which is crucial if your application use a microservices architecture.
 
@@ -233,6 +233,19 @@ image::../images/log-analytics-error-2.png[Screenshot of the logs results in Azu
 
 We can save the query for later use by clicking on the *Save* button.
 You can then give it a name and a description, and a category to quickly find it later.
+
+=== Viewing the console logs with the CLI
+
+You can also view the logs via a CLI command instead of using the portal.
+It's just a matter of writing any KQL query in the `analytics-query` parameter as follow:
+
+[source,shell]
+----
+az monitor log-analytics query \
+--workspace $LOG_ANALYTICS_WORKSPACE_CLIENT_ID \
+--analytics-query "ContainerAppConsoleLogs_CL | where RevisionName_s == 'quarkus-app--<REVISION_ID>'" \
+--output table
+----
 
 === Viewing the system logs
 
