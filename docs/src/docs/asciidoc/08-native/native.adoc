@@ -201,9 +201,9 @@ Execute the following curl commands to make sure it works:
 ----
 curl 'localhost:8703/springboot'
 
-curl 'localhost:8703/springboot/cpu?iterations=10&db=true&desc=java17'
+curl 'localhost:8703/springboot/cpu?iterations=10&db=true&desc=native'
 
-curl 'localhost:8703/springboot/memory?bites=10&db=true&desc=java17'
+curl 'localhost:8703/springboot/memory?bites=10&db=true&desc=native'
 ----
 
 === Deploying the Native Build of the Spring Boot Application
