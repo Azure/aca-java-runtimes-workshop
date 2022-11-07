@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY_URL: ghcr.io
-  PROJECT: ${{ github.repository }}
+  PROJECT: azure/aca-java-runtimes-workshop
   QUARKUS_APP: quarkus-app
   MICRONAUT_APP: micronaut-app
   SPRING_APP: springboot-app
