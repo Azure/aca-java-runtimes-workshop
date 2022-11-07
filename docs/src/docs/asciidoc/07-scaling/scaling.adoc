@@ -271,6 +271,16 @@ You should see the system logs of the `quarkus-app` container app, covering the 
 
 image::../images/log-analytics-system.png[Screenshot of the logs results in Azure portal]
 
+Using the CLI you can execute:
+
+[source,shell]
+----
+az monitor log-analytics query \
+--workspace $LOG_ANALYTICS_WORKSPACE_CLIENT_ID \
+--analytics-query "ContainerAppSystemLogs_CL | where RevisionName_s == 'quarkus-app--<REVISION_ID>' | project TimeGenerated, Reason_s, Log_s | sort by TimeGenerated desc" \
+--output table
+----
+
 == Load Testing
 
 Now it's time to add some load to the application.
