@@ -49,8 +49,10 @@ As native builds are much slower than JVM builds, this will allow us to have a f
 As native builds will replace the JVM builds, you need to disable the existing GitHub Action:
 
 - In the GitHub UI, go to the `Actions` tab
-- Click on the `Build and deploy Java images` workflow
+- Click on the `Build and deploy to Azure Container Apps` workflow
 - Select the `...` button, and click on `Disable workflow`
+
+image::../images/github-actions-disable.png[Disable GitHub Actions]
 
 == Native Build of the Quarkus Application
 
