@@ -96,9 +96,9 @@ This means that you can execute the same curl commands as before:
 ----
 curl 'localhost:8701/quarkus'
 
-curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=java17'
+curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=native'
 
-curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=java17'
+curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=native'
 ----
 
 === Deploying the Native Build of the Quarkus Application
@@ -150,9 +150,9 @@ Execute the following curl commands to make sure it works:
 ----
 curl 'localhost:8702/micronaut'
 
-curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'
+curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=native'
 
-curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'
+curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=native'
 ----
 
 === Deploying the Native Build of the Micronaut Application
