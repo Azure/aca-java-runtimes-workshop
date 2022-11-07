@@ -33,8 +33,8 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: $REGISTRY_URL
-          username: $GITHUB_ACTOR
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ env.GITHUB_ACTOR }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Quarkus with Java
@@ -44,7 +44,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $REGISTRY_URL/$PROJECT/$QUARKUS_APP:latest
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:latest
           file: ./quarkus-app/src/main/docker/Dockerfile.jvm
           context: ./quarkus-app/
 
@@ -65,8 +65,8 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: $REGISTRY_URL
-          username: $GITHUB_ACTOR
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ env.GITHUB_ACTOR }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build quarkus-app with GraalVM
@@ -76,7 +76,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $REGISTRY_URL/$PROJECT/$QUARKUS_APP-native:latest
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}-native:latest
           file: ./quarkus-app/src/main/docker/Dockerfile.native
           context: ./quarkus-app/
 
@@ -96,8 +96,8 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: $REGISTRY_URL
-          username: $GITHUB_ACTOR
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ env.GITHUB_ACTOR }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Micronaut with Java
@@ -107,7 +107,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $REGISTRY_URL/$PROJECT/$MICRONAUT_APP:latest
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:latest
           file: ./micronaut-app/src/main/docker/Dockerfile.jvm
           context: ./micronaut-app/
 
@@ -128,8 +128,8 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: $REGISTRY_URL
-          username: $GITHUB_ACTOR
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ env.GITHUB_ACTOR }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build micronaut-app with GraalVM
@@ -139,7 +139,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $REGISTRY_URL/$PROJECT/$MICRONAUT_APP-native:latest
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}-native:latest
           file: ./micronaut-app/src/main/docker/Dockerfile.native
           context: ./micronaut-app/
 
@@ -159,8 +159,8 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: $REGISTRY_URL
-          username: $GITHUB_ACTOR
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ env.GITHUB_ACTOR }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Spring Boot with Java
@@ -174,7 +174,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $REGISTRY_URL/$PROJECT/$SPRING_APP:latest
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:latest
           file: ./springboot-app/src/main/docker/Dockerfile.jvm
           context: ./springboot-app/
 
@@ -195,8 +195,8 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: $REGISTRY_URL
-          username: $GITHUB_ACTOR
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ env.GITHUB_ACTOR }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build springboot-app with GraalVM
@@ -206,6 +206,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $REGISTRY_URL/$PROJECT/$SPRING_APP-native:latest
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}-native:latest
           file: ./springboot-app/src/main/docker/Dockerfile.native
           context: ./springboot-app/
