@@ -105,7 +105,7 @@ This is useful to troubleshoot issues with a specific instance of your applicati
 
 - You can also access the console logs in http://portal.azure.com[Azure Portal].
 You get access to all logs from the https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview[Log Analytics] workspace we created earlier.
-Using SQL-like queries, you can filter the logs and get the information you need across all your applications, revisions, and instances.
+Using SQL-like queries (called https://learn.microsoft.com/azure/data-explorer/kusto/query[Kusto Query Language], or KQL), you can filter the logs and get the information you need across all your applications, revisions, and instances.
 
 - Finally, you also have access to the _system logs_, which are the logs of the container host.
 It's very useful to troubleshoot issues with the container host itself and find out why your container is not running.
