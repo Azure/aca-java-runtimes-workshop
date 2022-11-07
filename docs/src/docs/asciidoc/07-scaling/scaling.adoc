@@ -413,7 +413,7 @@ As our applications provides endpoints to load either the CPU or the memory, we 
 === Scaling based on CPU usage
 
 To scale based on CPU usage, we need to update the scale rule of the application to use the `cpu` trigger.
-This will create a new revision of the application, and will start a new deployment.
+This will create a new revision of the application (but the URL `$QUARKUS_HOST` remains unchanged), and will start a new deployment.
 
 We will set a new scale rule for our Quarkus app using the Azure CLI:
 
@@ -423,6 +423,8 @@ include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocAutoScalingCpu, in
 ----
 
 This will automatically scale out the application when the CPU usage is above 10% (we set it low deliberately to make it easy to go up).
+
+image::../images/dashboard-scale-setcpu.png[Screenshot of setting up CPU scaler]
 
 Go back to the http://portal.azure.com[Azure Portal], and search for `lt-java-runtimes` to open again our load testing instance.
 Select *Tests* in the left sidebar, open the test we created earlier and select *Run* to run the load tests again.
@@ -450,6 +452,8 @@ include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocAutoScalingMemory,
 ----
 
 This will automatically scale out the application when the memory usage is above 15% (we set it low deliberately to make it easy to go up).
+
+image::../images/dashboard-scale-setmemory.png[Screenshot of setting up memory scaler]
 
 Again, go back to the http://portal.azure.com[Azure Portal] and run the load tests again.
 Open the dashboard when the test is finished, and take a look at the number of replicas chart again.
