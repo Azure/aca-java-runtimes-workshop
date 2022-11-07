@@ -190,6 +190,24 @@ Now that we've defined our workflow and prepared everything, we can run it to de
 Commit and push your changes to your repository, and go to the `Actions` tab of your repository to see the workflow running.
 It should take a few minutes to complete.
 
+[WARNING]
+====
+If during deployment, you get an error that looks like this:
+
+[source,shell]
+----
+ERROR: (WebhookInvalidParameterValue) The following field(s) are either invalid or missing. Invalid value: "javaruntimesregistry....": GET https:?scope=repository....azurecr.io: UNAUTHORIZED: authentication required.
+----
+
+It's because you didn't allow anonymous pull to the container registry.
+Make sure you have executed the following command:
+
+[source,shell]
+----
+include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]
+----
+====
+
 image::../images/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
 
 If you want, you can check the Registry in the https://portal.azure.com[Azure portal].
