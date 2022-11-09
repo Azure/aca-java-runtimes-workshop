@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build springboot-app with GraalVM
         run: |
-          cd springboot-app && ./mvnw -Pnative package
+          cd springboot-app && ./mvnw -Pnative native:compile
       - name: Build springboot-app native Docker image
         uses: docker/build-push-action@v2
         with:
