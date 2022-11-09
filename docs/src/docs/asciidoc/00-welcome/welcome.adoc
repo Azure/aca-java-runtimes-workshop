@@ -110,6 +110,22 @@ In this section, you will add some load to your microservices, monitor them, sca
 * _Going Native_:
 In this section you will compile your microservices with GraalVM, package them, deploy them on ACA, and see how it impacts the performance.
 
+[NOTE]
+====
+This workshop is *modular*, meaning that you can skip some sections if you want.
+For example, if you're not interested in developing some microservices variants, you can instead use these pre-built Docker images when deploying to Azure Container Apps:
+
+[source,text,indent=0]
+----
+ghcr.io/azure/aca-java-runtimes-workshop/quarkus-app:latest
+ghcr.io/azure/aca-java-runtimes-workshop/micronaut-app:latest
+ghcr.io/azure/aca-java-runtimes-workshop/springboot-app:latest
+ghcr.io/azure/aca-java-runtimes-workshop/quarkus-app-native:latest
+ghcr.io/azure/aca-java-runtimes-workshop/micronaut-app-native:latest
+ghcr.io/azure/aca-java-runtimes-workshop/springboot-app-native:latest
+----
+====
+
 === What Do You Have to Do?
 
 This workshop should be as self-explanatory as possible.

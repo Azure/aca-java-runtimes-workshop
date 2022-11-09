@@ -63,6 +63,21 @@ include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocBuild]
 Make sure to keep the correct indentation for the steps.
 YAML is very sensitive to indentation.
 
+[TIP]
+====
+If earlier you skipped some sections and have some microservices variants that you did not prepare, you can use some of these pre-built Docker images at the deployment step, and remove the next Docker build/push steps that you do not need:
+
+[source,text,indent=0]
+----
+ghcr.io/azure/aca-java-runtimes-workshop/quarkus-app:latest
+ghcr.io/azure/aca-java-runtimes-workshop/micronaut-app:latest
+ghcr.io/azure/aca-java-runtimes-workshop/springboot-app:latest
+ghcr.io/azure/aca-java-runtimes-workshop/quarkus-app-native:latest
+ghcr.io/azure/aca-java-runtimes-workshop/micronaut-app-native:latest
+ghcr.io/azure/aca-java-runtimes-workshop/springboot-app-native:latest
+----
+====
+
 The next step is to build our Docker images.
 We'll use the https://github.com/marketplace/actions/build-and-push-docker-images[`docker/build-push-action` action] to build and push our images to our container registry.
 Add the following steps to the `build` job:
