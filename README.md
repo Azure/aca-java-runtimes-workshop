@@ -43,7 +43,7 @@ To build a Docker image with the native application (you need to build the nativ
 docker build -t micronaut-app-native -f src/main/docker/Dockerfile.native .
 ```
 
-## SpringBoot
+## Spring Boot
 
 ```shell
 cd springboot-app
