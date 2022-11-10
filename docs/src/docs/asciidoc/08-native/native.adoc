@@ -183,7 +183,7 @@ Go to the `springboot-app` directory and execute the following command:
 
 [source,shell]
 ----
-mvn -Pnative package
+mvn -Pnative native:compile
 ----
 
 In your `target` folder, this should create a binary called `springboot-app`.

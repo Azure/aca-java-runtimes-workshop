@@ -27,14 +27,14 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Log in to container registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY_URL }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build springboot-app with GraalVM
         run: |
-          cd springboot-app && ./mvnw -Pnative package
+          cd springboot-app && ./mvnw -Pnative native:compile
       - name: Build springboot-app native Docker image
         uses: docker/build-push-action@v2
         with:

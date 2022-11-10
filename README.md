@@ -55,7 +55,7 @@ curl 'localhost:8703/springboot'  # Invokes the hello endpoint
 
 To build a native application (you need GraalVM installed):
 ```shell
-mvn -Pnative clean package
+mvn -Pnative clean native:compile
 ./target/springboot-app
 ```
 
