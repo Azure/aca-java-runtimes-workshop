@@ -5,7 +5,7 @@
 
 In this section you will:
 
-* Develop a REST API with SpringBoot that consumes memory and CPU (the exact same algorithm than before)
+* Develop a REST API with Spring Boot that consumes memory and CPU (the exact same algorithm than before)
 * Add a Statistics persistent entity to store metrics in a Postgres database
 * Configure the application
 * Develop some tests to validate the behavior of the application
@@ -14,16 +14,16 @@ In this section you will:
 * Check a few metrics locally
 
 In your repository you should have a directory called `springboot-app` .
-This is the root of the SpringBoot microservice source code that we will be using in this section.
+This is the root of the Spring Boot microservice source code that we will be using in this section.
 
-== The SpringBoot REST Resource
+== The Spring Boot REST Resource
 
-The SpringBoot application is a simple REST resource that exposes a single endpoint to consume memory and CPU.
-Before creating the REST resource, we need to add some code to the existing main SpringBoot class that will bootstrap the application.
+The Spring Boot application is a simple REST resource that exposes a single endpoint to consume memory and CPU.
+Before creating the REST resource, we need to add some code to the existing main Spring Boot class that will bootstrap the application.
 Add the following code to the `SpringbootApplication` under the `io/containerapps/javaruntime/workshop/springboot` package.
 
 [[springboot-listing-rest-resource]]
-.Bootstrapping SpringBoot Class
+.Bootstrapping Spring Boot Class
 [source,indent=0]
 ----
 include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplication.java[]
