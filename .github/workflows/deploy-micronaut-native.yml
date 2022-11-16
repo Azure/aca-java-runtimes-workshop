@@ -1,4 +1,4 @@
-name: Micronaut native image
+name: Build and deploy Micronaut native image
 
 on:
   push:

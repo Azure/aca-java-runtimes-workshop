@@ -1,4 +1,4 @@
-name: Quarkus native image
+name: Build and deploy Quarkus native image
 
 on:
   push:
