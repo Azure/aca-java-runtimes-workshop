@@ -32,6 +32,8 @@ jobs:
           registry: ${{ env.REGISTRY_URL }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Install libfreetype-dev (required for Spring Boot 3 native build)
+        run: sudo apt-get install -y libfreetype-dev
       - name: Build springboot-app with GraalVM
         run: |
           cd springboot-app && ./mvnw -Pnative native:compile
