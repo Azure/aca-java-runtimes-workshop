@@ -70,7 +70,7 @@ image::../images/dashboard-create.png[Screenshot of the Azure portal showing the
 We'll also add charts to monitor the memory usage and number of replicas of our applications.
 
 Click on *+New chart* (top left corner) and repeat the same steps as before to create a chart with "_Memory Working Set Bytes_" metrics with aggregation "_Max_".
-Do this for the three applications (Quarkus, Micronaut and SpringBoot).
+Do this for the three applications (Quarkus, Micronaut and Spring Boot).
 Select *Save to dashboard*, choose *Pin to dashboard*, and select the existing "Java Runtimes" dashboard.
 
 Click on *+New chart* again, and create another chart with the "_Replica Count_" metric with aggregation "_Max_".
@@ -474,7 +474,7 @@ You want to make sure that you don't scale too early, and that you don't scale t
 == Checking the Metrics in the Database
 
 Remember that we have a Postgres Database with three tables where we store our metrics.
-You can execute the following SQL statements so you get all the metrics for Quarkus, Micronaut and SpringBoot.
+You can execute the following SQL statements so you get all the metrics for Quarkus, Micronaut and Spring Boot.
 
 [source,shell]
 ----

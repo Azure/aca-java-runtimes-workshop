@@ -11,7 +11,7 @@
     <groupId>io.containerapps.javaruntime.workshop</groupId>
     <artifactId>springboot-app</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <description>Azure Container Apps and Java Runtimes Workshop :: SpringBoot</description>
+    <description>Azure Container Apps and Java Runtimes Workshop :: Spring Boot</description>
     <properties>
         <java.version>17</java.version>
     </properties>

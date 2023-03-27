@@ -26,7 +26,7 @@ public class SpringbootResourceTest {
           .when().get(basePath)
           .then()
             .statusCode(200)
-            .body(is("SpringBoot: hello"));
+            .body(is("Spring Boot: hello"));
     }
 // end::adocTestHello[]
 
@@ -36,7 +36,7 @@ public class SpringbootResourceTest {
           .when().get(basePath + "/cpu")
           .then()
             .statusCode(200)
-            .body(startsWith("SpringBoot: CPU consumption is done with"))
+            .body(startsWith("Spring Boot: CPU consumption is done with"))
             .body(endsWith("nano-seconds."));
     }
 
@@ -46,7 +46,7 @@ public class SpringbootResourceTest {
           .when().get(basePath + "/cpu")
           .then()
             .statusCode(200)
-            .body(startsWith("SpringBoot: CPU consumption is done with"))
+            .body(startsWith("Spring Boot: CPU consumption is done with"))
             .body(endsWith("The result is persisted in the database."));
     }
 
@@ -57,7 +57,7 @@ public class SpringbootResourceTest {
           .when().get(basePath + "/cpu")
           .then()
             .statusCode(200)
-            .body(startsWith("SpringBoot: CPU consumption is done with"))
+            .body(startsWith("Spring Boot: CPU consumption is done with"))
             .body(not(containsString("Java17")))
             .body(endsWith("The result is persisted in the database."));
     }
@@ -69,7 +69,7 @@ public class SpringbootResourceTest {
           .when().get(basePath + "/memory")
           .then()
             .statusCode(200)
-            .body(startsWith("SpringBoot: Memory consumption is done with"))
+            .body(startsWith("Spring Boot: Memory consumption is done with"))
             .body(endsWith("nano-seconds."));
     }
 
@@ -79,7 +79,7 @@ public class SpringbootResourceTest {
           .when().get(basePath + "/memory")
           .then()
             .statusCode(200)
-            .body(startsWith("SpringBoot: Memory consumption is done with"))
+            .body(startsWith("Spring Boot: Memory consumption is done with"))
             .body(endsWith("The result is persisted in the database."));
     }
 
@@ -90,7 +90,7 @@ public class SpringbootResourceTest {
           .when().get(basePath + "/memory")
           .then()
             .statusCode(200)
-            .body(startsWith("SpringBoot: Memory consumption is done with"))
+            .body(startsWith("Spring Boot: Memory consumption is done with"))
             .body(not(containsString("Java17")))
             .body(endsWith("The result is persisted in the database."));
     }
