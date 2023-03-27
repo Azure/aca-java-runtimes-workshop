@@ -56,6 +56,7 @@ setupRepo() {
 
   REGISTRY_USERNAME=$(
     az acr credential show \
+      --resource-group "$RESOURCE_GROUP" \
       --name "$REGISTRY" \
       --query "username" \
       --output tsv
@@ -63,6 +64,7 @@ setupRepo() {
 
   REGISTRY_PASSWORD=$(
     az acr credential show \
+      --resource-group "$RESOURCE_GROUP" \
       --name "$REGISTRY" \
       --query "passwords[0].value" \
       --output tsv
