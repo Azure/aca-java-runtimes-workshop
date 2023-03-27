@@ -16,6 +16,7 @@ echo "Retrieving credentials..."
 # tag::adocRegistryCredentials[]
 REGISTRY_USERNAME=$(
   az acr credential show \
+    --resource-group "$RESOURCE_GROUP" \
     --name "$REGISTRY" \
     --query "username" \
     --output tsv
@@ -24,6 +25,7 @@ echo "REGISTRY_USERNAME=$REGISTRY_USERNAME"
 
 REGISTRY_PASSWORD=$(
   az acr credential show \
+    --resource-group "$RESOURCE_GROUP" \
     --name "$REGISTRY" \
     --query "passwords[0].value" \
     --output tsv
