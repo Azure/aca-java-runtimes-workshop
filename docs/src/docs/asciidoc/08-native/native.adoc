@@ -124,7 +124,7 @@ You can now `git push` your changes, and this new workflow should build a native
 image::../images/github-actions-native.png[Native build workflow]
 
 Good.
-Let's now create the same workflow for the Micronaut and SpringBoot applications before we do some performance tuning again.
+Let's now create the same workflow for the Micronaut and Spring Boot applications before we do some performance tuning again.
 
 == Building the Native Image of the Micronaut Application
 

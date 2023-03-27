@@ -34,7 +34,7 @@ Create this new `SpringbootResource` class under the `io.containerapps.javarunti
 As you can see in the header of the class, the resource is exposed on the `/springboot` path.
 
 [[springboot-listing-rest-resource-1]]
-.Header of the SpringBoot REST Resource
+.Header of the Spring Boot REST Resource
 [source,indent=0]
 ----
 include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocHeader]

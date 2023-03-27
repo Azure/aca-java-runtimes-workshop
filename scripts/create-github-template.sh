@@ -48,7 +48,7 @@ touch $TEMPLATE_HOME/quarkus-app/src/main/resources/application.properties
 rm -rf $TEMPLATE_HOME/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/Quarkus*
 touch $TEMPLATE_HOME/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/.gitkeep
 
-### Removing the SpringBoot files
+### Removing the Spring Boot files
 rm -rf $TEMPLATE_HOME/springboot-app/target
 rm -rf $TEMPLATE_HOME/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/Springboot*
 rm -rf $TEMPLATE_HOME/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/Statistics*

@@ -39,8 +39,8 @@ public class SpringbootResource {
 // tag::adocMethodHello[]
     @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
     public String hello() {
-        LOGGER.log(INFO, "SpringBoot: hello");
-        return "SpringBoot: hello";
+        LOGGER.log(INFO, "Spring Boot: hello");
+        return "Spring Boot: hello";
     }
 // end::adocMethodHello[]
 
@@ -59,7 +59,7 @@ public class SpringbootResource {
     public String cpu(@RequestParam(value = "iterations", defaultValue = "10") Long iterations,
                       @RequestParam(value = "db", defaultValue = "false") Boolean db,
                       @RequestParam(value = "desc", required = false) String desc) {
-        LOGGER.log(INFO, "SpringBoot: cpu: {0} {1} with desc {2}", iterations, db, desc);
+        LOGGER.log(INFO, "Spring Boot: cpu: {0} {1} with desc {2}", iterations, db, desc);
         Long iterationsDone = iterations;
 
         Instant start = Instant.now();
@@ -87,7 +87,7 @@ public class SpringbootResource {
             repository.save(statistics);
         }
 
-        String msg = "SpringBoot: CPU consumption is done with " + iterationsDone + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        String msg = "Spring Boot: CPU consumption is done with " + iterationsDone + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
         if (db) {
             msg += " The result is persisted in the database.";
         }
@@ -110,7 +110,7 @@ public class SpringbootResource {
     public String memory(@RequestParam(value = "bites", defaultValue = "10") Integer bites,
                          @RequestParam(value = "db", defaultValue = "false") Boolean db,
                          @RequestParam(value = "desc", required = false) String desc) {
-        LOGGER.log(INFO, "SpringBoot: memory: {0} {1} with desc {2}", bites, db, desc);
+        LOGGER.log(INFO, "Spring Boot: memory: {0} {1} with desc {2}", bites, db, desc);
 
         Instant start = Instant.now();
         if (bites == null) {
@@ -134,7 +134,7 @@ public class SpringbootResource {
             repository.save(statistics);
         }
 
-        String msg = "SpringBoot: Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
+        String msg = "Spring Boot: Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
         if (db) {
             msg += " The result is persisted in the database.";
         }
@@ -151,7 +151,7 @@ public class SpringbootResource {
 // tag::adocMethodStats[]
     @GetMapping(path = "/stats", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Statistics> stats() {
-        LOGGER.log(INFO, "SpringBoot: retrieving statistics");
+        LOGGER.log(INFO, "Spring Boot: retrieving statistics");
         List<Statistics> result = new ArrayList<Statistics>();
         for (Statistics stats : repository.findAll()) {
             result.add(stats);
