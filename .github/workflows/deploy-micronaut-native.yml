@@ -37,7 +37,7 @@ jobs:
         run: |
           cd micronaut-app && ./mvnw package -Dpackaging=native-image
       - name: Build micronaut-app native Docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/micronaut-app-native:${{ github.sha }}

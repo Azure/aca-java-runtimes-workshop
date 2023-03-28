@@ -38,7 +38,7 @@ jobs:
           sudo apt-get install -y libfreetype-dev
           cd springboot-app && ./mvnw -Pnative native:compile
       - name: Build springboot-app native Docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }}
