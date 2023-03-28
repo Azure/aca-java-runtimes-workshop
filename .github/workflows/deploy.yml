@@ -71,7 +71,7 @@ jobs:
 
       # tag::adocPush[]
       - name: Build and push Quarkus Java image to registry
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }}
@@ -79,7 +79,7 @@ jobs:
           context: ./quarkus-app/
 
       - name: Build and push Micronaut Java image to registry
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
@@ -87,7 +87,7 @@ jobs:
           context: ./micronaut-app/
 
       - name: Build and push Spring Boot Java image to registry
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
