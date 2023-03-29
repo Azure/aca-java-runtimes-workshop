@@ -1,0 +1,14 @@
+= Prerequisites for the Java Runtimes and Azure Container Apps Workshop
+
+For this workshop, you'll be using many tools to build and deploy your microservices. 
+To make it more convenient and save time, you'll have 3 different options to work on the project:
+
+- You can work locally using your preferred IDE, but you will need to install all the tools manually. Since it can take some time, we recommend you to prepare your environment before the workshop using the instructions in the next section.
+
+- You can work directly in https://github.com/features/codespaces[GitHub Codespaces], without having to install anything on your machine. You just need a https://github.com/join[GitHub account] and a modern browser, and you're ready to go.
+
+- You can work locally using VS Code, Docker and https://code.visualstudio.com/docs/remote/containers[Dev Containers], so you have a pre-configured development environment. Make sure you have https://docs.docker.com/get-docker[Docker], https://code.visualstudio.com/Download[VS Code] and https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack[this extension] installed on your machine, and you're ready.
+
+// Setup manually
+include::01-setup-project/setup-manually.adoc[]
+<<<

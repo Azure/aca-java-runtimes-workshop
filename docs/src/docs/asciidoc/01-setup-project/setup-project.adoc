@@ -21,15 +21,13 @@ Once the repository is created, you have 3 options to work on the project:
 
 - You can work locally using your preferred IDE, but you will need to install all the tools manually.
 
-- You can work directly in GitHub Codespaces[https://github.com/features/codespaces], without having to install anything on your machine.
+- You can work directly in https://github.com/features/codespaces[GitHub Codespaces], without having to install anything on your machine.
 
-- You can work locally using VSCode, Docker and Dev Containers[https://code.visualstudio.com/docs/remote/containers], so you have a pre-configured development environment.
+- You can work locally using VSCode, Docker and https://code.visualstudio.com/docs/remote/containers[Dev Containers], so you have a pre-configured development environment.
 
 All these options are described in the following sections, pick the one that suits you best.
 
-== Setting Up Your Development Environment Manually
-
-First, you'll need to clone your project locally using git.
+If you want to work locally, first you need to clone the project on your machine using git (you can skip these steps if you choose to use GitHub Codespaces).
 
 1.
 Select the **Code** button, then copy your repository url.
@@ -44,48 +42,9 @@ Open a terminal and run:
 git clone <your_repo_url>
 ----
 
-If you decide not to use VSCode and Dev Containers, you will need to install the following tools:
-
-[cols="1,1"]
-|===
-| Java {jdk-version}       | https://learn.microsoft.com/java/openjdk/download[Get OpenJDK]
-| Maven {maven-version}    | https://maven.apache.org/download.cgi[Get Maven]
-| Docker {docker-version}  |  https://docs.docker.com/get-docker[Get Docker]
-| Azure CLI                | https://learn.microsoft.com/cli/azure/install-azure-cli#install[Get Azure CLI]
-| Git                      | https://git-scm.com
-| GitHub account           | https://github.com/join
-| Azure account            | https://azure.microsoft.com/free[Get a free Azure account]
-| A code editor, such as VS Code, Eclipse, or IntelliJ | https://code.visualstudio.com/Download[Get VS Code]
-| cURL (or any other HTTP client) | https://curl.se/download.html[Get cURL]
-| GraalVM (optional)       | https://www.graalvm.org/downloads[Get GraalVM]
-| jq (optional)            | https://stedolan.github.io/jq/download[Get jq]
-|===
-
-You can test your installation by running the following commands:
-
-[source,shell]
-----
-java -version
-mvn --version
-docker --version
-az --version
-git --version
-curl --version
-jq --version
-----
-
-If everything is installed correctly, you should see the version of each tool.
-
-[WARNING]
-====
-If you are on Windows, you will need to run *bash* commands.
-You have multiples way to do that:
-
-* Use the *Git Bash* command line that comes with Git. Open the start menu, and search for "Git Bash".
-* Install the *Windows Subsystem for Linux* (WSL) with a Linux distribution (eg. Ubuntu).
-You can follow the instructions https://learn.microsoft.com/en-us/windows/wsl/install[here].
-* Use *Visual Studio Code* with the Dev Containers setup (see below).
-====
+// Setup manually
+include::setup-manually.adoc[]
+<<<
 
 == Setting Up Your Environment in GitHub Codespaces
 
@@ -103,21 +62,6 @@ image::../images/create-codespaces.png[Screenshot of GitHub showing the Codespac
 This will start the creation of a dev container environment, which is a pre-configured container with all the needed tools installed. Once it's ready, you have everything you need to start coding for this workshop.
 
 == Setting Up Your Environment with VSCode and Dev Containers
-
-First, you'll need to clone your project locally using git.
-
-1.
-Select the **Code** button, then copy your repository url.
-
-image::../images/github-clone.png[Screenshot of GitHub showing the repository URL]
-
-2.
-Open a terminal and run:
-
-[source,shell]
-----
-git clone <your_repo_url>
-----
 
 If you have VS Code and Docker installed on your machine, a quick way to set up your environment is to use the pre-configured https://code.visualstudio.com/docs/remote/containers[Dev Containers] of the template project.
 Install the https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack[Remote Development extension] in VS Code.
