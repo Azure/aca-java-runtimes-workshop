@@ -45,5 +45,12 @@
 	"features": {
 		"git": "os-provided",
 		"docker-in-docker": "latest"
+	},
+
+	// At least 8gb of RAM is needed for GraalVM builds
+	"hostRequirements": {
+		"cpus": 4,
+		"memory": "8gb",
+		"storage": "32gb"
 	}
 }
