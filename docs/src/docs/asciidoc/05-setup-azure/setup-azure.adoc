@@ -20,11 +20,11 @@ az provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managed
 To be able to deploy the application to Azure, you first need an Azure subscription.
 If you don't have one, go to https://azure.microsoft.com/free/[azure.microsoft.com/free] and register.
 
-// [NOTE]
-// ====
-// If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: {azure-pass-url}.
-// Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
-// ====
+[NOTE]
+====
+If you're attending this workshop at Devoxx FR, you can use this link to redeem an Azure Pass: {azure-pass-url}.
+Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
+====
 
 Once you have created your Azure subscription, let's use a few Azure CLI commands to login and make sure you are using the right subscription.
 Also remember that, at any point, you can go to the https://portal.azure.com[Azure Portal] to have a visual look at the resources we'll be configuring.
