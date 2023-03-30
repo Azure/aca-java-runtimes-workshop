@@ -65,9 +65,9 @@ mvn -Pnative package
 ----
 
 In your `target` folder, this should create a binary called `quarkus-app-1.0.0-SNAPSHOT-runner`.
-Before executing it, you need to start the Postgres database.
-When you package a Quarkus application with `mvn package` (JVM or native), Quarkus turns out to be using the production profile (`%prod`) and needs a Postgres to be up and running and configured.
-For that, you first need to configure the `application.properties` file with the right Postgres URL.
+Before executing it, you need to start the PostgreSQL database.
+When you package a Quarkus application with `mvn package` (JVM or native), Quarkus turns out to be using the production profile (`%prod`) and needs a PostgreSQL to be up and running and configured.
+For that, you first need to configure the `application.properties` file with the right PostgreSQL URL.
 Add the following properties to the `quarkus-app/src/main/resources/application.properties` file:
 
 [source,properties]
@@ -138,7 +138,7 @@ mvn package -Dpackaging=native-image
 ----
 
 In your `target` folder, this should create a binary called `./target/micronaut-app`.
-You can execute it with the following command (make sure the Postgres database is running `docker compose -f postgres.yaml up`):
+You can execute it with the following command (make sure the PostgreSQL database is running `docker compose -f postgres.yaml up`):
 
 [source,shell]
 ----
@@ -187,7 +187,7 @@ mvn -Pnative native:compile
 ----
 
 In your `target` folder, this should create a binary called `springboot-app`.
-Make sure you have the Postgres database still up and running, and execute:
+Make sure you have the PostgreSQL database still up and running, and execute:
 
 [source,shell]
 ----

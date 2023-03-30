@@ -78,9 +78,9 @@ image::../images/welcome-develop.png[]
 Once developed and tested locally, you will be packaging your microservices in Docker containers and deploy them to Azure Container Apps:
 
 * You will first create an Azure Container Apps environment (a.k.a. _ACA_) in Azure
-* You will create a managed Postgres database in Azure (one single database for all 3 microservices but one table per microservice)
+* You will create a managed PostgreSQL database in Azure (one single database for all 3 microservices but one table per microservice)
 * You will create an Azure Registry to manage the Docker images
-* You will package each microservice in Docker images and configure them so they can connect to the Postgres database
+* You will package each microservice in Docker images and configure them so they can connect to the PostgreSQL database
 * You will then push these images to Azure Container Registry
 * Then you will deploy the Docker images of your microservices into the ACA environment
 
@@ -101,7 +101,7 @@ In this section, you will develop a microservice using Micronaut.
 In this section, you will develop a microservice using Spring Boot.
 * _Setting Up the Azure Container Apps Environment_:
 This section introduces Azure and the Container Apps service to prepare all the needed resources for our application.
-You will create an entire infrastructure on Azure (Container Registry, Postgres database, etc.) to make everything ready for deployment.
+You will create an entire infrastructure on Azure (Container Registry, PostgreSQL database, etc.) to make everything ready for deployment.
 * _Deploying the Applications_:
 In this section, you will set up a CI/CD pipeline using GitHub Actions so that our application builds and deploy automatically on new commits.
 You will build Docker images out of our microservices, push them to Azure Registry, all that using Docker and Azure CLI.

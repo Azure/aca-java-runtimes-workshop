@@ -6,7 +6,7 @@
 In this section you will:
 
 * Develop a REST API with Micronaut that consumes memory and CPU (the exact same algorithm than before)
-* Add a Statistics persistent entity to store metrics in a Postgres database
+* Add a Statistics persistent entity to store metrics in a PostgreSQL database
 * Configure the application
 * Develop some tests to validate the behavior of the application
 * Test the application locally
@@ -92,7 +92,7 @@ Let's create them now.
 == Transactions and ORM
 
 When the database is enabled, the statistics are stored in the database.
-For that we need a `Statistics` entity with a few enumerations that will be mapped to the Postgres database.
+For that we need a `Statistics` entity with a few enumerations that will be mapped to the PostgreSQL database.
 Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
 
 [[micronaut-listing-entity]]
@@ -124,7 +124,7 @@ mvn compile
 
 == Configuring the Micronaut Application
 
-We need to configure the default Postgres database and Hibernate ORM.
+We need to configure the default PostgreSQL database and Hibernate ORM.
 We also need this service to be exposed on the port 8702 (different port from the Quarkus application).
 Notice that we use non-blocking threads (`thread-selection: IO`).
 Add the following to the `src/main/resources/application.yml` file.
@@ -139,7 +139,7 @@ include::{workshop-github-raw}/micronaut-app/src/main/resources/application.yml[
 == Testing the Micronaut Application Locally
 
 Now, to make sure that the application works as expected, we need to write some tests.
-Remember that the tests need a Postgres database to run.
+Remember that the tests need a PostgreSQL database to run.
 For that, we need to configure Testcontainers in a separate class (`MicronautApplicationTest`)
 Create the `MicronautApplicationTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` package.
 
@@ -197,7 +197,7 @@ Let's also create a simple test to make sure the statistics are stored in the da
 include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestStats]
 ----
 
-Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a Postgres database) and run them with the following command:
+Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a PostgreSQL database) and run them with the following command:
 
 [source,shell]
 ----
@@ -218,7 +218,7 @@ All the tests should pass and you should see the following output:
 == Running the Micronaut Application Locally
 
 Now that the tests are all green, let's execute the application locally and execute a few `curl` commands.
-To run the application, we first need to have our Postgres database up and running.
+To run the application, we first need to have our PostgreSQL database up and running.
 Make sure you still have Docker up and running and execute under the `infrastructure` directory:
 
 [source,shell]

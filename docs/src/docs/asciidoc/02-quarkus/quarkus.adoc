@@ -6,7 +6,7 @@
 In this section you will:
 
 * Develop a REST API with Quarkus that consumes memory and CPU
-* Add a Statistics persistent entity to store metrics in a Postgres database
+* Add a Statistics persistent entity to store metrics in a PostgreSQL database
 * Configure the application
 * Develop some tests to validate the behavior of the application
 * Test the application locally
@@ -84,7 +84,7 @@ Let's create them now.
 == Transactions and ORM
 
 When the database is enabled, the statistics are stored in the database.
-For that we need a `Statistics` entity with a few enumerations that will be mapped to the Postgres database.
+For that we need a `Statistics` entity with a few enumerations that will be mapped to the PostgreSQL database.
 Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/quarkus` package.
 
 [[quarkus-listing-entity]]
@@ -117,7 +117,7 @@ mvn compile
 
 == Configuring the Quarkus Application
 
-There is not much to configure as Quarkus is configured by default to use the Postgres database (thanks to https://quarkus.io/guides/dev-services[DevService]).
+There is not much to configure as Quarkus is configured by default to use the PostgreSQL database (thanks to https://quarkus.io/guides/dev-services[DevService]).
 To make sure our 3 microservices can run side by side, we need to configure the listening port of the Quarkus application.
 To have this service exposed on the port 8701, add the following configuration in the `src/main/resources/application.properties` file.
 
@@ -182,7 +182,7 @@ Let's also create a simple test to make sure the statistics are stored in the da
 include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestStats]
 ----
 
-Now that you have your tests methods, make sure you have *Docker Desktop up and running* (as it needs to start a Postgres database) and run them with the following command (the first Quarkus test can take a while as Testcontainers needs to download the Postgres image):
+Now that you have your tests methods, make sure you have *Docker Desktop up and running* (as it needs to start a PostgreSQL database) and run them with the following command (the first Quarkus test can take a while as Testcontainers needs to download the PostgreSQL image):
 
 [source,shell]
 ----

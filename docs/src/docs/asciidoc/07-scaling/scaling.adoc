@@ -473,7 +473,7 @@ You want to make sure that you don't scale too early, and that you don't scale t
 
 == Checking the Metrics in the Database
 
-Remember that we have a Postgres Database with three tables where we store our metrics.
+Remember that we have a PostgreSQL Database with three tables where we store our metrics.
 You can execute the following SQL statements so you get all the metrics for Quarkus, Micronaut and Spring Boot.
 
 [source,shell]
