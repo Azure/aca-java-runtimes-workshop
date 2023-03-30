@@ -156,8 +156,8 @@ It allows you to run containerized applications without worrying about orchestra
 You write code using your preferred programming language or framework (in this workshop it's Java and Quarkus, but it can be anything), and build microservices with full support for Distributed Application Runtime (https://dapr.io/[Dapr]).
 Then, your containers will scale dynamically based on HTTP traffic or events powered by Kubernetes Event-Driven Autoscaling (https://keda.sh[KEDA]).
 
-There are already a few compute resources on Azure: from IAAS to FAAS.
-Azure Container Apps sits between PAAS and FAAS.
+There are already a few compute resources on Azure: from IaaS  to FaaS .
+Azure Container Apps sits between PaaS  and FaaS .
 On one hand, it feels more PaaS, because you are not forced into a specific programming model and you can control the rules on which to scale out / scale in.
 On the other hand, it has quite some serverless characteristics like scaling to zero, event-driven scaling, per second pricing and the ability to leverage Dapr's event-based bindings.
 
