@@ -46,13 +46,6 @@
             <artifactId>rest-assured</artifactId>
             <version>5.3.0</version>
             <scope>test</scope>
-            <exclusions>
-                <!-- Exclude Groovy because of classpath issue -->
-                <exclusion>
-                    <groupId>org.apache.groovy</groupId>
-                    <artifactId>groovy-xml</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
