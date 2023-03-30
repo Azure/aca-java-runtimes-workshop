@@ -2,11 +2,15 @@
 package io.containerapps.javaruntime.workshop.springboot;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, properties = {
     "server.port=8803",
@@ -14,95 +18,104 @@ import static org.hamcrest.CoreMatchers.*;
     "spring.datasource.username=postgres",
     "spring.datasource.password=password"
 })
-public class SpringbootResourceTest {
+class SpringbootResourceTest {
 
     private static String basePath = "http://localhost:8803/springboot";
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 // end::adocHeader[]
 
 // tag::adocTestHello[]
     @Test
     public void testHelloEndpoint() {
-        given()
-          .when().get(basePath)
-          .then()
-            .statusCode(200)
-            .body(is("Spring Boot: hello"));
+        ResponseEntity<String> response = this.restTemplate.
+            getForEntity(basePath, String.class);
+
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertThat(response.getBody()).contains("Spring Boot: hello");
     }
 // end::adocTestHello[]
 
     @Test
     public void testCpuEndpoint() {
-        given().param("iterations", 1)
-          .when().get(basePath + "/cpu")
-          .then()
-            .statusCode(200)
-            .body(startsWith("Spring Boot: CPU consumption is done with"))
-            .body(endsWith("nano-seconds."));
+        ResponseEntity<String> response = this.restTemplate.
+            getForEntity(basePath + "/cpu?iterations=1", String.class);
+
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertThat(response.getBody())
+            .startsWith("Spring Boot: CPU consumption is done with")
+            .endsWith("nano-seconds.");
     }
 
     @Test
     public void testCpuWithDBEndpoint() {
-        given().param("iterations", 1).param("db", true)
-          .when().get(basePath + "/cpu")
-          .then()
-            .statusCode(200)
-            .body(startsWith("Spring Boot: CPU consumption is done with"))
-            .body(endsWith("The result is persisted in the database."));
+        ResponseEntity<String> response = this.restTemplate.
+            getForEntity(basePath + "/cpu?iterations=1&db=true", String.class);
+
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertThat(response.getBody())
+            .startsWith("Spring Boot: CPU consumption is done with")
+            .endsWith("The result is persisted in the database.");
     }
 
 // tag::adocTestCPU[]
     @Test
     public void testCpuWithDBAndDescEndpoint() {
-        given().param("iterations", 1).param("db", true).param("desc", "Java17")
-          .when().get(basePath + "/cpu")
-          .then()
-            .statusCode(200)
-            .body(startsWith("Spring Boot: CPU consumption is done with"))
-            .body(not(containsString("Java17")))
-            .body(endsWith("The result is persisted in the database."));
+        ResponseEntity<String> response = this.restTemplate.
+            getForEntity(basePath + "/cpu?iterations=1&db=true&dec=Java17", String.class);
+
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertThat(response.getBody())
+            .startsWith("Spring Boot: CPU consumption is done with")
+            .doesNotContain("Java17")
+            .endsWith("The result is persisted in the database.");
     }
 // end::adocTestCPU[]
 
     @Test
     public void testMemoryEndpoint() {
-        given().param("bites", 1)
-          .when().get(basePath + "/memory")
-          .then()
-            .statusCode(200)
-            .body(startsWith("Spring Boot: Memory consumption is done with"))
-            .body(endsWith("nano-seconds."));
+        ResponseEntity<String> response = this.restTemplate.
+            getForEntity(basePath + "/memory?bites=1", String.class);
+
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertThat(response.getBody())
+            .startsWith("Spring Boot: Memory consumption is done with")
+            .endsWith("nano-seconds.");
     }
 
     @Test
     public void testMemoryWithDBEndpoint() {
-        given().param("bites", 1).param("db", true)
-          .when().get(basePath + "/memory")
-          .then()
-            .statusCode(200)
-            .body(startsWith("Spring Boot: Memory consumption is done with"))
-            .body(endsWith("The result is persisted in the database."));
+        ResponseEntity<String> response = this.restTemplate.
+            getForEntity(basePath + "/memory?bites=1&db=true", String.class);
+
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertThat(response.getBody())
+            .startsWith("Spring Boot: Memory consumption is done with")
+            .endsWith("The result is persisted in the database.");
     }
 
 // tag::adocTestMemory[]
     @Test
     public void testMemoryWithDBAndDescEndpoint() {
-        given().param("bites", 1).param("db", true).param("desc", "Java17")
-          .when().get(basePath + "/memory")
-          .then()
-            .statusCode(200)
-            .body(startsWith("Spring Boot: Memory consumption is done with"))
-            .body(not(containsString("Java17")))
-            .body(endsWith("The result is persisted in the database."));
+        ResponseEntity<String> response = this.restTemplate.
+            getForEntity(basePath + "/memory?bites=1&db=true&desc=Java17", String.class);
+
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertThat(response.getBody())
+            .startsWith("Spring Boot: Memory consumption is done with")
+            .doesNotContain("Java17")
+            .endsWith("The result is persisted in the database.");
     }
 // end::adocTestMemory[]
 
 // tag::adocTestStats[]
     @Test
     public void testStats() {
-        given()
-            .when().get(basePath + "/stats")
-            .then()
-            .statusCode(200);
+        ResponseEntity<String> response = this.restTemplate.
+            getForEntity(basePath + "/stats", String.class);
+
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
 // end::adocTestStats[]
 }
