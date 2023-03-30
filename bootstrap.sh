@@ -47,6 +47,8 @@ mvn io.quarkus:quarkus-maven-plugin:2.12.3.Final:create \
     -Dpath="/api/heroes" \
     -Dextensions="resteasy, resteasy-jsonb, hibernate-orm-panache, jdbc-postgresql"
 
+echo "### Bootstraps the Spring Boot App"
+curl https://start.spring.io/starter.tgz  -d bootVersion=3.0.5 -d javaVersion=17 -d dependencies=web,data-jpa,postgresql -d type=maven-project -d packageName=io.containerapps.javaruntime.workshop.springboot -d artifactId=springboot-app -d version=1.0.0-SNAPSHOT -d baseDir=springboot-app -d name=springboot -d groupId=io.containerapps.javaruntime.workshop -d description=Azure%20Container%20Apps%20and%20Java%20Runtimes%20Workshop%20%3A%3A%20Spring%20Boot | tar -xzvf -
 
 echo "### Running all the Tests"
 mvn test
