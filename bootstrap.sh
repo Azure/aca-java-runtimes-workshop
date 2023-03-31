@@ -32,10 +32,7 @@ echo -e "<?xml version=\"1.0\"?>
 
 
 echo "### Bootstraps the Micronaut App"
-mn create-app io.containerapps.javaruntime.workshop.micronaut.micronaut-app  \
-    --build=maven  \
-    --lang=java \
-    --java-version=17
+curl --location --request GET 'https://launch.micronaut.io/create/default/io.containerapps.javaruntime.workshop.micronaut.micronaut-app?lang=JAVA&build=MAVEN&test=JUNIT&javaVersion=JDK_17&features=data-jpa&features=postgres&features=testcontainers&features=micronaut-test-rest-assured' --output micronaut-app.zip && unzip micronaut-app.zip && rm micronaut-app.zip
 
 
 echo "### Bootstraps the Quarkus App"
