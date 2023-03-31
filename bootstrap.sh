@@ -39,12 +39,14 @@ mn create-app io.containerapps.javaruntime.workshop.micronaut.micronaut-app  \
 
 
 echo "### Bootstraps the Quarkus App"
-mvn io.quarkus:quarkus-maven-plugin:2.12.3.Final:create \
-    -DplatformVersion=2.12.3.Final \
+mvn io.quarkus:quarkus-maven-plugin:3.0.0.CR1:create \
+    -DplatformVersion=3.0.0.CR1 \
     -DprojectGroupId=io.containerapps.javaruntime.workshop \
     -DprojectArtifactId=quarkus-app \
+    -DprojectName="Azure Container Apps and Java Runtimes Workshop :: Quarkus" \
+    -DjavaVersion=17 \
     -DclassName="io.containerapps.javaruntime.workshop.quarkus.QuarkusResource" \
-    -Dpath="/api/heroes" \
+    -Dpath="/quarkus" \
     -Dextensions="resteasy, resteasy-jsonb, hibernate-orm-panache, jdbc-postgresql"
 
 echo "### Bootstraps the Spring Boot App"
