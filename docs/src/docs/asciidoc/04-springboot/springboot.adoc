@@ -140,7 +140,7 @@ include::{workshop-github-raw}/springboot-app/src/main/resources/application.pro
 Now, to make sure that the application works as expected, we need to write some tests.
 Remember that the tests need a PostgreSQL database to run.
 For that, we need to configure Testcontainers in a separate class (`SpringbootApplicationTest`).
-Create the `SpringbootApplicationTests` class under the `src/test/java/io/containerapps/javaruntime/workshop/springboot` package.
+Create the `SpringbootApplicationTests` class under the `src/test/java/io/containerapps/javaruntime/workshop/springboot` folder.
 
 [[springboot-listing-test]]
 .Test Class Configuring Testcontainers
