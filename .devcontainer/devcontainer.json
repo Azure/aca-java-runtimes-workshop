@@ -2,18 +2,22 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/java
 {
 	"name": "Java",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			// Update the VARIANT arg to pick a Java version: 11, 17
-			// Append -bullseye or -buster to pin to an OS version.
-			// Use the -bullseye variants on local arm64/Apple Silicon.
-			"VARIANT": "17-bullseye",
-			// Options
-			"INSTALL_MAVEN": "true",
-			"INSTALL_GRADLE": "false",
-			"NODE_VERSION": "lts/*"
-		}
+	"image": "mcr.microsoft.com/vscode/devcontainers/java:0-17-bullseye",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "none",
+			"installMaven": "true",
+			"installGradle": "false"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:1": {
+			"version": "20",
+			"moby": "false",
+			"dockerDashComposeVersion": "v2"
+		},
+		"ghcr.io/devcontainers/features/azure-cli:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 
 	// Configure tool-specific properties.
@@ -38,14 +42,10 @@
 	"forwardPorts": [8701, 8702, 8703],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "",
+	"postCreateCommand": "az config set extension.use_dynamic_install=yes_without_prompt && az extension add --name containerapp  --upgrade && az extension add --name rdbms-connect --upgrade && az extension add --name log-analytics --upgrade",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
-	"features": {
-		"git": "os-provided",
-		"docker-in-docker": "latest"
-	},
 
 	// At least 8gb of RAM is needed for GraalVM builds
 	"hostRequirements": {
