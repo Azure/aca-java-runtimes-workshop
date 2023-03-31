@@ -19,8 +19,8 @@ This is the root of the Spring Boot microservice source code that we will be usi
 == The Spring Boot REST Resource
 
 The Spring Boot application is a simple REST resource that exposes a single endpoint to consume memory and CPU.
-Before creating the REST resource, we need to add some code to the existing main Spring Boot class that will bootstrap the application.
-Add the following code to the `SpringbootApplication` under the `io/containerapps/javaruntime/workshop/springboot` package.
+Before creating the REST resource, let's check the existing main Spring Boot class that will bootstrap the application.
+Check the following code in the `SpringbootApplication` class under the `io/containerapps/javaruntime/workshop/springboot` package.
 
 [[springboot-listing-rest-resource]]
 .Bootstrapping Spring Boot Class
@@ -139,8 +139,8 @@ include::{workshop-github-raw}/springboot-app/src/main/resources/application.pro
 
 Now, to make sure that the application works as expected, we need to write some tests.
 Remember that the tests need a PostgreSQL database to run.
-For that, we need to configure Testcontainers in a separate class (`SpringbootApplicationTest`)
-Create the `SpringbootApplicationTests` class under the `src/test/java/io/containerapps/javaruntime/workshop/springboot` package.
+For that, we need to configure Testcontainers in a separate class (`SpringbootApplicationTest`).
+Create the `SpringbootApplicationTests` class under the `src/test/java/io/containerapps/javaruntime/workshop/springboot` folder.
 
 [[springboot-listing-test]]
 .Test Class Configuring Testcontainers
