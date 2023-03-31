@@ -18,8 +18,8 @@
     <jdk.version>17</jdk.version>
     <release.version>17</release.version>
     <micronaut.version>3.8.8</micronaut.version>
-    <micronaut.runtime>netty</micronaut.runtime>
     <micronaut.data.version>3.9.7</micronaut.data.version>
+    <micronaut.runtime>netty</micronaut.runtime>
     <exec.mainClass>io.containerapps.javaruntime.workshop.micronaut.Application</exec.mainClass>
   </properties>
 
@@ -84,6 +84,11 @@
     <dependency>
       <groupId>io.micronaut.test</groupId>
       <artifactId>micronaut-test-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut.test</groupId>
+      <artifactId>micronaut-test-rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

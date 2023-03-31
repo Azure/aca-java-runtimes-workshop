@@ -3,4 +3,4 @@ defaultPackage: io.containerapps.javaruntime.workshop.micronaut
 testFramework: junit
 sourceLanguage: java
 buildTool: maven
-features: [annotation-api, app-name, data, data-jpa, http-client, jackson-databind, java, java-application, jdbc-hikari, junit, logback, maven, netty-server, postgres, readme, shade, testcontainers, yaml]
+features: [annotation-api, app-name, data, data-jpa, http-client, jackson-databind, java, java-application, jdbc-hikari, junit, logback, maven, micronaut-test-rest-assured, netty-server, postgres, readme, shade, testcontainers, yaml]

@@ -6,14 +6,21 @@
 - [Micronaut Guides](https://guides.micronaut.io/index.html)
 ---
 
+## Feature testcontainers documentation
+
+- [https://www.testcontainers.org/](https://www.testcontainers.org/)
+
+
 ## Feature http-client documentation
 
 - [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
 
 
-## Feature testcontainers documentation
+## Feature micronaut-test-rest-assured documentation
 
-- [https://www.testcontainers.org/](https://www.testcontainers.org/)
+- [Micronaut Micronaut-Test REST-assured documentation](https://micronaut-projects.github.io/micronaut-test/latest/guide/#restAssured)
+
+- [https://rest-assured.io/#docs](https://rest-assured.io/#docs)
 
 
 ## Feature jdbc-hikari documentation
