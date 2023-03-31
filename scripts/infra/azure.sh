@@ -101,7 +101,7 @@ createInfrastructure() {
 # tag::adocEnvironmentVariables[]
   PROJECT="java-runtimes"
   RESOURCE_GROUP="rg-${PROJECT}"
-  LOCATION="northeurope"
+  LOCATION="westeurope"
   TAG="java-runtimes"
 
   LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
