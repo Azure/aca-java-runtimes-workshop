@@ -12,7 +12,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
 @MicronautTest
-class MicronautApplicationTest {
+class MicronautAppTest {
 
     private PostgreSQLContainer postgreSQLContainer;
 
@@ -31,4 +31,5 @@ class MicronautApplicationTest {
     void testItWorks() {
         Assertions.assertTrue(application.isRunning());
     }
+
 }

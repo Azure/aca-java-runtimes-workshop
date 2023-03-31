@@ -26,7 +26,7 @@ Create the `MicronautApplication` under the `io/containerapps/javaruntime/worksh
 .Bootstrapping Micronaut Class
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautApplication.java[]
+include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Application.java[]
 ----
 
 The REST resource is defined in the `MicronautResource` class.
@@ -140,18 +140,18 @@ include::{workshop-github-raw}/micronaut-app/src/main/resources/application.yml[
 
 Now, to make sure that the application works as expected, we need to write some tests.
 Remember that the tests need a PostgreSQL database to run.
-For that, we need to configure Testcontainers in a separate class (`MicronautApplicationTest`)
-Create the `MicronautApplicationTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` package.
+For that, we need to configure Testcontainers in a separate class (`MicronautAppTest`)
+Open the `MicronautAppTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` package.
 
 [[micronaut-listing-test]]
 .Test Class Configuring Testcontainers
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautApplicationTest.java[]
+include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautAppTest.java[]
 ----
 
 Then, all our tests go into the `MicronautResourceTest` class.
-Create the `MicronautResourceTest` class under the same package that `MicronautApplicationTest`.
+Create the `MicronautResourceTest` class under the same package that `MicronautAppTest`.
 
 [[micronaut-listing-test-1]]
 .Header of the Test Class
