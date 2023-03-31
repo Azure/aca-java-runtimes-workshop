@@ -201,8 +201,6 @@ jobs:
 
       - name: Build springboot-app with GraalVM
         run: |
-          # Required for Spring Boot 3 native build
-          sudo apt-get install -y libfreetype-dev
           cd springboot-app && ./mvnw -Pnative native:compile
 
       - name: Build springboot-app native Docker image
