@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build quarkus-app with GraalVM
         run: |
-          cd quarkus-app && ./mvnw -Pnative package
+          cd quarkus-app && ./mvnw -Pnative package -Dquarkus.native.container-build=true
       - name: Build quarkus-app native Docker image
         uses: docker/build-push-action@v4
         with:
