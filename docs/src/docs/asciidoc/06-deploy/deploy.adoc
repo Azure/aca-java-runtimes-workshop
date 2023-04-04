@@ -225,3 +225,23 @@ But then, the following `curl` invocations should be faster.
 ----
 include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocPingApps, indent=0]
 ----
+
+If you want to quickly check the logs of the applications, you can use the following Azure CLI commands (more on logs later):
+
+[source,shell]
+----
+az containerapp logs show \
+   --name "$QUARKUS_APP" \
+   --resource-group "$RESOURCE_GROUP" \
+   --format text
+
+az containerapp logs show \
+   --name "$MICRONAUT_APP" \
+   --resource-group "$RESOURCE_GROUP" \
+   --format text
+
+az containerapp logs show \
+   --name "$SPRING_APP" \
+   --resource-group "$RESOURCE_GROUP" \
+   --format text
+----
