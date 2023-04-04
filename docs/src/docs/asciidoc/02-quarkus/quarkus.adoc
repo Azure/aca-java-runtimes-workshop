@@ -200,6 +200,23 @@ All the tests should pass and you should see the following output:
 [INFO] ------------------------------------------------------------------------
 ----
 
+[WARNING]
+====
+If your test fail with the following error, it means that Docker Desktop is not running or that the `docker.sock` file is not available:
+
+[source,shell]
+----
+Previous attempts to find a Docker environment failed. Will not retry
+----
+
+To fix this, you need to create a symbolic link to the `docker.sock` file:
+
+[source,shell]
+----
+sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock
+----
+====
+
 == Running the Quarkus Application Locally
 
 Now that the tests are all green, let's execute the application locally and execute a few `curl` commands.
