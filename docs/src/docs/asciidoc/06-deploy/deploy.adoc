@@ -121,7 +121,7 @@ In GitHub, secrets can be defined at three different levels:
 - _Environment level_: secrets defined at the environment level are available only in workflows referencing the specified https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment[environment].
 
 For this workshop, we'll define our secrets at the repository level.
-To do so, go to the `Settings` tab of your repository, and select `Secrets` then `Actions` under it, in the left menu.
+To do so, go to the `Settings` tab of your repository, and select `Secrets and variables` then `Actions` under it, in the left menu.
 
 Then select `New repository secret` and create two secrets for `REGISTRY_USERNAME` and `REGISTRY_PASSWORD`.
 
