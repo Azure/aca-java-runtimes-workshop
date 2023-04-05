@@ -52,7 +52,7 @@ As native builds will replace the JVM builds, you need to disable the existing G
 - Click on the `Build and deploy to Azure Container Apps` workflow
 - Select the `...` button, and click on `Disable workflow`
 
-image::../images/github-actions-disable.png[Disable GitHub Actions]
+image::../assets/github-actions-disable.png[Disable GitHub Actions]
 
 == Building the Native Image of the Quarkus Application
 
@@ -121,7 +121,7 @@ Use the command `echo $REGISTRY_URL` to get the value of the variable.
 
 You can now `git push` your changes, and this new workflow should build a native image, and deploy this native image instead of the JVM image.
 
-image::../images/github-actions-native.png[Native build workflow]
+image::../assets/github-actions-native.png[Native build workflow]
 
 Good.
 Let's now create the same workflow for the Micronaut and Spring Boot applications before we do some performance tuning again.
@@ -236,11 +236,11 @@ After all your native images are built and deployed, let's run our load tests ag
 
 In the Azure Portal, search for `lt-java-runtimes` and select the Azure Load Testing instance we created before.
 
-image::../images/search-load-testing.png[Search for the Load Testing instance]
+image::../assets/search-load-testing.png[Search for the Load Testing instance]
 
 Select *Tests* in the left menu, then select the test we created earlier.
 
-image::../images/load-testing-run.png[Screenshot of the Load Testing interface showing the "run" button]
+image::../assets/load-testing-run.png[Screenshot of the Load Testing interface showing the "run" button]
 
 Click *Run* to start the tests again.
 
@@ -252,4 +252,4 @@ In the Azure Portal, select the *Dashboard* in the side menu, and select the "Ja
 
 You should now see the results of the load tests for the native images, and you can compare them to the previous results of the JVM images.
 
-image::../images/java-runtimes-dashboard-native.png[Screenshot of the Java Runtimes dashboard with JVM vs native tests]
+image::../assets/java-runtimes-dashboard-native.png[Screenshot of the Java Runtimes dashboard with JVM vs native tests]

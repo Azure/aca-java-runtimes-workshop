@@ -11,7 +11,7 @@ This includes:
 
 Open {template-github-url}[this GitHub repository,window=_blank] and click on `Use this template`.
 
-image::../images/github-template.png[Screenshot of GitHub showing the "Use this template" button]
+image::../assets/github-template.png[Screenshot of GitHub showing the "Use this template" button]
 
 You will be redirected to the repository creation page.
 Select the owner of the repository, enter a name for your new repository (eg.
@@ -32,7 +32,7 @@ If you want to work locally, first you need to clone the project on your machine
 1.
 Select the **Code** button, then copy your repository url.
 
-image::../images/github-clone.png[Screenshot of GitHub showing the repository URL]
+image::../assets/github-clone.png[Screenshot of GitHub showing the repository URL]
 
 2.
 Open a terminal and run:
@@ -48,7 +48,7 @@ include::setup-manually.adoc[]
 
 == Setting Up Your Environment in GitHub Codespaces
 
-GitHub Codespaces[https://github.com/features/codespaces] allows you to have an instant dev environment already prepared for this workshop.
+https://github.com/features/codespaces[GitHub Codespaces] allows you to have an instant dev environment already prepared for this workshop.
 
 [NOTE]
 ====
@@ -57,7 +57,7 @@ Codespaces includes up to 60 hours of free usage per month for all GitHub users,
 
 After your project created on GitHub, select the **Code** button, then the **Codespaces** tab and click on **Create Codespaces on main**.
 
-image::../images/create-codespaces.png[Screenshot of GitHub showing the Codespaces creation]
+image::../assets/create-codespaces.png[Screenshot of GitHub showing the Codespaces creation]
 
 This will start the creation of a dev container environment, which is a pre-configured container with all the needed tools installed. Once it's ready, you have everything you need to start coding for this workshop.
 
@@ -72,7 +72,7 @@ You can learn more about Dev Containers in https://learn.microsoft.com/shows/beg
 https://containers.dev[Check the website] and https://github.com/devcontainers/spec[the specification] if you want to know all the details of Dev Containers.
 ====
 
-image::../images/vscode-install.png[Screenshot of the VSCode Marketplace showing the Remote Development extension]
+image::../assets/vscode-install.png[Screenshot of the VSCode Marketplace showing the Remote Development extension]
 
 Click on the green *Install* button.
 This opens VSCode on the plugin page, ready to install the Remote Development extension.
@@ -80,15 +80,15 @@ Click on *Install*
 Then, open your project in VSCode.
 Open the *Command Palette* (View -> Command Palette) and enter "Rebuild and Reopen in Container".
 
-image::../images/vscode-command-pallette.png[]
+image::../assets/vscode-command-pallette.png[]
 
 The first time it will take some time to download and setup the container image, meanwhile you can go ahead and read the next sections.
 
-image::../images/vscode-install-containers.png[]
+image::../assets/vscode-install-containers.png[]
 
 Once the container is ready, you will see the following message in the bottom right corner of VSCode:
 
-image::../images/vscode-connected.png[]
+image::../assets/vscode-connected.png[]
 
 == Building the Initial Project
 

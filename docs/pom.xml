@@ -42,7 +42,7 @@
                     <attributes>
                         <project-version>${project.version}</project-version>
                         <allow-uri-read/>
-                        <imagesdir>./images</imagesdir>
+                        <imagesdir>./assets</imagesdir>
                         <revdate>${revision.date}</revdate>
                         <attribute-missing>warn</attribute-missing>
                         <doctype>book</doctype>

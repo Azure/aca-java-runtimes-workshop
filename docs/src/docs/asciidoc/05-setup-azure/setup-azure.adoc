@@ -178,7 +178,7 @@ include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistryShow, inde
 
 If you log into the https://portal.azure.com[Azure Portal] and search for the `rg-java-runtimes` resource group, you should see the following created resources.
 
-image::../images/azure-rg.png[Screenshot of Azure Portal showing the Java Runtimes resource group]
+image::../assets/azure-rg.png[Screenshot of Azure Portal showing the Java Runtimes resource group]
 
 === Creating the Container Apps environment
 
@@ -222,7 +222,7 @@ include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressHosts, ind
 Get these locations and copy them into a web browser.
 You should see the following page:
 
-image::../images/aca-hello.png[Screenshot of the Hello World page from the Azure Container Apps]
+image::../assets/aca-hello.png[Screenshot of the Hello World page from the Azure Container Apps]
 
 === Creating the Azure Database for PostgreSQL
 
@@ -238,7 +238,7 @@ include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresCreate, in
 
 At this stage, if you go back to the http://portal.azure.com[Azure Portal] you'll see the database deployed as well as the 3 container apps.
 
-image::../images/azure-rg-2.png[Screenshot of Azure Portal showing the database and apps]
+image::../assets/azure-rg-2.png[Screenshot of Azure Portal showing the database and apps]
 
 Now that we have our database setup, it's time to create the tables.
 We'll use a database initialization SQL file for that.

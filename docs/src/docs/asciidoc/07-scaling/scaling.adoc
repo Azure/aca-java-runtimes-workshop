@@ -36,18 +36,18 @@ We'll use the https://portal.azure.com[Azure portal] to create a nice dashboard 
 Open the http://portal.azure.com[Azure Portal] and navigate to the resource group `rg-java-runtimes` you created for your application.
 Select the `quarkus-app` container app, then select *Metrics* from the left menu, under the *Monitoring* group.
 
-image::../images/aca-metrics.png[Screenshot of the Azure portal showing the metrics panel for the container app]
+image::../assets/aca-metrics.png[Screenshot of the Azure portal showing the metrics panel for the container app]
 
 Using the *Metrics* panel, you can select which metrics you want to observe, and the time range for the data.
 Under the _Standard Metrics_ namespace, you can see the list of available built-in metrics for your application.
 You can also create https://learn.microsoft.com/azure/azure-monitor/essentials/metrics-custom-overview?[your own custom metrics].
 
-image::../images/standard-metrics.png[Screenshot of the Azure portal showing the list of standard metrics]
+image::../assets/standard-metrics.png[Screenshot of the Azure portal showing the list of standard metrics]
 
 Select "_CPU Usage_" from the list of metrics, choose "_Max_" for the *Aggregation* and select the last 30 minutes for the time range (in the top right of the panel).
 You can see the CPU and memory usage for your application.
 
-image::../images/metrics-cpu.png[Screenshot of the Azure portal showing the list of standard metrics]
+image::../assets/metrics-cpu.png[Screenshot of the Azure portal showing the list of standard metrics]
 
 === Creating charts for all services
 
@@ -61,11 +61,11 @@ Let's save this chart on the dashboard!
 
 Select *Save to dashboard* and choose *Pin to dashboard*:
 
-image::../images/metrics-save.png[Screenshot of the Azure portal showing the save to dashboard options]
+image::../assets/metrics-save.png[Screenshot of the Azure portal showing the save to dashboard options]
 
 In the _Pin to dashboard_ dialog, select *Create new* and give it a name, for example "Java Runtimes" then click *Create and pin*.
 
-image::../images/dashboard-create.png[Screenshot of the Azure portal showing the dashboard creation dialog]
+image::../assets/dashboard-create.png[Screenshot of the Azure portal showing the dashboard creation dialog]
 
 We'll also add charts to monitor the memory usage and number of replicas of our applications.
 
@@ -78,20 +78,20 @@ Don't forget to save this dashboard as well (select *Save to dashboard*, choose 
 
 When you're finished, in the http://portal.azure.com[Azure Portal] sidebar select *Dashboards* and choose the "_Java Runtimes_" dashboard we created earlier.
 
-image::../images/dashboard-select.png[Screenshot of Azure portal dashboard selection]
+image::../assets/dashboard-select.png[Screenshot of Azure portal dashboard selection]
 
 [NOTE]
 ====
 Depending on your setup, you might see the Azure Portal sidebar menu or not.
 If not, click on the burger menu at the very top left of the portal and you will see the Dashboard menu.
 
-image::../images/dashboard-burger.png[Screenshot of Azure portal burger menu]
+image::../assets/dashboard-burger.png[Screenshot of Azure portal burger menu]
 ====
 
 You should now see the 3 charts you just created.
 You can rearrange the charts by dragging them around, and resize them by dragging the bottom right corner.
 
-image::../images/dashboard-scale.png[Screenshot of dashboard showing metrics for our applications]
+image::../assets/dashboard-scale.png[Screenshot of dashboard showing metrics for our applications]
 
 == Logs
 
@@ -153,7 +153,7 @@ Select the `logs-java-runtimes` container app, then select *Logs* from the left 
 By default, you are presented a list of pre-defined queries.
 Close this panel by clicking on the *X* button on the top right corner, as we'll create our own query.
 
-image::../images/log-analytics.png[Screenshot of the Azure portal showing the logs analytics panel]
+image::../assets/log-analytics.png[Screenshot of the Azure portal showing the logs analytics panel]
 
 Log analytics queries use the https://docs.microsoft.com/en-us/azure/azure-monitor/log-query/query-language[Kusto query language], which is a SQL-like language.
 You can use the query language to filter the logs and get the information you need.
@@ -180,7 +180,7 @@ az containerapp revision list \
 Select *Run* to execute the query.
 You should see the logs of the `quarkus-app` container app.
 
-image::../images/log-analytics-query.png[Screenshot of the logs results in Azure portal]
+image::../assets/log-analytics-query.png[Screenshot of the logs results in Azure portal]
 
 For now, it's not very useful as it's the same logs we saw in the previous section.
 Let's add some filters to the query to search for error messages from the logs:
@@ -206,7 +206,7 @@ Oops! We're trying to allocate more memory than the container has available, res
 
 If you run the query again, you should see the error message in the logs:
 
-image::../images/log-analytics-error.png[Screenshot of the logs results in Azure portal]
+image::../assets/log-analytics-error.png[Screenshot of the logs results in Azure portal]
 
 [TIP]
 ====
@@ -229,7 +229,7 @@ ContainerAppConsoleLogs_CL
 
 And here we can quickly see our `OutOfMemoryError` error message.
 
-image::../images/log-analytics-error-2.png[Screenshot of the logs results in Azure portal]
+image::../assets/log-analytics-error-2.png[Screenshot of the logs results in Azure portal]
 
 We can save the query for later use by clicking on the *Save* button.
 You can then give it a name and a description, and a category to quickly find it later.
@@ -269,7 +269,7 @@ ContainerAppSystemLogs_CL
 
 You should see the system logs of the `quarkus-app` container app, covering the whole lifecycle of the container.
 
-image::../images/log-analytics-system.png[Screenshot of the logs results in Azure portal]
+image::../assets/log-analytics-system.png[Screenshot of the logs results in Azure portal]
 
 Using the CLI you can execute:
 
@@ -295,12 +295,12 @@ It is available on the https://azuremarketplace.microsoft.com[Azure Marketplace]
 
 To use Azure Load Testing, go to the https://portal.azure.com[Azure Portal], select *Create a resource* in the sidebar and search for "_Azure Load Testing_".
 
-image::../images/portal-create-resource-load-testing.png[Screenshot of searching for Azure Load Testing in Azure Portal]
+image::../assets/portal-create-resource-load-testing.png[Screenshot of searching for Azure Load Testing in Azure Portal]
 
 1.
 Select *Create*:
 
-image::../images/load-testing-create.png[Azure Load Testing creation screen]
+image::../assets/load-testing-create.png[Azure Load Testing creation screen]
 
 2.
 In the **Resource group** field, select the `rg-java-runtimes` that we created previously.
@@ -317,11 +317,11 @@ Select **Review + Create**, then **Create**.
 Creating a load testing resource can take a few moment.
 Once created, you should see the Azure Load Testing available in your resource group:
 
-image::../images/load-testing-group.png[Screenshot of Azure Load Testing in Resource group]
+image::../assets/load-testing-group.png[Screenshot of Azure Load Testing in Resource group]
 
 Select `lt-java-runtimes`, and then click on *Tests* and then *Create*.
 
-image::../images/load-testing-create-test.png[Screenshot of test creation]
+image::../assets/load-testing-create-test.png[Screenshot of test creation]
 
 1.
 You can either create a quick load test using a wizard, or create a load test using a JMeter script.
@@ -330,7 +330,7 @@ Choose this second option.
 2.
 Before uploading a JMeter script, create a load test by entering a name (eg. "_Add some load_"), a description and click on the "Test plan" tab:
 
-image::../images/load-testing-jmeter.png[Screenshot of test setup]
+image::../assets/load-testing-jmeter.png[Screenshot of test setup]
 
 3.
 Now that you are on the "Test plan" tab, you can upload the JMeter file (located under `scripts/jmeter/src/test/jmeter/load.jmx`) as well as the `user.properties` file.
@@ -365,7 +365,7 @@ MICRONAUT_PORT=443
 4.
 Select *Upload*, and choose "_User properties_" in the *File relevance* field of the `user.properties` file.
 
-image::../images/load-testing-upload.png[Screenshot of test plan setup]
+image::../assets/load-testing-upload.png[Screenshot of test plan setup]
 
 5.
 Select *Review + Create*, then *Create*.
@@ -375,7 +375,7 @@ Select *Review + Create*, then *Create*.
 After the test creation, it will start automatically after a short time.
 When the test run finishes, you will get some metrics:
 
-image::../images/load-testing-metrics.png[Screenshot of test run]
+image::../assets/load-testing-metrics.png[Screenshot of test run]
 
 In the http://portal.azure.com[Azure Portal] sidebar, select *Dashboards* and go back to the "_Java Runtimes_" dashboard we created earlier.
 
@@ -387,7 +387,7 @@ There might be a slight delay before the metrics are visible in the dashboard.
 If you take a look at the charts, you can see CPU and memory usage increase, and also that the number of replicas has increased from 1 replica to 10.
 Azure Container Apps has scaled automatically the application depending on the load.
 
-image::../images/dashboard-scale.png[Screenshot of dashboard showing load testing results]
+image::../assets/dashboard-scale.png[Screenshot of dashboard showing load testing results]
 
 == Scaling
 
@@ -424,7 +424,7 @@ include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocAutoScalingCpu, in
 
 This will automatically scale out the application when the CPU usage is above 10% (we set it low deliberately to make it easy to go up).
 
-image::../images/dashboard-scale-setcpu.png[Screenshot of setting up CPU scaler]
+image::../assets/dashboard-scale-setcpu.png[Screenshot of setting up CPU scaler]
 
 Go back to the http://portal.azure.com[Azure Portal], and search for `lt-java-runtimes` to open again our load testing instance.
 Select *Tests* in the left sidebar, open the test we created earlier and select *Run* to run the load tests again.
@@ -432,7 +432,7 @@ Select *Tests* in the left sidebar, open the test we created earlier and select 
 Once the test is finished, go back to the "_Java Runtimes_" dashboard and take a look at the number of replicas chart again.
 You should see that the number of replicas has increased to 10, and that the CPU usage has increased as well.
 
-image::../images/dashboard-scale-cpu.png[Screenshot of dashboard showing CPU scaler results]
+image::../assets/dashboard-scale-cpu.png[Screenshot of dashboard showing CPU scaler results]
 
 [NOTE]
 ====
@@ -453,14 +453,14 @@ include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocAutoScalingMemory,
 
 This will automatically scale out the application when the memory usage is above 15% (we set it low deliberately to make it easy to go up).
 
-image::../images/dashboard-scale-setmemory.png[Screenshot of setting up memory scaler]
+image::../assets/dashboard-scale-setmemory.png[Screenshot of setting up memory scaler]
 
 Again, go back to the http://portal.azure.com[Azure Portal] and run the load tests again.
 Open the dashboard when the test is finished, and take a look at the number of replicas chart again.
 
 You can now compare how the CPU (Quarkus), memory (Micronaut), and HTTP (Spring) triggers behave when scaling the application, under the same load.
 
-image::../images/dashboard-scale-memory.png[Screenshot of dashboard showing CPU scaler results]
+image::../assets/dashboard-scale-memory.png[Screenshot of dashboard showing CPU scaler results]
 
 As you can see, using different scaling triggers allows to tune the scaling behavior of your application, depending on the type of load you want to handle.
 Note that you're not limited to only one scaling trigger, you can use multiple triggers at the same time.

@@ -27,7 +27,7 @@ What you are going to do:
 Ready? Here we go!
 Check the workshop at {workshop-url} of flash the QR Code if you don't want to type.
 
-image::../images/qrcode-workshop.png[]
+image::../assets/qrcode-workshop.png[]
 
 == Presenting the Workshop
 
@@ -71,7 +71,7 @@ You will be developing 3 microservices, each doing the exact same thing (consumi
 * A repository used to store the results of the CPU and memory consuming algorithms
 * A statistics entity mapped to the relational database
 
-image::../images/welcome-develop.png[]
+image::../assets/welcome-develop.png[]
 
 === What Will You Be Deploying?
 
@@ -84,7 +84,7 @@ Once developed and tested locally, you will be packaging your microservices in D
 * You will then push these images to Azure Container Registry
 * Then you will deploy the Docker images of your microservices into the ACA environment
 
-image::../images/welcome-deploy.png[]
+image::../assets/welcome-deploy.png[]
 
 === Structure of the Workshop
 
@@ -136,7 +136,7 @@ Oh, and be ready to have some fun!
 // If you're attending this workshop at Devoxx BE, you can use this link to redeem an Azure Pass: {azure-pass-url}.
 // Once you have your code, copy it and click on the button *Get on board with Azure*, then follow the instructions.
 //
-// image::../images/qrcode-azure-pass.png[]
+// image::../assets/qrcode-azure-pass.png[]
 
 == Presenting Azure and Cloud Services
 
@@ -161,14 +161,14 @@ Azure Container Apps sits between PaaS  and FaaS .
 On one hand, it feels more PaaS, because you are not forced into a specific programming model and you can control the rules on which to scale out / scale in.
 On the other hand, it has quite some serverless characteristics like scaling to zero, event-driven scaling, per second pricing and the ability to leverage Dapr's event-based bindings.
 
-image::../images/azure-compute-services.png[Diagram showing the different compute resources on Azure]
+image::../assets/azure-compute-services.png[Diagram showing the different compute resources on Azure]
 
 Container Apps is built on top of Azure Kubernetes Service, including a deep integration with KEDA (event-driven auto scaling for Kubernetes), Dapr (distributed application runtime) and Envoy (a service proxy designed for cloud-native applications).
 The underlying complexity is completely abstracted for the end-user.
 So no need to configure your K8S service, deployment, ingress, volume manifests… You get a very simple API and user interface to configure the desired configuration for your containerized application.
 This simplification means also less control, hence the difference with AKS.
 
-image::../images/azure-container-apps.png[Diagram showing the architecture of Azure Container Apps]
+image::../assets/azure-container-apps.png[Diagram showing the architecture of Azure Container Apps]
 
 Azure Container Apps has the following features:
 
@@ -192,5 +192,5 @@ They share the same disk space and network.
 - _Revision_: this is an immutable snapshot of a Container App.
 New revisions are automatically created and are valuable for HTTP traffic redirection strategies, such as A/B testing.
 
-image::../images/aca-environment.png[Diagram showing the environment concept in Azure Container Apps]
+image::../assets/aca-environment.png[Diagram showing the environment concept in Azure Container Apps]
 

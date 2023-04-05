@@ -125,7 +125,7 @@ To do so, go to the `Settings` tab of your repository, and select `Secrets and v
 
 Then select `New repository secret` and create two secrets for `REGISTRY_USERNAME` and `REGISTRY_PASSWORD`.
 
-image::../images/github-secrets.png[Screenshot of GitHub interface showing the New repository secret button]
+image::../assets/github-secrets.png[Screenshot of GitHub interface showing the New repository secret button]
 
 You can get the value of the `REGISTRY_USERNAME` and `REGISTRY_PASSWORD` secrets by running the following commands:
 
@@ -136,7 +136,7 @@ include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocRegistryCredentia
 
 You will end up with something like this:
 
-image::../images/github-secrets-added.png[Screenshot of GitHub interface showing the added secrets]
+image::../assets/github-secrets-added.png[Screenshot of GitHub interface showing the added secrets]
 
 [TIP]
 ====
@@ -157,7 +157,7 @@ include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocCreatePrincipal, i
 
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value (make sure to *copy the entire JSon*).
 
-image::../images/github-secrets-added-2.png[Screenshot of GitHub interface showing the added secrets]
+image::../assets/github-secrets-added-2.png[Screenshot of GitHub interface showing the added secrets]
 
 === Updating the Container Apps target port
 
@@ -173,7 +173,7 @@ include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressUpdate, in
 
 If you want you can have a look at the https://portal.azure.com[Azure portal] to check that the target port has been updated.
 
-image::../images/portal-update-port.png[Screenshot of Azure Portal showing the updated target port]
+image::../assets/portal-update-port.png[Screenshot of Azure Portal showing the updated target port]
 
 === Running the workflow
 
@@ -199,13 +199,13 @@ include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistryUpdate, in
 ----
 ====
 
-image::../images/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
+image::../assets/github-actions.png[Screenshot of GitHub interface showing the Actions tab]
 
 If you want, you can check the Registry in the https://portal.azure.com[Azure portal].
 You will see that the images have been pushed to the registry.
 You can even check the content of the images by clicking on the `Tags` tab.
 
-image::../images/portal-registry.png[Screenshot of Azure Portal showing the container registry]
+image::../assets/portal-registry.png[Screenshot of Azure Portal showing the container registry]
 
 === Testing the deployed application
 
