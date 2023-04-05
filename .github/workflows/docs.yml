@@ -13,8 +13,7 @@ jobs:
     name: Build and Deploy
 
     permissions:
-      pages: write
-      id-token: write
+      contents: write
 
     environment:
       name: github-pages
@@ -47,14 +46,9 @@ jobs:
         mvn generate-resources
         npx -y @moaw/cli@latest convert docs/src/docs/asciidoc/index.adoc -a docs/src/docs/asciidoc/attributes.json -d docs/target/generated-docs/workshop.md
 
-    - name: Setup GitHub Pages
-      uses: actions/configure-pages@v2
-
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
-      with:
-        path: docs/target/generated-docs
-
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v1
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/target/generated-docs/
