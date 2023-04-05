@@ -1,6 +1,5 @@
 [[native]]
 = Going Native
-'''
 
 In this section you will:
 

@@ -1,8 +1,6 @@
 [[micronaut]]
 = Developing the Micronaut Application
 
-'''
-
 In this section you will:
 
 * Develop a REST API with Micronaut that consumes memory and CPU (the exact same algorithm than before)

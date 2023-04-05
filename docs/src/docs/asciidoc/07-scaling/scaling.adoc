@@ -1,8 +1,6 @@
 [[scaling]]
 = Load Testing, Scaling and Monitoring the Applications
 
-'''
-
 Our microservices have several endpoints consuming memory or CPU.
 Depending on the number of iterations and bites we pass as parameters to these endpoints, it can take significantly longer to respond.
 We are going to explore the problem by looking at CPU and memory metrics.

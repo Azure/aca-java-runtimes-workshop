@@ -1,8 +1,6 @@
 [[quarkus]]
 = Developing the Quarkus Application
 
-'''
-
 In this section you will:
 
 * Develop a REST API with Quarkus that consumes memory and CPU

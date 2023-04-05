@@ -1,8 +1,6 @@
 [[springboot]]
 = Developing the Spring Boot Application
 
-'''
-
 In this section you will:
 
 * Develop a REST API with Spring Boot that consumes memory and CPU (the exact same algorithm than before)
