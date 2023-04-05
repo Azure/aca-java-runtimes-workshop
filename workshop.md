@@ -397,8 +397,6 @@ Now that you have your development environment setup and that you can build the 
 
 ## Developing the Quarkus Application
 
-***
-
 In this section you will:
 
 - Develop a REST API with Quarkus that consumes memory and CPU
@@ -783,8 +781,6 @@ Now, let’s move to the Micronaut application.
 ---
 
 ## Developing the Micronaut Application
-
-***
 
 In this section you will:
 
@@ -1291,8 +1287,6 @@ We now have the Quarkus and Micronaut application fully tested, up and running, 
 ---
 
 ## Developing the Spring Boot Application
-
-***
 
 In this section you will:
 
@@ -2611,8 +2605,6 @@ az containerapp logs show \
 
 ## Load Testing, Scaling and Monitoring the Applications
 
-***
-
 Our microservices have several endpoints consuming memory or CPU.
 Depending on the number of iterations and bites we pass as parameters to these endpoints, it can take significantly longer to respond.
 We are going to explore the problem by looking at CPU and memory metrics.
@@ -3118,8 +3110,6 @@ az postgres flexible-server execute \
 ---
 
 ## Going Native
-
-***
 
 In this section you will:
 
