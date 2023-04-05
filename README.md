@@ -1,6 +1,6 @@
 # Azure Container Apps Java Runtimes Workshop
 
-[Check the Workshop](https://azure.github.io/aca-java-runtimes-workshop).
+[Check the Workshop](https://aka.ms/java-runtimes).
 
 ## Quarkus
 
