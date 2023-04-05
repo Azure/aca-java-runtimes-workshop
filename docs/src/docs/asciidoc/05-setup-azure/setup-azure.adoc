@@ -7,7 +7,7 @@ But before, you need an Azure subscription, and then you have to set up the Azur
 [WARNING]
 ====
 Azure Container Apps is not available in all the regions.
-To make sure you can follow this workshop, check if the region you are in supports Azure Container Apps by executing the following commandaz provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+To make sure you can follow this workshop, check if the region you are in supports Azure Container Apps by executing the following command
 
 [source,shell]
 ----
