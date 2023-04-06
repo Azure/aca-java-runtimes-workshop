@@ -44,7 +44,6 @@ git clone <your_repo_url>
 
 // Setup manually
 include::setup-manually.adoc[]
-<<<
 
 == Setting Up Your Environment in GitHub Codespaces
 
