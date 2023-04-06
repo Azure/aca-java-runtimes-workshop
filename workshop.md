@@ -300,9 +300,6 @@ If everything is installed correctly, you should see the version of each tool.
 
 </div>
 
-
----
-
 ### Setting Up Your Environment in GitHub Codespaces
 
 [GitHub Codespaces](https://github.com/features/codespaces) allows you to have an instant dev environment already prepared for this workshop.
