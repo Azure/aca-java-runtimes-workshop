@@ -406,6 +406,11 @@ This is the default scaling rule.
 - _Event-driven_: Event-based triggers such as messages in an Azure Service Bus.
 - _CPU_ or _Memory usage_: Scaling based on the amount of CPU or memory consumed by a replica.
 
+[NOTE]
+====
+By default, when you deploy a container app, it is set to scale from 0 to 10 replicas. The default scaling rule uses HTTP scaling and defaults to a minimum of 10 concurrent requests per second.
+====
+
 As our applications provides endpoints to load either the CPU or the memory, we will explore usage of the _CPU_ and _Memory usage_ triggers to scale our application.
 
 === Scaling based on CPU usage
