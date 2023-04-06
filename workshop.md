@@ -3546,5 +3546,3 @@ az group delete --name "$RESOURCE_GROUP"
 - [Create an issue if something does not work](https://github.com/Azure/aca-java-runtimes-workshop/issues)
 - [Deploy to Azure Container Apps Workshop](https://quarkus.io/quarkus-workshops/super-heroes/index-azure.html)
 - [Quarkus Super Heroes Workshop](https://quarkus.io/quarkus-workshops/super-heroes/index.html)
-
----
