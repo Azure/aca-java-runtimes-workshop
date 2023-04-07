@@ -2175,9 +2175,9 @@ POSTGRES_CONNECTION_STRING=$(
 echo "POSTGRES_CONNECTION_STRING=$POSTGRES_CONNECTION_STRING"
 ```
 
-<div class="info" data-title="note">
+<div class="tip" data-title="tip">
 
-> You need to append `ssl=true&sslmode=require` to the end of each connect string to force the driver to use ssl.
+> You can append `ssl=true&sslmode=require` to the end of the connection string to force the driver to use ssl.
 > 
 
 </div>
