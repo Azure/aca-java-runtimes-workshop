@@ -187,7 +187,7 @@ If during deployment, you get an error that looks like this:
 
 [source,shell]
 ----
-ERROR: (WebhookInvalidParameterValue) The following field(s) are either invalid or missing. Invalid value: "javaruntimesregistry....": GET https:?scope=repository....azurecr.io: UNAUTHORIZED: authentication required.
+ERROR: (WebhookInvalidParameterValue) The following field(s) are either invalid or missing. Invalid value: "crjavaruntimes....": GET https:?scope=repository....azurecr.io: UNAUTHORIZED: authentication required.
 ----
 
 It's because you didn't allow anonymous pull to the container registry.

@@ -16,7 +16,7 @@ on:
 
 env:
   # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
+  REGISTRY_URL: crjavaruntimessinedied.azurecr.io
   PROJECT: java-runtimes
   RESOURCE_GROUP: rg-java-runtimes
   QUARKUS_APP: quarkus-app

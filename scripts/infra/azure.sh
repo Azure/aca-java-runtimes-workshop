@@ -110,7 +110,7 @@ createInfrastructure() {
   # If you're using a dev container, you should manually set this to
   # a unique value (like your name) to avoid conflicts with other users.
   UNIQUE_IDENTIFIER=$(whoami)
-  REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
+  REGISTRY="crjavaruntimes${UNIQUE_IDENTIFIER}"
   IMAGES_TAG="1.0"
 
   POSTGRES_DB_ADMIN="javaruntimesadmin"
@@ -118,7 +118,7 @@ createInfrastructure() {
   POSTGRES_DB_VERSION="13"
   POSTGRES_SKU="Standard_B1ms"
   POSTGRES_TIER="Burstable"
-  POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
+  POSTGRES_DB="db-stats-$UNIQUE_IDENTIFIER"
   POSTGRES_DB_SCHEMA="stats"
   POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
 
