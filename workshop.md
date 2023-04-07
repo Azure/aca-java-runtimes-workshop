@@ -47,6 +47,7 @@ What you are going to do:
 - Analyze CPU load and scale containers appropriately
 - Analyze memory and scale containers appropriately
 - And much more!
+
 Ready? Here we go!
 Check the workshop at [https://aka.ms/java-runtimes](https://aka.ms/java-runtimes) of flash the QR Code if you don’t want to type.
 
@@ -104,6 +105,7 @@ You will be developing 3 microservices, each doing the exact same thing (consumi
 - A REST endpoint (used as an entry point) that will execute our CPU and memory consuming algorithms
 - A repository used to store the results of the CPU and memory consuming algorithms
 - A statistics entity mapped to the relational database
+
 ![welcome develop](./assets/welcome-develop.png)
 
 #### What Will You Be Deploying?
@@ -116,6 +118,7 @@ Once developed and tested locally, you will be packaging your microservices in D
 - You will package each microservice in Docker images and configure them so they can connect to the PostgreSQL database
 - You will then push these images to Azure Container Registry
 - Then you will deploy the Docker images of your microservices into the ACA environment
+
 ![welcome deploy](./assets/welcome-deploy.png)
 
 #### Structure of the Workshop
@@ -141,6 +144,7 @@ You will build Docker images out of our microservices, push them to Azure Regist
 In this section, you will add some load to your microservices, monitor them, scale them, check the logs, etc.
 - *Going Native*:
 In this section you will compile your microservices with GraalVM, package them, deploy them on ACA, and see how it impacts the performance.
+
 
 <div class="info" data-title="note">
 
@@ -175,6 +179,7 @@ For this workshop, we’ll use in particular the following services:
 - Azure Container Apps: a managed container service to run our microservices.
 - Azure Container Registry: a private container registry to store our Docker images.
 - Azure Database for PostgreSQL: a managed PostgreSQL database.
+
 #### What’s Azure Container Apps?
 
 [Azure Container Apps](https://azure.microsoft.com/products/container-apps/?WT.mc_id=javascript-0000-yolasors) is a fully managed serverless container service on Azure.
@@ -205,6 +210,7 @@ Azure Container Apps has the following features:
 - *Secrets*: deploy secrets that are securely shared between containers, scale rules and Dapr sidecars
 - *Monitoring*: the standard output and error streams are automatically written to Log Analytics
 - *Dapr*: through a simple flag, you can enable native Dapr integration for your Container Apps
+
 Azure Container Apps introduces the following concepts:
 
 - *Environment*: this is a secure boundary around a group of Container Apps.
@@ -214,6 +220,7 @@ An environment can be compared with a Kubernetes namespace.
 They share the same disk space and network.
 - *Revision*: this is an immutable snapshot of a Container App.
 New revisions are automatically created and are valuable for HTTP traffic redirection strategies, such as A/B testing.
+
 ![Diagram showing the environment concept in Azure Container Apps](./assets/aca-environment.png)
 
 
@@ -226,9 +233,10 @@ This includes:
 
 - Creating a new project on GitHub based on an existing GitHub template
 - Setting up your development environment, either by installing all the needed tools manually, or installing a few tools and relying on VSCode and Dev Containers (easier as everything is set up for you).
+
 ### Using the GitHub Template
 
-Open [this GitHub repository](https://github.com/Azure/aca-java-runtimes-workshop-template) and click on `Use this template`.
+Open [this GitHub repository](https://github.com/Azure/aca-java-runtimes-workshop-template), click on `Use this template` then `Create a new repository`.
 
 ![Screenshot of GitHub showing the "Use this template" button](./assets/github-template.png)
 
@@ -241,7 +249,8 @@ Once the repository is created, you have 3 options to work on the project:
 - You can work locally using your preferred IDE, but you will need to install all the tools manually.
 - You can work directly in [GitHub Codespaces](https://github.com/features/codespaces), without having to install anything on your machine.
 - You can work locally using VSCode, Docker and [Dev Containers](https://code.visualstudio.com/docs/remote/containers?WT.mc_id=javascript-0000-yolasors), so you have a pre-configured development environment.
-All these options are described in the following sections, pick the one that suits you best.
+
+All these options are described in the following sections. The fastest and easiest way is to use GitHub Codespaces, but you can pick the one that suits you best.
 
 If you want to work locally, first you need to clone the project on your machine using git (you can skip these steps if you choose to use GitHub Codespaces).
 
@@ -297,6 +306,7 @@ If everything is installed correctly, you should see the version of each tool.
 > - Install the **Windows Subsystem for Linux** (WSL) with a Linux distribution (eg. Ubuntu).
 > You can follow the instructions [here](https://learn.microsoft.com/windows/wsl/install?WT.mc_id=javascript-0000-yolasors).
 > - Use **Visual Studio Code** with the Dev Containers setup (see below).
+> 
 
 </div>
 
@@ -403,6 +413,7 @@ In this section you will:
 - Test the application locally
 - Run the application locally
 - Check a few metrics locally
+
 When you created your repository from the GitHub template, you should have a directory called `quarkus-app` in your current directory.
 This is the root of the Quarkus microservice source code that we will be using in this section.
 
@@ -460,6 +471,7 @@ Let’s now add a `cpu` method that consumes CPU depending on a few optional par
 - `db` if this parameter is set to true, the statistics are stored in the database.
 That allows us to check the impact of the database on the CPU consumption.
 - `desc` any optional description you want to persist in the database
+
 ```java
 @GET
 @Path("/cpu")
@@ -506,6 +518,7 @@ Now, add a `memory` method that consumes memory depending on a few optional para
 - `bites` the more bits you have, the more memory it consumes.
 - `db` if this parameter is set to true, the statistics are stored in the database.
 - `desc` any optional description you want to persist in the database
+
 ```java
 @GET
 @Path("/memory")
@@ -788,6 +801,7 @@ In this section you will:
 - Test the application locally
 - Run the application locally
 - Check a few metrics locally
+
 In your repository you should have another directory called `micronaut-app` .
 This is the root of the Micronaut microservice source code that we will be using in this section.
 
@@ -858,6 +872,7 @@ Let’s now add a `cpu` method that consumes CPU depending on a few optional par
 - `db` if this parameter is set to true, the statistics are stored in the database.
 That allows us to check the impact of the database on the CPU consumption.
 - `desc` any optional description you want to persist in the database
+
 ```java
 @Get(uri = "/cpu", produces = MediaType.TEXT_PLAIN)
 public String cpu(@QueryValue(value = "iterations", defaultValue = "10") Long iterations,
@@ -903,6 +918,7 @@ Now, add a `memory` method that consumes memory depending on a few optional para
 - `bites` the more bits you have, the more memory it consumes.
 - `db` if this parameter is set to true, the statistics are stored in the database.
 - `desc` any optional description you want to persist in the database
+
 ```java
 @Get(uri = "/memory", produces = MediaType.TEXT_PLAIN)
 public String memory(@QueryValue(value = "bites", defaultValue = "10") Integer bites,
@@ -1294,6 +1310,7 @@ In this section you will:
 - Test the application locally
 - Run the application locally
 - Check a few metrics locally
+
 In your repository you should have a directory called `springboot-app` .
 This is the root of the Spring Boot microservice source code that we will be using in this section.
 
@@ -1369,6 +1386,7 @@ Let’s now add a `cpu` method that consumes CPU depending on a few optional par
 - `db` if this parameter is set to true, the statistics are stored in the database.
 That allows us to check the impact of the database on the CPU consumption.
 - `desc` any optional description you want to persist in the database
+
 ```java
 @GetMapping(path = "/cpu", produces = MediaType.TEXT_PLAIN_VALUE)
 public String cpu(@RequestParam(value = "iterations", defaultValue = "10") Long iterations,
@@ -1414,6 +1432,7 @@ Now, add a `memory` method that consumes memory depending on a few optional para
 - `bites` the more bits you have, the more memory it consumes.
 - `db` if this parameter is set to true, the statistics are stored in the database.
 - `desc` any optional description you want to persist in the database
+
 ```java
 @GetMapping(path = "/memory", produces = MediaType.TEXT_PLAIN_VALUE)
 public String memory(@RequestParam(value = "bites", defaultValue = "10") Integer bites,
@@ -2257,6 +2276,7 @@ It will then run a `build` job the following steps:
 - Set up Java environment
 - Set up [Docker Buildx](https://docs.docker.com/engine/reference/commandline/buildx) for building our images
 - Log in to our container registry
+
 #### Building the applications
 
 Now we need to add the steps to build and package our apps.
@@ -2400,6 +2420,7 @@ In GitHub, secrets can be defined at three different levels:
 - *Repository level*: secrets defined at the repository level are available in all workflows of the repository.
 - *Organization level*: secrets defined at the organization level are available in all workflows of the [GitHub organization](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations).
 - *Environment level*: secrets defined at the environment level are available only in workflows referencing the specified [environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
+
 For this workshop, we’ll define our secrets at the repository level.
 To do so, go to the `Settings` tab of your repository, and select `Secrets and variables` then `Actions` under it, in the left menu.
 
@@ -2616,6 +2637,7 @@ When you know CPU usage you are better prepared to answer the following question
 - Is there room to grow without scaling out or up?
 - How much of the available CPU resources is it really using?
 - What type of load is it?
+
 ### Memory
 
 When you know memory usage you are better prepared to answer the following questions:
@@ -2625,6 +2647,7 @@ When you know memory usage you are better prepared to answer the following quest
 - What does the baseline of usage look like?
 - Is there room to grow without scaling out or up?
 - How much of the available memory resources is it really using?
+
 ### Monitoring
 
 One of the first thing you usually want to do once your application is deployed is to configure monitoring.
@@ -2707,6 +2730,7 @@ You get access to all logs from the [Log Analytics](https://learn.microsoft.com/
 Using SQL-like queries (called [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query?WT.mc_id=javascript-0000-yolasors), or KQL), you can filter the logs and get the information you need across all your applications, revisions, and instances.
 - Finally, you also have access to the *system logs*, which are the logs of the container host.
 It’s very useful to troubleshoot issues with the container host itself and find out why your container is not running.
+
 #### Streaming logs of a container instance
 
 The most straightforward way to access the logs of your application is to connect to a given container instance and get the stream of console logs.
@@ -2995,6 +3019,7 @@ This is the default scaling rule.
 - *Event-driven*: Event-based triggers such as messages in an Azure Service Bus.
 - *CPU* or *Memory usage*: Scaling based on the amount of CPU or memory consumed by a replica.
 
+
 <div class="info" data-title="note">
 
 > By default, when you deploy a container app, it is set to scale from 0 to 10 replicas. The default scaling rule uses HTTP scaling and defaults to a minimum of 10 concurrent requests per second.
@@ -3122,6 +3147,7 @@ In this section you will:
 - Build a GraalVM native image of the Quarkus application, and deploy it
 - Build a GraalVM native image of the Micronaut application, and deploy it
 - Build a GraalVM native image of the Spring Boot application, and deploy it
+
 The 3 native image builds are extremely similar, so don’t be surprised if there is some repetition in the instructions.
 
 ### What is GraalVM
@@ -3162,6 +3188,7 @@ As native builds will replace the JVM builds, you need to disable the existing G
 - In the GitHub UI, go to the `Actions` tab
 - Click on the `Build and deploy to Azure Container Apps` workflow
 - Select the `…​` button, and click on `Disable workflow`
+
 ![Disable GitHub Actions](./assets/github-actions-disable.png)
 
 ### Building the Native Image of the Quarkus Application
