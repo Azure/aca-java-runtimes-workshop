@@ -435,113 +435,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-/*! Stylesheet for CodeRay to loosely match GitHub themes | MIT License */
-pre.CodeRay{background:#f7f7f8}
-.CodeRay .line-numbers{border-right:1px solid;opacity:.35;padding:0 .5em 0 0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
-.CodeRay .line-numbers strong{color:#000}
-table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.CodeRay td{vertical-align:top;line-height:inherit}
-table.CodeRay td.line-numbers{text-align:right}
-table.CodeRay td.code{padding:0 0 0 .75em}
-.CodeRay .debug{color:#fff!important;background:navy!important}
-.CodeRay .annotation{color:#007}
-.CodeRay .attribute-name{color:navy}
-.CodeRay .attribute-value{color:#700}
-.CodeRay .binary{color:#509}
-.CodeRay .comment{color:#998;font-style:italic}
-.CodeRay .char{color:#04d}
-.CodeRay .char .content{color:#04d}
-.CodeRay .char .delimiter{color:#039}
-.CodeRay .class{color:#458;font-weight:bold}
-.CodeRay .complex{color:#a08}
-.CodeRay .constant,.CodeRay .predefined-constant{color:teal}
-.CodeRay .color{color:#099}
-.CodeRay .class-variable{color:#369}
-.CodeRay .decorator{color:#b0b}
-.CodeRay .definition{color:#099}
-.CodeRay .delimiter{color:#000}
-.CodeRay .doc{color:#970}
-.CodeRay .doctype{color:#34b}
-.CodeRay .doc-string{color:#d42}
-.CodeRay .escape{color:#666}
-.CodeRay .entity{color:#800}
-.CodeRay .error{color:#808}
-.CodeRay .exception{color:inherit}
-.CodeRay .filename{color:#099}
-.CodeRay .function{color:#900;font-weight:bold}
-.CodeRay .global-variable{color:teal}
-.CodeRay .hex{color:#058}
-.CodeRay .integer,.CodeRay .float{color:#099}
-.CodeRay .include{color:#555}
-.CodeRay .inline{color:#000}
-.CodeRay .inline .inline{background:#ccc}
-.CodeRay .inline .inline .inline{background:#bbb}
-.CodeRay .inline .inline-delimiter{color:#d14}
-.CodeRay .inline-delimiter{color:#d14}
-.CodeRay .important{color:#555;font-weight:bold}
-.CodeRay .interpreted{color:#b2b}
-.CodeRay .instance-variable{color:teal}
-.CodeRay .label{color:#970}
-.CodeRay .local-variable{color:#963}
-.CodeRay .octal{color:#40e}
-.CodeRay .predefined{color:#369}
-.CodeRay .preprocessor{color:#579}
-.CodeRay .pseudo-class{color:#555}
-.CodeRay .directive{font-weight:bold}
-.CodeRay .type{font-weight:bold}
-.CodeRay .predefined-type{color:inherit}
-.CodeRay .reserved,.CodeRay .keyword{color:#000;font-weight:bold}
-.CodeRay .key{color:#808}
-.CodeRay .key .delimiter{color:#606}
-.CodeRay .key .char{color:#80f}
-.CodeRay .value{color:#088}
-.CodeRay .regexp .delimiter{color:#808}
-.CodeRay .regexp .content{color:#808}
-.CodeRay .regexp .modifier{color:#808}
-.CodeRay .regexp .char{color:#d14}
-.CodeRay .regexp .function{color:#404;font-weight:bold}
-.CodeRay .string{color:#d20}
-.CodeRay .string .string .string{background:#ffd0d0}
-.CodeRay .string .content{color:#d14}
-.CodeRay .string .char{color:#d14}
-.CodeRay .string .delimiter{color:#d14}
-.CodeRay .shell{color:#d14}
-.CodeRay .shell .delimiter{color:#d14}
-.CodeRay .symbol{color:#990073}
-.CodeRay .symbol .content{color:#a60}
-.CodeRay .symbol .delimiter{color:#630}
-.CodeRay .tag{color:teal}
-.CodeRay .tag-special{color:#d70}
-.CodeRay .variable{color:#036}
-.CodeRay .insert{background:#afa}
-.CodeRay .delete{background:#faa}
-.CodeRay .change{color:#aaf;background:#007}
-.CodeRay .head{color:#f8f;background:#505}
-.CodeRay .insert .insert{color:#080}
-.CodeRay .delete .delete{color:#800}
-.CodeRay .change .change{color:#66f}
-.CodeRay .head .head{color:#f4f}
-</style>
 </head>
-<body id="micronaut" class="book toc2 toc-left">
+<body id="micronaut" class="article">
 <div id="header">
 <h1>Developing the Micronaut Application</h1>
 <div class="details">
 <span id="revdate"></span>
-</div>
-<div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#the-micronaut-rest-resource">The Micronaut REST Resource</a></li>
-<li><a href="#transactions-and-orm">Transactions and ORM</a></li>
-<li><a href="#compiling-the-micronaut-application">Compiling the Micronaut Application</a></li>
-<li><a href="#configuring-the-micronaut-application">Configuring the Micronaut Application</a></li>
-<li><a href="#testing-the-micronaut-application-locally">Testing the Micronaut Application Locally</a></li>
-<li><a href="#running-the-micronaut-application-locally">Running the Micronaut Application Locally</a></li>
-</ul>
 </div>
 </div>
 <div id="content">
@@ -582,7 +481,7 @@ This is the root of the Micronaut microservice source code that we will be using
 </div>
 </div>
 <div class="sect1">
-<h2 id="the-micronaut-rest-resource"><a class="anchor" href="#the-micronaut-rest-resource"></a><a class="link" href="#the-micronaut-rest-resource">The Micronaut REST Resource</a></h2>
+<h2 id="the-micronaut-rest-resource"><a class="anchor" href="#the-micronaut-rest-resource"></a>The Micronaut REST Resource</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Micronaut application is also made of a simple REST resource that exposes the endpoints that consume memory and CPU.
@@ -590,18 +489,9 @@ Before creating the REST resource, we need to create a main Micronaut class that
 Open the <code>Application</code> class under the <code>io/containerapps/javaruntime/workshop/micronaut</code> package.</p>
 </div>
 <div id="micronaut-listing-rest-resource" class="listingblock">
-<div class="title">Listing 1. Bootstrapping Micronaut Class</div>
+<div class="title">Bootstrapping Micronaut Class</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.micronaut</span>;
-
-<span class="keyword">import</span> <span class="include">io.micronaut.runtime.Micronaut</span>;
-
-<span class="directive">public</span> <span class="type">class</span> <span class="class">Application</span> {
-
-    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> main(<span class="predefined-type">String</span><span class="type">[]</span> args) {
-        Micronaut.run(Application.class, args);
-    }
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Application.java[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -610,35 +500,9 @@ Create a new file called <code>MicronautResource.java</code> under the <code>src
 As you can see in the header of the class, the resource is exposed on the <code>/micronaut</code> path.</p>
 </div>
 <div id="micronaut-listing-rest-resource-1" class="listingblock">
-<div class="title">Listing 2. Header of the Micronaut REST Resource</div>
+<div class="title">Header of the Micronaut REST Resource</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.micronaut</span>;
-
-<span class="keyword">import</span> <span class="include">io.micronaut.http.MediaType</span>;
-<span class="keyword">import</span> <span class="include">io.micronaut.http.annotation.Controller</span>;
-<span class="keyword">import</span> <span class="include">io.micronaut.http.annotation.Get</span>;
-<span class="keyword">import</span> <span class="include">io.micronaut.http.annotation.QueryValue</span>;
-
-<span class="keyword">import</span> <span class="include">java.lang.System.Logger</span>;
-<span class="keyword">import</span> <span class="include">java.time.Duration</span>;
-<span class="keyword">import</span> <span class="include">java.time.Instant</span>;
-<span class="keyword">import</span> <span class="include">java.util.ArrayList</span>;
-<span class="keyword">import</span> <span class="include">java.util.HashMap</span>;
-<span class="keyword">import</span> <span class="include">java.util.List</span>;
-
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">java.lang.System.Logger.Level.INFO</span>;
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">java.lang.invoke.MethodHandles.lookup</span>;
-
-<span class="annotation">@Controller</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/micronaut</span><span class="delimiter">&quot;</span></span>)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">MicronautResource</span> {
-
-    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">Logger</span> LOGGER = <span class="predefined-type">System</span>.getLogger(lookup().lookupClass().getName());
-
-    <span class="directive">private</span> <span class="directive">final</span> StatisticsRepository repository;
-
-    <span class="directive">public</span> MicronautResource(StatisticsRepository statisticsRepository) {
-        <span class="local-variable">this</span>.repository = statisticsRepository;
-    }
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocHeader]
 }</code></pre>
 </div>
 </div>
@@ -646,13 +510,9 @@ As you can see in the header of the class, the resource is exposed on the <code>
 <p>Let&#8217;s add a <code>hello</code> method returning <em>Hello World</em> so we can quickly check if our endpoint responds or not.</p>
 </div>
 <div id="micronaut-listing-rest-resource-2" class="listingblock">
-<div class="title">Listing 3. Hello Method</div>
+<div class="title">Hello Method</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Get</span>(produces = MediaType.TEXT_PLAIN)
-<span class="directive">public</span> <span class="predefined-type">String</span> hello() {
-    LOGGER.log(INFO, <span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: hello</span><span class="delimiter">&quot;</span></span>);
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: hello</span><span class="delimiter">&quot;</span></span>;
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodHello]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -673,46 +533,9 @@ That allows us to check the impact of the database on the CPU consumption.</p>
 </ul>
 </div>
 <div id="micronaut-listing-rest-resource-3" class="listingblock">
-<div class="title">Listing 4. CPU Method</div>
+<div class="title">CPU Method</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Get</span>(uri = <span class="string"><span class="delimiter">&quot;</span><span class="content">/cpu</span><span class="delimiter">&quot;</span></span>, produces = MediaType.TEXT_PLAIN)
-<span class="directive">public</span> <span class="predefined-type">String</span> cpu(<span class="annotation">@QueryValue</span>(value = <span class="string"><span class="delimiter">&quot;</span><span class="content">iterations</span><span class="delimiter">&quot;</span></span>, defaultValue = <span class="string"><span class="delimiter">&quot;</span><span class="content">10</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Long</span> iterations,
-                  <span class="annotation">@QueryValue</span>(value = <span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>, defaultValue = <span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Boolean</span> db,
-                  <span class="annotation">@QueryValue</span>(value = <span class="string"><span class="delimiter">&quot;</span><span class="content">desc</span><span class="delimiter">&quot;</span></span>, defaultValue = <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> desc) {
-    LOGGER.log(INFO, <span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: cpu: {0} {1} with desc {2}</span><span class="delimiter">&quot;</span></span>, iterations, db, desc);
-    <span class="predefined-type">Long</span> iterationsDone = iterations;
-
-    Instant start = Instant.now();
-    <span class="keyword">if</span> (iterations == <span class="predefined-constant">null</span>) {
-        iterations = <span class="integer">20000L</span>;
-    } <span class="keyword">else</span> {
-        iterations *= <span class="integer">20000</span>;
-    }
-    <span class="keyword">while</span> (iterations &gt; <span class="integer">0</span>) {
-        <span class="keyword">if</span> (iterations % <span class="integer">20000</span> == <span class="integer">0</span>) {
-            <span class="keyword">try</span> {
-                <span class="predefined-type">Thread</span>.sleep(<span class="integer">20</span>);
-            } <span class="keyword">catch</span> (<span class="exception">InterruptedException</span> ie) {
-            }
-        }
-        iterations--;
-    }
-
-    <span class="keyword">if</span> (db) {
-        Statistics statistics = <span class="keyword">new</span> Statistics();
-        statistics.type = <span class="predefined-type">Type</span>.CPU;
-        statistics.parameter = iterations.toString();
-        statistics.duration = <span class="predefined-type">Duration</span>.between(start, Instant.now());
-        statistics.description = desc;
-        repository.save(statistics);
-    }
-
-    <span class="predefined-type">String</span> msg = <span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: CPU consumption is done with </span><span class="delimiter">&quot;</span></span> + iterationsDone + <span class="string"><span class="delimiter">&quot;</span><span class="content"> iterations in </span><span class="delimiter">&quot;</span></span> + <span class="predefined-type">Duration</span>.between(start, Instant.now()).getNano() + <span class="string"><span class="delimiter">&quot;</span><span class="content"> nano-seconds.</span><span class="delimiter">&quot;</span></span>;
-    <span class="keyword">if</span> (db) {
-        msg += <span class="string"><span class="delimiter">&quot;</span><span class="content"> The result is persisted in the database.</span><span class="delimiter">&quot;</span></span>;
-    }
-    <span class="keyword">return</span> msg;
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodCPU]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -732,59 +555,18 @@ That allows us to check the impact of the database on the CPU consumption.</p>
 </ul>
 </div>
 <div id="micronaut-listing-rest-resource-4" class="listingblock">
-<div class="title">Listing 5. Memory Method</div>
+<div class="title">Memory Method</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Get</span>(uri = <span class="string"><span class="delimiter">&quot;</span><span class="content">/memory</span><span class="delimiter">&quot;</span></span>, produces = MediaType.TEXT_PLAIN)
-<span class="directive">public</span> <span class="predefined-type">String</span> memory(<span class="annotation">@QueryValue</span>(value = <span class="string"><span class="delimiter">&quot;</span><span class="content">bites</span><span class="delimiter">&quot;</span></span>, defaultValue = <span class="string"><span class="delimiter">&quot;</span><span class="content">10</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Integer</span> bites,
-                     <span class="annotation">@QueryValue</span>(value = <span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>, defaultValue = <span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Boolean</span> db,
-                     <span class="annotation">@QueryValue</span>(value = <span class="string"><span class="delimiter">&quot;</span><span class="content">desc</span><span class="delimiter">&quot;</span></span>, defaultValue = <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> desc) {
-    LOGGER.log(INFO, <span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: memory: {0} {1} with desc {2}</span><span class="delimiter">&quot;</span></span>, bites, db, desc);
-
-    Instant start = Instant.now();
-    <span class="keyword">if</span> (bites == <span class="predefined-constant">null</span>) {
-        bites = <span class="integer">1</span>;
-    }
-    <span class="predefined-type">HashMap</span> hunger = <span class="keyword">new</span> <span class="predefined-type">HashMap</span>&lt;&gt;();
-    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; bites * <span class="integer">1024</span> * <span class="integer">1024</span>; i += <span class="integer">8192</span>) {
-        <span class="type">byte</span><span class="type">[]</span> bytes = <span class="keyword">new</span> <span class="type">byte</span>[<span class="integer">8192</span>];
-        hunger.put(i, bytes);
-        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="integer">0</span>; j &lt; <span class="integer">8192</span>; j++) {
-            bytes[j] = <span class="string"><span class="delimiter">'</span><span class="content">0</span><span class="delimiter">'</span></span>;
-        }
-    }
-
-    <span class="keyword">if</span> (db) {
-        Statistics statistics = <span class="keyword">new</span> Statistics();
-        statistics.type = <span class="predefined-type">Type</span>.MEMORY;
-        statistics.parameter = bites.toString();
-        statistics.duration = <span class="predefined-type">Duration</span>.between(start, Instant.now());
-        statistics.description = desc;
-        repository.save(statistics);
-    }
-
-    <span class="predefined-type">String</span> msg = <span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: Memory consumption is done with </span><span class="delimiter">&quot;</span></span> + bites + <span class="string"><span class="delimiter">&quot;</span><span class="content"> bites in </span><span class="delimiter">&quot;</span></span> + <span class="predefined-type">Duration</span>.between(start, Instant.now()).getNano() + <span class="string"><span class="delimiter">&quot;</span><span class="content"> nano-seconds.</span><span class="delimiter">&quot;</span></span>;
-    <span class="keyword">if</span> (db) {
-        msg += <span class="string"><span class="delimiter">&quot;</span><span class="content"> The result is persisted in the database.</span><span class="delimiter">&quot;</span></span>;
-    }
-    <span class="keyword">return</span> msg;
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodMemory]</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s also create a method to retrieve the statistics from the database.</p>
 </div>
 <div id="micronaut-listing-rest-resource-5" class="listingblock">
-<div class="title">Listing 6. Method Returning all the Statistics</div>
+<div class="title">Method Returning all the Statistics</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Get</span>(uri = <span class="string"><span class="delimiter">&quot;</span><span class="content">/stats</span><span class="delimiter">&quot;</span></span>, produces = MediaType.APPLICATION_JSON)
-<span class="directive">public</span> <span class="predefined-type">List</span>&lt;Statistics&gt; stats() {
-    LOGGER.log(INFO, <span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: retrieving statistics</span><span class="delimiter">&quot;</span></span>);
-    <span class="predefined-type">List</span>&lt;Statistics&gt; result = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;Statistics&gt;();
-    <span class="keyword">for</span> (Statistics stats : repository.findAll()) {
-        result.add(stats);
-    }
-    <span class="keyword">return</span> result;
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodStats]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -794,7 +576,7 @@ Let&#8217;s create them now.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="transactions-and-orm"><a class="anchor" href="#transactions-and-orm"></a><a class="link" href="#transactions-and-orm">Transactions and ORM</a></h2>
+<h2 id="transactions-and-orm"><a class="anchor" href="#transactions-and-orm"></a>Transactions and ORM</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When the database is enabled, the statistics are stored in the database.
@@ -802,49 +584,9 @@ For that we need a <code>Statistics</code> entity with a few enumerations that w
 Create the <code>Statistics</code> entity in the <code>src/main/java/io/containerapps/javaruntime/workshop/micronaut</code> directory.</p>
 </div>
 <div id="micronaut-listing-entity" class="listingblock">
-<div class="title">Listing 7. Statistics Entity</div>
+<div class="title">Statistics Entity</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.micronaut</span>;
-
-<span class="keyword">import</span> <span class="include">javax.persistence.Column</span>;
-<span class="keyword">import</span> <span class="include">javax.persistence.Entity</span>;
-<span class="keyword">import</span> <span class="include">javax.persistence.GeneratedValue</span>;
-<span class="keyword">import</span> <span class="include">javax.persistence.Id</span>;
-<span class="keyword">import</span> <span class="include">javax.persistence.Table</span>;
-<span class="keyword">import</span> <span class="include">java.time.Duration</span>;
-<span class="keyword">import</span> <span class="include">java.time.Instant</span>;
-
-<span class="annotation">@Entity</span>
-<span class="annotation">@Table</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">Statistics_Micronaut</span><span class="delimiter">&quot;</span></span>)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">Statistics</span> {
-
-    <span class="annotation">@GeneratedValue</span>
-    <span class="annotation">@Id</span>
-    <span class="directive">private</span> <span class="predefined-type">Long</span> id;
-    <span class="annotation">@Column</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">done_at</span><span class="delimiter">&quot;</span></span>)
-    <span class="directive">public</span> Instant doneAt = Instant.now();
-    <span class="directive">public</span> Framework framework = Framework.MICRONAUT;
-    <span class="directive">public</span> <span class="predefined-type">Type</span> type;
-    <span class="directive">public</span> <span class="predefined-type">String</span> parameter;
-    <span class="directive">public</span> <span class="predefined-type">Duration</span> duration;
-    <span class="directive">public</span> <span class="predefined-type">String</span> description;
-
-    <span class="directive">public</span> <span class="predefined-type">Long</span> getId() {
-        <span class="keyword">return</span> id;
-    }
-
-    <span class="directive">public</span> <span class="type">void</span> setId(<span class="predefined-type">Long</span> id) {
-        <span class="local-variable">this</span>.id = id;
-    }
-}
-
-<span class="type">enum</span> <span class="predefined-type">Type</span> {
-    CPU, MEMORY
-}
-
-<span class="type">enum</span> Framework {
-    QUARKUS, MICRONAUT, SPRINGBOOT
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Statistics.java[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -852,22 +594,15 @@ Create the <code>Statistics</code> entity in the <code>src/main/java/io/containe
 Create the <code>StatisticsRepository</code> class under the same package.</p>
 </div>
 <div id="micronaut-listing-repository" class="listingblock">
-<div class="title">Listing 8. Statistics Repository</div>
+<div class="title">Statistics Repository</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.micronaut</span>;
-
-<span class="keyword">import</span> <span class="include">io.micronaut.data.annotation.Repository</span>;
-<span class="keyword">import</span> <span class="include">io.micronaut.data.repository.CrudRepository</span>;
-
-<span class="annotation">@Repository</span>
-<span class="type">interface</span> <span class="class">StatisticsRepository</span> <span class="directive">extends</span> CrudRepository&lt;Statistics, <span class="predefined-type">Long</span>&gt; {
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/StatisticsRepository.java[]</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="compiling-the-micronaut-application"><a class="anchor" href="#compiling-the-micronaut-application"></a><a class="link" href="#compiling-the-micronaut-application">Compiling the Micronaut Application</a></h2>
+<h2 id="compiling-the-micronaut-application"><a class="anchor" href="#compiling-the-micronaut-application"></a>Compiling the Micronaut Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You should have all the code to compile the application.
@@ -875,13 +610,13 @@ To make sure you have all the code and dependencies, run the following command:<
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">mvn compile</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">mvn compile</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="configuring-the-micronaut-application"><a class="anchor" href="#configuring-the-micronaut-application"></a><a class="link" href="#configuring-the-micronaut-application">Configuring the Micronaut Application</a></h2>
+<h2 id="configuring-the-micronaut-application"><a class="anchor" href="#configuring-the-micronaut-application"></a>Configuring the Micronaut Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We need to configure the default PostgreSQL database and Hibernate ORM.
@@ -890,41 +625,15 @@ Notice that we use non-blocking threads (<code>thread-selection: IO</code>).
 Add the following to the <code>src/main/resources/application.yml</code> file.</p>
 </div>
 <div id="micronaut-listing-config" class="listingblock">
-<div class="title">Listing 9. Configuration Properties</div>
+<div class="title">Configuration Properties</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">micronaut</span>:
-  <span class="key">application</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">MicronautApp</span></span>
-  <span class="key">server</span>:
-    <span class="key">port</span>: <span class="string"><span class="content">8702</span></span>
-    <span class="key">thread-selection</span>: <span class="string"><span class="content">IO</span></span>
-<span class="key">netty</span>:
-  <span class="key">default</span>:
-    <span class="key">allocator</span>:
-      <span class="key">max-order</span>: <span class="string"><span class="content">3</span></span>
-<span class="key">datasources</span>:
-  <span class="key">default</span>:
-    <span class="key">dialect</span>: <span class="string"><span class="content">POSTGRES</span></span>
-    <span class="key">url</span>: <span class="string"><span class="content">jdbc:postgresql://localhost:5432/postgres</span></span>
-    <span class="key">username</span>: <span class="string"><span class="content">postgres</span></span>
-    <span class="key">password</span>: <span class="string"><span class="content">password</span></span>
-    <span class="key">driverClassName</span>: <span class="string"><span class="content">org.postgresql.Driver</span></span>
-<span class="key">jpa</span>:
-  <span class="key">default</span>:
-    <span class="key">entity-scan</span>:
-      <span class="key">packages</span>: <span class="string"><span class="content">'io.containerapps.javaruntime.workshop.micronaut'</span></span>
-    <span class="key">properties</span>:
-      <span class="key">hibernate</span>:
-        <span class="key">bytecode</span>:
-          <span class="key">provider</span>: <span class="string"><span class="content">none</span></span>
-        <span class="key">hbm2ddl</span>:
-          <span class="key">auto</span>: <span class="string"><span class="content">none</span></span></code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/main/resources/application.yml[]</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="testing-the-micronaut-application-locally"><a class="anchor" href="#testing-the-micronaut-application-locally"></a><a class="link" href="#testing-the-micronaut-application-locally">Testing the Micronaut Application Locally</a></h2>
+<h2 id="testing-the-micronaut-application-locally"><a class="anchor" href="#testing-the-micronaut-application-locally"></a>Testing the Micronaut Application Locally</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now, to make sure that the application works as expected, we need to write some tests.
@@ -933,43 +642,9 @@ For that, we need to configure Testcontainers in a separate class (<code>Microna
 Open the <code>MicronautAppTest</code> class under the <code>src/test/java/io/containerapps/javaruntime/workshop/micronaut</code> folder.</p>
 </div>
 <div id="micronaut-listing-test" class="listingblock">
-<div class="title">Listing 10. Test Class Configuring Testcontainers</div>
+<div class="title">Test Class Configuring Testcontainers</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.micronaut</span>;
-
-<span class="keyword">import</span> <span class="include">io.micronaut.runtime.EmbeddedApplication</span>;
-<span class="keyword">import</span> <span class="include">io.micronaut.test.extensions.junit5.annotation.MicronautTest</span>;
-<span class="keyword">import</span> <span class="include">org.junit.jupiter.api.BeforeEach</span>;
-<span class="keyword">import</span> <span class="include">org.junit.jupiter.api.Test</span>;
-<span class="keyword">import</span> <span class="include">org.junit.jupiter.api.Assertions</span>;
-
-<span class="keyword">import</span> <span class="include">jakarta.inject.Inject</span>;
-<span class="keyword">import</span> <span class="include">org.testcontainers.containers.PostgreSQLContainer</span>;
-<span class="keyword">import</span> <span class="include">org.testcontainers.junit.jupiter.Testcontainers</span>;
-
-<span class="annotation">@Testcontainers</span>
-<span class="annotation">@MicronautTest</span>
-<span class="type">class</span> <span class="class">MicronautAppTest</span> {
-
-    <span class="directive">private</span> PostgreSQLContainer postgreSQLContainer;
-
-    <span class="annotation">@Inject</span>
-    EmbeddedApplication&lt;?&gt; application;
-
-    <span class="annotation">@BeforeEach</span>
-    <span class="directive">public</span> <span class="type">void</span> setUp() {
-        postgreSQLContainer = <span class="keyword">new</span> PostgreSQLContainer(<span class="string"><span class="delimiter">&quot;</span><span class="content">postgres:14</span><span class="delimiter">&quot;</span></span>)
-            .withDatabaseName(<span class="string"><span class="delimiter">&quot;</span><span class="content">postgres</span><span class="delimiter">&quot;</span></span>)
-            .withUsername(<span class="string"><span class="delimiter">&quot;</span><span class="content">postgres</span><span class="delimiter">&quot;</span></span>)
-            .withPassword(<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>);
-    }
-
-    <span class="annotation">@Test</span>
-    <span class="type">void</span> testItWorks() {
-        Assertions.assertTrue(application.isRunning());
-    }
-
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautAppTest.java[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -977,35 +652,9 @@ Open the <code>MicronautAppTest</code> class under the <code>src/test/java/io/co
 Create the <code>MicronautResourceTest</code> class under the same package that <code>MicronautAppTest</code>.</p>
 </div>
 <div id="micronaut-listing-test-1" class="listingblock">
-<div class="title">Listing 11. Header of the Test Class</div>
+<div class="title">Header of the Test Class</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.micronaut</span>;
-
-<span class="keyword">import</span> <span class="include">io.micronaut.test.extensions.junit5.annotation.MicronautTest</span>;
-<span class="keyword">import</span> <span class="include">io.restassured.specification.RequestSpecification</span>;
-<span class="keyword">import</span> <span class="include">org.junit.jupiter.api.BeforeEach</span>;
-<span class="keyword">import</span> <span class="include">org.junit.jupiter.api.Test</span>;
-<span class="keyword">import</span> <span class="include">org.testcontainers.containers.PostgreSQLContainer</span>;
-<span class="keyword">import</span> <span class="include">org.testcontainers.junit.jupiter.Testcontainers</span>;
-
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">io.restassured.RestAssured.given</span>;
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.hamcrest.CoreMatchers</span>.*;
-
-<span class="annotation">@Testcontainers</span>
-<span class="annotation">@MicronautTest</span>
-<span class="type">class</span> <span class="class">MicronautResourceTest</span> {
-
-    <span class="directive">private</span> <span class="directive">static</span> <span class="predefined-type">String</span> basePath = <span class="string"><span class="delimiter">&quot;</span><span class="content">http://localhost:8802/micronaut</span><span class="delimiter">&quot;</span></span>;
-
-    <span class="directive">private</span> PostgreSQLContainer postgreSQLContainer;
-
-    <span class="annotation">@BeforeEach</span>
-    <span class="directive">public</span> <span class="type">void</span> setUp() {
-        postgreSQLContainer = <span class="keyword">new</span> PostgreSQLContainer(<span class="string"><span class="delimiter">&quot;</span><span class="content">postgres:14</span><span class="delimiter">&quot;</span></span>)
-            .withDatabaseName(<span class="string"><span class="delimiter">&quot;</span><span class="content">postgres</span><span class="delimiter">&quot;</span></span>)
-            .withUsername(<span class="string"><span class="delimiter">&quot;</span><span class="content">postgres</span><span class="delimiter">&quot;</span></span>)
-            .withPassword(<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>);
-    }
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocHeader]
 }</code></pre>
 </div>
 </div>
@@ -1013,67 +662,36 @@ Create the <code>MicronautResourceTest</code> class under the same package that 
 <p>First, let&#8217;s write a test to check that the <code>hello</code> method returns the right <em>Hello World</em> string.</p>
 </div>
 <div id="micronaut-listing-test-2" class="listingblock">
-<div class="title">Listing 12. Testing the Hello Endpoint</div>
+<div class="title">Testing the Hello Endpoint</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testHelloEndpoint(RequestSpecification spec) {
-    spec
-      .when().get(basePath)
-      .then()
-        .statusCode(<span class="integer">200</span>)
-        .body(is(<span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: hello</span><span class="delimiter">&quot;</span></span>));
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestHello]</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Then, we write another test to check that the <code>cpu</code> method consumes CPU and takes the right parameters.</p>
 </div>
 <div id="micronaut-listing-test-3" class="listingblock">
-<div class="title">Listing 13. Testing the CPU Endpoint</div>
+<div class="title">Testing the CPU Endpoint</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testCpuWithDBAndDescEndpoint() {
-    given().param(<span class="string"><span class="delimiter">&quot;</span><span class="content">iterations</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>).param(<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>).param(<span class="string"><span class="delimiter">&quot;</span><span class="content">desc</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Java17</span><span class="delimiter">&quot;</span></span>)
-      .when().get(basePath + <span class="string"><span class="delimiter">&quot;</span><span class="content">/cpu</span><span class="delimiter">&quot;</span></span>)
-      .then()
-        .statusCode(<span class="integer">200</span>)
-        .body(startsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: CPU consumption is done with</span><span class="delimiter">&quot;</span></span>))
-        .body(not(containsString(<span class="string"><span class="delimiter">&quot;</span><span class="content">Java17</span><span class="delimiter">&quot;</span></span>)))
-        .body(endsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">The result is persisted in the database.</span><span class="delimiter">&quot;</span></span>));
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestCPU]</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>And we do the same for the <code>memory</code> method.</p>
 </div>
 <div id="micronaut-listing-test-4" class="listingblock">
-<div class="title">Listing 14. Testing the Memory Endpoint</div>
+<div class="title">Testing the Memory Endpoint</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testMemoryWithDBAndDescEndpoint() {
-    given().param(<span class="string"><span class="delimiter">&quot;</span><span class="content">bites</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>).param(<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>).param(<span class="string"><span class="delimiter">&quot;</span><span class="content">desc</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Java17</span><span class="delimiter">&quot;</span></span>)
-      .when().get(basePath + <span class="string"><span class="delimiter">&quot;</span><span class="content">/memory</span><span class="delimiter">&quot;</span></span>)
-      .then()
-        .statusCode(<span class="integer">200</span>)
-        .body(startsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">Micronaut: Memory consumption is done with</span><span class="delimiter">&quot;</span></span>))
-        .body(not(containsString(<span class="string"><span class="delimiter">&quot;</span><span class="content">Java17</span><span class="delimiter">&quot;</span></span>)))
-        .body(endsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">The result is persisted in the database.</span><span class="delimiter">&quot;</span></span>));
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestMemory]</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s also create a simple test to make sure the statistics are stored in the database.</p>
 </div>
 <div id="micronaut-listing-test-5" class="listingblock">
-<div class="title">Listing 15. Testing Retrieving the Statistics from the Database</div>
+<div class="title">Testing Retrieving the Statistics from the Database</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testStats() {
-    given()
-        .when().get(basePath + <span class="string"><span class="delimiter">&quot;</span><span class="content">/stats</span><span class="delimiter">&quot;</span></span>)
-        .then()
-        .statusCode(<span class="integer">200</span>);
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in micronaut.adoc - include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestStats]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1081,7 +699,7 @@ Create the <code>MicronautResourceTest</code> class under the same package that 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">mvn test</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">mvn test</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1089,7 +707,7 @@ Create the <code>MicronautResourceTest</code> class under the same package that 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+<pre class="highlight"><code class="language-shell" data-lang="shell">[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
 [INFO]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
@@ -1099,7 +717,7 @@ Create the <code>MicronautResourceTest</code> class under the same package that 
 </div>
 </div>
 <div class="sect1">
-<h2 id="running-the-micronaut-application-locally"><a class="anchor" href="#running-the-micronaut-application-locally"></a><a class="link" href="#running-the-micronaut-application-locally">Running the Micronaut Application Locally</a></h2>
+<h2 id="running-the-micronaut-application-locally"><a class="anchor" href="#running-the-micronaut-application-locally"></a>Running the Micronaut Application Locally</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now that the tests are all green, let&#8217;s execute the application locally and execute a few <code>curl</code> commands.
@@ -1108,14 +726,14 @@ Make sure you still have Docker up and running and execute under the <code>infra
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">docker compose -f postgres.yaml up</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">docker compose -f postgres.yaml up</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<div class="title">Warning</div>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -1125,7 +743,7 @@ You can check the context you are using and switch to the default one if needed:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">docker context ls
+<pre class="highlight"><code class="language-shell" data-lang="shell">docker context ls
 docker context use default
 docker context ls</code></pre>
 </div>
@@ -1139,14 +757,14 @@ docker context ls</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">mvn mn:run</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">mvn mn:run</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<div class="title">Warning</div>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -1155,7 +773,7 @@ If it&#8217;s the case, use the <code>lsof</code> command (on Mac) to get the pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">ServerStartupException: Unable to start Micronaut server on *:8702
+<pre class="highlight"><code class="language-shell" data-lang="shell">ServerStartupException: Unable to start Micronaut server on *:8702
 Caused by: java.net.BindException: Address already in use
 
 lsof -i:8702
@@ -1171,7 +789,7 @@ kill -9 &lt;PID&gt;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">curl 'localhost:8702/micronaut'
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'localhost:8702/micronaut'
 
 curl 'localhost:8702/micronaut/cpu?iterations=10&amp;db=true&amp;desc=java17'
 
@@ -1184,7 +802,7 @@ Change the number of iterations and the number of bites to see how the performan
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">curl 'localhost:8702/micronaut/cpu?iterations=50'
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'localhost:8702/micronaut/cpu?iterations=50'
 curl 'localhost:8702/micronaut/cpu?iterations=100'
 curl 'localhost:8702/micronaut/cpu?iterations=100&amp;db=true'
 
@@ -1198,9 +816,9 @@ curl 'localhost:8702/micronaut/memory?bites=100&amp;db=true'</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">curl 'localhost:8702/micronaut/stats'
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'localhost:8702/micronaut/stats'
 
-# or if you have &quot;jq&quot; installed you can make it prettier with
+# or if you have "jq" installed you can make it prettier with
 # curl 'localhost:8702/micronaut/stats' | jq</code></pre>
 </div>
 </div>
@@ -1213,7 +831,7 @@ We now have the Quarkus and Micronaut application fully tested, up and running, 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 11:23:46 UTC
+Last updated 2023-04-07 11:42:32 UTC
 </div>
 </div>
 </body>

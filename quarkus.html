@@ -435,113 +435,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-/*! Stylesheet for CodeRay to loosely match GitHub themes | MIT License */
-pre.CodeRay{background:#f7f7f8}
-.CodeRay .line-numbers{border-right:1px solid;opacity:.35;padding:0 .5em 0 0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
-.CodeRay .line-numbers strong{color:#000}
-table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.CodeRay td{vertical-align:top;line-height:inherit}
-table.CodeRay td.line-numbers{text-align:right}
-table.CodeRay td.code{padding:0 0 0 .75em}
-.CodeRay .debug{color:#fff!important;background:navy!important}
-.CodeRay .annotation{color:#007}
-.CodeRay .attribute-name{color:navy}
-.CodeRay .attribute-value{color:#700}
-.CodeRay .binary{color:#509}
-.CodeRay .comment{color:#998;font-style:italic}
-.CodeRay .char{color:#04d}
-.CodeRay .char .content{color:#04d}
-.CodeRay .char .delimiter{color:#039}
-.CodeRay .class{color:#458;font-weight:bold}
-.CodeRay .complex{color:#a08}
-.CodeRay .constant,.CodeRay .predefined-constant{color:teal}
-.CodeRay .color{color:#099}
-.CodeRay .class-variable{color:#369}
-.CodeRay .decorator{color:#b0b}
-.CodeRay .definition{color:#099}
-.CodeRay .delimiter{color:#000}
-.CodeRay .doc{color:#970}
-.CodeRay .doctype{color:#34b}
-.CodeRay .doc-string{color:#d42}
-.CodeRay .escape{color:#666}
-.CodeRay .entity{color:#800}
-.CodeRay .error{color:#808}
-.CodeRay .exception{color:inherit}
-.CodeRay .filename{color:#099}
-.CodeRay .function{color:#900;font-weight:bold}
-.CodeRay .global-variable{color:teal}
-.CodeRay .hex{color:#058}
-.CodeRay .integer,.CodeRay .float{color:#099}
-.CodeRay .include{color:#555}
-.CodeRay .inline{color:#000}
-.CodeRay .inline .inline{background:#ccc}
-.CodeRay .inline .inline .inline{background:#bbb}
-.CodeRay .inline .inline-delimiter{color:#d14}
-.CodeRay .inline-delimiter{color:#d14}
-.CodeRay .important{color:#555;font-weight:bold}
-.CodeRay .interpreted{color:#b2b}
-.CodeRay .instance-variable{color:teal}
-.CodeRay .label{color:#970}
-.CodeRay .local-variable{color:#963}
-.CodeRay .octal{color:#40e}
-.CodeRay .predefined{color:#369}
-.CodeRay .preprocessor{color:#579}
-.CodeRay .pseudo-class{color:#555}
-.CodeRay .directive{font-weight:bold}
-.CodeRay .type{font-weight:bold}
-.CodeRay .predefined-type{color:inherit}
-.CodeRay .reserved,.CodeRay .keyword{color:#000;font-weight:bold}
-.CodeRay .key{color:#808}
-.CodeRay .key .delimiter{color:#606}
-.CodeRay .key .char{color:#80f}
-.CodeRay .value{color:#088}
-.CodeRay .regexp .delimiter{color:#808}
-.CodeRay .regexp .content{color:#808}
-.CodeRay .regexp .modifier{color:#808}
-.CodeRay .regexp .char{color:#d14}
-.CodeRay .regexp .function{color:#404;font-weight:bold}
-.CodeRay .string{color:#d20}
-.CodeRay .string .string .string{background:#ffd0d0}
-.CodeRay .string .content{color:#d14}
-.CodeRay .string .char{color:#d14}
-.CodeRay .string .delimiter{color:#d14}
-.CodeRay .shell{color:#d14}
-.CodeRay .shell .delimiter{color:#d14}
-.CodeRay .symbol{color:#990073}
-.CodeRay .symbol .content{color:#a60}
-.CodeRay .symbol .delimiter{color:#630}
-.CodeRay .tag{color:teal}
-.CodeRay .tag-special{color:#d70}
-.CodeRay .variable{color:#036}
-.CodeRay .insert{background:#afa}
-.CodeRay .delete{background:#faa}
-.CodeRay .change{color:#aaf;background:#007}
-.CodeRay .head{color:#f8f;background:#505}
-.CodeRay .insert .insert{color:#080}
-.CodeRay .delete .delete{color:#800}
-.CodeRay .change .change{color:#66f}
-.CodeRay .head .head{color:#f4f}
-</style>
 </head>
-<body id="quarkus" class="book toc2 toc-left">
+<body id="quarkus" class="article">
 <div id="header">
 <h1>Developing the Quarkus Application</h1>
 <div class="details">
 <span id="revdate"></span>
-</div>
-<div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#the-quarkus-rest-resource">The Quarkus REST Resource</a></li>
-<li><a href="#transactions-and-orm">Transactions and ORM</a></li>
-<li><a href="#compiling-the-quarkus-application">Compiling the Quarkus Application</a></li>
-<li><a href="#configuring-the-quarkus-application">Configuring the Quarkus Application</a></li>
-<li><a href="#testing-the-quarkus-application-locally">Testing the Quarkus Application Locally</a></li>
-<li><a href="#running-the-quarkus-application-locally">Running the Quarkus Application Locally</a></li>
-</ul>
 </div>
 </div>
 <div id="content">
@@ -582,7 +481,7 @@ This is the root of the Quarkus microservice source code that we will be using i
 </div>
 </div>
 <div class="sect1">
-<h2 id="the-quarkus-rest-resource"><a class="anchor" href="#the-quarkus-rest-resource"></a><a class="link" href="#the-quarkus-rest-resource">The Quarkus REST Resource</a></h2>
+<h2 id="the-quarkus-rest-resource"><a class="anchor" href="#the-quarkus-rest-resource"></a>The Quarkus REST Resource</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Quarkus application is made of a simple REST resource that consumes memory and CPU.
@@ -592,36 +491,9 @@ Then, add the following to the header of the class.
 As you can see, it is a JAX-RS resource that is exposed on the <code>/quarkus</code> path.</p>
 </div>
 <div id="quarkus-listing-rest-resource-1" class="listingblock">
-<div class="title">Listing 1. Header of the Quarkus REST Resource</div>
+<div class="title">Header of the Quarkus REST Resource</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.quarkus</span>;
-
-<span class="keyword">import</span> <span class="include">jakarta.ws.rs.DefaultValue</span>;
-<span class="keyword">import</span> <span class="include">jakarta.ws.rs.GET</span>;
-<span class="keyword">import</span> <span class="include">jakarta.ws.rs.Path</span>;
-<span class="keyword">import</span> <span class="include">jakarta.ws.rs.Produces</span>;
-<span class="keyword">import</span> <span class="include">jakarta.ws.rs.QueryParam</span>;
-<span class="keyword">import</span> <span class="include">jakarta.ws.rs.core.MediaType</span>;
-<span class="keyword">import</span> <span class="include">java.lang.System.Logger</span>;
-<span class="keyword">import</span> <span class="include">java.time.Duration</span>;
-<span class="keyword">import</span> <span class="include">java.time.Instant</span>;
-<span class="keyword">import</span> <span class="include">java.util.HashMap</span>;
-<span class="keyword">import</span> <span class="include">java.util.List</span>;
-
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">java.lang.System.Logger.Level.INFO</span>;
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">java.lang.invoke.MethodHandles.lookup</span>;
-
-<span class="annotation">@Path</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/quarkus</span><span class="delimiter">&quot;</span></span>)
-<span class="annotation">@Produces</span>(MediaType.TEXT_PLAIN)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">QuarkusResource</span> {
-
-    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">Logger</span> LOGGER = <span class="predefined-type">System</span>.getLogger(lookup().lookupClass().getName());
-
-    <span class="directive">private</span> <span class="directive">final</span> StatisticsRepository repository;
-
-    <span class="directive">public</span> QuarkusResource(StatisticsRepository statisticsRepository) {
-        <span class="local-variable">this</span>.repository = statisticsRepository;
-    }
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocHeader]
 }</code></pre>
 </div>
 </div>
@@ -629,13 +501,9 @@ As you can see, it is a JAX-RS resource that is exposed on the <code>/quarkus</c
 <p>Let&#8217;s add a <code>hello</code> method returning <em>Hello World</em> so we can quickly check if our endpoint responds or not.</p>
 </div>
 <div id="quarkus-listing-rest-resource-2" class="listingblock">
-<div class="title">Listing 2. Hello Method</div>
+<div class="title">Hello Method</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@GET</span>
-<span class="directive">public</span> <span class="predefined-type">String</span> hello() {
-    LOGGER.log(INFO, <span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: hello</span><span class="delimiter">&quot;</span></span>);
-    <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: hello</span><span class="delimiter">&quot;</span></span>;
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodHello]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -656,47 +524,9 @@ That allows us to check the impact of the database on the CPU consumption.</p>
 </ul>
 </div>
 <div id="quarkus-listing-rest-resource-3" class="listingblock">
-<div class="title">Listing 3. CPU Method</div>
+<div class="title">CPU Method</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@GET</span>
-<span class="annotation">@Path</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/cpu</span><span class="delimiter">&quot;</span></span>)
-<span class="directive">public</span> <span class="predefined-type">String</span> cpu(<span class="annotation">@QueryParam</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">iterations</span><span class="delimiter">&quot;</span></span>) <span class="annotation">@DefaultValue</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">10</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Long</span> iterations,
-                  <span class="annotation">@QueryParam</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>) <span class="annotation">@DefaultValue</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Boolean</span> db,
-                  <span class="annotation">@QueryParam</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">desc</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> desc) {
-    LOGGER.log(INFO, <span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: cpu: {0} {1} with desc {2}</span><span class="delimiter">&quot;</span></span>, iterations, db, desc);
-    <span class="predefined-type">Long</span> iterationsDone = iterations;
-
-    Instant start = Instant.now();
-    <span class="keyword">if</span> (iterations == <span class="predefined-constant">null</span>) {
-        iterations = <span class="integer">20000L</span>;
-    } <span class="keyword">else</span> {
-        iterations *= <span class="integer">20000</span>;
-    }
-    <span class="keyword">while</span> (iterations &gt; <span class="integer">0</span>) {
-        <span class="keyword">if</span> (iterations % <span class="integer">20000</span> == <span class="integer">0</span>) {
-            <span class="keyword">try</span> {
-                <span class="predefined-type">Thread</span>.sleep(<span class="integer">20</span>);
-            } <span class="keyword">catch</span> (<span class="exception">InterruptedException</span> ie) {
-            }
-        }
-        iterations--;
-    }
-
-    <span class="keyword">if</span> (db) {
-        Statistics statistics = <span class="keyword">new</span> Statistics();
-        statistics.type = <span class="predefined-type">Type</span>.CPU;
-        statistics.parameter = iterations.toString();
-        statistics.duration = <span class="predefined-type">Duration</span>.between(start, Instant.now());
-        statistics.description = desc;
-        repository.persist(statistics);
-    }
-
-    <span class="predefined-type">String</span> msg = <span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: CPU consumption is done with </span><span class="delimiter">&quot;</span></span> + iterationsDone + <span class="string"><span class="delimiter">&quot;</span><span class="content"> iterations in </span><span class="delimiter">&quot;</span></span> + <span class="predefined-type">Duration</span>.between(start, Instant.now()).getNano() + <span class="string"><span class="delimiter">&quot;</span><span class="content"> nano-seconds.</span><span class="delimiter">&quot;</span></span>;
-    <span class="keyword">if</span> (db) {
-        msg += <span class="string"><span class="delimiter">&quot;</span><span class="content"> The result is persisted in the database.</span><span class="delimiter">&quot;</span></span>;
-    }
-    <span class="keyword">return</span> msg;
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodCPU]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -716,43 +546,9 @@ That allows us to check the impact of the database on the CPU consumption.</p>
 </ul>
 </div>
 <div id="quarkus-listing-rest-resource-4" class="listingblock">
-<div class="title">Listing 4. Memory Method</div>
+<div class="title">Memory Method</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@GET</span>
-<span class="annotation">@Path</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/memory</span><span class="delimiter">&quot;</span></span>)
-<span class="directive">public</span> <span class="predefined-type">String</span> memory(<span class="annotation">@QueryParam</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">bites</span><span class="delimiter">&quot;</span></span>) <span class="annotation">@DefaultValue</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">10</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Integer</span> bites,
-                     <span class="annotation">@QueryParam</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>) <span class="annotation">@DefaultValue</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">Boolean</span> db,
-                     <span class="annotation">@QueryParam</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">desc</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> desc) {
-    LOGGER.log(INFO, <span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: memory: {0} {1} with desc {2}</span><span class="delimiter">&quot;</span></span>, bites, db, desc);
-
-    Instant start = Instant.now();
-    <span class="keyword">if</span> (bites == <span class="predefined-constant">null</span>) {
-        bites = <span class="integer">1</span>;
-    }
-    <span class="predefined-type">HashMap</span> hunger = <span class="keyword">new</span> <span class="predefined-type">HashMap</span>&lt;&gt;();
-    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; bites * <span class="integer">1024</span> * <span class="integer">1024</span>; i += <span class="integer">8192</span>) {
-        <span class="type">byte</span><span class="type">[]</span> bytes = <span class="keyword">new</span> <span class="type">byte</span>[<span class="integer">8192</span>];
-        hunger.put(i, bytes);
-        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="integer">0</span>; j &lt; <span class="integer">8192</span>; j++) {
-            bytes[j] = <span class="string"><span class="delimiter">'</span><span class="content">0</span><span class="delimiter">'</span></span>;
-        }
-    }
-
-    <span class="keyword">if</span> (db) {
-        Statistics statistics = <span class="keyword">new</span> Statistics();
-        statistics.type = <span class="predefined-type">Type</span>.MEMORY;
-        statistics.parameter = bites.toString();
-        statistics.duration = <span class="predefined-type">Duration</span>.between(start, Instant.now());
-        statistics.description = desc;
-        repository.persist(statistics);
-    }
-
-    <span class="predefined-type">String</span> msg = <span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: Memory consumption is done with </span><span class="delimiter">&quot;</span></span> + bites + <span class="string"><span class="delimiter">&quot;</span><span class="content"> bites in </span><span class="delimiter">&quot;</span></span> + <span class="predefined-type">Duration</span>.between(start, Instant.now()).getNano() + <span class="string"><span class="delimiter">&quot;</span><span class="content"> nano-seconds.</span><span class="delimiter">&quot;</span></span>;
-    <span class="keyword">if</span> (db) {
-        msg += <span class="string"><span class="delimiter">&quot;</span><span class="content"> The result is persisted in the database.</span><span class="delimiter">&quot;</span></span>;
-    }
-    <span class="keyword">return</span> msg;
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodMemory]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -760,15 +556,9 @@ That allows us to check the impact of the database on the CPU consumption.</p>
 This is very easy to do with <a href="https://quarkus.io/guides/hibernate-orm-panache">Panache</a>.</p>
 </div>
 <div id="quarkus-listing-rest-resource-5" class="listingblock">
-<div class="title">Listing 5. Method Returning all the Statistics</div>
+<div class="title">Method Returning all the Statistics</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@GET</span>
-<span class="annotation">@Path</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/stats</span><span class="delimiter">&quot;</span></span>)
-<span class="annotation">@Produces</span>(MediaType.APPLICATION_JSON)
-<span class="directive">public</span> <span class="predefined-type">List</span>&lt;Statistics&gt; stats() {
-    LOGGER.log(INFO, <span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: retrieving statistics</span><span class="delimiter">&quot;</span></span>);
-    <span class="keyword">return</span> Statistics.findAll().list();
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodStats]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -778,7 +568,7 @@ Let&#8217;s create them now.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="transactions-and-orm"><a class="anchor" href="#transactions-and-orm"></a><a class="link" href="#transactions-and-orm">Transactions and ORM</a></h2>
+<h2 id="transactions-and-orm"><a class="anchor" href="#transactions-and-orm"></a>Transactions and ORM</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When the database is enabled, the statistics are stored in the database.
@@ -786,38 +576,9 @@ For that we need a <code>Statistics</code> entity with a few enumerations that w
 Create the <code>Statistics</code> entity in the <code>src/main/java/io/containerapps/javaruntime/workshop/quarkus</code> folder.</p>
 </div>
 <div id="quarkus-listing-entity" class="listingblock">
-<div class="title">Listing 6. Statistics Entity</div>
+<div class="title">Statistics Entity</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.quarkus</span>;
-
-<span class="keyword">import</span> <span class="include">io.quarkus.hibernate.orm.panache.PanacheEntity</span>;
-
-<span class="keyword">import</span> <span class="include">jakarta.persistence.Column</span>;
-<span class="keyword">import</span> <span class="include">jakarta.persistence.Entity</span>;
-<span class="keyword">import</span> <span class="include">jakarta.persistence.Table</span>;
-<span class="keyword">import</span> <span class="include">java.time.Duration</span>;
-<span class="keyword">import</span> <span class="include">java.time.Instant</span>;
-
-<span class="annotation">@Entity</span>
-<span class="annotation">@Table</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">Statistics_Quarkus</span><span class="delimiter">&quot;</span></span>)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">Statistics</span> <span class="directive">extends</span> PanacheEntity {
-
-    <span class="annotation">@Column</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">done_at</span><span class="delimiter">&quot;</span></span>)
-    <span class="directive">public</span> Instant doneAt = Instant.now();
-    <span class="directive">public</span> Framework framework = Framework.QUARKUS;
-    <span class="directive">public</span> <span class="predefined-type">Type</span> type;
-    <span class="directive">public</span> <span class="predefined-type">String</span> parameter;
-    <span class="directive">public</span> <span class="predefined-type">Duration</span> duration;
-    <span class="directive">public</span> <span class="predefined-type">String</span> description;
-}
-
-<span class="type">enum</span> <span class="predefined-type">Type</span> {
-    CPU, MEMORY
-}
-
-<span class="type">enum</span> Framework {
-    QUARKUS, MICRONAUT, SPRINGBOOT
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/Statistics.java[]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -826,25 +587,15 @@ Create the <code>StatisticsRepository</code> class under the same package.
 Notice that <code>StatisticsRepository</code> is a <a href="https://quarkus.io/guides/hibernate-orm-panache">Panache Repository</a> that extends the <code>PanacheRepository</code> class.</p>
 </div>
 <div id="quarkus-listing-repository" class="listingblock">
-<div class="title">Listing 7. Statistics Repository</div>
+<div class="title">Statistics Repository</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.quarkus</span>;
-
-<span class="keyword">import</span> <span class="include">io.quarkus.hibernate.orm.panache.PanacheRepository</span>;
-
-<span class="keyword">import</span> <span class="include">jakarta.enterprise.context.ApplicationScoped</span>;
-<span class="keyword">import</span> <span class="include">jakarta.transaction.Transactional</span>;
-
-<span class="annotation">@ApplicationScoped</span>
-<span class="annotation">@Transactional</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">StatisticsRepository</span> <span class="directive">implements</span> PanacheRepository&lt;Statistics&gt; {
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/StatisticsRepository.java[]</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="compiling-the-quarkus-application"><a class="anchor" href="#compiling-the-quarkus-application"></a><a class="link" href="#compiling-the-quarkus-application">Compiling the Quarkus Application</a></h2>
+<h2 id="compiling-the-quarkus-application"><a class="anchor" href="#compiling-the-quarkus-application"></a>Compiling the Quarkus Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You should have all the code to compile the application.
@@ -852,13 +603,13 @@ To make sure you have all the code and dependencies, run the following command:<
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">mvn compile</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">mvn compile</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="configuring-the-quarkus-application"><a class="anchor" href="#configuring-the-quarkus-application"></a><a class="link" href="#configuring-the-quarkus-application">Configuring the Quarkus Application</a></h2>
+<h2 id="configuring-the-quarkus-application"><a class="anchor" href="#configuring-the-quarkus-application"></a>Configuring the Quarkus Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>There is not much to configure as Quarkus is configured by default to use the PostgreSQL database (thanks to <a href="https://quarkus.io/guides/dev-services">DevService</a>).
@@ -866,15 +617,15 @@ To make sure our 3 microservices can run side by side, we need to configure the 
 To have this service exposed on the port 8701, add the following configuration in the <code>src/main/resources/application.properties</code> file.</p>
 </div>
 <div id="quarkus-listing-config" class="listingblock">
-<div class="title">Listing 8. Configuration Properties</div>
+<div class="title">Configuration Properties</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">quarkus.http.port=<span class="integer">8701</span></code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/main/resources/application.properties[tags=adocProperties]</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="testing-the-quarkus-application-locally"><a class="anchor" href="#testing-the-quarkus-application-locally"></a><a class="link" href="#testing-the-quarkus-application-locally">Testing the Quarkus Application Locally</a></h2>
+<h2 id="testing-the-quarkus-application-locally"><a class="anchor" href="#testing-the-quarkus-application-locally"></a>Testing the Quarkus Application Locally</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now, to make sure that the application works as expected, we need to write some tests.
@@ -887,18 +638,9 @@ That&#8217;s why we need Docker to run the tests and run the application.</p>
 Then, add the following to the header of the class.</p>
 </div>
 <div id="quarkus-listing-test-1" class="listingblock">
-<div class="title">Listing 9. Header of the Test Class</div>
+<div class="title">Header of the Test Class</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.containerapps.javaruntime.workshop.quarkus</span>;
-
-<span class="keyword">import</span> <span class="include">io.quarkus.test.junit.QuarkusTest</span>;
-<span class="keyword">import</span> <span class="include">org.junit.jupiter.api.Test</span>;
-
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">io.restassured.RestAssured.given</span>;
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.hamcrest.CoreMatchers</span>.*;
-
-<span class="annotation">@QuarkusTest</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">QuarkusResourceTest</span> {
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocHeader]
 }</code></pre>
 </div>
 </div>
@@ -906,67 +648,36 @@ Then, add the following to the header of the class.</p>
 <p>First, let&#8217;s write a test to check that the <code>hello</code> method returns the right <em>Hello World</em> string.</p>
 </div>
 <div id="quarkus-listing-test-2" class="listingblock">
-<div class="title">Listing 10. Testing the Hello Endpoint</div>
+<div class="title">Testing the Hello Endpoint</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testHelloEndpoint() {
-    given()
-      .when().get(<span class="string"><span class="delimiter">&quot;</span><span class="content">/quarkus</span><span class="delimiter">&quot;</span></span>)
-      .then()
-        .statusCode(<span class="integer">200</span>)
-        .body(is(<span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: hello</span><span class="delimiter">&quot;</span></span>));
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestHello]</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Then, we write another test to check that the <code>cpu</code> method consumes CPU and takes the right parameters.</p>
 </div>
 <div id="quarkus-listing-test-3" class="listingblock">
-<div class="title">Listing 11. Testing the CPU Endpoint</div>
+<div class="title">Testing the CPU Endpoint</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testCpuWithDBAndDescEndpoint() {
-    given().param(<span class="string"><span class="delimiter">&quot;</span><span class="content">iterations</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>).param(<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>).param(<span class="string"><span class="delimiter">&quot;</span><span class="content">desc</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Java17</span><span class="delimiter">&quot;</span></span>)
-      .when().get(<span class="string"><span class="delimiter">&quot;</span><span class="content">/quarkus/cpu</span><span class="delimiter">&quot;</span></span>)
-      .then()
-        .statusCode(<span class="integer">200</span>)
-        .body(startsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: CPU consumption is done with</span><span class="delimiter">&quot;</span></span>))
-        .body(not(containsString(<span class="string"><span class="delimiter">&quot;</span><span class="content">Java17</span><span class="delimiter">&quot;</span></span>)))
-        .body(endsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">The result is persisted in the database.</span><span class="delimiter">&quot;</span></span>));
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestCPU]</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>And we do the same for the <code>memory</code> method.</p>
 </div>
 <div id="quarkus-listing-test-4" class="listingblock">
-<div class="title">Listing 12. Testing the Memory Endpoint</div>
+<div class="title">Testing the Memory Endpoint</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testMemoryWithDBAndDescEndpoint() {
-    given().param(<span class="string"><span class="delimiter">&quot;</span><span class="content">bites</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>).param(<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>).param(<span class="string"><span class="delimiter">&quot;</span><span class="content">desc</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Java17</span><span class="delimiter">&quot;</span></span>)
-      .when().get(<span class="string"><span class="delimiter">&quot;</span><span class="content">/quarkus/memory</span><span class="delimiter">&quot;</span></span>)
-      .then()
-        .statusCode(<span class="integer">200</span>)
-        .body(startsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">Quarkus: Memory consumption is done with</span><span class="delimiter">&quot;</span></span>))
-        .body(not(containsString(<span class="string"><span class="delimiter">&quot;</span><span class="content">Java17</span><span class="delimiter">&quot;</span></span>)))
-        .body(endsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">The result is persisted in the database.</span><span class="delimiter">&quot;</span></span>));
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestMemory]</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s also create a simple test to make sure the statistics are stored in the database.</p>
 </div>
 <div id="quarkus-listing-test-5" class="listingblock">
-<div class="title">Listing 13. Testing Retrieving the Statistics from the Database</div>
+<div class="title">Testing Retrieving the Statistics from the Database</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testStats() {
-    given()
-      .when().get(<span class="string"><span class="delimiter">&quot;</span><span class="content">/quarkus/stats</span><span class="delimiter">&quot;</span></span>)
-      .then()
-        .statusCode(<span class="integer">200</span>);
-}</code></pre>
+<pre class="highlight"><code>Unresolved directive in quarkus.adoc - include::{workshop-github-raw}/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestStats]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -974,7 +685,7 @@ Then, add the following to the header of the class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">mvn test</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">mvn test</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -982,7 +693,7 @@ Then, add the following to the header of the class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+<pre class="highlight"><code class="language-shell" data-lang="shell">[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
 [INFO]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
@@ -993,7 +704,7 @@ Then, add the following to the header of the class.</p>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<div class="title">Warning</div>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -1001,7 +712,7 @@ Then, add the following to the header of the class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">Previous attempts to find a Docker environment failed. Will not retry</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">Previous attempts to find a Docker environment failed. Will not retry</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1009,7 +720,7 @@ Then, add the following to the header of the class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock</code></pre>
 </div>
 </div>
 </td>
@@ -1019,7 +730,7 @@ Then, add the following to the header of the class.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="running-the-quarkus-application-locally"><a class="anchor" href="#running-the-quarkus-application-locally"></a><a class="link" href="#running-the-quarkus-application-locally">Running the Quarkus Application Locally</a></h2>
+<h2 id="running-the-quarkus-application-locally"><a class="anchor" href="#running-the-quarkus-application-locally"></a>Running the Quarkus Application Locally</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now that the tests are all green, let&#8217;s execute the application locally and execute a few <code>curl</code> commands.
@@ -1027,7 +738,7 @@ Make sure you still have Docker up and running and execute the following command
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">mvn quarkus:dev</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">mvn quarkus:dev</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1035,7 +746,7 @@ Make sure you still have Docker up and running and execute the following command
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">curl 'localhost:8701/quarkus'
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'localhost:8701/quarkus'
 
 curl 'localhost:8701/quarkus/cpu?iterations=10&amp;db=true&amp;desc=java17'
 
@@ -1048,7 +759,7 @@ Change the number of iterations and the number of bites to see how the performan
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">curl 'localhost:8701/quarkus/cpu?iterations=50'
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'localhost:8701/quarkus/cpu?iterations=50'
 curl 'localhost:8701/quarkus/cpu?iterations=100'
 curl 'localhost:8701/quarkus/cpu?iterations=100&amp;db=true'
 
@@ -1062,9 +773,9 @@ curl 'localhost:8701/quarkus/memory?bites=100&amp;db=true'</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">curl 'localhost:8701/quarkus/stats'
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'localhost:8701/quarkus/stats'
 
-# or if you have &quot;jq&quot; installed you can make it prettier with
+# or if you have "jq" installed you can make it prettier with
 # curl 'localhost:8701/quarkus/stats' | jq</code></pre>
 </div>
 </div>
@@ -1077,7 +788,7 @@ Now, let&#8217;s move to the Micronaut application.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 11:23:46 UTC
+Last updated 2023-04-07 11:42:32 UTC
 </div>
 </div>
 </body>

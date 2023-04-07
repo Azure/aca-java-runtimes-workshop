@@ -32,7 +32,7 @@ You will analyze CPU load as well as memory usage.
 And then you will establish a baseline, so you can see the impact of scaling out or scaling up containers.
 
 This workshop is a BYOL (*Bring Your Own Laptop*) session, so bring your Windows, OSX, or Linux laptop.
-You need JDK 17 on your machine, Apache Maven (3.8.x), Docker, Azure CLI and other few tools.
+You need JDK 17 on your machine, Apache Maven (3.9.x), Docker, Azure CLI and other few tools.
 On Mac and Windows, Docker for *x* is recommended instead of the Docker toolbox setup.
 
 What you are going to do:
@@ -49,7 +49,7 @@ What you are going to do:
 - Analyze memory and scale containers appropriately
 - And much more!
 Ready? Here we go!
-Check the workshop at [https://azure.github.io/aca-java-runtimes-workshop/](https://azure.github.io/aca-java-runtimes-workshop/) of flash the QR Code if you don’t want to type.
+Check the workshop at [https://aka.ms/java-runtimes](https://aka.ms/java-runtimes) of flash the QR Code if you don’t want to type.
 
 ![qrcode workshop](./assets/qrcode-workshop.png)
 
@@ -75,28 +75,13 @@ The algorithm consuming CPU will be a simple loop.
 The higher the iteration, the more CPU it uses:
 
 ```java
-while (iterations > 0) {
-    if (iterations % 20000 == 0) {
-        try {
-            Thread.sleep(20);
-        } catch (InterruptedException ie) {
-        }
-    }
-    iterations--;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoCPU]
 ```
 The algorithm consuming memory will be a simple hashmap that we will fill with bites.
 The more bits you have, the more memory it uses:
 
 ```java
-HashMap hunger = new HashMap<>();
-for (int i = 0; i < bites * 1024 * 1024; i += 8192) {
-    byte[] bytes = new byte[8192];
-    hunger.put(i, bytes);
-    for (int j = 0; j < 8192; j++) {
-        bytes[j] = '0';
-    }
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoMemory]
 ```
 #### What Will You Be Developing?
 
@@ -264,7 +249,7 @@ If you decide to setup your environment yourself, you will need to install the f
 |  |  |
 | :-- | :-- |
 | Java 17 | [Get OpenJDK](https://learn.microsoft.com/java/openjdk/download?WT.mc_id=javascript-0000-yolasors) |
-| Maven 3.8.x | [Get Maven](https://maven.apache.org/download.cgi) |
+| Maven 3.9.x | [Get Maven](https://maven.apache.org/download.cgi) |
 | Docker 20.x | [Get Docker](https://docs.docker.com/get-docker) |
 | Azure CLI | [Get Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli?WT.mc_id=javascript-0000-yolasors#install) |
 | Git | [https://git-scm.com](https://git-scm.com) |
@@ -416,44 +401,13 @@ Then, add the following to the header of the class.
 As you can see, it is a JAX-RS resource that is exposed on the `/quarkus` path.
 
 ```java
-package io.containerapps.javaruntime.workshop.quarkus;
-
-import jakarta.ws.rs.DefaultValue;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.MediaType;
-import java.lang.System.Logger;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.List;
-
-import static java.lang.System.Logger.Level.INFO;
-import static java.lang.invoke.MethodHandles.lookup;
-
-@Path("/quarkus")
-@Produces(MediaType.TEXT_PLAIN)
-public class QuarkusResource {
-
-    private static final Logger LOGGER = System.getLogger(lookup().lookupClass().getName());
-
-    private final StatisticsRepository repository;
-
-    public QuarkusResource(StatisticsRepository statisticsRepository) {
-        this.repository = statisticsRepository;
-    }
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocHeader]
 }
 ```
 Let’s add a `hello` method returning *Hello World* so we can quickly check if our endpoint responds or not.
 
 ```java
-@GET
-public String hello() {
-    LOGGER.log(INFO, "Quarkus: hello");
-    return "Quarkus: hello";
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodHello]
 ```
 Let’s now add a `cpu` method that consumes CPU depending on a few optional parameters.
 
@@ -462,45 +416,7 @@ Let’s now add a `cpu` method that consumes CPU depending on a few optional par
 That allows us to check the impact of the database on the CPU consumption.
 - `desc` any optional description you want to persist in the database
 ```java
-@GET
-@Path("/cpu")
-public String cpu(@QueryParam("iterations") @DefaultValue("10") Long iterations,
-                  @QueryParam("db") @DefaultValue("false") Boolean db,
-                  @QueryParam("desc") String desc) {
-    LOGGER.log(INFO, "Quarkus: cpu: {0} {1} with desc {2}", iterations, db, desc);
-    Long iterationsDone = iterations;
-
-    Instant start = Instant.now();
-    if (iterations == null) {
-        iterations = 20000L;
-    } else {
-        iterations *= 20000;
-    }
-    while (iterations > 0) {
-        if (iterations % 20000 == 0) {
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException ie) {
-            }
-        }
-        iterations--;
-    }
-
-    if (db) {
-        Statistics statistics = new Statistics();
-        statistics.type = Type.CPU;
-        statistics.parameter = iterations.toString();
-        statistics.duration = Duration.between(start, Instant.now());
-        statistics.description = desc;
-        repository.persist(statistics);
-    }
-
-    String msg = "Quarkus: CPU consumption is done with " + iterationsDone + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
-    if (db) {
-        msg += " The result is persisted in the database.";
-    }
-    return msg;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodCPU]
 ```
 Now, add a `memory` method that consumes memory depending on a few optional parameters.
 
@@ -508,53 +424,13 @@ Now, add a `memory` method that consumes memory depending on a few optional para
 - `db` if this parameter is set to true, the statistics are stored in the database.
 - `desc` any optional description you want to persist in the database
 ```java
-@GET
-@Path("/memory")
-public String memory(@QueryParam("bites") @DefaultValue("10") Integer bites,
-                     @QueryParam("db") @DefaultValue("false") Boolean db,
-                     @QueryParam("desc") String desc) {
-    LOGGER.log(INFO, "Quarkus: memory: {0} {1} with desc {2}", bites, db, desc);
-
-    Instant start = Instant.now();
-    if (bites == null) {
-        bites = 1;
-    }
-    HashMap hunger = new HashMap<>();
-    for (int i = 0; i < bites * 1024 * 1024; i += 8192) {
-        byte[] bytes = new byte[8192];
-        hunger.put(i, bytes);
-        for (int j = 0; j < 8192; j++) {
-            bytes[j] = '0';
-        }
-    }
-
-    if (db) {
-        Statistics statistics = new Statistics();
-        statistics.type = Type.MEMORY;
-        statistics.parameter = bites.toString();
-        statistics.duration = Duration.between(start, Instant.now());
-        statistics.description = desc;
-        repository.persist(statistics);
-    }
-
-    String msg = "Quarkus: Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
-    if (db) {
-        msg += " The result is persisted in the database.";
-    }
-    return msg;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodMemory]
 ```
 Let’s also create a method to retrieve the statistics from the database.
 This is very easy to do with [Panache](https://quarkus.io/guides/hibernate-orm-panache).
 
 ```java
-@GET
-@Path("/stats")
-@Produces(MediaType.APPLICATION_JSON)
-public List<Statistics> stats() {
-    LOGGER.log(INFO, "Quarkus: retrieving statistics");
-    return Statistics.findAll().list();
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocMethodStats]
 ```
 At this stage, the code does not compile yet, because there are a few missing classes.
 Let’s create them now.
@@ -566,53 +442,14 @@ For that we need a `Statistics` entity with a few enumerations that will be mapp
 Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/quarkus` folder.
 
 ```java
-package io.containerapps.javaruntime.workshop.quarkus;
-
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import java.time.Duration;
-import java.time.Instant;
-
-@Entity
-@Table(name = "Statistics_Quarkus")
-public class Statistics extends PanacheEntity {
-
-    @Column(name = "done_at")
-    public Instant doneAt = Instant.now();
-    public Framework framework = Framework.QUARKUS;
-    public Type type;
-    public String parameter;
-    public Duration duration;
-    public String description;
-}
-
-enum Type {
-    CPU, MEMORY
-}
-
-enum Framework {
-    QUARKUS, MICRONAUT, SPRINGBOOT
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/Statistics.java[]
 ```
 For manipulating the entity, we need a repository.
 Create the `StatisticsRepository` class under the same package.
 Notice that `StatisticsRepository` is a [Panache Repository](https://quarkus.io/guides/hibernate-orm-panache) that extends the `PanacheRepository` class.
 
 ```java
-package io.containerapps.javaruntime.workshop.quarkus;
-
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.transaction.Transactional;
-
-@ApplicationScoped
-@Transactional
-public class StatisticsRepository implements PanacheRepository<Statistics> {
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/StatisticsRepository.java[]
 ```
 ### Compiling the Quarkus Application
 
@@ -629,7 +466,7 @@ To make sure our 3 microservices can run side by side, we need to configure the 
 To have this service exposed on the port 8701, add the following configuration in the `src/main/resources/application.properties` file.
 
 ```java
-quarkus.http.port=8701
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/resources/application.properties[tags=adocProperties]
 ```
 ### Testing the Quarkus Application Locally
 
@@ -642,68 +479,28 @@ Create the `QuarkusResourceTest` class under the `src/test/java/io/containerapps
 Then, add the following to the header of the class.
 
 ```java
-package io.containerapps.javaruntime.workshop.quarkus;
-
-import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Test;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.*;
-
-@QuarkusTest
-public class QuarkusResourceTest {
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocHeader]
 }
 ```
 First, let’s write a test to check that the `hello` method returns the right *Hello World* string.
 
 ```java
-@Test
-public void testHelloEndpoint() {
-    given()
-      .when().get("/quarkus")
-      .then()
-        .statusCode(200)
-        .body(is("Quarkus: hello"));
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestHello]
 ```
 Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
 
 ```java
-@Test
-public void testCpuWithDBAndDescEndpoint() {
-    given().param("iterations", 1).param("db", true).param("desc", "Java17")
-      .when().get("/quarkus/cpu")
-      .then()
-        .statusCode(200)
-        .body(startsWith("Quarkus: CPU consumption is done with"))
-        .body(not(containsString("Java17")))
-        .body(endsWith("The result is persisted in the database."));
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestCPU]
 ```
 And we do the same for the `memory` method.
 
 ```java
-@Test
-public void testMemoryWithDBAndDescEndpoint() {
-    given().param("bites", 1).param("db", true).param("desc", "Java17")
-      .when().get("/quarkus/memory")
-      .then()
-        .statusCode(200)
-        .body(startsWith("Quarkus: Memory consumption is done with"))
-        .body(not(containsString("Java17")))
-        .body(endsWith("The result is persisted in the database."));
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestMemory]
 ```
 Let’s also create a simple test to make sure the statistics are stored in the database.
 
 ```java
-@Test
-public void testStats() {
-    given()
-      .when().get("/quarkus/stats")
-      .then()
-        .statusCode(200);
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/test/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResourceTest.java[tag=adocTestStats]
 ```
 Now that you have your tests methods, make sure you have **Docker Desktop up and running** (as it needs to start a PostgreSQL database) and run them with the following command (the first Quarkus test can take a while as Testcontainers needs to download the PostgreSQL image):
 
@@ -799,59 +596,20 @@ Before creating the REST resource, we need to create a main Micronaut class that
 Open the `Application` class under the `io/containerapps/javaruntime/workshop/micronaut` package.
 
 ```java
-package io.containerapps.javaruntime.workshop.micronaut;
-
-import io.micronaut.runtime.Micronaut;
-
-public class Application {
-
-    public static void main(String[] args) {
-        Micronaut.run(Application.class, args);
-    }
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Application.java[]
 ```
 The REST resource is defined in the `MicronautResource` class.
 Create a new file called `MicronautResource.java` under the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
 As you can see in the header of the class, the resource is exposed on the `/micronaut` path.
 
 ```java
-package io.containerapps.javaruntime.workshop.micronaut;
-
-import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.QueryValue;
-
-import java.lang.System.Logger;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import static java.lang.System.Logger.Level.INFO;
-import static java.lang.invoke.MethodHandles.lookup;
-
-@Controller("/micronaut")
-public class MicronautResource {
-
-    private static final Logger LOGGER = System.getLogger(lookup().lookupClass().getName());
-
-    private final StatisticsRepository repository;
-
-    public MicronautResource(StatisticsRepository statisticsRepository) {
-        this.repository = statisticsRepository;
-    }
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocHeader]
 }
 ```
 Let’s add a `hello` method returning *Hello World* so we can quickly check if our endpoint responds or not.
 
 ```java
-@Get(produces = MediaType.TEXT_PLAIN)
-public String hello() {
-    LOGGER.log(INFO, "Micronaut: hello");
-    return "Micronaut: hello";
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodHello]
 ```
 Let’s now add a `cpu` method that consumes CPU depending on a few optional parameters.
 
@@ -860,44 +618,7 @@ Let’s now add a `cpu` method that consumes CPU depending on a few optional par
 That allows us to check the impact of the database on the CPU consumption.
 - `desc` any optional description you want to persist in the database
 ```java
-@Get(uri = "/cpu", produces = MediaType.TEXT_PLAIN)
-public String cpu(@QueryValue(value = "iterations", defaultValue = "10") Long iterations,
-                  @QueryValue(value = "db", defaultValue = "false") Boolean db,
-                  @QueryValue(value = "desc", defaultValue = "") String desc) {
-    LOGGER.log(INFO, "Micronaut: cpu: {0} {1} with desc {2}", iterations, db, desc);
-    Long iterationsDone = iterations;
-
-    Instant start = Instant.now();
-    if (iterations == null) {
-        iterations = 20000L;
-    } else {
-        iterations *= 20000;
-    }
-    while (iterations > 0) {
-        if (iterations % 20000 == 0) {
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException ie) {
-            }
-        }
-        iterations--;
-    }
-
-    if (db) {
-        Statistics statistics = new Statistics();
-        statistics.type = Type.CPU;
-        statistics.parameter = iterations.toString();
-        statistics.duration = Duration.between(start, Instant.now());
-        statistics.description = desc;
-        repository.save(statistics);
-    }
-
-    String msg = "Micronaut: CPU consumption is done with " + iterationsDone + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
-    if (db) {
-        msg += " The result is persisted in the database.";
-    }
-    return msg;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodCPU]
 ```
 Now, add a `memory` method that consumes memory depending on a few optional parameters.
 
@@ -905,53 +626,12 @@ Now, add a `memory` method that consumes memory depending on a few optional para
 - `db` if this parameter is set to true, the statistics are stored in the database.
 - `desc` any optional description you want to persist in the database
 ```java
-@Get(uri = "/memory", produces = MediaType.TEXT_PLAIN)
-public String memory(@QueryValue(value = "bites", defaultValue = "10") Integer bites,
-                     @QueryValue(value = "db", defaultValue = "false") Boolean db,
-                     @QueryValue(value = "desc", defaultValue = "") String desc) {
-    LOGGER.log(INFO, "Micronaut: memory: {0} {1} with desc {2}", bites, db, desc);
-
-    Instant start = Instant.now();
-    if (bites == null) {
-        bites = 1;
-    }
-    HashMap hunger = new HashMap<>();
-    for (int i = 0; i < bites * 1024 * 1024; i += 8192) {
-        byte[] bytes = new byte[8192];
-        hunger.put(i, bytes);
-        for (int j = 0; j < 8192; j++) {
-            bytes[j] = '0';
-        }
-    }
-
-    if (db) {
-        Statistics statistics = new Statistics();
-        statistics.type = Type.MEMORY;
-        statistics.parameter = bites.toString();
-        statistics.duration = Duration.between(start, Instant.now());
-        statistics.description = desc;
-        repository.save(statistics);
-    }
-
-    String msg = "Micronaut: Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
-    if (db) {
-        msg += " The result is persisted in the database.";
-    }
-    return msg;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodMemory]
 ```
 Let’s also create a method to retrieve the statistics from the database.
 
 ```java
-@Get(uri = "/stats", produces = MediaType.APPLICATION_JSON)
-public List<Statistics> stats() {
-    LOGGER.log(INFO, "Micronaut: retrieving statistics");
-    List<Statistics> result = new ArrayList<Statistics>();
-    for (Statistics stats : repository.findAll()) {
-        result.add(stats);
-    }
-    return result;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodStats]
 ```
 At this stage, the code does not compile yet, because there are a few missing classes.
 Let’s create them now.
@@ -963,60 +643,13 @@ For that we need a `Statistics` entity with a few enumerations that will be mapp
 Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
 
 ```java
-package io.containerapps.javaruntime.workshop.micronaut;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.time.Duration;
-import java.time.Instant;
-
-@Entity
-@Table(name = "Statistics_Micronaut")
-public class Statistics {
-
-    @GeneratedValue
-    @Id
-    private Long id;
-    @Column(name = "done_at")
-    public Instant doneAt = Instant.now();
-    public Framework framework = Framework.MICRONAUT;
-    public Type type;
-    public String parameter;
-    public Duration duration;
-    public String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-}
-
-enum Type {
-    CPU, MEMORY
-}
-
-enum Framework {
-    QUARKUS, MICRONAUT, SPRINGBOOT
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Statistics.java[]
 ```
 For manipulating the entity, we need a repository.
 Create the `StatisticsRepository` class under the same package.
 
 ```java
-package io.containerapps.javaruntime.workshop.micronaut;
-
-import io.micronaut.data.annotation.Repository;
-import io.micronaut.data.repository.CrudRepository;
-
-@Repository
-interface StatisticsRepository extends CrudRepository<Statistics, Long> {
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/StatisticsRepository.java[]
 ```
 ### Compiling the Micronaut Application
 
@@ -1034,33 +667,7 @@ Notice that we use non-blocking threads (`thread-selection: IO`).
 Add the following to the `src/main/resources/application.yml` file.
 
 ```yaml
-micronaut:
-  application:
-    name: MicronautApp
-  server:
-    port: 8702
-    thread-selection: IO
-netty:
-  default:
-    allocator:
-      max-order: 3
-datasources:
-  default:
-    dialect: POSTGRES
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: password
-    driverClassName: org.postgresql.Driver
-jpa:
-  default:
-    entity-scan:
-      packages: 'io.containerapps.javaruntime.workshop.micronaut'
-    properties:
-      hibernate:
-        bytecode:
-          provider: none
-        hbm2ddl:
-          auto: none
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/main/resources/application.yml[]
 ```
 ### Testing the Micronaut Application Locally
 
@@ -1070,125 +677,34 @@ For that, we need to configure Testcontainers in a separate class (`MicronautApp
 Open the `MicronautAppTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` folder.
 
 ```java
-package io.containerapps.javaruntime.workshop.micronaut;
-
-import io.micronaut.runtime.EmbeddedApplication;
-import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-
-import jakarta.inject.Inject;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Testcontainers;
-
-@Testcontainers
-@MicronautTest
-class MicronautAppTest {
-
-    private PostgreSQLContainer postgreSQLContainer;
-
-    @Inject
-    EmbeddedApplication<?> application;
-
-    @BeforeEach
-    public void setUp() {
-        postgreSQLContainer = new PostgreSQLContainer("postgres:14")
-            .withDatabaseName("postgres")
-            .withUsername("postgres")
-            .withPassword("password");
-    }
-
-    @Test
-    void testItWorks() {
-        Assertions.assertTrue(application.isRunning());
-    }
-
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautAppTest.java[]
 ```
 Then, all our tests go into the `MicronautResourceTest` class.
 Create the `MicronautResourceTest` class under the same package that `MicronautAppTest`.
 
 ```java
-package io.containerapps.javaruntime.workshop.micronaut;
-
-import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
-import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Testcontainers;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.*;
-
-@Testcontainers
-@MicronautTest
-class MicronautResourceTest {
-
-    private static String basePath = "http://localhost:8802/micronaut";
-
-    private PostgreSQLContainer postgreSQLContainer;
-
-    @BeforeEach
-    public void setUp() {
-        postgreSQLContainer = new PostgreSQLContainer("postgres:14")
-            .withDatabaseName("postgres")
-            .withUsername("postgres")
-            .withPassword("password");
-    }
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocHeader]
 }
 ```
 First, let’s write a test to check that the `hello` method returns the right *Hello World* string.
 
 ```java
-@Test
-public void testHelloEndpoint(RequestSpecification spec) {
-    spec
-      .when().get(basePath)
-      .then()
-        .statusCode(200)
-        .body(is("Micronaut: hello"));
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestHello]
 ```
 Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
 
 ```java
-@Test
-public void testCpuWithDBAndDescEndpoint() {
-    given().param("iterations", 1).param("db", true).param("desc", "Java17")
-      .when().get(basePath + "/cpu")
-      .then()
-        .statusCode(200)
-        .body(startsWith("Micronaut: CPU consumption is done with"))
-        .body(not(containsString("Java17")))
-        .body(endsWith("The result is persisted in the database."));
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestCPU]
 ```
 And we do the same for the `memory` method.
 
 ```java
-@Test
-public void testMemoryWithDBAndDescEndpoint() {
-    given().param("bites", 1).param("db", true).param("desc", "Java17")
-      .when().get(basePath + "/memory")
-      .then()
-        .statusCode(200)
-        .body(startsWith("Micronaut: Memory consumption is done with"))
-        .body(not(containsString("Java17")))
-        .body(endsWith("The result is persisted in the database."));
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestMemory]
 ```
 Let’s also create a simple test to make sure the statistics are stored in the database.
 
 ```java
-@Test
-public void testStats() {
-    given()
-        .when().get(basePath + "/stats")
-        .then()
-        .statusCode(200);
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestStats]
 ```
 Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a PostgreSQL database) and run them with the following command:
 
@@ -1305,64 +821,20 @@ Before creating the REST resource, let’s check the existing main Spring Boot c
 Check the following code in the `SpringbootApplication` class under the `io/containerapps/javaruntime/workshop/springboot` package.
 
 ```java
-package io.containerapps.javaruntime.workshop.springboot;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class SpringbootApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(SpringbootApplication.class, args);
-	}
-
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplication.java[]
 ```
 The REST resource is defined in the `src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java` file.
 Create this new `SpringbootResource` class under the `io.containerapps.javaruntime.workshop.springboot` package.
 As you can see in the header of the class, the resource is exposed on the `/springboot` path.
 
 ```java
-package io.containerapps.javaruntime.workshop.springboot;
-
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.lang.System.Logger;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import static java.lang.System.Logger.Level.INFO;
-import static java.lang.invoke.MethodHandles.lookup;
-
-@RestController
-@RequestMapping("/springboot")
-public class SpringbootResource {
-
-    private static final Logger LOGGER = System.getLogger(lookup().lookupClass().getName());
-
-    private final StatisticsRepository repository;
-
-    public SpringbootResource(StatisticsRepository statisticsRepository) {
-        this.repository = statisticsRepository;
-    }
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocHeader]
 }
 ```
 Let’s add a `hello` method returning *Hello World* so we can quickly check if our endpoint responds or not.
 
 ```java
-@GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
-public String hello() {
-    LOGGER.log(INFO, "Spring Boot: hello");
-    return "Spring Boot: hello";
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodHello]
 ```
 Let’s now add a `cpu` method that consumes CPU depending on a few optional parameters.
 
@@ -1371,44 +843,7 @@ Let’s now add a `cpu` method that consumes CPU depending on a few optional par
 That allows us to check the impact of the database on the CPU consumption.
 - `desc` any optional description you want to persist in the database
 ```java
-@GetMapping(path = "/cpu", produces = MediaType.TEXT_PLAIN_VALUE)
-public String cpu(@RequestParam(value = "iterations", defaultValue = "10") Long iterations,
-                  @RequestParam(value = "db", defaultValue = "false") Boolean db,
-                  @RequestParam(value = "desc", required = false) String desc) {
-    LOGGER.log(INFO, "Spring Boot: cpu: {0} {1} with desc {2}", iterations, db, desc);
-    Long iterationsDone = iterations;
-
-    Instant start = Instant.now();
-    if (iterations == null) {
-        iterations = 20000L;
-    } else {
-        iterations *= 20000;
-    }
-    while (iterations > 0) {
-        if (iterations % 20000 == 0) {
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException ie) {
-            }
-        }
-        iterations--;
-    }
-
-    if (db) {
-        Statistics statistics = new Statistics();
-        statistics.type = Type.CPU;
-        statistics.parameter = iterations.toString();
-        statistics.duration = Duration.between(start, Instant.now());
-        statistics.description = desc;
-        repository.save(statistics);
-    }
-
-    String msg = "Spring Boot: CPU consumption is done with " + iterationsDone + " iterations in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
-    if (db) {
-        msg += " The result is persisted in the database.";
-    }
-    return msg;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodCPU]
 ```
 Now, add a `memory` method that consumes memory depending on a few optional parameters.
 
@@ -1416,53 +851,12 @@ Now, add a `memory` method that consumes memory depending on a few optional para
 - `db` if this parameter is set to true, the statistics are stored in the database.
 - `desc` any optional description you want to persist in the database
 ```java
-@GetMapping(path = "/memory", produces = MediaType.TEXT_PLAIN_VALUE)
-public String memory(@RequestParam(value = "bites", defaultValue = "10") Integer bites,
-                     @RequestParam(value = "db", defaultValue = "false") Boolean db,
-                     @RequestParam(value = "desc", required = false) String desc) {
-    LOGGER.log(INFO, "Spring Boot: memory: {0} {1} with desc {2}", bites, db, desc);
-
-    Instant start = Instant.now();
-    if (bites == null) {
-        bites = 1;
-    }
-    HashMap hunger = new HashMap<>();
-    for (int i = 0; i < bites * 1024 * 1024; i += 8192) {
-        byte[] bytes = new byte[8192];
-        hunger.put(i, bytes);
-        for (int j = 0; j < 8192; j++) {
-            bytes[j] = '0';
-        }
-    }
-
-    if (db) {
-        Statistics statistics = new Statistics();
-        statistics.type = Type.MEMORY;
-        statistics.parameter = bites.toString();
-        statistics.duration = Duration.between(start, Instant.now());
-        statistics.description = desc;
-        repository.save(statistics);
-    }
-
-    String msg = "Spring Boot: Memory consumption is done with " + bites + " bites in " + Duration.between(start, Instant.now()).getNano() + " nano-seconds.";
-    if (db) {
-        msg += " The result is persisted in the database.";
-    }
-    return msg;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodMemory]
 ```
 Let’s also create a method to retrieve the statistics from the database.
 
 ```java
-@GetMapping(path = "/stats", produces = MediaType.APPLICATION_JSON_VALUE)
-public List<Statistics> stats() {
-    LOGGER.log(INFO, "Spring Boot: retrieving statistics");
-    List<Statistics> result = new ArrayList<Statistics>();
-    for (Statistics stats : repository.findAll()) {
-        result.add(stats);
-    }
-    return result;
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodStats]
 ```
 At this stage, the code does not compile yet, because there are a few missing classes.
 Let’s create them now.
@@ -1474,51 +868,13 @@ For that we need a `Statistics` entity with a few enumerations.
 Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/springboot` directory.
 
 ```java
-package io.containerapps.javaruntime.workshop.springboot;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-import java.time.Duration;
-import java.time.Instant;
-
-@Entity
-@Table(name = "Statistics_Springboot")
-public class Statistics {
-
-    @GeneratedValue
-    @Id
-    private Long id;
-    @Column(name = "done_at")
-    public Instant doneAt = Instant.now();
-    public Framework framework = Framework.SPRINGBOOT;
-    public Type type;
-    public String parameter;
-    public Duration duration;
-    public String description;
-}
-
-enum Type {
-    CPU, MEMORY
-}
-
-enum Framework {
-    QUARKUS, MICRONAUT, SPRINGBOOT
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/Statistics.java[]
 ```
 For manipulating the entity, we need a repository.
 Create the `StatisticsRepository` class under the same package.
 
 ```java
-package io.containerapps.javaruntime.workshop.springboot;
-
-import org.springframework.data.repository.CrudRepository;
-
-interface StatisticsRepository extends CrudRepository<Statistics, Long> {
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/StatisticsRepository.java[]
 ```
 ### Compiling the Spring Boot Application
 
@@ -1535,17 +891,7 @@ This service is exposed on the port 8703.
 Add the following to the `src/main/resources/application.properties` file.
 
 ```java
-server.port=8703
-spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
-spring.datasource.username=postgres
-spring.datasource.password=password
-
-## Hibernate Properties
-spring.jpa.open-in-view=false
-#spring.jpa.show-sql=true
-
-# Hibernate ddl auto (create, create-drop, validate, update)
-spring.jpa.hibernate.ddl-auto=none
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/main/resources/application.properties[]
 ```
 ### Testing the Spring Boot Application Locally
 
@@ -1555,107 +901,34 @@ For that, we need to configure Testcontainers.
 Open up the `SpringbootApplicationTests` class under the `src/test/java/io/containerapps/javaruntime/workshop/springboot` folder, and add Testcontainers support in it:
 
 ```java
-package io.containerapps.javaruntime.workshop.springboot;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = {
-    "spring.datasource.url=jdbc:tc:postgresql:14-alpine://testcontainers/postgres",
-    "spring.datasource.username=postgres",
-    "spring.datasource.password=password"
-})
-class SpringbootApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplicationTests.java[]
 ```
 Then, all our tests go into the `SpringbootResourceTest` class.
 Create the `SpringbootResourceTest` class under the same package that `SpringbootApplicationTests`.
 
 ```java
-package io.containerapps.javaruntime.workshop.springboot;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT, properties = {
-    "server.port=8803",
-    "spring.datasource.url=jdbc:tc:postgresql:14-alpine://testcontainers/postgres",
-    "spring.datasource.username=postgres",
-    "spring.datasource.password=password"
-})
-class SpringbootResourceTest {
-
-    private static String basePath = "http://localhost:8803/springboot";
-
-    @Autowired
-    private TestRestTemplate restTemplate;
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocHeader]
 }
 ```
 First, let’s write a test to check that the `hello` method returns the right *Hello World* string.
 
 ```java
-@Test
-public void testHelloEndpoint() {
-    ResponseEntity<String> response = this.restTemplate.
-        getForEntity(basePath, String.class);
-
-    assertEquals(response.getStatusCode(), HttpStatus.OK);
-    assertThat(response.getBody()).contains("Spring Boot: hello");
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestHello]
 ```
 Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
 
 ```java
-@Test
-public void testCpuWithDBAndDescEndpoint() {
-    ResponseEntity<String> response = this.restTemplate.
-        getForEntity(basePath + "/cpu?iterations=1&db=true&dec=Java17", String.class);
-
-    assertEquals(response.getStatusCode(), HttpStatus.OK);
-    assertThat(response.getBody())
-        .startsWith("Spring Boot: CPU consumption is done with")
-        .doesNotContain("Java17")
-        .endsWith("The result is persisted in the database.");
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestCPU]
 ```
 And we do the same for the `memory` method.
 
 ```java
-@Test
-public void testMemoryWithDBAndDescEndpoint() {
-    ResponseEntity<String> response = this.restTemplate.
-        getForEntity(basePath + "/memory?bites=1&db=true&desc=Java17", String.class);
-
-    assertEquals(response.getStatusCode(), HttpStatus.OK);
-    assertThat(response.getBody())
-        .startsWith("Spring Boot: Memory consumption is done with")
-        .doesNotContain("Java17")
-        .endsWith("The result is persisted in the database.");
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestMemory]
 ```
 Let’s also create a simple test to make sure the statistics are stored in the database.
 
 ```java
-@Test
-public void testStats() {
-    ResponseEntity<String> response = this.restTemplate.
-        getForEntity(basePath + "/stats", String.class);
-
-    assertEquals(response.getStatusCode(), HttpStatus.OK);
-}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestStats]
 ```
 Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a PostgreSQL database) and run them with the following command:
 
@@ -1783,10 +1056,7 @@ Now we’ll configure the CLI to automatically install extensions when needed, a
 The Azure CLI is extensible, some commands are part of the core, but others are provided by extensions, such as the `az containerapp` command we’ll be using later.
 
 ```shell
-az config set extension.use_dynamic_install=yes_without_prompt
-az provider register --namespace Microsoft.App
-az provider register --namespace Microsoft.OperationalInsights
-az provider register --namespace Microsoft.Insights
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocSetupAzCli, indent=0]
 ```
 ### Creating the Azure Resources
 
@@ -1810,32 +1080,7 @@ Let’s first set a few environment variables that will help us in creating the 
 </div>
 
 ```shell
-PROJECT="java-runtimes"
-RESOURCE_GROUP="rg-${PROJECT}"
-LOCATION="westeurope"
-TAG="java-runtimes"
-
-LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
-CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
-
-# If you're using a dev container, you should manually set this to
-# a unique value (like your name) to avoid conflicts with other users.
-UNIQUE_IDENTIFIER=$(whoami)
-REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
-IMAGES_TAG="1.0"
-
-POSTGRES_DB_ADMIN="javaruntimesadmin"
-POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
-POSTGRES_DB_VERSION="13"
-POSTGRES_SKU="Standard_B1ms"
-POSTGRES_TIER="Burstable"
-POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
-POSTGRES_DB_SCHEMA="stats"
-POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
-
-QUARKUS_APP="quarkus-app"
-MICRONAUT_APP="micronaut-app"
-SPRING_APP="springboot-app"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocEnvironmentVariables, indent=0]
 ```
 
 <div class="info" data-title="note">
@@ -1876,10 +1121,7 @@ will be grouped into a single resource group.
 Run the following command to create the Java Runtimes resource group:
 
 ```shell
-az group create \
-  --name "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocResourceGroup, indent=0]
 ```
 #### Log Analytics Workspace
 
@@ -1890,32 +1132,12 @@ We will use the same workspace for most of the Azure resources we will be creati
 Create a Log Analytics workspace with the following command:
 
 ```shell
-az monitor log-analytics workspace create \
-  --resource-group "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG" \
-  --workspace-name "$LOG_ANALYTICS_WORKSPACE"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocLogAnalytics, indent=0]
 ```
 Let’s also retrieve the Log Analytics Client ID and client secret and store them in environment variables:
 
 ```shell
-LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$(
-  az monitor log-analytics workspace show \
-    --resource-group "$RESOURCE_GROUP" \
-    --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
-    --query customerId  \
-    --output tsv | tr -d '[:space:]'
-)
-echo "LOG_ANALYTICS_WORKSPACE_CLIENT_ID=$LOG_ANALYTICS_WORKSPACE_CLIENT_ID"
-
-LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(
-  az monitor log-analytics workspace get-shared-keys \
-    --resource-group "$RESOURCE_GROUP" \
-    --workspace-name "$LOG_ANALYTICS_WORKSPACE" \
-    --query primarySharedKey \
-    --output tsv | tr -d '[:space:]'
-)
-echo "LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocLogAnalyticsSecrets, indent=0]
 ```
 #### Azure Container Registry
 
@@ -1926,35 +1148,17 @@ Using the Azure Container Registry, you can store Docker-formatted images for al
 First, let’s created an Azure Container Registry with the following command (notice that we create the registry with admin rights `--admin-enabled true` which is not suited for real production, but good for our workshop):
 
 ```shell
-az acr create \
-  --resource-group "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG" \
-  --name "$REGISTRY" \
-  --workspace "$LOG_ANALYTICS_WORKSPACE" \
-  --sku Standard \
-  --admin-enabled true
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocRegistry, indent=0]
 ```
 Update the repository to allow anonymous users to pull the images (this can be handy if you want other attendees to use your registry):
 
 ```shell
-az acr update \
-  --resource-group "$RESOURCE_GROUP" \
-  --name "$REGISTRY" \
-  --anonymous-pull-enabled true
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]
 ```
 Get the URL of the Azure Container Registry and set it to the `REGISTRY_URL` variable with the following command:
 
 ```shell
-REGISTRY_URL=$(
-  az acr show \
-    --resource-group "$RESOURCE_GROUP" \
-    --name "$REGISTRY" \
-    --query "loginServer" \
-    --output tsv
-)
-
-echo "REGISTRY_URL=$REGISTRY_URL"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocRegistryShow, indent=0]
 ```
 If you log into the [Azure Portal](https://portal.azure.com/?WT.mc_id=javascript-0000-yolasors) and search for the `rg-java-runtimes` resource group, you should see the following created resources.
 
@@ -1967,13 +1171,7 @@ Containers deployed on the same environment use the same virtual network and the
 Create the container apps environment with the following command:
 
 ```shell
-az containerapp env create \
-    --resource-group "$RESOURCE_GROUP" \
-    --location "$LOCATION" \
-    --tags system="$TAG" \
-    --name "$CONTAINERAPPS_ENVIRONMENT" \
-    --logs-workspace-id "$LOG_ANALYTICS_WORKSPACE_CLIENT_ID" \
-    --logs-workspace-key "$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocACAEnv, indent=0]
 ```
 
 <div class="info" data-title="note">
@@ -1994,77 +1192,13 @@ Since we don’t have any container images ready yet, we’ll use a default "*He
 We’ll update the container apps with the actual images later.
 
 ```shell
-az containerapp create \
-  --resource-group "$RESOURCE_GROUP" \
-  --tags system="$TAG" application="$QUARKUS_APP" \
-  --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
-  --name "$QUARKUS_APP" \
-  --environment "$CONTAINERAPPS_ENVIRONMENT" \
-  --ingress external \
-  --target-port 80 \
-  --min-replicas 0 \
-  --env-vars QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate \
-             QUARKUS_HIBERNATE_ORM_SQL_LOAD_SCRIPT=no-file \
-             QUARKUS_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
-             QUARKUS_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
-             QUARKUS_DATASOURCE_JDBC_URL="$POSTGRES_DB_CONNECT_STRING"
-
-az containerapp create \
-  --resource-group "$RESOURCE_GROUP" \
-  --tags system="$TAG" application="$MICRONAUT_APP" \
-  --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
-  --name "$MICRONAUT_APP" \
-  --environment "$CONTAINERAPPS_ENVIRONMENT" \
-  --ingress external \
-  --target-port 80 \
-  --min-replicas 0 \
-  --env-vars DATASOURCES_DEFAULT_USERNAME="$POSTGRES_DB_ADMIN" \
-             DATASOURCES_DEFAULT_PASSWORD="$POSTGRES_DB_PWD" \
-             DATASOURCES_DEFAULT_URL="$POSTGRES_DB_CONNECT_STRING"
-
-az containerapp create \
-  --resource-group "$RESOURCE_GROUP" \
-  --tags system="$TAG" application="$SPRING_APP" \
-  --image "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" \
-  --name "$SPRING_APP" \
-  --environment "$CONTAINERAPPS_ENVIRONMENT" \
-  --ingress external \
-  --target-port 80 \
-  --min-replicas 0 \
-  --env-vars SPRING_DATASOURCE_USERNAME="$POSTGRES_DB_ADMIN" \
-             SPRING_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
-             SPRING_DATASOURCE_URL="$POSTGRES_DB_CONNECT_STRING"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocACACreate, indent=0]
 ```
 The `create` command returns the URL for the container apps.
 You can also get the URLs with the following commands:
 
 ```shell
-QUARKUS_HOST=$(
-  az containerapp show \
-    --name "$QUARKUS_APP" \
-    --resource-group "$RESOURCE_GROUP" \
-    --query "properties.configuration.ingress.fqdn" \
-    --output tsv \
-)
-echo "QUARKUS_HOST=$QUARKUS_HOST"
-
-MICRONAUT_HOST=$(
-  az containerapp show \
-    --name "$MICRONAUT_APP" \
-    --resource-group "$RESOURCE_GROUP" \
-    --query "properties.configuration.ingress.fqdn" \
-    --output tsv \
-)
-echo "MICRONAUT_HOST=$MICRONAUT_HOST"
-
-SPRING_HOST=$(
-  az containerapp show \
-    --name "$SPRING_APP" \
-    --resource-group "$RESOURCE_GROUP" \
-    --query "properties.configuration.ingress.fqdn" \
-    --output tsv \
-)
-echo "SPRING_HOST=$SPRING_HOST"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
 ```
 Get these locations and copy them into a web browser.
 You should see the following page:
@@ -2079,19 +1213,7 @@ Because we also want to access these database from an external SQL client, we ma
 Create the database with the following command (this one will take a few minutes):
 
 ```shell
-az postgres flexible-server create \
-  --resource-group "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG" \
-  --name "$POSTGRES_DB" \
-  --database-name "$POSTGRES_DB_SCHEMA" \
-  --admin-user "$POSTGRES_DB_ADMIN" \
-  --admin-password "$POSTGRES_DB_PWD" \
-  --public all \
-  --tier "$POSTGRES_TIER" \
-  --sku-name "$POSTGRES_SKU" \
-  --storage-size 256 \
-  --version "$POSTGRES_DB_VERSION"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocPostgresCreate, indent=0]
 ```
 At this stage, if you go back to the [Azure Portal](http://portal.azure.com/?WT.mc_id=javascript-0000-yolasors) you’ll see the database deployed as well as the 3 container apps.
 
@@ -2104,12 +1226,7 @@ Thanks to Azure CLI, we can execute these SQL scripts directly in our newly crea
 Create the tables using the following command (make sure you are in the repository root directory before your execute this command):
 
 ```shell
-az postgres flexible-server execute \
-  --name "$POSTGRES_DB" \
-  --admin-user "$POSTGRES_DB_ADMIN" \
-  --admin-password "$POSTGRES_DB_PWD" \
-  --database-name "$POSTGRES_DB_SCHEMA" \
-  --file-path "infrastructure/db-init/initialize-databases.sql"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocPostgresTable, indent=0]
 ```
 
 <div class="info" data-title="note">
@@ -2124,27 +1241,12 @@ az postgres flexible-server execute \
 You can execute a few SQL statements directly in the database with the following commands to check the content of the three `Statistics` tables (which should be empty at this stage):
 
 ```shell
-az postgres flexible-server execute \
-  --name "$POSTGRES_DB" \
-  --admin-user "$POSTGRES_DB_ADMIN" \
-  --admin-password "$POSTGRES_DB_PWD" \
-  --database-name "$POSTGRES_DB_SCHEMA" \
-  --querytext "select * from Statistics_Quarkus"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocPostgresSelect, indent=0]
 ```
 If you’d like to see the connection string to the database (so you can access your database from an external SQL client), use the following command:
 
 ```shell
-POSTGRES_CONNECTION_STRING=$(
-  az postgres flexible-server show-connection-string \
-    --server-name "$POSTGRES_DB" \
-    --admin-user "$POSTGRES_DB_ADMIN" \
-    --admin-password "$POSTGRES_DB_PWD" \
-    --database-name "$POSTGRES_DB_SCHEMA" \
-    --query "connectionStrings.jdbc" \
-    --output tsv
-)
-
-echo "POSTGRES_CONNECTION_STRING=$POSTGRES_CONNECTION_STRING"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocPostgresConnectionString, indent=0]
 ```
 
 <div class="info" data-title="note">
@@ -2192,55 +1294,7 @@ This file will contain the instructions for our CI/CD pipeline.
 Create a new file in your repository with the path `.github/workflows/deploy.yml` and the following content:
 
 ```yaml
-name: Build and deploy to Azure Container Apps
-
-# Controls when the action will run.
-# We want to run this workflow every time a commit is pushed to the 'main' branch
-on:
-  push:
-    branches: [main]
-
-env:
-  # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
-  PROJECT: java-runtimes
-  RESOURCE_GROUP: rg-java-runtimes
-  QUARKUS_APP: quarkus-app
-  MICRONAUT_APP: micronaut-app
-  SPRING_APP: springboot-app
-
-# A workflow run is made up of one or more jobs.
-# Unless you specify dependencies, jobs run in parallel by default.
-jobs:
-
-  # Define our "build" job, that will be the CI part of our pipeline
-  build:
-    # The type of runner that the job will run on.
-    # Many runners are available, including Windows, macOS, and Linux.
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks (actions) that will be executed as
-    # part of the job.
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'microsoft'
-          java-version: '17'
-          cache: 'maven'
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log in to container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ env.REGISTRY_URL }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/.github/workflows/deploy.yml[tags=adocGitHubActionsWorkflowBase;!adocSkipPath]
 ```
 
 <div class="important" data-title="warning">
@@ -2265,15 +1319,7 @@ Note that our tests will be run as part of the build, to make sure the integrati
 Add the following step to the `build` job:
 
 ```yaml
-      - name: Build Quarkus with Java
-        run: |
-          cd quarkus-app && ./mvnw package
-      - name: Build Micronaut with Java
-        run: |
-          cd micronaut-app && ./mvnw package
-      - name: Build Spring Boot with Java
-        run: |
-          cd springboot-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/.github/workflows/deploy.yml[tag=adocBuild]
 ```
 
 <div class="important" data-title="warning">
@@ -2304,29 +1350,7 @@ We’ll use the [`docker/build-push-action` action](https://github.com/marketpla
 Add the following steps to the `build` job:
 
 ```yaml
-      - name: Build and push Quarkus Java image to registry
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }}
-          file: ./quarkus-app/src/main/docker/Dockerfile.jvm
-          context: ./quarkus-app/
-
-      - name: Build and push Micronaut Java image to registry
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }}
-          file: ./micronaut-app/src/main/docker/Dockerfile.jvm
-          context: ./micronaut-app/
-
-      - name: Build and push Spring Boot Java image to registry
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }}
-          file: ./springboot-app/src/main/docker/Dockerfile.jvm
-          context: ./springboot-app/
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/.github/workflows/deploy.yml[tag=adocPush]
 ```
 We’re using the `github.sha` variable, to tag our images with the commit SHA that triggered the workflow.
 This way, we can easily identify which version of the application is deployed.
@@ -2346,47 +1370,7 @@ We’ll add a new `deploy` job to our workflow to deploy them to Azure Container
 Add these lines after the `build` job:
 
 ```yaml
-  # Define our "deploy" job, that will be the CD part of our pipeline
-  deploy:
-    runs-on: ubuntu-latest
-
-    # This job needs to run after the "build" job, so we'll add a dependency on it
-    needs: build
-    
-    steps:
-      # Log in to Azure to be able to deploy our apps
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      # Use the Azure CLI to deploy our apps
-      - name: Deploy to Azure Container Apps
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            
-            az containerapp update \
-              --name ${{ env.QUARKUS_APP }} \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.QUARKUS_APP }}:${{ github.sha }} \
-              --query "properties.configuration.ingress.fqdn" \
-              --output tsv
-
-            az containerapp update \
-              --name ${{ env.MICRONAUT_APP }} \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.MICRONAUT_APP }}:${{ github.sha }} \
-              --query "properties.configuration.ingress.fqdn" \
-              --output tsv
-
-            az containerapp update \
-              --name ${{ env.SPRING_APP }} \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/${{ env.SPRING_APP }}:${{ github.sha }} \
-              --query "properties.configuration.ingress.fqdn" \
-              --output tsv
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/.github/workflows/deploy.yml[tag=adocDeploy]
 ```
 This job will run after the `build` job, and will use the Azure CLI to deploy our apps to Azure Container Apps.
 We’re using the `github.sha` variable again to make sure we’re deploying the correct version of the images.
@@ -2411,23 +1395,7 @@ Then select `New repository secret` and create two secrets for `REGISTRY_USERNAM
 You can get the value of the `REGISTRY_USERNAME` and `REGISTRY_PASSWORD` secrets by running the following commands:
 
 ```shell
-REGISTRY_USERNAME=$(
-  az acr credential show \
-    --resource-group "$RESOURCE_GROUP" \
-    --name "$REGISTRY" \
-    --query "username" \
-    --output tsv
-)
-echo "REGISTRY_USERNAME=$REGISTRY_USERNAME"
-
-REGISTRY_PASSWORD=$(
-  az acr credential show \
-    --resource-group "$RESOURCE_GROUP" \
-    --name "$REGISTRY" \
-    --query "passwords[0].value" \
-    --output tsv
-)
-echo "REGISTRY_PASSWORD=$REGISTRY_PASSWORD"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]
 ```
 You will end up with something like this:
 
@@ -2449,23 +1417,7 @@ This is an identity that can be used to authenticate to Azure, and that can be g
 To create a new Service Principal, run the following commands:
 
 ```shell
-SUBSCRIPTION_ID=$(
-  az account show \
-    --query id \
-    --output tsv \
-    --only-show-errors
-)
-
-AZURE_CREDENTIALS=$(
-  MSYS_NO_PATHCONV=1 az ad sp create-for-rbac \
-    --name="sp-${PROJECT}-${UNIQUE_IDENTIFIER}" \
-    --role="Contributor" \
-    --scopes="/subscriptions/$SUBSCRIPTION_ID" \
-    --sdk-auth \
-    --only-show-errors
-)
-
-echo $AZURE_CREDENTIALS
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]
 ```
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value (make sure to **copy the entire JSon**).
 
@@ -2479,23 +1431,7 @@ The test image use port `80` in the container, but we use a different port in ea
 Run the following commands to update the target ports:
 
 ```shell
-az containerapp ingress enable \
-  --name "$QUARKUS_APP" \
-  --resource-group "$RESOURCE_GROUP" \
-  --target-port 8701 \
-  --type external
-
-az containerapp ingress enable \
-  --name "$MICRONAUT_APP" \
-  --resource-group "$RESOURCE_GROUP" \
-  --target-port 8702 \
-  --type external
-
-az containerapp ingress enable \
-  --name "$SPRING_APP" \
-  --resource-group "$RESOURCE_GROUP" \
-  --target-port 8703 \
-  --type external
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]
 ```
 If you want you can have a look at the [Azure portal](https://portal.azure.com/?WT.mc_id=javascript-0000-yolasors) to check that the target port has been updated.
 
@@ -2519,10 +1455,7 @@ It should take a few minutes to complete.
 > Make sure you have executed the following command:
 > 
 > ```shell
-> az acr update \
->   --resource-group "$RESOURCE_GROUP" \
->   --name "$REGISTRY" \
->   --anonymous-pull-enabled true
+> link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]
 > ```
 
 </div>
@@ -2541,44 +1474,14 @@ Once your workflow is completed, let’s make a quick test on our deployed apps.
 First we need to get the ingress URL by running the following command:
 
 ```shell
-QUARKUS_HOST=$(
-  az containerapp show \
-    --name "$QUARKUS_APP" \
-    --resource-group "$RESOURCE_GROUP" \
-    --query "properties.configuration.ingress.fqdn" \
-    --output tsv \
-)
-echo "QUARKUS_HOST=$QUARKUS_HOST"
-
-MICRONAUT_HOST=$(
-  az containerapp show \
-    --name "$MICRONAUT_APP" \
-    --resource-group "$RESOURCE_GROUP" \
-    --query "properties.configuration.ingress.fqdn" \
-    --output tsv \
-)
-echo "MICRONAUT_HOST=$MICRONAUT_HOST"
-
-SPRING_HOST=$(
-  az containerapp show \
-    --name "$SPRING_APP" \
-    --resource-group "$RESOURCE_GROUP" \
-    --query "properties.configuration.ingress.fqdn" \
-    --output tsv \
-)
-echo "SPRING_HOST=$SPRING_HOST"
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
 ```
 Then we can use `curl` to test our three applications.
 The first invocation can take long as Azure Container Apps needs to scale from 0.
 But then, the following `curl` invocations should be faster.
 
 ```shell
-curl https://${QUARKUS_HOST}/quarkus
-echo 
-curl https://${MICRONAUT_HOST}/micronaut
-echo 
-curl https://${SPRING_HOST}/springboot
-echo 
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/scale.sh[tag=adocPingApps, indent=0]
 ```
 If you want to quickly check the logs of the applications, you can use the following Azure CLI commands (more on logs later):
 
@@ -3013,14 +1916,7 @@ This will create a new revision of the application (but the URL `$QUARKUS_HOST` 
 We will set a new scale rule for our Quarkus app using the Azure CLI:
 
 ```shell
-az containerapp update \
-  --name "$QUARKUS_APP" \
-  --resource-group "$RESOURCE_GROUP" \
-  --scale-rule-name "cpu-scaling" \
-  --scale-rule-type "cpu" \
-  --scale-rule-metadata type=Utilization value=10 \
-  --min-replicas 1 \
-  --max-replicas 10
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/scale.sh[tag=adocAutoScalingCpu, indent=0]
 ```
 This will automatically scale out the application when the CPU usage is above 10% (we set it low deliberately to make it easy to go up).
 
@@ -3050,14 +1946,7 @@ Another option that we can use is to scale based on the memory usage, with the `
 This we will set the scale rule for our Micronaut app using the command:
 
 ```shell
-az containerapp update \
-  --name "$MICRONAUT_APP" \
-  --resource-group "$RESOURCE_GROUP" \
-  --scale-rule-name "memory-scaling" \
-  --scale-rule-type "memory" \
-  --scale-rule-metadata type=Utilization value=15 \
-  --min-replicas 1 \
-  --max-replicas 10
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/scripts/infra/scale.sh[tag=adocAutoScalingMemory, indent=0]
 ```
 This will automatically scale out the application when the memory usage is above 15% (we set it low deliberately to make it easy to go up).
 
@@ -3180,9 +2069,7 @@ For that, you first need to configure the `application.properties` file with the
 Add the following properties to the `quarkus-app/src/main/resources/application.properties` file:
 
 ```properties
-%prod.quarkus.datasource.username=postgres
-%prod.quarkus.datasource.password=password
-%prod.quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/postgres
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/quarkus-app/src/main/resources/application.properties[tag=adocProdProperties]
 ```
 Then start the database by executing the following command under the `infrastructure` directory:
 
@@ -3212,66 +2099,7 @@ First, let’s create a new workflow.
 Go to the `.github/workflows` directory, create a new file called `deploy-quarkus-native.yml` and add the following code:
 
 ```yaml
-name: Build and deploy Quarkus native image
-
-on:
-  push:
-    branches: [main]
-    workflow_dispatch:
-    paths:
-      - .github/workflows/*.yml
-      - quarkus-app/**
-
-env:
-  # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
-  PROJECT: java-runtimes
-  RESOURCE_GROUP: rg-java-runtimes
-
-jobs:
-  build-native:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: graalvm/setup-graalvm@v1
-        with:
-          version: 'latest'
-          java-version: '17'
-          components: 'native-image'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Log in to container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ env.REGISTRY_URL }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build quarkus-app with GraalVM
-        run: |
-          cd quarkus-app && ./mvnw -Pnative package -Dquarkus.native.container-build=true
-      - name: Build quarkus-app native Docker image
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/quarkus-app-native:${{ github.sha }}
-          file: ./quarkus-app/src/main/docker/Dockerfile.native
-          context: ./quarkus-app/
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Deploy quarkus-app native Docker image to Azure Container Apps
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            
-            az containerapp update \
-              --name quarkus-app \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/quarkus-app-native:${{ github.sha }} \
-              --query "properties.configuration.ingress.fqdn" \
-              --output tsv
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/.github/workflows/deploy-quarkus-native.yml[]
 ```
 
 <div class="important" data-title="warning">
@@ -3321,66 +2149,7 @@ Now, let’s create a GitHub Action that will build a native image of the Micron
 Create a new workflow in the `.github/workflows/deploy-micronaut-native.yml` file:
 
 ```yaml
-name: Build and deploy Micronaut native image
-
-on:
-  push:
-    branches: [main]
-    workflow_dispatch:
-    paths:
-      - .github/workflows/*.yml
-      - micronaut-app/**
-
-env:
-  # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
-  PROJECT: java-runtimes
-  RESOURCE_GROUP: rg-java-runtimes
-
-jobs:
-  build-native:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: graalvm/setup-graalvm@v1
-        with:
-          version: 'latest'
-          java-version: '17'
-          components: 'native-image'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Log in to container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ env.REGISTRY_URL }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build micronaut-app with GraalVM
-        run: |
-          cd micronaut-app && ./mvnw package -Dpackaging=native-image
-      - name: Build micronaut-app native Docker image
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/micronaut-app-native:${{ github.sha }}
-          file: ./micronaut-app/src/main/docker/Dockerfile.native
-          context: ./micronaut-app/
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Deploy micronaut-app native Docker image to Azure Container Apps
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            
-            az containerapp update \
-              --name micronaut-app \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/micronaut-app-native:${{ github.sha }} \
-              --query "properties.configuration.ingress.fqdn" \
-              --output tsv
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/.github/workflows/deploy-micronaut-native.yml[]
 ```
 
 <div class="important" data-title="warning">
@@ -3424,66 +2193,7 @@ Now, let’s create a GitHub Action that will build a native image of the Spring
 First, create a new workflow: create a new file called `.github/workflows/deploy-springboot-native.yml`:
 
 ```yaml
-name: Build and deploy Spring Boot native image
-
-on:
-  push:
-    branches: [main]
-    workflow_dispatch:
-    paths:
-      - .github/workflows/*.yml
-      - springboot-app/**
-
-env:
-  # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
-  PROJECT: java-runtimes
-  RESOURCE_GROUP: rg-java-runtimes
-
-jobs:
-  build-native:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: graalvm/setup-graalvm@v1
-        with:
-          version: 'latest'
-          java-version: '17'
-          components: 'native-image'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Log in to container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ env.REGISTRY_URL }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build springboot-app with GraalVM
-        run: |
-          cd springboot-app && ./mvnw -Pnative native:compile
-      - name: Build springboot-app native Docker image
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }}
-          file: ./springboot-app/src/main/docker/Dockerfile.native
-          context: ./springboot-app/
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Deploy springboot-app native Docker image to Azure Container Apps
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            
-            az containerapp update \
-              --name springboot-app \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }} \
-              --query "properties.configuration.ingress.fqdn" \
-              --output tsv
+link:https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main/.github/workflows/deploy-springboot-native.yml[]
 ```
 
 <div class="important" data-title="warning">
@@ -3550,7 +2260,7 @@ az group delete --name "$RESOURCE_GROUP"
 ```
 ### References
 
-- [The Azure Container Apps and Java Runtimes Workshop](https://azure.github.io/aca-java-runtimes-workshop/)
+- [The Azure Container Apps and Java Runtimes Workshop](https://aka.ms/java-runtimes)
 - [The workshop GitHub Repository](https://github.com/Azure/aca-java-runtimes-workshop)
 - [Create an issue if something does not work](https://github.com/Azure/aca-java-runtimes-workshop/issues)
 - [Deploy to Azure Container Apps Workshop](https://quarkus.io/quarkus-workshops/super-heroes/index-azure.html)
