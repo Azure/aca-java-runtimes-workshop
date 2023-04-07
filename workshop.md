@@ -19,7 +19,6 @@ audience: students, devs
 banner_url: assets/banner.jpg
 sections_title:
   - Introduction
-navigation_levels: 3
 ---
 
 # Java Runtimes and Azure Container Apps Workshop

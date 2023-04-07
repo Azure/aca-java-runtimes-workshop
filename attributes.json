@@ -9,7 +9,6 @@
     "duration_minutes": 180,
     "audience": "students, devs",
     "banner_url": "assets/banner.jpg",
-    "sections_title": ["Introduction"],
-    "navigation_levels": 3
+    "sections_title": ["Introduction"]
   }
 }
