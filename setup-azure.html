@@ -450,26 +450,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Ok, now that you have the three microservices up and running, time to deploy them on Azure Container Apps.
 But before, you need an Azure subscription, and then you have to set up the Azure environment.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Azure Container Apps is not available in all the regions.
-To make sure you can follow this workshop, check if the region you are in supports Azure Container Apps by executing the following command</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">az provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managedEnvironments'].locations"</code></pre>
-</div>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -505,6 +485,25 @@ Also remember that, at any point, you can go to the <a href="https://portal.azur
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">az login</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you&#8217;re using GitHub Codespaces, you should login using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">az login --use-device-code</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Make sure you are using the right subscription with:</p>
@@ -552,6 +551,26 @@ The Azure CLI is extensible, some commands are part of the core, but others are 
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now, let&#8217;s create the infrastructure for our application, so we can later deploy our microservices to Azure Container Apps.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Azure Container Apps is not available in all the regions.
+To make sure you can follow this workshop, check if the region you are in supports Azure Container Apps by executing the following command</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">az provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managedEnvironments'].locations"</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_setting_up_the_environment_variables"><a class="anchor" href="#_setting_up_the_environment_variables"></a>Setting Up the Environment Variables</h3>
@@ -865,7 +884,7 @@ let&#8217;s containerize and deploy our microservices.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 13:43:08 UTC
+Last updated 2023-04-07 13:52:44 UTC
 </div>
 </div>
 </body>

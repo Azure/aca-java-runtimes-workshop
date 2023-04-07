@@ -1744,18 +1744,6 @@ Time to containerize them and deploy them to Azure Container Apps.
 Ok, now that you have the three microservices up and running, time to deploy them on Azure Container Apps.
 But before, you need an Azure subscription, and then you have to set up the Azure environment.
 
-
-<div class="important" data-title="warning">
-
-> Azure Container Apps is not available in all the regions.
-> To make sure you can follow this workshop, check if the region you are in supports Azure Container Apps by executing the following command
-> 
-> ```shell
-> az provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
-> ```
-
-</div>
-
 ### Getting an Azure Subscription
 
 To be able to deploy the application to Azure, you first need an Azure subscription.
@@ -1778,6 +1766,17 @@ First, sign in to your Azure account using the Azure CLI:
 ```shell
 az login
 ```
+
+<div class="info" data-title="note">
+
+> If you’re using GitHub Codespaces, you should login using the following command:
+> 
+> ```shell
+> az login --use-device-code
+> ```
+
+</div>
+
 Make sure you are using the right subscription with:
 
 ```shell
@@ -1809,6 +1808,18 @@ az provider register --namespace Microsoft.Insights
 ### Creating the Azure Resources
 
 Now, let’s create the infrastructure for our application, so we can later deploy our microservices to Azure Container Apps.
+
+
+<div class="important" data-title="warning">
+
+> Azure Container Apps is not available in all the regions.
+> To make sure you can follow this workshop, check if the region you are in supports Azure Container Apps by executing the following command
+> 
+> ```shell
+> az provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+> ```
+
+</div>
 
 #### Setting Up the Environment Variables
 
