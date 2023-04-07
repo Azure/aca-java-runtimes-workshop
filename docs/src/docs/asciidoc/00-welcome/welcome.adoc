@@ -52,7 +52,7 @@ The higher the iteration, the more CPU it uses:
 
 [source,java,indent=0]
 ----
-include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoCPU]
+include::{project-root}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoCPU]
 ----
 
 The algorithm consuming memory will be a simple hashmap that we will fill with bites.
@@ -60,7 +60,7 @@ The more bits you have, the more memory it uses:
 
 [source,java,indent=0]
 ----
-include::{workshop-github-raw}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoMemory]
+include::{project-root}/quarkus-app/src/main/java/io/containerapps/javaruntime/workshop/quarkus/QuarkusResource.java[tag=adocAlgoMemory]
 ----
 
 === What Will You Be Developing?

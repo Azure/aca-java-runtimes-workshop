@@ -24,7 +24,7 @@ Check the following code in the `SpringbootApplication` class under the `io/cont
 .Bootstrapping Spring Boot Class
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplication.java[]
+include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplication.java[]
 ----
 
 The REST resource is defined in the `src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java` file.
@@ -35,7 +35,7 @@ As you can see in the header of the class, the resource is exposed on the `/spri
 .Header of the Spring Boot REST Resource
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocHeader]
+include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocHeader]
 }
 ----
 
@@ -45,7 +45,7 @@ Let's add a `hello` method returning _Hello World_ so we can quickly check if ou
 .Hello Method
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodHello]
+include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodHello]
 ----
 
 Let's now add a `cpu` method that consumes CPU depending on a few optional parameters.
@@ -59,7 +59,7 @@ That allows us to check the impact of the database on the CPU consumption.
 .CPU Method
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodCPU]
+include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodCPU]
 ----
 
 Now, add a `memory` method that consumes memory depending on a few optional parameters.
@@ -72,7 +72,7 @@ Now, add a `memory` method that consumes memory depending on a few optional para
 .Memory Method
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodMemory]
+include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodMemory]
 ----
 
 Let's also create a method to retrieve the statistics from the database.
@@ -81,7 +81,7 @@ Let's also create a method to retrieve the statistics from the database.
 .Method Returning all the Statistics
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodStats]
+include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java[tag=adocMethodStats]
 ----
 
 At this stage, the code does not compile yet, because there are a few missing classes.
@@ -97,7 +97,7 @@ Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntim
 .Statistics Entity
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/Statistics.java[]
+include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/Statistics.java[]
 ----
 
 For manipulating the entity, we need a repository.
@@ -107,7 +107,7 @@ Create the `StatisticsRepository` class under the same package.
 .Statistics Repository
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/StatisticsRepository.java[]
+include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/StatisticsRepository.java[]
 ----
 
 == Compiling the Spring Boot Application
@@ -130,7 +130,7 @@ Add the following to the `src/main/resources/application.properties` file.
 .Configuration Properties
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/main/resources/application.properties[]
+include::{project-root}/springboot-app/src/main/resources/application.properties[]
 ----
 
 == Testing the Spring Boot Application Locally
@@ -144,7 +144,7 @@ Open up the `SpringbootApplicationTests` class under the `src/test/java/io/conta
 .Test Class Configuring Testcontainers
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplicationTests.java[]
+include::{project-root}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplicationTests.java[]
 ----
 
 Then, all our tests go into the `SpringbootResourceTest` class.
@@ -154,7 +154,7 @@ Create the `SpringbootResourceTest` class under the same package that `Springboo
 .Header of the Test Class
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocHeader]
+include::{project-root}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocHeader]
 }
 ----
 
@@ -164,7 +164,7 @@ First, let's write a test to check that the `hello` method returns the right _He
 .Testing the Hello Endpoint
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestHello]
+include::{project-root}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestHello]
 ----
 
 Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
@@ -173,7 +173,7 @@ Then, we write another test to check that the `cpu` method consumes CPU and take
 .Testing the CPU Endpoint
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestCPU]
+include::{project-root}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestCPU]
 ----
 
 And we do the same for the `memory` method.
@@ -182,7 +182,7 @@ And we do the same for the `memory` method.
 .Testing the Memory Endpoint
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestMemory]
+include::{project-root}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestMemory]
 ----
 
 Let's also create a simple test to make sure the statistics are stored in the database.
@@ -191,7 +191,7 @@ Let's also create a simple test to make sure the statistics are stored in the da
 .Testing Retrieving the Statistics from the Database
 [source,indent=0]
 ----
-include::{workshop-github-raw}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestStats]
+include::{project-root}/springboot-app/src/test/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResourceTest.java[tag=adocTestStats]
 ----
 
 Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a PostgreSQL database) and run them with the following command:

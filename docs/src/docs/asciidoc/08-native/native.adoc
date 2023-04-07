@@ -71,7 +71,7 @@ Add the following properties to the `quarkus-app/src/main/resources/application.
 
 [source,properties]
 ----
-include::{workshop-github-raw}/quarkus-app/src/main/resources/application.properties[tag=adocProdProperties]
+include::{project-root}/quarkus-app/src/main/resources/application.properties[tag=adocProdProperties]
 ----
 
 Then start the database by executing the following command under the `infrastructure` directory:
@@ -109,7 +109,7 @@ Go to the `.github/workflows` directory, create a new file called `deploy-quarku
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-quarkus-native.yml[]
+include::{project-root}/.github/workflows/deploy-quarkus-native.yml[]
 ----
 
 [WARNING]
@@ -164,7 +164,7 @@ Create a new workflow in the `.github/workflows/deploy-micronaut-native.yml` fil
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-micronaut-native.yml[]
+include::{project-root}/.github/workflows/deploy-micronaut-native.yml[]
 ----
 
 [WARNING]
@@ -213,7 +213,7 @@ First, create a new workflow: create a new file called `.github/workflows/deploy
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy-springboot-native.yml[]
+include::{project-root}/.github/workflows/deploy-springboot-native.yml[]
 ----
 
 [WARNING]

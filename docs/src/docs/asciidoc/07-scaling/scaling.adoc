@@ -422,7 +422,7 @@ We will set a new scale rule for our Quarkus app using the Azure CLI:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocAutoScalingCpu, indent=0]
+include::{project-root}/scripts/infra/scale.sh[tag=adocAutoScalingCpu, indent=0]
 ----
 
 This will automatically scale out the application when the CPU usage is above 10% (we set it low deliberately to make it easy to go up).
@@ -451,7 +451,7 @@ This we will set the scale rule for our Micronaut app using the command:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocAutoScalingMemory, indent=0]
+include::{project-root}/scripts/infra/scale.sh[tag=adocAutoScalingMemory, indent=0]
 ----
 
 This will automatically scale out the application when the memory usage is above 15% (we set it low deliberately to make it easy to go up).

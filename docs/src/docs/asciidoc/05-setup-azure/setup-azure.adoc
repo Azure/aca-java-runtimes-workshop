@@ -61,7 +61,7 @@ The Azure CLI is extensible, some commands are part of the core, but others are 
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocSetupAzCli, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocSetupAzCli, indent=0]
 ----
 
 == Creating the Azure Resources
@@ -84,7 +84,7 @@ Please make sure to use a lowercase value, as it's used as a suffix to create re
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocEnvironmentVariables, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocEnvironmentVariables, indent=0]
 ----
 
 [NOTE]
@@ -126,7 +126,7 @@ Run the following command to create the Java Runtimes resource group:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocResourceGroup, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocResourceGroup, indent=0]
 ----
 
 === Log Analytics Workspace
@@ -139,14 +139,14 @@ Create a Log Analytics workspace with the following command:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocLogAnalytics, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocLogAnalytics, indent=0]
 ----
 
 Let's also retrieve the Log Analytics Client ID and client secret and store them in environment variables:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocLogAnalyticsSecrets, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocLogAnalyticsSecrets, indent=0]
 ----
 
 === Azure Container Registry
@@ -159,21 +159,21 @@ First, let's created an Azure Container Registry with the following command (not
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistry, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocRegistry, indent=0]
 ----
 
 Update the repository to allow anonymous users to pull the images (this can be handy if you want other attendees to use your registry):
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]
 ----
 
 Get the URL of the Azure Container Registry and set it to the `REGISTRY_URL` variable with the following command:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistryShow, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocRegistryShow, indent=0]
 ----
 
 If you log into the https://portal.azure.com[Azure Portal] and search for the `rg-java-runtimes` resource group, you should see the following created resources.
@@ -188,7 +188,7 @@ Create the container apps environment with the following command:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocACAEnv, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocACAEnv, indent=0]
 ----
 
 [NOTE]
@@ -208,7 +208,7 @@ We'll update the container apps with the actual images later.
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocACACreate, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocACACreate, indent=0]
 ----
 
 The `create` command returns the URL for the container apps.
@@ -216,7 +216,7 @@ You can also get the URLs with the following commands:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
+include::{project-root}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
 ----
 
 Get these locations and copy them into a web browser.
@@ -233,7 +233,7 @@ Create the database with the following command (this one will take a few minutes
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresCreate, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocPostgresCreate, indent=0]
 ----
 
 At this stage, if you go back to the http://portal.azure.com[Azure Portal] you'll see the database deployed as well as the 3 container apps.
@@ -248,7 +248,7 @@ Create the tables using the following command (make sure you are in the reposito
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresTable, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocPostgresTable, indent=0]
 ----
 
 [NOTE]
@@ -262,14 +262,14 @@ You can execute a few SQL statements directly in the database with the following
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresSelect, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocPostgresSelect, indent=0]
 ----
 
 If you'd like to see the connection string to the database (so you can access your database from an external SQL client), use the following command:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocPostgresConnectionString, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocPostgresConnectionString, indent=0]
 ----
 
 [NOTE]

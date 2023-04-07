@@ -9,8 +9,7 @@ Antonio Goncalves, Julien Dubois, Yohan Lasorsa
 :workshop-github-url: https://github.com/Azure/aca-java-runtimes-workshop
 :template-github-url: https://github.com/Azure/aca-java-runtimes-workshop-template
 :workshop-github-issue: https://github.com/Azure/aca-java-runtimes-workshop/issues
-:workshop-github-clone: https://github.com/Azure/aca-java-runtimes-workshop.git
-:workshop-github-raw: https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main
+:project-root: ../../../../..
 :azure-pass-url: https://azcheck.in/def230413
 
 // Document attributes

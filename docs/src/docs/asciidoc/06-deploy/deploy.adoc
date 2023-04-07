@@ -31,7 +31,7 @@ Create a new file in your repository with the path `.github/workflows/deploy.yml
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy.yml[tags=adocGitHubActionsWorkflowBase;!adocSkipPath]
+include::{project-root}/.github/workflows/deploy.yml[tags=adocGitHubActionsWorkflowBase;!adocSkipPath]
 ----
 
 [WARNING]
@@ -56,7 +56,7 @@ Add the following step to the `build` job:
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocBuild]
+include::{project-root}/.github/workflows/deploy.yml[tag=adocBuild]
 ----
 
 [WARNING]
@@ -84,7 +84,7 @@ Add the following steps to the `build` job:
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocPush]
+include::{project-root}/.github/workflows/deploy.yml[tag=adocPush]
 ----
 
 We're using the `github.sha` variable, to tag our images with the commit SHA that triggered the workflow.
@@ -103,7 +103,7 @@ Add these lines after the `build` job:
 
 [source,yaml]
 ----
-include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocDeploy]
+include::{project-root}/.github/workflows/deploy.yml[tag=adocDeploy]
 ----
 
 This job will run after the `build` job, and will use the Azure CLI to deploy our apps to Azure Container Apps.
@@ -131,7 +131,7 @@ You can get the value of the `REGISTRY_USERNAME` and `REGISTRY_PASSWORD` secrets
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]
+include::{project-root}/scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]
 ----
 
 You will end up with something like this:
@@ -152,7 +152,7 @@ To create a new Service Principal, run the following commands:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]
 ----
 
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value (make sure to *copy the entire JSon*).
@@ -168,7 +168,7 @@ Run the following commands to update the target ports:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]
+include::{project-root}/scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]
 ----
 
 If you want you can have a look at the https://portal.azure.com[Azure portal] to check that the target port has been updated.
@@ -195,7 +195,7 @@ Make sure you have executed the following command:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]
+include::{project-root}/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]
 ----
 ====
 
@@ -214,7 +214,7 @@ First we need to get the ingress URL by running the following command:
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
+include::{project-root}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]
 ----
 
 Then we can use `curl` to test our three applications.
@@ -223,7 +223,7 @@ But then, the following `curl` invocations should be faster.
 
 [source,shell]
 ----
-include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocPingApps, indent=0]
+include::{project-root}/scripts/infra/scale.sh[tag=adocPingApps, indent=0]
 ----
 
 If you want to quickly check the logs of the applications, you can use the following Azure CLI commands (more on logs later):

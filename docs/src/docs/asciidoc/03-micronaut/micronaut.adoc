@@ -24,7 +24,7 @@ Open the `Application` class under the `io/containerapps/javaruntime/workshop/mi
 .Bootstrapping Micronaut Class
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Application.java[]
+include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Application.java[]
 ----
 
 The REST resource is defined in the `MicronautResource` class.
@@ -35,7 +35,7 @@ As you can see in the header of the class, the resource is exposed on the `/micr
 .Header of the Micronaut REST Resource
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocHeader]
+include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocHeader]
 }
 ----
 
@@ -45,7 +45,7 @@ Let's add a `hello` method returning _Hello World_ so we can quickly check if ou
 .Hello Method
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodHello]
+include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodHello]
 ----
 
 Let's now add a `cpu` method that consumes CPU depending on a few optional parameters.
@@ -59,7 +59,7 @@ That allows us to check the impact of the database on the CPU consumption.
 .CPU Method
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodCPU]
+include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodCPU]
 ----
 
 Now, add a `memory` method that consumes memory depending on a few optional parameters.
@@ -72,7 +72,7 @@ Now, add a `memory` method that consumes memory depending on a few optional para
 .Memory Method
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodMemory]
+include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodMemory]
 ----
 
 Let's also create a method to retrieve the statistics from the database.
@@ -81,7 +81,7 @@ Let's also create a method to retrieve the statistics from the database.
 .Method Returning all the Statistics
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodStats]
+include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResource.java[tag=adocMethodStats]
 ----
 
 At this stage, the code does not compile yet, because there are a few missing classes.
@@ -97,7 +97,7 @@ Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntim
 .Statistics Entity
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Statistics.java[]
+include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/Statistics.java[]
 ----
 
 For manipulating the entity, we need a repository.
@@ -107,7 +107,7 @@ Create the `StatisticsRepository` class under the same package.
 .Statistics Repository
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/StatisticsRepository.java[]
+include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime/workshop/micronaut/StatisticsRepository.java[]
 ----
 
 == Compiling the Micronaut Application
@@ -131,7 +131,7 @@ Add the following to the `src/main/resources/application.yml` file.
 .Configuration Properties
 [source,yaml,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/main/resources/application.yml[]
+include::{project-root}/micronaut-app/src/main/resources/application.yml[]
 ----
 
 == Testing the Micronaut Application Locally
@@ -145,7 +145,7 @@ Open the `MicronautAppTest` class under the `src/test/java/io/containerapps/java
 .Test Class Configuring Testcontainers
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautAppTest.java[]
+include::{project-root}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautAppTest.java[]
 ----
 
 Then, all our tests go into the `MicronautResourceTest` class.
@@ -155,7 +155,7 @@ Create the `MicronautResourceTest` class under the same package that `MicronautA
 .Header of the Test Class
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocHeader]
+include::{project-root}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocHeader]
 }
 ----
 
@@ -165,7 +165,7 @@ First, let's write a test to check that the `hello` method returns the right _He
 .Testing the Hello Endpoint
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestHello]
+include::{project-root}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestHello]
 ----
 
 Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
@@ -174,7 +174,7 @@ Then, we write another test to check that the `cpu` method consumes CPU and take
 .Testing the CPU Endpoint
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestCPU]
+include::{project-root}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestCPU]
 ----
 
 And we do the same for the `memory` method.
@@ -183,7 +183,7 @@ And we do the same for the `memory` method.
 .Testing the Memory Endpoint
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestMemory]
+include::{project-root}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestMemory]
 ----
 
 Let's also create a simple test to make sure the statistics are stored in the database.
@@ -192,7 +192,7 @@ Let's also create a simple test to make sure the statistics are stored in the da
 .Testing Retrieving the Statistics from the Database
 [source,indent=0]
 ----
-include::{workshop-github-raw}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestStats]
+include::{project-root}/micronaut-app/src/test/java/io/containerapps/javaruntime/workshop/micronaut/MicronautResourceTest.java[tag=adocTestStats]
 ----
 
 Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a PostgreSQL database) and run them with the following command:
