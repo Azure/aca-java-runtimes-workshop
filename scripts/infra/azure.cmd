@@ -17,7 +17,7 @@ set "POSTGRES_DB_PWD=java-runtimes-p#ssw0rd-12046"
 set "POSTGRES_DB_VERSION=14"
 set "POSTGRES_SKU=Standard_B1ms"
 set "POSTGRES_TIER=Burstable"
-set "POSTGRES_DB=db-stats-$UNIQUE_IDENTIFIER"
+set "POSTGRES_DB=psql-stats-$UNIQUE_IDENTIFIER"
 set "POSTGRES_DB_SCHEMA=stats"
 set "POSTGRES_DB_CONNECT_STRING=jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
 

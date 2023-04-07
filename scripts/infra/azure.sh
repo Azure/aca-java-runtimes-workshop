@@ -118,7 +118,7 @@ createInfrastructure() {
   POSTGRES_DB_VERSION="13"
   POSTGRES_SKU="Standard_B1ms"
   POSTGRES_TIER="Burstable"
-  POSTGRES_DB="db-stats-$UNIQUE_IDENTIFIER"
+  POSTGRES_DB="psql-stats-$UNIQUE_IDENTIFIER"
   POSTGRES_DB_SCHEMA="stats"
   POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
 

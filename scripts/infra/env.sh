@@ -30,7 +30,7 @@ export POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
 export POSTGRES_DB_VERSION="13"
 export POSTGRES_SKU="Standard_B1ms"
 export POSTGRES_TIER="Burstable"
-export POSTGRES_DB="db-stats-$UNIQUE_IDENTIFIER"
+export POSTGRES_DB="psql-stats-$UNIQUE_IDENTIFIER"
 export POSTGRES_DB_SCHEMA="stats"
 export POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
 
