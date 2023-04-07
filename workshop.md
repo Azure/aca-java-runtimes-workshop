@@ -808,7 +808,7 @@ This is the root of the Micronaut microservice source code that we will be using
 ### The Micronaut REST Resource
 
 The Micronaut application is also made of a simple REST resource that exposes the endpoints that consume memory and CPU.
-Before creating the REST resource, we need to create a main Micronaut class that will bootstrap the application.
+Before creating the REST resource, let’s check the existing main Micronaut class that will bootstrap the application.
 Open the `Application` class under the `io/containerapps/javaruntime/workshop/micronaut` package.
 
 ```java
