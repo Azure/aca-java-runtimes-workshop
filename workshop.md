@@ -575,7 +575,7 @@ Let’s create them now.
 
 When the database is enabled, the statistics are stored in the database.
 For that we need a `Statistics` entity with a few enumerations that will be mapped to the PostgreSQL database.
-Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/quarkus` folder.
+Create the `Statistics.java` entity in the `src/main/java/io/containerapps/javaruntime/workshop/quarkus` folder.
 
 ```java
 package io.containerapps.javaruntime.workshop.quarkus;
@@ -610,7 +610,7 @@ enum Framework {
 }
 ```
 For manipulating the entity, we need a repository.
-Create the `StatisticsRepository` class under the same package.
+Create the `StatisticsRepository.java` class under the same package.
 Notice that `StatisticsRepository` is a [Panache Repository](https://quarkus.io/guides/hibernate-orm-panache) that extends the `PanacheRepository` class.
 
 ```java
@@ -629,7 +629,7 @@ public class StatisticsRepository implements PanacheRepository<Statistics> {
 ### Compiling the Quarkus Application
 
 You should have all the code to compile the application.
-To make sure you have all the code and dependencies, run the following command:
+To make sure you have all the code and dependencies, run the following command in the `quarkus-app` folder:
 
 ```shell
 mvn compile
@@ -650,7 +650,7 @@ For that, we will use [Quarkus Test Framework](https://quarkus.io/guides/getting
 Behind the scene, Quarkus uses [Testcontainers](https://www.testcontainers.org) with its [DevServices](https://quarkus.io/guides/dev-services) feature.
 That’s why we need Docker to run the tests and run the application.
 
-Create the `QuarkusResourceTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/quarkus` folder.
+Create the `QuarkusResourceTest.java` class under the `src/test/java/io/containerapps/javaruntime/workshop/quarkus` folder.
 Then, add the following to the header of the class.
 
 ```java
@@ -975,7 +975,7 @@ Let’s create them now.
 
 When the database is enabled, the statistics are stored in the database.
 For that we need a `Statistics` entity with a few enumerations that will be mapped to the PostgreSQL database.
-Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
+Create the `Statistics.java` entity in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
 
 ```java
 package io.containerapps.javaruntime.workshop.micronaut;
@@ -1021,7 +1021,7 @@ enum Framework {
 }
 ```
 For manipulating the entity, we need a repository.
-Create the `StatisticsRepository` class under the same package.
+Create the `StatisticsRepository.java` class under the same package.
 
 ```java
 package io.containerapps.javaruntime.workshop.micronaut;
@@ -1036,7 +1036,7 @@ interface StatisticsRepository extends CrudRepository<Statistics, Long> {
 ### Compiling the Micronaut Application
 
 You should have all the code to compile the application.
-To make sure you have all the code and dependencies, run the following command:
+To make sure you have all the code and dependencies, run the following command in the `micronaut-app` folder:
 
 ```shell
 mvn compile
@@ -1082,7 +1082,7 @@ jpa:
 Now, to make sure that the application works as expected, we need to write some tests.
 Remember that the tests need a PostgreSQL database to run.
 For that, we need to configure Testcontainers in a separate class (`MicronautAppTest`)
-Open the `MicronautAppTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` folder.
+Open the `MicronautAppTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` folder and add the following code.
 
 ```java
 package io.containerapps.javaruntime.workshop.micronaut;
@@ -1122,7 +1122,7 @@ class MicronautAppTest {
 }
 ```
 Then, all our tests go into the `MicronautResourceTest` class.
-Create the `MicronautResourceTest` class under the same package that `MicronautAppTest`.
+Create the `MicronautResourceTest.java` class under the same package that `MicronautAppTest`.
 
 ```java
 package io.containerapps.javaruntime.workshop.micronaut;
@@ -1335,8 +1335,8 @@ public class SpringbootApplication {
 
 }
 ```
-The REST resource is defined in the `src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java` file.
-Create this new `SpringbootResource` class under the `io.containerapps.javaruntime.workshop.springboot` package.
+The REST resource is defined in the `SpringbootResource` class.
+Create a new file called `SpringbootResource.java` under the `io.containerapps.javaruntime.workshop.springboot` directory.
 As you can see in the header of the class, the resource is exposed on the `/springboot` path.
 
 ```java
@@ -1489,7 +1489,7 @@ Let’s create them now.
 
 When the database is enabled, the statistics are stored in the database.
 For that we need a `Statistics` entity with a few enumerations.
-Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/springboot` directory.
+Create the `Statistics.java` entity in the `src/main/java/io/containerapps/javaruntime/workshop/springboot` directory.
 
 ```java
 package io.containerapps.javaruntime.workshop.springboot;
@@ -1528,7 +1528,7 @@ enum Framework {
 }
 ```
 For manipulating the entity, we need a repository.
-Create the `StatisticsRepository` class under the same package.
+Create the `StatisticsRepository.java` class under the same package.
 
 ```java
 package io.containerapps.javaruntime.workshop.springboot;
@@ -1541,7 +1541,7 @@ interface StatisticsRepository extends CrudRepository<Statistics, Long> {
 ### Compiling the Spring Boot Application
 
 You should have all the code to compile the application.
-To make sure you have all the code and dependencies, run the following command:
+To make sure you have all the code and dependencies, run the following command in the `springboot-app` folder:
 
 ```shell
 mvn compile
@@ -1592,7 +1592,7 @@ class SpringbootApplicationTests {
 }
 ```
 Then, all our tests go into the `SpringbootResourceTest` class.
-Create the `SpringbootResourceTest` class under the same package that `SpringbootApplicationTests`.
+Create the `SpringbootResourceTest.java` class under the same package that `SpringbootApplicationTests`.
 
 ```java
 package io.containerapps.javaruntime.workshop.springboot;

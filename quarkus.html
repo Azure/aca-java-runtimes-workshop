@@ -573,7 +573,7 @@ Let&#8217;s create them now.</p>
 <div class="paragraph">
 <p>When the database is enabled, the statistics are stored in the database.
 For that we need a <code>Statistics</code> entity with a few enumerations that will be mapped to the PostgreSQL database.
-Create the <code>Statistics</code> entity in the <code>src/main/java/io/containerapps/javaruntime/workshop/quarkus</code> folder.</p>
+Create the <code>Statistics.java</code> entity in the <code>src/main/java/io/containerapps/javaruntime/workshop/quarkus</code> folder.</p>
 </div>
 <div id="quarkus-listing-entity" class="listingblock">
 <div class="title">Statistics Entity</div>
@@ -583,7 +583,7 @@ Create the <code>Statistics</code> entity in the <code>src/main/java/io/containe
 </div>
 <div class="paragraph">
 <p>For manipulating the entity, we need a repository.
-Create the <code>StatisticsRepository</code> class under the same package.
+Create the <code>StatisticsRepository.java</code> class under the same package.
 Notice that <code>StatisticsRepository</code> is a <a href="https://quarkus.io/guides/hibernate-orm-panache">Panache Repository</a> that extends the <code>PanacheRepository</code> class.</p>
 </div>
 <div id="quarkus-listing-repository" class="listingblock">
@@ -599,7 +599,7 @@ Notice that <code>StatisticsRepository</code> is a <a href="https://quarkus.io/g
 <div class="sectionbody">
 <div class="paragraph">
 <p>You should have all the code to compile the application.
-To make sure you have all the code and dependencies, run the following command:</p>
+To make sure you have all the code and dependencies, run the following command in the <code>quarkus-app</code> folder:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -634,7 +634,7 @@ Behind the scene, Quarkus uses <a href="https://www.testcontainers.org">Testcont
 That&#8217;s why we need Docker to run the tests and run the application.</p>
 </div>
 <div class="paragraph">
-<p>Create the <code>QuarkusResourceTest</code> class under the <code>src/test/java/io/containerapps/javaruntime/workshop/quarkus</code> folder.
+<p>Create the <code>QuarkusResourceTest.java</code> class under the <code>src/test/java/io/containerapps/javaruntime/workshop/quarkus</code> folder.
 Then, add the following to the header of the class.</p>
 </div>
 <div id="quarkus-listing-test-1" class="listingblock">
@@ -788,7 +788,7 @@ Now, let&#8217;s move to the Micronaut application.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 12:59:03 UTC
+Last updated 2023-04-07 13:36:56 UTC
 </div>
 </div>
 </body>

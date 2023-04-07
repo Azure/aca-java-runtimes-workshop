@@ -495,8 +495,8 @@ Check the following code in the <code>SpringbootApplication</code> class under t
 </div>
 </div>
 <div class="paragraph">
-<p>The REST resource is defined in the <code>src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java</code> file.
-Create this new <code>SpringbootResource</code> class under the <code>io.containerapps.javaruntime.workshop.springboot</code> package.
+<p>The REST resource is defined in the <code>SpringbootResource</code> class.
+Create a new file called <code>SpringbootResource.java</code> under the <code>io.containerapps.javaruntime.workshop.springboot</code> directory.
 As you can see in the header of the class, the resource is exposed on the <code>/springboot</code> path.</p>
 </div>
 <div id="springboot-listing-rest-resource-1" class="listingblock">
@@ -581,7 +581,7 @@ Let&#8217;s create them now.</p>
 <div class="paragraph">
 <p>When the database is enabled, the statistics are stored in the database.
 For that we need a <code>Statistics</code> entity with a few enumerations.
-Create the <code>Statistics</code> entity in the <code>src/main/java/io/containerapps/javaruntime/workshop/springboot</code> directory.</p>
+Create the <code>Statistics.java</code> entity in the <code>src/main/java/io/containerapps/javaruntime/workshop/springboot</code> directory.</p>
 </div>
 <div id="springboot-listing-entity" class="listingblock">
 <div class="title">Statistics Entity</div>
@@ -591,7 +591,7 @@ Create the <code>Statistics</code> entity in the <code>src/main/java/io/containe
 </div>
 <div class="paragraph">
 <p>For manipulating the entity, we need a repository.
-Create the <code>StatisticsRepository</code> class under the same package.</p>
+Create the <code>StatisticsRepository.java</code> class under the same package.</p>
 </div>
 <div id="springboot-listing-repository" class="listingblock">
 <div class="title">Statistics Repository</div>
@@ -606,7 +606,7 @@ Create the <code>StatisticsRepository</code> class under the same package.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You should have all the code to compile the application.
-To make sure you have all the code and dependencies, run the following command:</p>
+To make sure you have all the code and dependencies, run the following command in the <code>springboot-app</code> folder:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -648,7 +648,7 @@ Open up the <code>SpringbootApplicationTests</code> class under the <code>src/te
 </div>
 <div class="paragraph">
 <p>Then, all our tests go into the <code>SpringbootResourceTest</code> class.
-Create the <code>SpringbootResourceTest</code> class under the same package that <code>SpringbootApplicationTests</code>.</p>
+Create the <code>SpringbootResourceTest.java</code> class under the same package that <code>SpringbootApplicationTests</code>.</p>
 </div>
 <div id="springboot-listing-test-1" class="listingblock">
 <div class="title">Header of the Test Class</div>
@@ -784,7 +784,7 @@ Time to containerize them and deploy them to Azure Container Apps.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 12:59:03 UTC
+Last updated 2023-04-07 13:36:56 UTC
 </div>
 </div>
 </body>
