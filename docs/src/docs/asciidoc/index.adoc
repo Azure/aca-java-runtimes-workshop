@@ -1,7 +1,37 @@
 = Java Runtimes and Azure Container Apps Workshop
 Antonio Goncalves, Julien Dubois, Yohan Lasorsa
+
+// Workshop attributes
+:jdk-version: 17
+:maven-version: 3.9.x
+:docker-version: 20.x
+:workshop-url: https://aka.ms/java-runtimes
+:workshop-github-url: https://github.com/Azure/aca-java-runtimes-workshop
+:template-github-url: https://github.com/Azure/aca-java-runtimes-workshop-template
+:workshop-github-issue: https://github.com/Azure/aca-java-runtimes-workshop/issues
+:workshop-github-clone: https://github.com/Azure/aca-java-runtimes-workshop.git
+:workshop-github-raw: https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main
+:azure-pass-url: https://azcheck.in/def230413
+
+// Document attributes
 :revnumber: {project-version}
+:doctype: book
+:allow-uri-read:
+:imagesdir: ./assets
+:icons: font
+:attribute-missing: warn
+:sectlinks:
+:sectanchors:
+:xrefstyle: short
+:listing-caption: Listing
+:appendix-caption: Appendix
+:table-caption: Table
+:figure-caption: Figure
 :example-caption!:
+:toc: left
+:toclevels: 3
+:source-highlighter: coderay
+:source-language: java
 
 // Welcome
 include::00-welcome/welcome.adoc[leveloffset=+1]

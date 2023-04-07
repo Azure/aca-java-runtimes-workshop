@@ -41,43 +41,8 @@
                     <!-- Attributes common to all output formats -->
                     <attributes>
                         <project-version>${project.version}</project-version>
-                        <allow-uri-read/>
-                        <imagesdir>./assets</imagesdir>
                         <revdate>${revision.date}</revdate>
-                        <attribute-missing>warn</attribute-missing>
-                        <doctype>book</doctype>
-                        <sectlinks/>
-                        <sectanchors/>
-                        <!-- Code Source -->
-                        <source-highlighter>coderay</source-highlighter>
-                        <source-language>java</source-language>
-                        <!-- Captions -->
-                        <xrefstyle>short</xrefstyle>
-                        <listing-caption>Listing</listing-caption>
-                        <appendix-caption>Appendix</appendix-caption>
-                        <table-caption>Table</table-caption>
-                        <!-- Images -->
-                        <icons>font</icons>
                         <data-uri/>
-                        <figure-caption>Figure</figure-caption>
-                        <!-- TOC -->
-                        <toc/>
-                        <toclevels>3</toclevels>
-                        <toc>left</toc>
-                        <!-- Java -->
-                        <jdk-version>17</jdk-version>
-                        <maven-version>3.9.x</maven-version>
-                        <docker-version>20.x</docker-version>
-                        <!-- ============= -->
-                        <!-- =  Workshop = -->
-                        <!-- ============= -->
-                        <workshop-url>https://azure.github.io/aca-java-runtimes-workshop/</workshop-url>
-                        <workshop-github-url>https://github.com/Azure/aca-java-runtimes-workshop</workshop-github-url>
-                        <template-github-url>https://github.com/Azure/aca-java-runtimes-workshop-template</template-github-url>
-                        <workshop-github-issue>https://github.com/Azure/aca-java-runtimes-workshop/issues</workshop-github-issue>
-                        <workshop-github-clone>https://github.com/Azure/aca-java-runtimes-workshop.git</workshop-github-clone>
-                        <workshop-github-raw>https://raw.githubusercontent.com/Azure/aca-java-runtimes-workshop/main</workshop-github-raw>
-                        <azure-pass-url>https://azcheck.in/def230413</azure-pass-url>
                     </attributes>
                 </configuration>
                 <executions>
