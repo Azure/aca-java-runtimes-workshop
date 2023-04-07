@@ -3,7 +3,7 @@ set "RESOURCE_GROUP=rg-$PROJECT"
 set "LOCATION=eastus"
 set "TAG=$PROJECT"
 
-set "LOG_ANALYTICS_WORKSPACE=logs-$PROJECT"
+set "LOG_ANALYTICS_WORKSPACE=log-$PROJECT"
 set "CONTAINERAPPS_ENVIRONMENT=env-$PROJECT"
 
 REM If you're using a dev container, you should manually set this to

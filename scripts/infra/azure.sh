@@ -104,7 +104,7 @@ createInfrastructure() {
   LOCATION="westeurope"
   TAG="$PROJECT"
 
-  LOG_ANALYTICS_WORKSPACE="logs-$PROJECT"
+  LOG_ANALYTICS_WORKSPACE="log-$PROJECT"
   CONTAINERAPPS_ENVIRONMENT="env-$PROJECT"
 
   # If you're using a dev container, you should manually set this to
