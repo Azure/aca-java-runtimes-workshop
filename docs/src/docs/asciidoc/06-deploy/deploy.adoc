@@ -178,6 +178,7 @@ image::../assets/portal-update-port.png[Screenshot of Azure Portal showing the u
 === Running the workflow
 
 Now that we've defined our workflow and prepared everything, we can run it to deploy our application to Azure Container Apps.
+
 Commit and push your changes to your repository, and go to the `Actions` tab of your repository to see the workflow running.
 It should take a few minutes to complete.
 
