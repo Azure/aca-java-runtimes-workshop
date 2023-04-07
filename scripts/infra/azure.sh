@@ -100,12 +100,12 @@ createInfrastructure() {
 
 # tag::adocEnvironmentVariables[]
   PROJECT="java-runtimes"
-  RESOURCE_GROUP="rg-${PROJECT}"
+  RESOURCE_GROUP="rg-$PROJECT"
   LOCATION="westeurope"
-  TAG="java-runtimes"
+  TAG="$PROJECT"
 
-  LOG_ANALYTICS_WORKSPACE="logs-java-runtimes"
-  CONTAINERAPPS_ENVIRONMENT="env-java-runtimes"
+  LOG_ANALYTICS_WORKSPACE="logs-$PROJECT"
+  CONTAINERAPPS_ENVIRONMENT="env-$PROJECT"
 
   # If you're using a dev container, you should manually set this to
   # a unique value (like your name) to avoid conflicts with other users.
