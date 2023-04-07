@@ -31,6 +31,8 @@ Antonio Goncalves, Julien Dubois, Yohan Lasorsa
 :toclevels: 3
 :source-highlighter: coderay
 :source-language: java
+:idprefix:
+:idseparator: -
 
 // Welcome
 include::00-welcome/welcome.adoc[leveloffset=+1]
