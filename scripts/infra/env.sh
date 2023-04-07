@@ -27,7 +27,7 @@ export IMAGES_TAG="1.0"
 
 export POSTGRES_DB_ADMIN="javaruntimesadmin"
 export POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
-export POSTGRES_DB_VERSION="13"
+export POSTGRES_DB_VERSION="14"
 export POSTGRES_SKU="Standard_B1ms"
 export POSTGRES_TIER="Burstable"
 export POSTGRES_DB="psql-stats-$UNIQUE_IDENTIFIER"
