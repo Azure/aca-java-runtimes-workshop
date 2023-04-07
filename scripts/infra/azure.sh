@@ -105,7 +105,7 @@ createInfrastructure() {
   TAG="$PROJECT"
 
   LOG_ANALYTICS_WORKSPACE="log-$PROJECT"
-  CONTAINERAPPS_ENVIRONMENT="env-$PROJECT"
+  CONTAINERAPPS_ENVIRONMENT="cae-$PROJECT"
 
   # If you're using a a dev container, you should manually set this to
   # a unique value (like your name) to avoid conflicts with other users.
