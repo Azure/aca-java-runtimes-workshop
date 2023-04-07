@@ -281,9 +281,9 @@ If you'd like to see the connection string to the database (so you can access yo
 include::{project-root}/scripts/infra/azure.sh[tag=adocPostgresConnectionString, indent=0]
 ----
 
-[NOTE]
+[TIP]
 ====
-You need to append `ssl=true&sslmode=require` to the end of each connect string to force the driver to use ssl.
+You can append `ssl=true&sslmode=require` to the end of the connection string to force the driver to use ssl.
 ====
 
 That's it for the Azure infrastructure setup.
