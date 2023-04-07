@@ -493,7 +493,7 @@ This file will contain the instructions for our CI/CD pipeline.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/.github/workflows/deploy.yml[tags=adocGitHubActionsWorkflowBase;!adocSkipPath]</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in deploy.adoc - include::{project-root}/.github/workflows/deploy.yml[tags=adocGitHubActionsWorkflowBase;!adocSkipPath]</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -540,7 +540,7 @@ Add the following step to the <code>build</code> job:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocBuild]</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in deploy.adoc - include::{project-root}/.github/workflows/deploy.yml[tag=adocBuild]</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -587,7 +587,7 @@ Add the following steps to the <code>build</code> job:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocPush]</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in deploy.adoc - include::{project-root}/.github/workflows/deploy.yml[tag=adocPush]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -618,7 +618,7 @@ Add these lines after the <code>build</code> job:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/.github/workflows/deploy.yml[tag=adocDeploy]</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">Unresolved directive in deploy.adoc - include::{project-root}/.github/workflows/deploy.yml[tag=adocDeploy]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -665,7 +665,7 @@ To do so, go to the <code>Settings</code> tab of your repository, and select <co
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{project-root}/scripts/infra/deploy.sh[tag=adocRegistryCredentials, indent=0]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -701,7 +701,7 @@ This is an identity that can be used to authenticate to Azure, and that can be g
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{project-root}/scripts/infra/azure.sh[tag=adocCreatePrincipal, indent=0]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -725,7 +725,7 @@ The test image use port <code>80</code> in the container, but we use a different
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{project-root}/scripts/infra/deploy.sh[tag=adocIngressUpdate, indent=0]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -765,7 +765,7 @@ Make sure you have executed the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{project-root}/scripts/infra/azure.sh[tag=adocRegistryUpdate, indent=0]</code></pre>
 </div>
 </div>
 </td>
@@ -796,7 +796,7 @@ First we need to get the ingress URL by running the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{project-root}/scripts/infra/deploy.sh[tag=adocIngressHosts, indent=0]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -806,7 +806,7 @@ But then, the following <code>curl</code> invocations should be faster.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{workshop-github-raw}/scripts/infra/scale.sh[tag=adocPingApps, indent=0]</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">Unresolved directive in deploy.adoc - include::{project-root}/scripts/infra/scale.sh[tag=adocPingApps, indent=0]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -836,7 +836,7 @@ az containerapp logs show \
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 11:46:55 UTC
+Last updated 2023-04-07 11:55:10 UTC
 </div>
 </div>
 </body>
