@@ -9,7 +9,7 @@ This includes:
 
 == Using the GitHub Template
 
-Open {template-github-url}[this GitHub repository,window=_blank] and click on `Use this template`.
+Open {template-github-url}[this GitHub repository,window=_blank], click on `Use this template` then `Create a new repository`.
 
 image::../assets/github-template.png[Screenshot of GitHub showing the "Use this template" button]
 
