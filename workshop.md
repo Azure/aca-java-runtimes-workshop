@@ -1844,7 +1844,7 @@ LOCATION="westeurope"
 TAG="$PROJECT"
 
 LOG_ANALYTICS_WORKSPACE="log-$PROJECT"
-CONTAINERAPPS_ENVIRONMENT="env-$PROJECT"
+CONTAINERAPPS_ENVIRONMENT="cae-$PROJECT"
 
 # If you're using a a dev container, you should manually set this to
 # a unique value (like your name) to avoid conflicts with other users.
@@ -1854,7 +1854,7 @@ IMAGES_TAG="1.0"
 
 POSTGRES_DB_ADMIN="javaruntimesadmin"
 POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
-POSTGRES_DB_VERSION="13"
+POSTGRES_DB_VERSION="14"
 POSTGRES_SKU="Standard_B1ms"
 POSTGRES_TIER="Burstable"
 POSTGRES_DB="psql-stats-$UNIQUE_IDENTIFIER"
