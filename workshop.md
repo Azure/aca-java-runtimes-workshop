@@ -1789,9 +1789,8 @@ az account show
 > For that, you can execute the following command to list all your subscriptions and set the one you want to use:
 > 
 > ```shell
-> az login
 > az account list --output table
-> az account set --subscription ${SUBSCRIPTION}
+> az account set --subscription <subscription-id>
 > ```
 
 </div>
@@ -1847,8 +1846,9 @@ TAG="$PROJECT"
 LOG_ANALYTICS_WORKSPACE="log-$PROJECT"
 CONTAINERAPPS_ENVIRONMENT="env-$PROJECT"
 
-# If you're using a dev container, you should manually set this to
-# a unique value (like your name) to avoid conflicts with other users.
+# If you're using a GitHub Codespaces or a dev container, you should
+# manually set this to a unique value (like your name) to avoid conflicts
+# with other users.
 UNIQUE_IDENTIFIER=$(whoami)
 REGISTRY="crjavaruntimes${UNIQUE_IDENTIFIER}"
 IMAGES_TAG="1.0"
