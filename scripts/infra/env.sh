@@ -16,7 +16,7 @@ export TAG="$PROJECT"
 export LOG_ANALYTICS_WORKSPACE="log-$PROJECT"
 export CONTAINERAPPS_ENVIRONMENT="env-$PROJECT"
 
-export UNIQUE_IDENTIFIER=${UNIQUE_IDENTIFIER:-$(whoami)}
+export UNIQUE_IDENTIFIER=${UNIQUE_IDENTIFIER:-${GITHUB_USER:-$(whoami)}}
 
 echo "Using unique identifier is: $UNIQUE_IDENTIFIER"
 echo "You can override it by setting it manually before running this script:"
