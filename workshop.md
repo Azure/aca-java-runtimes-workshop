@@ -2228,6 +2228,10 @@ on:
   push:
     branches: [main]
 
+# Only allow one workflow to run at a time
+concurrency:
+  group: deployment
+
 env:
   # Replace with your registry URL
   REGISTRY_URL: crjavaruntimessinedied.azurecr.io
@@ -2534,6 +2538,7 @@ If you want you can have a look at the [Azure portal](https://portal.azure.com/?
 #### Running the workflow
 
 Now that we’ve defined our workflow and prepared everything, we can run it to deploy our application to Azure Container Apps.
+
 Commit and push your changes to your repository, and go to the `Actions` tab of your repository to see the workflow running.
 It should take a few minutes to complete.
 
