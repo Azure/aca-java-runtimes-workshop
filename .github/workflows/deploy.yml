@@ -14,6 +14,10 @@ on:
       - quarkus-app/**
 # end::adocSkipPath[]
 
+# Only allow one workflow to run at a time
+concurrency:
+  group: deployment
+
 env:
   # Replace with your registry URL
   REGISTRY_URL: crjavaruntimessinedied.azurecr.io
