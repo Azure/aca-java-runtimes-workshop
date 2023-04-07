@@ -83,7 +83,7 @@ Let's create them now.
 
 When the database is enabled, the statistics are stored in the database.
 For that we need a `Statistics` entity with a few enumerations that will be mapped to the PostgreSQL database.
-Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/quarkus` folder.
+Create the `Statistics.java` entity in the `src/main/java/io/containerapps/javaruntime/workshop/quarkus` folder.
 
 [[quarkus-listing-entity]]
 .Statistics Entity
@@ -93,7 +93,7 @@ include::{project-root}/quarkus-app/src/main/java/io/containerapps/javaruntime/w
 ----
 
 For manipulating the entity, we need a repository.
-Create the `StatisticsRepository` class under the same package.
+Create the `StatisticsRepository.java` class under the same package.
 Notice that `StatisticsRepository` is a https://quarkus.io/guides/hibernate-orm-panache[Panache Repository] that extends the `PanacheRepository` class.
 
 [[quarkus-listing-repository]]
@@ -106,7 +106,7 @@ include::{project-root}/quarkus-app/src/main/java/io/containerapps/javaruntime/w
 == Compiling the Quarkus Application
 
 You should have all the code to compile the application.
-To make sure you have all the code and dependencies, run the following command:
+To make sure you have all the code and dependencies, run the following command in the `quarkus-app` folder:
 
 [source,shell]
 ----
@@ -133,7 +133,7 @@ For that, we will use https://quarkus.io/guides/getting-started-testing[Quarkus 
 Behind the scene, Quarkus uses https://www.testcontainers.org[Testcontainers] with its https://quarkus.io/guides/dev-services[DevServices] feature.
 That's why we need Docker to run the tests and run the application.
 
-Create the `QuarkusResourceTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/quarkus` folder.
+Create the `QuarkusResourceTest.java` class under the `src/test/java/io/containerapps/javaruntime/workshop/quarkus` folder.
 Then, add the following to the header of the class.
 
 [[quarkus-listing-test-1]]

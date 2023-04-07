@@ -17,7 +17,7 @@ This is the root of the Micronaut microservice source code that we will be using
 == The Micronaut REST Resource
 
 The Micronaut application is also made of a simple REST resource that exposes the endpoints that consume memory and CPU.
-Before creating the REST resource, we need to create a main Micronaut class that will bootstrap the application.
+Before creating the REST resource, let's check the existing main Micronaut class that will bootstrap the application.
 Open the `Application` class under the `io/containerapps/javaruntime/workshop/micronaut` package.
 
 [[micronaut-listing-rest-resource]]
@@ -91,7 +91,7 @@ Let's create them now.
 
 When the database is enabled, the statistics are stored in the database.
 For that we need a `Statistics` entity with a few enumerations that will be mapped to the PostgreSQL database.
-Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
+Create the `Statistics.java` entity in the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
 
 [[micronaut-listing-entity]]
 .Statistics Entity
@@ -101,7 +101,7 @@ include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime
 ----
 
 For manipulating the entity, we need a repository.
-Create the `StatisticsRepository` class under the same package.
+Create the `StatisticsRepository.java` class under the same package.
 
 [[micronaut-listing-repository]]
 .Statistics Repository
@@ -113,7 +113,7 @@ include::{project-root}/micronaut-app/src/main/java/io/containerapps/javaruntime
 == Compiling the Micronaut Application
 
 You should have all the code to compile the application.
-To make sure you have all the code and dependencies, run the following command:
+To make sure you have all the code and dependencies, run the following command in the `micronaut-app` folder:
 
 [source,shell]
 ----
@@ -139,7 +139,7 @@ include::{project-root}/micronaut-app/src/main/resources/application.yml[]
 Now, to make sure that the application works as expected, we need to write some tests.
 Remember that the tests need a PostgreSQL database to run.
 For that, we need to configure Testcontainers in a separate class (`MicronautAppTest`)
-Open the `MicronautAppTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` folder.
+Open the `MicronautAppTest` class under the `src/test/java/io/containerapps/javaruntime/workshop/micronaut` folder and add the following code.
 
 [[micronaut-listing-test]]
 .Test Class Configuring Testcontainers
@@ -149,7 +149,7 @@ include::{project-root}/micronaut-app/src/test/java/io/containerapps/javaruntime
 ----
 
 Then, all our tests go into the `MicronautResourceTest` class.
-Create the `MicronautResourceTest` class under the same package that `MicronautAppTest`.
+Create the `MicronautResourceTest.java` class under the same package that `MicronautAppTest`.
 
 [[micronaut-listing-test-1]]
 .Header of the Test Class

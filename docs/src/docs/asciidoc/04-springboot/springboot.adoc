@@ -27,8 +27,8 @@ Check the following code in the `SpringbootApplication` class under the `io/cont
 include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootApplication.java[]
 ----
 
-The REST resource is defined in the `src/main/java/io/containerapps/javaruntime/workshop/springboot/SpringbootResource.java` file.
-Create this new `SpringbootResource` class under the `io.containerapps.javaruntime.workshop.springboot` package.
+The REST resource is defined in the `SpringbootResource` class.
+Create a new file called `SpringbootResource.java` under the `io.containerapps.javaruntime.workshop.springboot` directory.
 As you can see in the header of the class, the resource is exposed on the `/springboot` path.
 
 [[springboot-listing-rest-resource-1]]
@@ -91,7 +91,7 @@ Let's create them now.
 
 When the database is enabled, the statistics are stored in the database.
 For that we need a `Statistics` entity with a few enumerations.
-Create the `Statistics` entity in the `src/main/java/io/containerapps/javaruntime/workshop/springboot` directory.
+Create the `Statistics.java` entity in the `src/main/java/io/containerapps/javaruntime/workshop/springboot` directory.
 
 [[springboot-listing-entity]]
 .Statistics Entity
@@ -101,7 +101,7 @@ include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntim
 ----
 
 For manipulating the entity, we need a repository.
-Create the `StatisticsRepository` class under the same package.
+Create the `StatisticsRepository.java` class under the same package.
 
 [[springboot-listing-repository]]
 .Statistics Repository
@@ -113,7 +113,7 @@ include::{project-root}/springboot-app/src/main/java/io/containerapps/javaruntim
 == Compiling the Spring Boot Application
 
 You should have all the code to compile the application.
-To make sure you have all the code and dependencies, run the following command:
+To make sure you have all the code and dependencies, run the following command in the `springboot-app` folder:
 
 [source,shell]
 ----
@@ -148,7 +148,7 @@ include::{project-root}/springboot-app/src/test/java/io/containerapps/javaruntim
 ----
 
 Then, all our tests go into the `SpringbootResourceTest` class.
-Create the `SpringbootResourceTest` class under the same package that `SpringbootApplicationTests`.
+Create the `SpringbootResourceTest.java` class under the same package that `SpringbootApplicationTests`.
 
 [[springboot-listing-test-1]]
 .Header of the Test Class
