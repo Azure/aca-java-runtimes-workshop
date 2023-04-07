@@ -473,7 +473,7 @@ To make sure you can follow this workshop, check if the region you are in suppor
 </div>
 </div>
 <div class="sect1">
-<h2 id="getting-an-azure-subscription"><a class="anchor" href="#getting-an-azure-subscription"></a>Getting an Azure Subscription</h2>
+<h2 id="_getting_an_azure_subscription"><a class="anchor" href="#_getting_an_azure_subscription"></a>Getting an Azure Subscription</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To be able to deploy the application to Azure, you first need an Azure subscription.
@@ -548,13 +548,13 @@ The Azure CLI is extensible, some commands are part of the core, but others are 
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating-the-azure-resources"><a class="anchor" href="#creating-the-azure-resources"></a>Creating the Azure Resources</h2>
+<h2 id="_creating_the_azure_resources"><a class="anchor" href="#_creating_the_azure_resources"></a>Creating the Azure Resources</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now, let&#8217;s create the infrastructure for our application, so we can later deploy our microservices to Azure Container Apps.</p>
 </div>
 <div class="sect2">
-<h3 id="setting-up-the-environment-variables"><a class="anchor" href="#setting-up-the-environment-variables"></a>Setting Up the Environment Variables</h3>
+<h3 id="_setting_up_the_environment_variables"><a class="anchor" href="#_setting_up_the_environment_variables"></a>Setting Up the Environment Variables</h3>
 <div class="paragraph">
 <p>Let&#8217;s first set a few environment variables that will help us in creating the Azure infrastructure.</p>
 </div>
@@ -631,7 +631,7 @@ If you want to know the list of available locations, you can execute the followi
 </div>
 </div>
 <div class="sect2">
-<h3 id="resource-group"><a class="anchor" href="#resource-group"></a>Resource Group</h3>
+<h3 id="_resource_group"><a class="anchor" href="#_resource_group"></a>Resource Group</h3>
 <div class="paragraph">
 <p>A <a href="https://learn.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal?WT.mc_id=javascript-0000-yolasors">resource group</a> is a container that holds related resources for an Azure solution.
 The resource group can include all the resources for the solution, or only those resources that you want to manage as a group.
@@ -648,7 +648,7 @@ will be grouped into a single resource group.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="log-analytics-workspace"><a class="anchor" href="#log-analytics-workspace"></a>Log Analytics Workspace</h3>
+<h3 id="_log_analytics_workspace"><a class="anchor" href="#_log_analytics_workspace"></a>Log Analytics Workspace</h3>
 <div class="paragraph">
 <p><a href="https://learn.microsoft.com/azure/azure-monitor/logs/quick-create-workspace?tabs=azure-portal&amp;WT.mc_id=javascript-0000-yolasors">Log Analytics workspace</a> is the environment for Azure Monitor log data.
 Each workspace has its own data repository and configuration, and data sources and solutions are configured to store their data in a particular workspace.
@@ -672,7 +672,7 @@ We will use the same workspace for most of the Azure resources we will be creati
 </div>
 </div>
 <div class="sect2">
-<h3 id="azure-container-registry"><a class="anchor" href="#azure-container-registry"></a>Azure Container Registry</h3>
+<h3 id="_azure_container_registry"><a class="anchor" href="#_azure_container_registry"></a>Azure Container Registry</h3>
 <div class="paragraph">
 <p>In the next chapter we will be creating Docker containers and pushing them to the Azure Container Registry.
 <a href="https://azure.microsoft.com/products/container-registry/?WT.mc_id=javascript-0000-yolasors">Azure Container Registry</a> is a private registry for hosting container images.
@@ -712,7 +712,7 @@ Using the Azure Container Registry, you can store Docker-formatted images for al
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-the-container-apps-environment"><a class="anchor" href="#creating-the-container-apps-environment"></a>Creating the Container Apps environment</h3>
+<h3 id="_creating_the_container_apps_environment"><a class="anchor" href="#_creating_the_container_apps_environment"></a>Creating the Container Apps environment</h3>
 <div class="paragraph">
 <p>A container apps environment acts as a boundary for our containers.
 Containers deployed on the same environment use the same virtual network and the same Log Analytics workspace.
@@ -740,7 +740,7 @@ And then, come back to this one when the command is done and execute the next on
 </table>
 </div>
 <div class="sect3">
-<h4 id="creating-the-container-apps"><a class="anchor" href="#creating-the-container-apps"></a>Creating the Container Apps</h4>
+<h4 id="_creating_the_container_apps"><a class="anchor" href="#_creating_the_container_apps"></a>Creating the Container Apps</h4>
 <div class="paragraph">
 <p>Now that we have created the container apps environment, we can create the container apps.
 A container app is a containerized application that is deployed to a container apps environment.
@@ -774,7 +774,7 @@ You should see the following page:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-the-azure-database-for-postgresql"><a class="anchor" href="#creating-the-azure-database-for-postgresql"></a>Creating the Azure Database for PostgreSQL</h3>
+<h3 id="_creating_the_azure_database_for_postgresql"><a class="anchor" href="#_creating_the_azure_database_for_postgresql"></a>Creating the Azure Database for PostgreSQL</h3>
 <div class="paragraph">
 <p>We&#8217;ll use a PostgreSQL database to store analytics data from our microservices.
 Because we also want to access these database from an external SQL client, we make them available to the outside world thanks to the <code>-public all</code> parameter.</p>
@@ -865,7 +865,7 @@ let&#8217;s containerize and deploy our microservices.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 12:21:49 UTC
+Last updated 2023-04-07 12:30:37 UTC
 </div>
 </div>
 </body>

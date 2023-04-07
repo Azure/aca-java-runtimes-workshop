@@ -453,7 +453,7 @@ To do this, we&#8217;ll setup a GitHub Actions CI/CD workflow that will build an
 </div>
 </div>
 <div class="sect1">
-<h2 id="whats-cicd"><a class="anchor" href="#whats-cicd"></a>What&#8217;s CI/CD?</h2>
+<h2 id="_whats_cicd"><a class="anchor" href="#_whats_cicd"></a>What&#8217;s CI/CD?</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>CI/CD stands for <em>Continuous Integration</em> and <em>Continuous Delivery</em>.</p>
@@ -470,7 +470,7 @@ By doing so, you can get working software into the hands of users faster.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="whats-github-actions"><a class="anchor" href="#whats-github-actions"></a>What&#8217;s GitHub Actions?</h2>
+<h2 id="_whats_github_actions"><a class="anchor" href="#_whats_github_actions"></a>What&#8217;s GitHub Actions?</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://github.com/features/actions">GitHub Actions</a> is a service that lets you automate your software development workflows.
@@ -482,7 +482,7 @@ It allows you to run workflows that can be triggered by any event on the GitHub 
 </div>
 </div>
 <div class="sect1">
-<h2 id="setting-up-github-actions-for-deployment"><a class="anchor" href="#setting-up-github-actions-for-deployment"></a>Setting Up GitHub Actions for deployment</h2>
+<h2 id="_setting_up_github_actions_for_deployment"><a class="anchor" href="#_setting_up_github_actions_for_deployment"></a>Setting Up GitHub Actions for deployment</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To set up GitHub Actions for deployment, we&#8217;ll need to create a new workflow file in our repository.
@@ -532,7 +532,7 @@ It will then run a <code>build</code> job the following steps:</p>
 </ul>
 </div>
 <div class="sect2">
-<h3 id="building-the-applications"><a class="anchor" href="#building-the-applications"></a>Building the applications</h3>
+<h3 id="_building_the_applications"><a class="anchor" href="#_building_the_applications"></a>Building the applications</h3>
 <div class="paragraph">
 <p>Now we need to add the steps to build and package our apps.
 Note that our tests will be run as part of the build, to make sure the integration is correct.
@@ -610,7 +610,7 @@ This way, we can easily identify which version of the application is deployed.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="deploying-to-azure-container-apps"><a class="anchor" href="#deploying-to-azure-container-apps"></a>Deploying to Azure Container Apps</h3>
+<h3 id="_deploying_to_azure_container_apps"><a class="anchor" href="#_deploying_to_azure_container_apps"></a>Deploying to Azure Container Apps</h3>
 <div class="paragraph">
 <p>Our container images are now built and pushed to our container registry, ready to be deployed.
 We&#8217;ll add a new <code>deploy</code> job to our workflow to deploy them to Azure Container Apps.
@@ -627,7 +627,7 @@ We&#8217;re using the <code>github.sha</code> variable again to make sure we&#82
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-up-secrets"><a class="anchor" href="#setting-up-secrets"></a>Setting up secrets</h3>
+<h3 id="_setting_up_secrets"><a class="anchor" href="#_setting_up_secrets"></a>Setting up secrets</h3>
 <div class="paragraph">
 <p>As you can see in the previous steps, we&#8217;re using differents secrets in our workflow: <code>REGISTRY_USERNAME</code>, <code>REGISTRY_PASSWORD</code> and <code>AZURE_CREDENTIALS</code>.
 <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">Secrets</a> in GitHub are encryped and allow you to store sensitive information such as passwords or API keys, and use them in your workflows using the <code>${{ secrets.MY_SECRET }}</code> syntax.</p>
@@ -691,7 +691,7 @@ To do so, go to the <code>Settings</code> tab of your repository, and select <co
 </table>
 </div>
 <div class="sect3">
-<h4 id="creating-an-azure-service-principal"><a class="anchor" href="#creating-an-azure-service-principal"></a>Creating an Azure Service Principal</h4>
+<h4 id="_creating_an_azure_service_principal"><a class="anchor" href="#_creating_an_azure_service_principal"></a>Creating an Azure Service Principal</h4>
 <div class="paragraph">
 <p>In order to deploy our application to Azure Container Apps, we&#8217;ll need to create an Azure Service Principal.
 This is an identity that can be used to authenticate to Azure, and that can be granted access to specific resources.</p>
@@ -715,7 +715,7 @@ This is an identity that can be used to authenticate to Azure, and that can be g
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-the-container-apps-target-port"><a class="anchor" href="#updating-the-container-apps-target-port"></a>Updating the Container Apps target port</h3>
+<h3 id="_updating_the_container_apps_target_port"><a class="anchor" href="#_updating_the_container_apps_target_port"></a>Updating the Container Apps target port</h3>
 <div class="paragraph">
 <p>Earlier, we used a test image when we created our Container Apps instance as we didn&#8217;t have our application images ready yet.
 The test image use port <code>80</code> in the container, but we use a different port in each of our applications so we have to update it before deployment.</p>
@@ -738,7 +738,7 @@ The test image use port <code>80</code> in the container, but we use a different
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-workflow"><a class="anchor" href="#running-the-workflow"></a>Running the workflow</h3>
+<h3 id="_running_the_workflow"><a class="anchor" href="#_running_the_workflow"></a>Running the workflow</h3>
 <div class="paragraph">
 <p>Now that we&#8217;ve defined our workflow and prepared everything, we can run it to deploy our application to Azure Container Apps.
 Commit and push your changes to your repository, and go to the <code>Actions</code> tab of your repository to see the workflow running.
@@ -789,7 +789,7 @@ You can even check the content of the images by clicking on the <code>Tags</code
 </div>
 </div>
 <div class="sect2">
-<h3 id="testing-the-deployed-application"><a class="anchor" href="#testing-the-deployed-application"></a>Testing the deployed application</h3>
+<h3 id="_testing_the_deployed_application"><a class="anchor" href="#_testing_the_deployed_application"></a>Testing the deployed application</h3>
 <div class="paragraph">
 <p>Once your workflow is completed, let&#8217;s make a quick test on our deployed apps.
 First we need to get the ingress URL by running the following command:</p>
@@ -836,7 +836,7 @@ az containerapp logs show \
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 12:21:49 UTC
+Last updated 2023-04-07 12:30:37 UTC
 </div>
 </div>
 </body>

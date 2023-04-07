@@ -454,7 +454,7 @@ We are going to explore the problem by looking at CPU and memory metrics.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cpu"><a class="anchor" href="#cpu"></a>CPU</h2>
+<h2 id="_cpu"><a class="anchor" href="#_cpu"></a>CPU</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When you know CPU usage you are better prepared to answer the following questions:</p>
@@ -484,7 +484,7 @@ We are going to explore the problem by looking at CPU and memory metrics.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="memory"><a class="anchor" href="#memory"></a>Memory</h2>
+<h2 id="_memory"><a class="anchor" href="#_memory"></a>Memory</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When you know memory usage you are better prepared to answer the following questions:</p>
@@ -511,7 +511,7 @@ We are going to explore the problem by looking at CPU and memory metrics.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="monitoring"><a class="anchor" href="#monitoring"></a>Monitoring</h2>
+<h2 id="_monitoring"><a class="anchor" href="#_monitoring"></a>Monitoring</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>One of the first thing you usually want to do once your application is deployed is to configure monitoring.
@@ -546,7 +546,7 @@ You can see the CPU and memory usage for your application.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-charts-for-all-services"><a class="anchor" href="#creating-charts-for-all-services"></a>Creating charts for all services</h3>
+<h3 id="_creating_charts_for_all_services"><a class="anchor" href="#_creating_charts_for_all_services"></a>Creating charts for all services</h3>
 <div class="paragraph">
 <p>Now let&#8217;s add the CPU metrics of the Micronaut and Spring apps to the same chart.
 Select <strong>Add metric</strong> and select "<em>CPU Usage</em>" and aggregation "<em>Max</em>" again.
@@ -626,7 +626,7 @@ You can rearrange the charts by dragging them around, and resize them by draggin
 </div>
 </div>
 <div class="sect1">
-<h2 id="logs"><a class="anchor" href="#logs"></a>Logs</h2>
+<h2 id="_logs"><a class="anchor" href="#_logs"></a>Logs</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <a href="http://portal.azure.com/?WT.mc_id=javascript-0000-yolasors">Azure Portal</a> also provides a nice interface to view the logs of your application.
@@ -653,7 +653,7 @@ It&#8217;s very useful to troubleshoot issues with the container host itself and
 </ul>
 </div>
 <div class="sect2">
-<h3 id="streaming-logs-of-a-container-instance"><a class="anchor" href="#streaming-logs-of-a-container-instance"></a>Streaming logs of a container instance</h3>
+<h3 id="_streaming_logs_of_a_container_instance"><a class="anchor" href="#_streaming_logs_of_a_container_instance"></a>Streaming logs of a container instance</h3>
 <div class="paragraph">
 <p>The most straightforward way to access the logs of your application is to connect to a given container instance and get the stream of console logs.
 You can directly access the stream of logs from the latest revision of a running instance of your application with this command:</p>
@@ -697,7 +697,7 @@ You should see the logs of the application being updated in real time.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-the-console-logs-in-azure-portal"><a class="anchor" href="#viewing-the-console-logs-in-azure-portal"></a>Viewing the console logs in Azure portal</h3>
+<h3 id="_viewing_the_console_logs_in_azure_portal"><a class="anchor" href="#_viewing_the_console_logs_in_azure_portal"></a>Viewing the console logs in Azure portal</h3>
 <div class="paragraph">
 <p>You can also access the console logs in the <a href="http://portal.azure.com/?WT.mc_id=javascript-0000-yolasors">Azure Portal</a> or via CLI.
 Using <a href="https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview?WT.mc_id=javascript-0000-yolasors">Log Analytics</a>, you get access to all logs from all your applications, revisions, and instances.
@@ -826,7 +826,7 @@ You can then give it a name and a description, and a category to quickly find it
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-the-console-logs-with-the-cli"><a class="anchor" href="#viewing-the-console-logs-with-the-cli"></a>Viewing the console logs with the CLI</h3>
+<h3 id="_viewing_the_console_logs_with_the_cli"><a class="anchor" href="#_viewing_the_console_logs_with_the_cli"></a>Viewing the console logs with the CLI</h3>
 <div class="paragraph">
 <p>You can also view the logs via a CLI command instead of using the portal.
 It&#8217;s just a matter of writing any KQL query in the <code>analytics-query</code> parameter as follow:</p>
@@ -841,7 +841,7 @@ It&#8217;s just a matter of writing any KQL query in the <code>analytics-query</
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-the-system-logs"><a class="anchor" href="#viewing-the-system-logs"></a>Viewing the system logs</h3>
+<h3 id="_viewing_the_system_logs"><a class="anchor" href="#_viewing_the_system_logs"></a>Viewing the system logs</h3>
 <div class="paragraph">
 <p>While console logs are very useful to troubleshoot issues with your application, it won&#8217;t be much help if your container is not running.
 In this case, you need to troubleshoot the container host itself.
@@ -886,7 +886,7 @@ Change the previous query in the editor to get the system logs:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="load-testing"><a class="anchor" href="#load-testing"></a>Load Testing</h2>
+<h2 id="_load_testing"><a class="anchor" href="#_load_testing"></a>Load Testing</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now it&#8217;s time to add some load to the application.
@@ -900,7 +900,7 @@ This will allow us to see how the auto-scaling features works in Azure Container
 It is available on the <a href="https://azuremarketplace.microsoft.com/?WT.mc_id=javascript-0000-yolasors">Azure Marketplace</a>.</p>
 </div>
 <div class="sect2">
-<h3 id="setting-up-azure-load-testing"><a class="anchor" href="#setting-up-azure-load-testing"></a>Setting up Azure Load Testing</h3>
+<h3 id="_setting_up_azure_load_testing"><a class="anchor" href="#_setting_up_azure_load_testing"></a>Setting up Azure Load Testing</h3>
 <div class="paragraph">
 <p>To use Azure Load Testing, go to the <a href="https://portal.azure.com/?WT.mc_id=javascript-0000-yolasors">Azure Portal</a>, select <strong>Create a resource</strong> in the sidebar and search for "<em>Azure Load Testing</em>".</p>
 </div>
@@ -1012,7 +1012,7 @@ Select <strong>Review + Create</strong>, then <strong>Create</strong>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="running-the-tests"><a class="anchor" href="#running-the-tests"></a>Running the tests</h3>
+<h3 id="_running_the_tests"><a class="anchor" href="#_running_the_tests"></a>Running the tests</h3>
 <div class="paragraph">
 <p>After the test creation, it will start automatically after a short time.
 When the test run finishes, you will get some metrics:</p>
@@ -1052,7 +1052,7 @@ Azure Container Apps has scaled automatically the application depending on the l
 </div>
 </div>
 <div class="sect1">
-<h2 id="scaling-2"><a class="anchor" href="#scaling-2"></a>Scaling</h2>
+<h2 id="_scaling"><a class="anchor" href="#_scaling"></a>Scaling</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now that we have seen the auto-scaling in action, let&#8217;s dive a bit into fine-tuning its configuration.</p>
@@ -1111,7 +1111,7 @@ This is the default scaling rule.</p>
 <p>As our applications provides endpoints to load either the CPU or the memory, we will explore usage of the <em>CPU</em> and <em>Memory usage</em> triggers to scale our application.</p>
 </div>
 <div class="sect2">
-<h3 id="scaling-based-on-cpu-usage"><a class="anchor" href="#scaling-based-on-cpu-usage"></a>Scaling based on CPU usage</h3>
+<h3 id="_scaling_based_on_cpu_usage"><a class="anchor" href="#_scaling_based_on_cpu_usage"></a>Scaling based on CPU usage</h3>
 <div class="paragraph">
 <p>To scale based on CPU usage, we need to update the scale rule of the application to use the <code>cpu</code> trigger.
 This will create a new revision of the application (but the URL <code>$QUARKUS_HOST</code> remains unchanged), and will start a new deployment.</p>
@@ -1162,7 +1162,7 @@ Use HTTP or event based triggers to allow scaling to 0.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="scaling-based-on-memory-usage"><a class="anchor" href="#scaling-based-on-memory-usage"></a>Scaling based on memory usage</h3>
+<h3 id="_scaling_based_on_memory_usage"><a class="anchor" href="#_scaling_based_on_memory_usage"></a>Scaling based on memory usage</h3>
 <div class="paragraph">
 <p>Another option that we can use is to scale based on the memory usage, with the <code>memory</code> trigger.</p>
 </div>
@@ -1217,7 +1217,7 @@ You want to make sure that you don&#8217;t scale too early, and that you don&#82
 </div>
 </div>
 <div class="sect1">
-<h2 id="checking-the-metrics-in-the-database"><a class="anchor" href="#checking-the-metrics-in-the-database"></a>Checking the Metrics in the Database</h2>
+<h2 id="_checking_the_metrics_in_the_database"><a class="anchor" href="#_checking_the_metrics_in_the_database"></a>Checking the Metrics in the Database</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Remember that we have a PostgreSQL Database with three tables where we store our metrics.
@@ -1255,7 +1255,7 @@ az postgres flexible-server execute \
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 12:21:49 UTC
+Last updated 2023-04-07 12:30:37 UTC
 </div>
 </div>
 </body>

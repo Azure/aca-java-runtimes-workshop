@@ -471,7 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="what-is-graalvm"><a class="anchor" href="#what-is-graalvm"></a>What is GraalVM</h2>
+<h2 id="_what_is_graalvm"><a class="anchor" href="#_what_is_graalvm"></a>What is GraalVM</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>GraalVM is a new technology, allowing to create a native build of a Java application:
@@ -490,14 +490,14 @@ That executable will be specific to your operating system, and will start much f
 </div>
 </div>
 <div class="sect1">
-<h2 id="setting-up-our-native-build-environment"><a class="anchor" href="#setting-up-our-native-build-environment"></a>Setting Up our Native Build Environment</h2>
+<h2 id="_setting_up_our_native_build_environment"><a class="anchor" href="#_setting_up_our_native_build_environment"></a>Setting Up our Native Build Environment</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To build native images of our 3 microservices, we will use a local GraalVM as well as different GitHub Actions.
 Let&#8217;s install GraalVM first and then build the native images.</p>
 </div>
 <div class="sect2">
-<h3 id="installing-graalvm-locally"><a class="anchor" href="#installing-graalvm-locally"></a>Installing GraalVM Locally</h3>
+<h3 id="_installing_graalvm_locally"><a class="anchor" href="#_installing_graalvm_locally"></a>Installing GraalVM Locally</h3>
 <div class="paragraph">
 <p>We&#8217;re going to use GraalVM Community Edition, which is free to use.</p>
 </div>
@@ -514,7 +514,7 @@ Let&#8217;s install GraalVM first and then build the native images.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="github-actions-setup"><a class="anchor" href="#github-actions-setup"></a>GitHub Actions setup</h3>
+<h3 id="_github_actions_setup"><a class="anchor" href="#_github_actions_setup"></a>GitHub Actions setup</h3>
 <div class="paragraph">
 <p>We are going to create 3 new GitHub Actions, one per native build.
 As native builds are much slower than JVM builds, this will allow us to have a faster feedback loop.</p>
@@ -544,7 +544,7 @@ As native builds are much slower than JVM builds, this will allow us to have a f
 </div>
 </div>
 <div class="sect1">
-<h2 id="building-the-native-image-of-the-quarkus-application"><a class="anchor" href="#building-the-native-image-of-the-quarkus-application"></a>Building the Native Image of the Quarkus Application</h2>
+<h2 id="_building_the_native_image_of_the_quarkus_application"><a class="anchor" href="#_building_the_native_image_of_the_quarkus_application"></a>Building the Native Image of the Quarkus Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>First, let&#8217;s build a local native build of the Quarkus application.
@@ -597,7 +597,7 @@ curl 'localhost:8701/quarkus/memory?bites=10&amp;db=true&amp;desc=native'</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deploying-the-native-build-of-the-quarkus-application"><a class="anchor" href="#deploying-the-native-build-of-the-quarkus-application"></a>Deploying the Native Build of the Quarkus Application</h3>
+<h3 id="_deploying_the_native_build_of_the_quarkus_application"><a class="anchor" href="#_deploying_the_native_build_of_the_quarkus_application"></a>Deploying the Native Build of the Quarkus Application</h3>
 <div class="paragraph">
 <p>Now, let&#8217;s create a GitHub Action that will build a native image of the Quarkus application, and deploy it.</p>
 </div>
@@ -641,7 +641,7 @@ Let&#8217;s now create the same workflow for the Micronaut and Spring Boot appli
 </div>
 </div>
 <div class="sect1">
-<h2 id="building-the-native-image-of-the-micronaut-application"><a class="anchor" href="#building-the-native-image-of-the-micronaut-application"></a>Building the Native Image of the Micronaut Application</h2>
+<h2 id="_building_the_native_image_of_the_micronaut_application"><a class="anchor" href="#_building_the_native_image_of_the_micronaut_application"></a>Building the Native Image of the Micronaut Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now, Let&#8217;s do the same for Micronaut.
@@ -676,7 +676,7 @@ curl 'localhost:8702/micronaut/memory?bites=10&amp;db=true&amp;desc=native'</cod
 </div>
 </div>
 <div class="sect2">
-<h3 id="deploying-the-native-build-of-the-micronaut-application"><a class="anchor" href="#deploying-the-native-build-of-the-micronaut-application"></a>Deploying the Native Build of the Micronaut Application</h3>
+<h3 id="_deploying_the_native_build_of_the_micronaut_application"><a class="anchor" href="#_deploying_the_native_build_of_the_micronaut_application"></a>Deploying the Native Build of the Micronaut Application</h3>
 <div class="paragraph">
 <p>Now, let&#8217;s create a GitHub Action that will build a native image of the Micronaut application, and deploy it.</p>
 </div>
@@ -710,7 +710,7 @@ Use the command <code>echo $REGISTRY_URL</code> to get the value of the variable
 </div>
 </div>
 <div class="sect1">
-<h2 id="building-the-native-image-of-the-spring-boot-application"><a class="anchor" href="#building-the-native-image-of-the-spring-boot-application"></a>Building the Native Image of the Spring Boot Application</h2>
+<h2 id="_building_the_native_image_of_the_spring_boot_application"><a class="anchor" href="#_building_the_native_image_of_the_spring_boot_application"></a>Building the Native Image of the Spring Boot Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now that we have our Quarkus and Micronaut native applications running, let&#8217;s build a local native build for the Spring Boot application.
@@ -744,7 +744,7 @@ curl 'localhost:8703/springboot/memory?bites=10&amp;db=true&amp;desc=native'</co
 </div>
 </div>
 <div class="sect2">
-<h3 id="deploying-the-native-build-of-the-spring-boot-application"><a class="anchor" href="#deploying-the-native-build-of-the-spring-boot-application"></a>Deploying the Native Build of the Spring Boot Application</h3>
+<h3 id="_deploying_the_native_build_of_the_spring_boot_application"><a class="anchor" href="#_deploying_the_native_build_of_the_spring_boot_application"></a>Deploying the Native Build of the Spring Boot Application</h3>
 <div class="paragraph">
 <p>Now, let&#8217;s create a GitHub Action that will build a native image of the Spring Boot application, and deploy it.</p>
 </div>
@@ -792,7 +792,7 @@ Use the command <code>echo $REGISTRY_URL</code> to get the value of the variable
 </div>
 </div>
 <div class="sect1">
-<h2 id="load-testing-the-native-images"><a class="anchor" href="#load-testing-the-native-images"></a>Load Testing the Native Images</h2>
+<h2 id="_load_testing_the_native_images"><a class="anchor" href="#_load_testing_the_native_images"></a>Load Testing the Native Images</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>After all your native images are built and deployed, let&#8217;s run our load tests again.</p>
@@ -819,7 +819,7 @@ Use the command <code>echo $REGISTRY_URL</code> to get the value of the variable
 </div>
 </div>
 <div class="sect1">
-<h2 id="monitoring-the-native-images"><a class="anchor" href="#monitoring-the-native-images"></a>Monitoring the Native Images</h2>
+<h2 id="_monitoring_the_native_images"><a class="anchor" href="#_monitoring_the_native_images"></a>Monitoring the Native Images</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Once the load tests are done, let&#8217;s take a look at the results.</p>
@@ -840,7 +840,7 @@ Use the command <code>echo $REGISTRY_URL</code> to get the value of the variable
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 12:21:37 UTC
+Last updated 2023-04-07 12:30:19 UTC
 </div>
 </div>
 </body>
