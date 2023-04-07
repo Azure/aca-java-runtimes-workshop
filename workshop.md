@@ -1833,13 +1833,13 @@ RESOURCE_GROUP="rg-$PROJECT"
 LOCATION="westeurope"
 TAG="$PROJECT"
 
-LOG_ANALYTICS_WORKSPACE="logs-$PROJECT"
+LOG_ANALYTICS_WORKSPACE="log-$PROJECT"
 CONTAINERAPPS_ENVIRONMENT="env-$PROJECT"
 
 # If you're using a dev container, you should manually set this to
 # a unique value (like your name) to avoid conflicts with other users.
 UNIQUE_IDENTIFIER=$(whoami)
-REGISTRY="javaruntimesregistry${UNIQUE_IDENTIFIER}"
+REGISTRY="crjavaruntimes${UNIQUE_IDENTIFIER}"
 IMAGES_TAG="1.0"
 
 POSTGRES_DB_ADMIN="javaruntimesadmin"
@@ -1847,7 +1847,7 @@ POSTGRES_DB_PWD="java-runtimes-p#ssw0rd-12046"
 POSTGRES_DB_VERSION="13"
 POSTGRES_SKU="Standard_B1ms"
 POSTGRES_TIER="Burstable"
-POSTGRES_DB="db-stats-${UNIQUE_IDENTIFIER}"
+POSTGRES_DB="psql-stats-$UNIQUE_IDENTIFIER"
 POSTGRES_DB_SCHEMA="stats"
 POSTGRES_DB_CONNECT_STRING="jdbc:postgresql://${POSTGRES_DB}.postgres.database.azure.com:5432/${POSTGRES_DB_SCHEMA}?ssl=true&sslmode=require"
 
@@ -2220,7 +2220,7 @@ on:
 
 env:
   # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
+  REGISTRY_URL: crjavaruntimessinedied.azurecr.io
   PROJECT: java-runtimes
   RESOURCE_GROUP: rg-java-runtimes
   QUARKUS_APP: quarkus-app
@@ -2533,7 +2533,7 @@ It should take a few minutes to complete.
 > If during deployment, you get an error that looks like this:
 > 
 > ```shell
-> ERROR: (WebhookInvalidParameterValue) The following field(s) are either invalid or missing. Invalid value: "javaruntimesregistry....": GET https:?scope=repository....azurecr.io: UNAUTHORIZED: authentication required.
+> ERROR: (WebhookInvalidParameterValue) The following field(s) are either invalid or missing. Invalid value: "crjavaruntimes....": GET https:?scope=repository....azurecr.io: UNAUTHORIZED: authentication required.
 > ```
 > It’s because you didn’t allow anonymous pull to the container registry.
 > Make sure you have executed the following command:
@@ -3250,7 +3250,7 @@ on:
 
 env:
   # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
+  REGISTRY_URL: crjavaruntimessinedied.azurecr.io
   PROJECT: java-runtimes
   RESOURCE_GROUP: rg-java-runtimes
 
@@ -3359,7 +3359,7 @@ on:
 
 env:
   # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
+  REGISTRY_URL: crjavaruntimessinedied.azurecr.io
   PROJECT: java-runtimes
   RESOURCE_GROUP: rg-java-runtimes
 
@@ -3462,7 +3462,7 @@ on:
 
 env:
   # Replace with your registry URL
-  REGISTRY_URL: javaruntimesregistrysinedied.azurecr.io
+  REGISTRY_URL: crjavaruntimessinedied.azurecr.io
   PROJECT: java-runtimes
   RESOURCE_GROUP: rg-java-runtimes
 
