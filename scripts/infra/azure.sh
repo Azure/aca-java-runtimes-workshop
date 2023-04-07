@@ -107,8 +107,9 @@ createInfrastructure() {
   LOG_ANALYTICS_WORKSPACE="log-$PROJECT"
   CONTAINERAPPS_ENVIRONMENT="env-$PROJECT"
 
-  # If you're using a dev container, you should manually set this to
-  # a unique value (like your name) to avoid conflicts with other users.
+  # If you're using a GitHub Codespaces or a dev container, you should
+  # manually set this to a unique value (like your name) to avoid conflicts
+  # with other users.
   UNIQUE_IDENTIFIER=$(whoami)
   REGISTRY="crjavaruntimes${UNIQUE_IDENTIFIER}"
   IMAGES_TAG="1.0"
