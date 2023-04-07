@@ -25,7 +25,7 @@ Once the repository is created, you have 3 options to work on the project:
 
 - You can work locally using VSCode, Docker and https://code.visualstudio.com/docs/remote/containers[Dev Containers], so you have a pre-configured development environment.
 
-All these options are described in the following sections, pick the one that suits you best.
+All these options are described in the following sections. The fastest and easiest way is to use GitHub Codespaces, but you can pick the one that suits you best.
 
 If you want to work locally, first you need to clone the project on your machine using git (you can skip these steps if you choose to use GitHub Codespaces).
 
