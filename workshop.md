@@ -3194,7 +3194,15 @@ Let’s install GraalVM first and then build the native images.
 
 We’re going to use GraalVM Community Edition, which is free to use.
 
-In order to use GraalVM, you will need to set it up using the instructions available at [https://www.graalvm.org/22.3/docs/getting-started/#install-graalvm](https://www.graalvm.org/22.3/docs/getting-started/#install-graalvm).
+In order to use GraalVM, you will need to set it up for Java 17 using the instructions available at [https://www.graalvm.org/22.3/docs/getting-started/#install-graalvm](https://www.graalvm.org/22.3/docs/getting-started/#install-graalvm).
+
+
+<div class="info" data-title="note">
+
+> If you’re using GitHub Codespaces or a dev container, you need to select the ***Linux*** variant.
+> 
+
+</div>
 
 As you will probably need to set up the `JAVA_HOME` and the `PATH` environment variables several times, you can set up an alias that would make this easier, for example:
 
