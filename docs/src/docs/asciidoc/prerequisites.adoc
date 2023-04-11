@@ -1,5 +1,9 @@
 = Prerequisites for the Java Runtimes and Azure Container Apps Workshop
 
+:jdk-version: 17
+:maven-version: 3.9.x
+:docker-version: 20.x
+
 For this workshop, you'll be using many tools to build and deploy your microservices. 
 To make it more convenient and save time, you'll have 3 different options to work on the project:
 
