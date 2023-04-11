@@ -2704,11 +2704,11 @@ In the *Pin to dashboard* dialog, select **Create new** and give it a name, for 
 
 We’ll also add charts to monitor the memory usage and number of replicas of our applications.
 
-Click on **+New chart** (top left corner) and repeat the same steps as before to create a chart with "*Memory Working Set Bytes*" metrics with aggregation "*Max*".
+Click on **+ New chart** (top left corner) and repeat the same steps as before to create a chart with "*Memory Working Set Bytes*" metrics with aggregation "*Max*".
 Do this for the three applications (Quarkus, Micronaut and Spring Boot).
 Select **Save to dashboard**, choose **Pin to dashboard**, and select the existing "Java Runtimes" dashboard.
 
-Click on **+New chart** again, and create another chart with the "*Replica Count*" metric with aggregation "*Max*".
+Click on **+ New chart** again, and create another chart with the "*Replica Count*" metric with aggregation "*Max*".
 Don’t forget to save this dashboard as well (select **Save to dashboard**, choose **Pin to dashboard**, and select the existing "Java Runtimes" dashboard).
 
 When you’re finished, in the [Azure Portal](http://portal.azure.com/?WT.mc_id=javascript-0000-yolasors) sidebar select **Dashboards** and choose the "*Java Runtimes*" dashboard we created earlier.
@@ -2762,7 +2762,7 @@ You can directly access the stream of logs from the latest revision of a running
 <div class="tip" data-title="tip">
 
 > Don’t forget that by default, containers apps scale out to 0 instances when they are not used.
-> You can use the command `curl [https://${QUARKUS_HOST}/quarkus`](https://${QUARKUS_HOST}/quarkus`) to wake up the container app first if the connections fails.
+> You can use the command `curl https://${QUARKUS_HOST}/quarkus` to wake up the container app first if the connections fails.
 > 
 
 </div>
@@ -2931,7 +2931,7 @@ In the ***Resource group*** field, select the `rg-java-runtimes` that we created
 Set the name `lt-java-runtimes-<Your unique identifier>` for the load testing instance (the name has to be unique).
 
 4.
-Set the location to match our previously created resources (East US).
+Set the location to match your previously created resources (West Europe).
 
 5.
 Select ***Review + Create***, then ***Create***.
@@ -2941,7 +2941,7 @@ Once created, you should see the Azure Load Testing available in your resource g
 
 ![Screenshot of Azure Load Testing in Resource group](./assets/load-testing-group.png)
 
-Select `lt-java-runtimes`, and then click on **Tests** and then **Create**.
+Select `lt-java-runtimes-<your_id>`, and then click on **Tests** and then **Create**.
 
 ![Screenshot of test creation](./assets/load-testing-create-test.png)
 
@@ -2982,6 +2982,14 @@ MICRONAUT_PROTOCOL=https
 MICRONAUT_HOST=<Your MICRONAUT_HOST>
 MICRONAUT_PORT=443
 ```
+
+<div class="info" data-title="note">
+
+> If you’re using GitHub Codespaces, you need to right-click on the `load.jmx` and `user.properties` files and select **Download…​** first to get the files before uploading them to Azure Load Testing.
+> 
+
+</div>
+
 4.
 Select **Upload**, and choose "*User properties*" in the **File relevance** field of the `user.properties` file.
 

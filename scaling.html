@@ -577,12 +577,12 @@ Let&#8217;s save this chart on the dashboard!</p>
 <p>We&#8217;ll also add charts to monitor the memory usage and number of replicas of our applications.</p>
 </div>
 <div class="paragraph">
-<p>Click on <strong>+New chart</strong> (top left corner) and repeat the same steps as before to create a chart with "<em>Memory Working Set Bytes</em>" metrics with aggregation "<em>Max</em>".
+<p>Click on <strong>+ New chart</strong> (top left corner) and repeat the same steps as before to create a chart with "<em>Memory Working Set Bytes</em>" metrics with aggregation "<em>Max</em>".
 Do this for the three applications (Quarkus, Micronaut and Spring Boot).
 Select <strong>Save to dashboard</strong>, choose <strong>Pin to dashboard</strong>, and select the existing "Java Runtimes" dashboard.</p>
 </div>
 <div class="paragraph">
-<p>Click on <strong>+New chart</strong> again, and create another chart with the "<em>Replica Count</em>" metric with aggregation "<em>Max</em>".
+<p>Click on <strong>+ New chart</strong> again, and create another chart with the "<em>Replica Count</em>" metric with aggregation "<em>Max</em>".
 Don&#8217;t forget to save this dashboard as well (select <strong>Save to dashboard</strong>, choose <strong>Pin to dashboard</strong>, and select the existing "Java Runtimes" dashboard).</p>
 </div>
 <div class="paragraph">
@@ -676,7 +676,7 @@ You can directly access the stream of logs from the latest revision of a running
 <td class="content">
 <div class="paragraph">
 <p>Don&#8217;t forget that by default, containers apps scale out to 0 instances when they are not used.
-You can use the command <code>curl <a href="https://${QUARKUS_HOST}/quarkus" class="bare">https://${QUARKUS_HOST}/quarkus</a></code> to wake up the container app first if the connections fails.</p>
+You can use the command <code>curl https://${QUARKUS_HOST}/quarkus</code> to wake up the container app first if the connections fails.</p>
 </div>
 </td>
 </tr>
@@ -928,7 +928,7 @@ Set the name <code>lt-java-runtimes-&lt;Your unique identifier&gt;</code> for th
 </div>
 <div class="paragraph">
 <p>4.
-Set the location to match our previously created resources (East US).</p>
+Set the location to match your previously created resources (West Europe).</p>
 </div>
 <div class="paragraph">
 <p>5.
@@ -944,7 +944,7 @@ Once created, you should see the Azure Load Testing available in your resource g
 </div>
 </div>
 <div class="paragraph">
-<p>Select <code>lt-java-runtimes</code>, and then click on <strong>Tests</strong> and then <strong>Create</strong>.</p>
+<p>Select <code>lt-java-runtimes-&lt;your_id&gt;</code>, and then click on <strong>Tests</strong> and then <strong>Create</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -996,6 +996,20 @@ MICRONAUT_PROTOCOL=https
 MICRONAUT_HOST=&lt;Your MICRONAUT_HOST&gt;
 MICRONAUT_PORT=443</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you&#8217;re using GitHub Codespaces, you need to right-click on the <code>load.jmx</code> and <code>user.properties</code> files and select <strong>Download&#8230;&#8203;</strong> first to get the files before uploading them to Azure Load Testing.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>4.
@@ -1255,7 +1269,7 @@ az postgres flexible-server execute \
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-07 14:36:13 UTC
+Last updated 2023-04-11 08:28:04 UTC
 </div>
 </div>
 </body>
