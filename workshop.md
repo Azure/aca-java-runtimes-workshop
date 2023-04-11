@@ -3207,7 +3207,7 @@ In order to use GraalVM, you will need to set it up for Java 17 using the instru
 As you will probably need to set up the `JAVA_HOME` and the `PATH` environment variables several times, you can set up an alias that would make this easier, for example:
 
 ```shell
-alias graalvm="export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java19-22.3.1/Contents/Home && export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java19-22.3.1/Contents/Home/bin:$PATH && java -version"
+alias graalvm="export JAVA_HOME=/workspaces/java-runtimes-workshop/graalvm-ce-java17-22.3.1 && export PATH=/workspaces/java-runtimes-workshop/graalvm-ce-java17-22.3.1bin:$PATH && java -version"
 ```
 #### GitHub Actions setup
 
