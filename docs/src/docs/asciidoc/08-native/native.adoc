@@ -257,3 +257,8 @@ In the Azure Portal, select the *Dashboard* in the side menu, and select the "Ja
 You should now see the results of the load tests for the native images, and you can compare them to the previous results of the JVM images.
 
 image::../assets/java-runtimes-dashboard-native.png[Screenshot of the Java Runtimes dashboard with JVM vs native tests]
+
+[NOTE]
+====
+Additional telemetry can be enabled using Application Insights for Spring Boot Native applications. You can read more about it on the https://github.com/jeanbisutti/applicationinsights-spring-native[applicationinsights-spring-native] repository.
+====
