@@ -3586,6 +3586,14 @@ You should now see the results of the load tests for the native images, and you 
 ![Screenshot of the Java Runtimes dashboard with JVM vs native tests](./assets/java-runtimes-dashboard-native.png)
 
 
+<div class="info" data-title="note">
+
+> Additional telemetry can be enabled using Application Insights for Spring Boot Native applications. You can read more about it on the [applicationinsights-spring-native](https://github.com/jeanbisutti/applicationinsights-spring-native) repository.
+> 
+
+</div>
+
+
 ---
 
 ## Conclusion
