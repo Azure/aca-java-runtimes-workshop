@@ -716,11 +716,22 @@ Then, add the following to the header of the class.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To fix this, you need to create a symbolic link to the <code>docker.sock</code> file:</p>
+<p>To fix this, you need to create a symbolic link to the <code>docker.sock</code> file.</p>
+</div>
+<div class="paragraph">
+<p>On Mac OS X:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On Linux (tested with Linux Mint):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">sudo ln -s $HOME/.docker/desktop/docker.sock /var/run/docker.sock</code></pre>
 </div>
 </div>
 </td>
@@ -788,7 +799,7 @@ Now, let&#8217;s move to the Micronaut application.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-13 21:25:23 UTC
+Last updated 2023-04-14 19:11:49 UTC
 </div>
 </div>
 </body>

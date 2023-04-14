@@ -739,10 +739,17 @@ All the tests should pass and you should see the following output:
 > ```shell
 > Previous attempts to find a Docker environment failed. Will not retry
 > ```
-> To fix this, you need to create a symbolic link to the `docker.sock` file:
+> To fix this, you need to create a symbolic link to the `docker.sock` file.
+> 
+> On Mac OS X:
 > 
 > ```shell
 > sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock
+> ```
+> On Linux (tested with Linux Mint):
+> 
+> ```shell
+> sudo ln -s $HOME/.docker/desktop/docker.sock /var/run/docker.sock
 > ```
 
 </div>
