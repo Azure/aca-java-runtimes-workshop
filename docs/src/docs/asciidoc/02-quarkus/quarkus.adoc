@@ -213,6 +213,15 @@ To fix this, you need to create a symbolic link to the `docker.sock` file:
 ----
 sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock
 ----
+or 
+[source,shell]
+----
+sudo ln -s $HOME/.docker/desktop/docker.sock /var/run/docker.sock
+----
+
+Check which file exists on your machine, it will depend of which Docker you use. 
+
+
 ====
 
 == Running the Quarkus Application Locally
