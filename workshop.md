@@ -85,6 +85,7 @@ while (iterations > 0) {
     iterations--;
 }
 ```
+
 The algorithm consuming memory will be a simple hashmap that we will fill with bites.
 The more bits you have, the more memory it uses:
 
@@ -98,6 +99,7 @@ for (int i = 0; i < bites * 1024 * 1024; i += 8192) {
     }
 }
 ```
+
 #### What Will You Be Developing?
 
 You will be developing 3 microservices, each doing the exact same thing (consuming CPU and memory), but using a different Java runtime: Quarkus, Spring Boot and Micronaut:
@@ -159,6 +161,7 @@ In this section you will compile your microservices with GraalVM, package them, 
 > ghcr.io/azure/aca-java-runtimes-workshop/micronaut-app-native:latest
 > ghcr.io/azure/aca-java-runtimes-workshop/springboot-app-native:latest
 > ```
+> 
 
 </div>
 
@@ -265,6 +268,7 @@ Open a terminal and run:
 ```shell
 git clone <your_repo_url>
 ```
+
 ### Setting Up Your Development Environment Manually
 
 If you decide to setup your environment yourself, you will need to install the following tools:
@@ -294,6 +298,7 @@ git --version
 curl --version
 jq --version
 ```
+
 If everything is installed correctly, you should see the version of each tool.
 
 
@@ -369,6 +374,7 @@ Go to the directory where you cloned the repository and build the code with the 
 cd <your_repo_url>
 mvn install
 ```
+
 You should see the following output:
 
 ```shell
@@ -386,6 +392,7 @@ You should see the following output:
 [INFO] Finished at: 2022-10-07T09:46:16+02:00
 [INFO] ------------------------------------------------------------------------
 ```
+
 
 <div class="important" data-title="warning">
 
@@ -456,6 +463,7 @@ public class QuarkusResource {
     }
 }
 ```
+
 Let’s add a `hello` method returning *Hello World* so we can quickly check if our endpoint responds or not.
 
 ```java
@@ -465,6 +473,7 @@ public String hello() {
     return "Quarkus: hello";
 }
 ```
+
 Let’s now add a `cpu` method that consumes CPU depending on a few optional parameters.
 
 - `iterations` the more iterations you have, the more CPU it consumes.
@@ -513,6 +522,7 @@ public String cpu(@QueryParam("iterations") @DefaultValue("10") Long iterations,
     return msg;
 }
 ```
+
 Now, add a `memory` method that consumes memory depending on a few optional parameters.
 
 - `bites` the more bits you have, the more memory it consumes.
@@ -556,6 +566,7 @@ public String memory(@QueryParam("bites") @DefaultValue("10") Integer bites,
     return msg;
 }
 ```
+
 Let’s also create a method to retrieve the statistics from the database.
 This is very easy to do with [Panache](https://quarkus.io/guides/hibernate-orm-panache).
 
@@ -568,6 +579,7 @@ public List<Statistics> stats() {
     return Statistics.findAll().list();
 }
 ```
+
 At this stage, the code does not compile yet, because there are a few missing classes.
 Let’s create them now.
 
@@ -609,6 +621,7 @@ enum Framework {
     QUARKUS, MICRONAUT, SPRINGBOOT
 }
 ```
+
 For manipulating the entity, we need a repository.
 Create the `StatisticsRepository.java` class under the same package.
 Notice that `StatisticsRepository` is a [Panache Repository](https://quarkus.io/guides/hibernate-orm-panache) that extends the `PanacheRepository` class.
@@ -626,6 +639,7 @@ import jakarta.transaction.Transactional;
 public class StatisticsRepository implements PanacheRepository<Statistics> {
 }
 ```
+
 ### Compiling the Quarkus Application
 
 You should have all the code to compile the application.
@@ -634,6 +648,7 @@ To make sure you have all the code and dependencies, run the following command i
 ```shell
 mvn compile
 ```
+
 ### Configuring the Quarkus Application
 
 There is not much to configure as Quarkus is configured by default to use the PostgreSQL database (thanks to [DevService](https://quarkus.io/guides/dev-services)).
@@ -643,6 +658,7 @@ To have this service exposed on the port 8701, add the following configuration i
 ```java
 quarkus.http.port=8701
 ```
+
 ### Testing the Quarkus Application Locally
 
 Now, to make sure that the application works as expected, we need to write some tests.
@@ -666,6 +682,7 @@ import static org.hamcrest.CoreMatchers.*;
 public class QuarkusResourceTest {
 }
 ```
+
 First, let’s write a test to check that the `hello` method returns the right *Hello World* string.
 
 ```java
@@ -678,6 +695,7 @@ public void testHelloEndpoint() {
         .body(is("Quarkus: hello"));
 }
 ```
+
 Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
 
 ```java
@@ -692,6 +710,7 @@ public void testCpuWithDBAndDescEndpoint() {
         .body(endsWith("The result is persisted in the database."));
 }
 ```
+
 And we do the same for the `memory` method.
 
 ```java
@@ -706,6 +725,7 @@ public void testMemoryWithDBAndDescEndpoint() {
         .body(endsWith("The result is persisted in the database."));
 }
 ```
+
 Let’s also create a simple test to make sure the statistics are stored in the database.
 
 ```java
@@ -717,11 +737,13 @@ public void testStats() {
         .statusCode(200);
 }
 ```
+
 Now that you have your tests methods, make sure you have **Docker Desktop up and running** (as it needs to start a PostgreSQL database) and run them with the following command (the first Quarkus test can take a while as Testcontainers needs to download the PostgreSQL image):
 
 ```shell
 mvn test
 ```
+
 All the tests should pass and you should see the following output:
 
 ```shell
@@ -732,6 +754,7 @@ All the tests should pass and you should see the following output:
 [INFO] ------------------------------------------------------------------------
 ```
 
+
 <div class="important" data-title="warning">
 
 > If your test fail with the following error, it means that Docker Desktop is not running or that the `docker.sock` file is not available:
@@ -739,6 +762,7 @@ All the tests should pass and you should see the following output:
 > ```shell
 > Previous attempts to find a Docker environment failed. Will not retry
 > ```
+> 
 > To fix this, you need to create a symbolic link to the `docker.sock` file.
 > 
 > On Mac OS X:
@@ -746,11 +770,13 @@ All the tests should pass and you should see the following output:
 > ```shell
 > sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock
 > ```
+> 
 > On Linux (tested with Linux Mint):
 > 
 > ```shell
 > sudo ln -s $HOME/.docker/desktop/docker.sock /var/run/docker.sock
 > ```
+> 
 
 </div>
 
@@ -762,6 +788,7 @@ Make sure you still have Docker up and running and execute the following command
 ```shell
 mvn quarkus:dev
 ```
+
 In another terminal you can execute the following `curl` commands to invoke the endpoint:
 
 ```shell
@@ -771,6 +798,7 @@ curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=java17'
 
 curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=java17'
 ```
+
 You can change the parameters to see how the application behaves.
 Change the number of iterations and the number of bites to see how the performance is impacted (with and without database).
 
@@ -783,6 +811,7 @@ curl 'localhost:8701/quarkus/memory?bites=50'
 curl 'localhost:8701/quarkus/memory?bites=100'
 curl 'localhost:8701/quarkus/memory?bites=100&db=true'
 ```
+
 You can check the content of the database with:
 
 ```shell
@@ -791,6 +820,7 @@ curl 'localhost:8701/quarkus/stats'
 # or if you have "jq" installed you can make it prettier with
 # curl 'localhost:8701/quarkus/stats' | jq
 ```
+
 That’s it for the Quarkus application.
 Now, let’s move to the Micronaut application.
 
@@ -830,6 +860,7 @@ public class Application {
     }
 }
 ```
+
 The REST resource is defined in the `MicronautResource` class.
 Create a new file called `MicronautResource.java` under the `src/main/java/io/containerapps/javaruntime/workshop/micronaut` directory.
 As you can see in the header of the class, the resource is exposed on the `/micronaut` path.
@@ -864,6 +895,7 @@ public class MicronautResource {
     }
 }
 ```
+
 Let’s add a `hello` method returning *Hello World* so we can quickly check if our endpoint responds or not.
 
 ```java
@@ -873,6 +905,7 @@ public String hello() {
     return "Micronaut: hello";
 }
 ```
+
 Let’s now add a `cpu` method that consumes CPU depending on a few optional parameters.
 
 - `iterations` the more iterations you have, the more CPU it consumes.
@@ -920,6 +953,7 @@ public String cpu(@QueryValue(value = "iterations", defaultValue = "10") Long it
     return msg;
 }
 ```
+
 Now, add a `memory` method that consumes memory depending on a few optional parameters.
 
 - `bites` the more bits you have, the more memory it consumes.
@@ -962,6 +996,7 @@ public String memory(@QueryValue(value = "bites", defaultValue = "10") Integer b
     return msg;
 }
 ```
+
 Let’s also create a method to retrieve the statistics from the database.
 
 ```java
@@ -975,6 +1010,7 @@ public List<Statistics> stats() {
     return result;
 }
 ```
+
 At this stage, the code does not compile yet, because there are a few missing classes.
 Let’s create them now.
 
@@ -1027,6 +1063,7 @@ enum Framework {
     QUARKUS, MICRONAUT, SPRINGBOOT
 }
 ```
+
 For manipulating the entity, we need a repository.
 Create the `StatisticsRepository.java` class under the same package.
 
@@ -1040,6 +1077,7 @@ import io.micronaut.data.repository.CrudRepository;
 interface StatisticsRepository extends CrudRepository<Statistics, Long> {
 }
 ```
+
 ### Compiling the Micronaut Application
 
 You should have all the code to compile the application.
@@ -1048,6 +1086,7 @@ To make sure you have all the code and dependencies, run the following command i
 ```shell
 mvn compile
 ```
+
 ### Configuring the Micronaut Application
 
 We need to configure the default PostgreSQL database and Hibernate ORM.
@@ -1084,6 +1123,7 @@ jpa:
         hbm2ddl:
           auto: none
 ```
+
 ### Testing the Micronaut Application Locally
 
 Now, to make sure that the application works as expected, we need to write some tests.
@@ -1128,6 +1168,7 @@ class MicronautAppTest {
 
 }
 ```
+
 Then, all our tests go into the `MicronautResourceTest` class.
 Create the `MicronautResourceTest.java` class under the same package that `MicronautAppTest`.
 
@@ -1161,6 +1202,7 @@ class MicronautResourceTest {
     }
 }
 ```
+
 First, let’s write a test to check that the `hello` method returns the right *Hello World* string.
 
 ```java
@@ -1173,6 +1215,7 @@ public void testHelloEndpoint(RequestSpecification spec) {
         .body(is("Micronaut: hello"));
 }
 ```
+
 Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
 
 ```java
@@ -1187,6 +1230,7 @@ public void testCpuWithDBAndDescEndpoint() {
         .body(endsWith("The result is persisted in the database."));
 }
 ```
+
 And we do the same for the `memory` method.
 
 ```java
@@ -1201,6 +1245,7 @@ public void testMemoryWithDBAndDescEndpoint() {
         .body(endsWith("The result is persisted in the database."));
 }
 ```
+
 Let’s also create a simple test to make sure the statistics are stored in the database.
 
 ```java
@@ -1212,11 +1257,13 @@ public void testStats() {
         .statusCode(200);
 }
 ```
+
 Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a PostgreSQL database) and run them with the following command:
 
 ```shell
 mvn test
 ```
+
 All the tests should pass and you should see the following output:
 
 ```shell
@@ -1226,6 +1273,7 @@ All the tests should pass and you should see the following output:
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 ```
+
 ### Running the Micronaut Application Locally
 
 Now that the tests are all green, let’s execute the application locally and execute a few `curl` commands.
@@ -1235,6 +1283,7 @@ Make sure you still have Docker up and running and execute under the `infrastruc
 ```shell
 docker compose -f postgres.yaml up
 ```
+
 
 <div class="important" data-title="warning">
 
@@ -1247,6 +1296,7 @@ docker compose -f postgres.yaml up
 > docker context use default
 > docker context ls
 > ```
+> 
 
 </div>
 
@@ -1255,6 +1305,7 @@ Under the `micronaut-app` directory, execute the following command:
 ```shell
 mvn mn:run
 ```
+
 
 <div class="important" data-title="warning">
 
@@ -1268,6 +1319,7 @@ mvn mn:run
 > lsof -i:8702
 > kill -9 <PID>
 > ```
+> 
 
 </div>
 
@@ -1280,6 +1332,7 @@ curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=java17'
 
 curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=java17'
 ```
+
 You can change the parameters to see how the application behaves.
 Change the number of iterations and the number of bites to see how the performance is impacted (with and without database).
 
@@ -1292,6 +1345,7 @@ curl 'localhost:8702/micronaut/memory?bites=50'
 curl 'localhost:8702/micronaut/memory?bites=100'
 curl 'localhost:8702/micronaut/memory?bites=100&db=true'
 ```
+
 You can check the content of the database with:
 
 ```shell
@@ -1300,6 +1354,7 @@ curl 'localhost:8702/micronaut/stats'
 # or if you have "jq" installed you can make it prettier with
 # curl 'localhost:8702/micronaut/stats' | jq
 ```
+
 That’s it for the Micronaut application.
 We now have the Quarkus and Micronaut application fully tested, up and running, time to write the Spring Boot application.
 
@@ -1342,6 +1397,7 @@ public class SpringbootApplication {
 
 }
 ```
+
 The REST resource is defined in the `SpringbootResource` class.
 Create a new file called `SpringbootResource.java` under the `io.containerapps.javaruntime.workshop.springboot` directory.
 As you can see in the header of the class, the resource is exposed on the `/springboot` path.
@@ -1378,6 +1434,7 @@ public class SpringbootResource {
     }
 }
 ```
+
 Let’s add a `hello` method returning *Hello World* so we can quickly check if our endpoint responds or not.
 
 ```java
@@ -1387,6 +1444,7 @@ public String hello() {
     return "Spring Boot: hello";
 }
 ```
+
 Let’s now add a `cpu` method that consumes CPU depending on a few optional parameters.
 
 - `iterations` the more iterations you have, the more CPU it consumes.
@@ -1434,6 +1492,7 @@ public String cpu(@RequestParam(value = "iterations", defaultValue = "10") Long 
     return msg;
 }
 ```
+
 Now, add a `memory` method that consumes memory depending on a few optional parameters.
 
 - `bites` the more bits you have, the more memory it consumes.
@@ -1476,6 +1535,7 @@ public String memory(@RequestParam(value = "bites", defaultValue = "10") Integer
     return msg;
 }
 ```
+
 Let’s also create a method to retrieve the statistics from the database.
 
 ```java
@@ -1489,6 +1549,7 @@ public List<Statistics> stats() {
     return result;
 }
 ```
+
 At this stage, the code does not compile yet, because there are a few missing classes.
 Let’s create them now.
 
@@ -1534,6 +1595,7 @@ enum Framework {
     QUARKUS, MICRONAUT, SPRINGBOOT
 }
 ```
+
 For manipulating the entity, we need a repository.
 Create the `StatisticsRepository.java` class under the same package.
 
@@ -1545,6 +1607,7 @@ import org.springframework.data.repository.CrudRepository;
 interface StatisticsRepository extends CrudRepository<Statistics, Long> {
 }
 ```
+
 ### Compiling the Spring Boot Application
 
 You should have all the code to compile the application.
@@ -1553,6 +1616,7 @@ To make sure you have all the code and dependencies, run the following command i
 ```shell
 mvn compile
 ```
+
 ### Configuring the Spring Boot Application
 
 We need to configure the default PostgreSQL database and Hibernate ORM.
@@ -1572,6 +1636,7 @@ spring.jpa.open-in-view=false
 # Hibernate ddl auto (create, create-drop, validate, update)
 spring.jpa.hibernate.ddl-auto=none
 ```
+
 ### Testing the Spring Boot Application Locally
 
 Now, to make sure that the application works as expected, we need to write some tests.
@@ -1598,6 +1663,7 @@ class SpringbootApplicationTests {
 
 }
 ```
+
 Then, all our tests go into the `SpringbootResourceTest` class.
 Create the `SpringbootResourceTest.java` class under the same package that `SpringbootApplicationTests`.
 
@@ -1629,6 +1695,7 @@ class SpringbootResourceTest {
     private TestRestTemplate restTemplate;
 }
 ```
+
 First, let’s write a test to check that the `hello` method returns the right *Hello World* string.
 
 ```java
@@ -1641,6 +1708,7 @@ public void testHelloEndpoint() {
     assertThat(response.getBody()).contains("Spring Boot: hello");
 }
 ```
+
 Then, we write another test to check that the `cpu` method consumes CPU and takes the right parameters.
 
 ```java
@@ -1656,6 +1724,7 @@ public void testCpuWithDBAndDescEndpoint() {
         .endsWith("The result is persisted in the database.");
 }
 ```
+
 And we do the same for the `memory` method.
 
 ```java
@@ -1671,6 +1740,7 @@ public void testMemoryWithDBAndDescEndpoint() {
         .endsWith("The result is persisted in the database.");
 }
 ```
+
 Let’s also create a simple test to make sure the statistics are stored in the database.
 
 ```java
@@ -1682,11 +1752,13 @@ public void testStats() {
     assertEquals(response.getStatusCode(), HttpStatus.OK);
 }
 ```
+
 Now that you have your tests methods, make sure you have Docker Desktop up and running (as it needs to start a PostgreSQL database) and run them with the following command:
 
 ```shell
 mvn test
 ```
+
 All the tests should pass and you should see the following output:
 
 ```shell
@@ -1696,6 +1768,7 @@ All the tests should pass and you should see the following output:
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 ```
+
 ### Running the Spring Boot Application Locally
 
 Now that the tests are all green, let’s execute the application locally and execute a few `curl` commands.
@@ -1705,11 +1778,13 @@ Make sure you still have Docker up and running and execute under the `infrastruc
 ```shell
 docker compose -f postgres.yaml up
 ```
+
 Under the `springboot-app` directory, execute the following command:
 
 ```shell
 mvn spring-boot:run
 ```
+
 In another terminal you can execute the following `curl` commands to invoke the endpoint:
 
 ```shell
@@ -1719,6 +1794,7 @@ curl 'localhost:8703/springboot/cpu?iterations=10&db=true&desc=java17'
 
 curl 'localhost:8703/springboot/memory?bites=10&db=true&desc=java17'
 ```
+
 You can change the parameters to see how the application behaves.
 Change the number of iterations and the number of bites to see how the performance is impacted (with and without database).
 
@@ -1731,6 +1807,7 @@ curl 'localhost:8703/springboot/memory?bites=50'
 curl 'localhost:8703/springboot/memory?bites=100'
 curl 'localhost:8703/springboot/memory?bites=100&db=true'
 ```
+
 You can check the content of the database with:
 
 ```shell
@@ -1739,6 +1816,7 @@ curl 'localhost:8703/springboot/stats'
 # or if you have "jq" installed you can make it prettier with
 # curl 'localhost:8703/springboot/stats' | jq
 ```
+
 That’s it.
 We now have developed and tested locally our three microservices.
 Time to containerize them and deploy them to Azure Container Apps.
@@ -1774,6 +1852,7 @@ First, sign in to your Azure account using the Azure CLI:
 az login
 ```
 
+
 <div class="info" data-title="note">
 
 > If you’re using GitHub Codespaces, you should login using the following command:
@@ -1781,6 +1860,7 @@ az login
 > ```shell
 > az login --use-device-code
 > ```
+> 
 
 </div>
 
@@ -1789,6 +1869,7 @@ Make sure you are using the right subscription with:
 ```shell
 az account show
 ```
+
 
 <div class="info" data-title="note">
 
@@ -1799,6 +1880,7 @@ az account show
 > az account list --output table
 > az account set --subscription <subscription-id>
 > ```
+> 
 
 </div>
 
@@ -1811,6 +1893,7 @@ az provider register --namespace Microsoft.App
 az provider register --namespace Microsoft.OperationalInsights
 az provider register --namespace Microsoft.Insights
 ```
+
 ### Creating the Azure Resources
 
 Now, let’s create the infrastructure for our application, so we can later deploy our microservices to Azure Container Apps.
@@ -1824,6 +1907,7 @@ Now, let’s create the infrastructure for our application, so we can later depl
 > ```shell
 > az provider show -n Microsoft.App --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 > ```
+> 
 
 </div>
 
@@ -1873,6 +1957,7 @@ MICRONAUT_APP="micronaut-app"
 SPRING_APP="springboot-app"
 ```
 
+
 <div class="info" data-title="note">
 
 > Notice that we are using a specific location.
@@ -1883,6 +1968,7 @@ SPRING_APP="springboot-app"
 > ```shell
 > az account list-locations --query "[].name"
 > ```
+> 
 
 </div>
 
@@ -1894,6 +1980,7 @@ SPRING_APP="springboot-app"
 > ```shell
 > source ./scripts/infra/env.sh
 > ```
+> 
 > If you need to force a specific `UNIQUE_IDENTIFIER`, you can set it before running the command with `export UNIQUE_IDENTIFIER=<your-unique-identifier>`.
 > 
 
@@ -1916,6 +2003,7 @@ az group create \
   --location "$LOCATION" \
   --tags system="$TAG"
 ```
+
 #### Log Analytics Workspace
 
 [Log Analytics workspace](https://learn.microsoft.com/azure/azure-monitor/logs/quick-create-workspace?tabs=azure-portal&WT.mc_id=javascript-0000-yolasors) is the environment for Azure Monitor log data.
@@ -1931,6 +2019,7 @@ az monitor log-analytics workspace create \
   --tags system="$TAG" \
   --workspace-name "$LOG_ANALYTICS_WORKSPACE"
 ```
+
 Let’s also retrieve the Log Analytics Client ID and client secret and store them in environment variables:
 
 ```shell
@@ -1952,6 +2041,7 @@ LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$(
 )
 echo "LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
 ```
+
 #### Azure Container Registry
 
 In the next chapter we will be creating Docker containers and pushing them to the Azure Container Registry.
@@ -1970,6 +2060,7 @@ az acr create \
   --sku Standard \
   --admin-enabled true
 ```
+
 Update the repository to allow anonymous users to pull the images (this can be handy if you want other attendees to use your registry):
 
 ```shell
@@ -1978,6 +2069,7 @@ az acr update \
   --name "$REGISTRY" \
   --anonymous-pull-enabled true
 ```
+
 Get the URL of the Azure Container Registry and set it to the `REGISTRY_URL` variable with the following command:
 
 ```shell
@@ -1991,6 +2083,7 @@ REGISTRY_URL=$(
 
 echo "REGISTRY_URL=$REGISTRY_URL"
 ```
+
 If you log into the [Azure Portal](https://portal.azure.com/?WT.mc_id=javascript-0000-yolasors) and search for the `rg-java-runtimes` resource group, you should see the following created resources.
 
 ![Screenshot of Azure Portal showing the Java Runtimes resource group](./assets/azure-rg.png)
@@ -2010,6 +2103,7 @@ az containerapp env create \
     --logs-workspace-id "$LOG_ANALYTICS_WORKSPACE_CLIENT_ID" \
     --logs-workspace-key "$LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET"
 ```
+
 
 <div class="info" data-title="note">
 
@@ -2070,6 +2164,7 @@ az containerapp create \
              SPRING_DATASOURCE_PASSWORD="$POSTGRES_DB_PWD" \
              SPRING_DATASOURCE_URL="$POSTGRES_DB_CONNECT_STRING"
 ```
+
 The `create` command returns the URL for the container apps.
 You can also get the URLs with the following commands:
 
@@ -2101,6 +2196,7 @@ SPRING_HOST=$(
 )
 echo "SPRING_HOST=$SPRING_HOST"
 ```
+
 Get these locations and copy them into a web browser.
 You should see the following page:
 
@@ -2128,6 +2224,7 @@ az postgres flexible-server create \
   --storage-size 256 \
   --version "$POSTGRES_DB_VERSION"
 ```
+
 At this stage, if you go back to the [Azure Portal](http://portal.azure.com/?WT.mc_id=javascript-0000-yolasors) you’ll see the database deployed as well as the 3 container apps.
 
 ![Screenshot of Azure Portal showing the database and apps](./assets/azure-rg-2.png)
@@ -2146,6 +2243,7 @@ az postgres flexible-server execute \
   --database-name "$POSTGRES_DB_SCHEMA" \
   --file-path "infrastructure/db-init/initialize-databases.sql"
 ```
+
 
 <div class="info" data-title="note">
 
@@ -2166,6 +2264,7 @@ az postgres flexible-server execute \
   --database-name "$POSTGRES_DB_SCHEMA" \
   --querytext "select * from Statistics_Quarkus"
 ```
+
 If you’d like to see the connection string to the database (so you can access your database from an external SQL client), use the following command:
 
 ```shell
@@ -2181,6 +2280,7 @@ POSTGRES_CONNECTION_STRING=$(
 
 echo "POSTGRES_CONNECTION_STRING=$POSTGRES_CONNECTION_STRING"
 ```
+
 
 <div class="tip" data-title="tip">
 
@@ -2282,6 +2382,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
 ```
 
+
 <div class="important" data-title="warning">
 
 > Don’t forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
@@ -2316,6 +2417,7 @@ Add the following step to the `build` job:
           cd springboot-app && ./mvnw package  && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 ```
 
+
 <div class="important" data-title="warning">
 
 > Make sure to keep the correct indentation for the steps.
@@ -2336,6 +2438,7 @@ Add the following step to the `build` job:
 > ghcr.io/azure/aca-java-runtimes-workshop/micronaut-app-native:latest
 > ghcr.io/azure/aca-java-runtimes-workshop/springboot-app-native:latest
 > ```
+> 
 
 </div>
 
@@ -2368,6 +2471,7 @@ Add the following steps to the `build` job:
           file: ./springboot-app/src/main/docker/Dockerfile.jvm
           context: ./springboot-app/
 ```
+
 We’re using the `github.sha` variable, to tag our images with the commit SHA that triggered the workflow.
 This way, we can easily identify which version of the application is deployed.
 
@@ -2428,6 +2532,7 @@ Add these lines after the `build` job:
               --query "properties.configuration.ingress.fqdn" \
               --output tsv
 ```
+
 This job will run after the `build` job, and will use the Azure CLI to deploy our apps to Azure Container Apps.
 We’re using the `github.sha` variable again to make sure we’re deploying the correct version of the images.
 
@@ -2470,6 +2575,7 @@ REGISTRY_PASSWORD=$(
 )
 echo "REGISTRY_PASSWORD=$REGISTRY_PASSWORD"
 ```
+
 You will end up with something like this:
 
 ![Screenshot of GitHub interface showing the added secrets](./assets/github-secrets-added.png)
@@ -2508,6 +2614,7 @@ AZURE_CREDENTIALS=$(
 
 echo $AZURE_CREDENTIALS
 ```
+
 Then just like in the previous step, create a new secret in your repository named `AZURE_CREDENTIALS` and paste the value of the `AZURE_CREDENTIALS` variable as the secret value (make sure to **copy the entire JSon**).
 
 ![Screenshot of GitHub interface showing the added secrets](./assets/github-secrets-added-2.png)
@@ -2538,6 +2645,7 @@ az containerapp ingress enable \
   --target-port 8703 \
   --type external
 ```
+
 If you want you can have a look at the [Azure portal](https://portal.azure.com/?WT.mc_id=javascript-0000-yolasors) to check that the target port has been updated.
 
 ![Screenshot of Azure Portal showing the updated target port](./assets/portal-update-port.png)
@@ -2557,6 +2665,7 @@ It should take a few minutes to complete.
 > ```shell
 > ERROR: (WebhookInvalidParameterValue) The following field(s) are either invalid or missing. Invalid value: "crjavaruntimes....": GET https:?scope=repository....azurecr.io: UNAUTHORIZED: authentication required.
 > ```
+> 
 > It’s because you didn’t allow anonymous pull to the container registry.
 > Make sure you have executed the following command:
 > 
@@ -2566,6 +2675,7 @@ It should take a few minutes to complete.
 >   --name "$REGISTRY" \
 >   --anonymous-pull-enabled true
 > ```
+> 
 
 </div>
 
@@ -2610,6 +2720,7 @@ SPRING_HOST=$(
 )
 echo "SPRING_HOST=$SPRING_HOST"
 ```
+
 Then we can use `curl` to test our three applications.
 The first invocation can take long as Azure Container Apps needs to scale from 0.
 But then, the following `curl` invocations should be faster.
@@ -2622,6 +2733,7 @@ echo
 curl https://${SPRING_HOST}/springboot
 echo 
 ```
+
 If you want to quickly check the logs of the applications, you can use the following Azure CLI commands (more on logs later):
 
 ```shell
@@ -2640,6 +2752,7 @@ az containerapp logs show \
    --resource-group "$RESOURCE_GROUP" \
    --format text
 ```
+
 
 ---
 
@@ -2766,6 +2879,7 @@ You can directly access the stream of logs from the latest revision of a running
   --follow
 ```
 
+
 <div class="tip" data-title="tip">
 
 > Don’t forget that by default, containers apps scale out to 0 instances when they are not used.
@@ -2783,6 +2897,7 @@ You should see the logs of the application being updated in real time.
 ```shell
 curl https://${QUARKUS_HOST}/quarkus/cpu?iterations=10
 ```
+
 #### Viewing the console logs in Azure portal
 
 You can also access the console logs in the [Azure Portal](http://portal.azure.com/?WT.mc_id=javascript-0000-yolasors) or via CLI.
@@ -2807,6 +2922,7 @@ Enter this query in the editor:
 ContainerAppConsoleLogs_CL
 | where RevisionName_s == "quarkus-app--<REVISION_ID>"
 ```
+
 You can get the app revision name by running the following command:
 
 ```shell
@@ -2815,6 +2931,7 @@ az containerapp revision list \
   --resource-group "$RESOURCE_GROUP" \
   --query "[0].name" --output tsv
 ```
+
 Select **Run** to execute the query.
 You should see the logs of the `quarkus-app` container app.
 
@@ -2829,6 +2946,7 @@ ContainerAppConsoleLogs_CL
 | where Log_s !has "INFO"
 | where Log_s contains "error"
 ```
+
 Select **Run** to execute the query.
 If your application is working fine, you should not see any results.
 Let’s generate some errors by crashing the application with the following command:
@@ -2836,6 +2954,7 @@ Let’s generate some errors by crashing the application with the following comm
 ```shell
 curl https://${QUARKUS_HOST}/quarkus/memory?bites=1000
 ```
+
 Oops! We’re trying to allocate more memory than the container has available, resulting in a crash because of our (crude) memory allocation algorithm.
 
 If you run the query again, you should see the error message in the logs:
@@ -2862,6 +2981,7 @@ ContainerAppConsoleLogs_CL
 | sort by TimeGenerated desc
 | take 10
 ```
+
 And here we can quickly see our `OutOfMemoryError` error message.
 
 ![Screenshot of the logs results in Azure portal](./assets/log-analytics-error-2.png)
@@ -2880,6 +3000,7 @@ az monitor log-analytics query \
 --analytics-query "ContainerAppConsoleLogs_CL | where RevisionName_s == 'quarkus-app--<REVISION_ID>'" \
 --output table
 ```
+
 #### Viewing the system logs
 
 While console logs are very useful to troubleshoot issues with your application, it won’t be much help if your container is not running.
@@ -2898,6 +3019,7 @@ ContainerAppSystemLogs_CL
 | project TimeGenerated, Reason_s, Log_s
 | sort by TimeGenerated desc
 ```
+
 You should see the system logs of the `quarkus-app` container app, covering the whole lifecycle of the container.
 
 ![Screenshot of the logs results in Azure portal](./assets/log-analytics-system.png)
@@ -2910,6 +3032,7 @@ az monitor log-analytics query \
 --analytics-query "ContainerAppSystemLogs_CL | where RevisionName_s == 'quarkus-app--<REVISION_ID>' | project TimeGenerated, Reason_s, Log_s | sort by TimeGenerated desc" \
 --output table
 ```
+
 ### Load Testing
 
 Now it’s time to add some load to the application.
@@ -2989,6 +3112,7 @@ MICRONAUT_PROTOCOL=https
 MICRONAUT_HOST=<Your MICRONAUT_HOST>
 MICRONAUT_PORT=443
 ```
+
 
 <div class="info" data-title="note">
 
@@ -3076,6 +3200,7 @@ az containerapp update \
   --min-replicas 1 \
   --max-replicas 10
 ```
+
 This will automatically scale out the application when the CPU usage is above 10% (we set it low deliberately to make it easy to go up).
 
 ![Screenshot of setting up CPU scaler](./assets/dashboard-scale-setcpu.png)
@@ -3113,6 +3238,7 @@ az containerapp update \
   --min-replicas 1 \
   --max-replicas 10
 ```
+
 This will automatically scale out the application when the memory usage is above 15% (we set it low deliberately to make it easy to go up).
 
 ![Screenshot of setting up memory scaler](./assets/dashboard-scale-setmemory.png)
@@ -3167,6 +3293,7 @@ az postgres flexible-server execute \
   --output table
 ```
 
+
 ---
 
 ## Going Native
@@ -3216,6 +3343,7 @@ As you will probably need to set up the `JAVA_HOME` and the `PATH` environment v
 ```shell
 alias graalvm="export JAVA_HOME=/workspaces/java-runtimes-workshop/graalvm-ce-java17-22.3.1 && export PATH=/workspaces/java-runtimes-workshop/graalvm-ce-java17-22.3.1bin:$PATH && java -version"
 ```
+
 #### GitHub Actions setup
 
 We are going to create 3 new GitHub Actions, one per native build.
@@ -3237,6 +3365,7 @@ Go to the `quarkus-app` directory, and run the following command:
 ```shell
 mvn -Pnative package
 ```
+
 In your `target` folder, this should create a binary called `quarkus-app-1.0.0-SNAPSHOT-runner`.
 Before executing it, you need to start the PostgreSQL database.
 When you package a Quarkus application with `mvn package` (JVM or native), Quarkus turns out to be using the production profile (`%prod`) and needs a PostgreSQL to be up and running and configured.
@@ -3248,16 +3377,19 @@ Add the following properties to the `quarkus-app/src/main/resources/application.
 %prod.quarkus.datasource.password=password
 %prod.quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/postgres
 ```
+
 Then start the database by executing the following command under the `infrastructure` directory:
 
 ```shell
 docker compose -f postgres.yaml up
 ```
+
 You can now execute the native binary of the Quarkus application under the `quarkus-app` directory with the following command:
 
 ```shell
 ./target/quarkus-app-1.0.0-SNAPSHOT-runner
 ```
+
 You should see the application starting very fast, and work in a similar way as the JVM build.
 This means that you can execute the same curl commands as before:
 
@@ -3268,6 +3400,7 @@ curl 'localhost:8701/quarkus/cpu?iterations=10&db=true&desc=native'
 
 curl 'localhost:8701/quarkus/memory?bites=10&db=true&desc=native'
 ```
+
 #### Deploying the Native Build of the Quarkus Application
 
 Now, let’s create a GitHub Action that will build a native image of the Quarkus application, and deploy it.
@@ -3338,6 +3471,7 @@ jobs:
               --output tsv
 ```
 
+
 <div class="important" data-title="warning">
 
 > Don’t forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
@@ -3362,12 +3496,14 @@ Go to the `micronaut-app` directory and execute the following command:
 ```shell
 mvn package -Dpackaging=native-image
 ```
+
 In your `target` folder, this should create a binary called `./target/micronaut-app`.
 You can execute it with the following command (make sure the PostgreSQL database is running `docker compose -f postgres.yaml up`):
 
 ```shell
 ./target/micronaut-app
 ```
+
 You should see the application starting very fast, and work in a similar way as the JVM build.
 Execute the following curl commands to make sure it works:
 
@@ -3378,6 +3514,7 @@ curl 'localhost:8702/micronaut/cpu?iterations=10&db=true&desc=native'
 
 curl 'localhost:8702/micronaut/memory?bites=10&db=true&desc=native'
 ```
+
 #### Deploying the Native Build of the Micronaut Application
 
 Now, let’s create a GitHub Action that will build a native image of the Micronaut application, and deploy it.
@@ -3447,6 +3584,7 @@ jobs:
               --output tsv
 ```
 
+
 <div class="important" data-title="warning">
 
 > Don’t forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
@@ -3465,12 +3603,14 @@ Go to the `springboot-app` directory and execute the following command:
 ```shell
 mvn -Pnative native:compile
 ```
+
 In your `target` folder, this should create a binary called `springboot-app`.
 Make sure you have the PostgreSQL database still up and running, and execute:
 
 ```shell
 ./target/springboot-app
 ```
+
 You should see the application starting faster than its JVM counter part.
 Execute the following curl commands to make sure it works:
 
@@ -3481,6 +3621,7 @@ curl 'localhost:8703/springboot/cpu?iterations=10&db=true&desc=native'
 
 curl 'localhost:8703/springboot/memory?bites=10&db=true&desc=native'
 ```
+
 #### Deploying the Native Build of the Spring Boot Application
 
 Now, let’s create a GitHub Action that will build a native image of the Spring Boot application, and deploy it.
@@ -3550,6 +3691,7 @@ jobs:
               --output tsv
 ```
 
+
 <div class="important" data-title="warning">
 
 > Don’t forget to replace the value of the `REGISTRY_URL` environment variable with the value of the `$REGISTRY_URL` variable that you copied earlier.
@@ -3595,7 +3737,7 @@ You should now see the results of the load tests for the native images, and you 
 
 <div class="info" data-title="note">
 
-> Additional telemetry can be enabled using Application Insights for Spring Boot Native applications. You can read more about it on the [applicationinsights-spring-native](https://github.com/jeanbisutti/applicationinsights-spring-native) repository.
+> Additional telemetry can be enabled using Application Insights for Spring Boot Native applications. You can read more about it on the [spring-cloud-azure-starter-monitor](https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/spring-cloud-azure-starter-monitor) repository.
 > 
 
 </div>
@@ -3620,6 +3762,7 @@ We hope you liked it, you had fun in attending it, learnt a few things, and more
 ```shell
 az group delete --name "$RESOURCE_GROUP"
 ```
+
 ### References
 
 - [The Azure Container Apps and Java Runtimes Workshop](https://aka.ms/java-runtimes)
