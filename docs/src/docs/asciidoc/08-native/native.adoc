@@ -260,5 +260,5 @@ image::../assets/java-runtimes-dashboard-native.png[Screenshot of the Java Runti
 
 [NOTE]
 ====
-Additional telemetry can be enabled using Application Insights for Spring Boot Native applications. You can read more about it on the https://github.com/jeanbisutti/applicationinsights-spring-native[applicationinsights-spring-native] repository.
+Additional telemetry can be enabled using Application Insights for Spring Boot Native applications. You can read more about it on the https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/spring-cloud-azure-starter-monitor[spring-cloud-azure-starter-monitor] repository.
 ====
