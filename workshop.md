@@ -679,7 +679,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
 @QuarkusTest
-public class QuarkusResourceTest {
+class QuarkusResourceTest {
 }
 ```
 
@@ -687,7 +687,7 @@ First, let’s write a test to check that the `hello` method returns the right *
 
 ```java
 @Test
-public void testHelloEndpoint() {
+void testHelloEndpoint() {
     given()
       .when().get("/quarkus")
       .then()
@@ -700,7 +700,7 @@ Then, we write another test to check that the `cpu` method consumes CPU and take
 
 ```java
 @Test
-public void testCpuWithDBAndDescEndpoint() {
+void testCpuWithDBAndDescEndpoint() {
     given().param("iterations", 1).param("db", true).param("desc", "Java17")
       .when().get("/quarkus/cpu")
       .then()
@@ -715,7 +715,7 @@ And we do the same for the `memory` method.
 
 ```java
 @Test
-public void testMemoryWithDBAndDescEndpoint() {
+void testMemoryWithDBAndDescEndpoint() {
     given().param("bites", 1).param("db", true).param("desc", "Java17")
       .when().get("/quarkus/memory")
       .then()
@@ -730,7 +730,7 @@ Let’s also create a simple test to make sure the statistics are stored in the 
 
 ```java
 @Test
-public void testStats() {
+void testStats() {
     given()
       .when().get("/quarkus/stats")
       .then()
