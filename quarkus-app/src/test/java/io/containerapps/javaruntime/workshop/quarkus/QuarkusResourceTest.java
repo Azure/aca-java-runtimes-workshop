@@ -8,12 +8,12 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
 @QuarkusTest
-public class QuarkusResourceTest {
+class QuarkusResourceTest {
 // end::adocHeader[]
 
 // tag::adocTestHello[]
     @Test
-    public void testHelloEndpoint() {
+    void testHelloEndpoint() {
         given()
           .when().get("/quarkus")
           .then()
@@ -23,7 +23,7 @@ public class QuarkusResourceTest {
 // end::adocTestHello[]
 
     @Test
-    public void testCpuEndpoint() {
+    void testCpuEndpoint() {
         given().param("iterations", 1)
           .when().get("/quarkus/cpu")
           .then()
@@ -33,7 +33,7 @@ public class QuarkusResourceTest {
     }
 
     @Test
-    public void testCpuWithDBEndpoint() {
+    void testCpuWithDBEndpoint() {
         given().param("iterations", 1).param("db", true)
           .when().get("/quarkus/cpu")
           .then()
@@ -44,7 +44,7 @@ public class QuarkusResourceTest {
 
 // tag::adocTestCPU[]
     @Test
-    public void testCpuWithDBAndDescEndpoint() {
+    void testCpuWithDBAndDescEndpoint() {
         given().param("iterations", 1).param("db", true).param("desc", "Java17")
           .when().get("/quarkus/cpu")
           .then()
@@ -56,7 +56,7 @@ public class QuarkusResourceTest {
 // end::adocTestCPU[]
 
     @Test
-    public void testMemoryEndpoint() {
+    void testMemoryEndpoint() {
         given().param("bites", 1)
           .when().get("/quarkus/memory")
           .then()
@@ -66,7 +66,7 @@ public class QuarkusResourceTest {
     }
 
     @Test
-    public void testMemoryWithDBEndpoint() {
+    void testMemoryWithDBEndpoint() {
         given().param("bites", 1).param("db", true)
           .when().get("/quarkus/memory")
           .then()
@@ -77,7 +77,7 @@ public class QuarkusResourceTest {
 
 // tag::adocTestMemory[]
     @Test
-    public void testMemoryWithDBAndDescEndpoint() {
+    void testMemoryWithDBAndDescEndpoint() {
         given().param("bites", 1).param("db", true).param("desc", "Java17")
           .when().get("/quarkus/memory")
           .then()
@@ -90,7 +90,7 @@ public class QuarkusResourceTest {
 
 // tag::adocTestStats[]
     @Test
-    public void testStats() {
+    void testStats() {
         given()
           .when().get("/quarkus/stats")
           .then()
