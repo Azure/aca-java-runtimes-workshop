@@ -8,7 +8,25 @@
 echo "### Removes all the generated files from the project"
 rm -rf pom.xml \
   quarkus-app \
-  micronaut-app
+  micronaut-app \
+  springboot-app
+
+echo "### Bootstraps the Micronaut App"
+curl --location --request GET 'https://launch.micronaut.io/create/default/io.containerapps.javaruntime.workshop.micronaut.micronaut-app?lang=JAVA&build=MAVEN&test=JUNIT&javaVersion=JDK_21&features=data-jpa&features=postgres&features=testcontainers&features=micronaut-test-rest-assured' --output micronaut-app.zip && unzip -o micronaut-app.zip && rm micronaut-app.zip
+
+echo "### Bootstraps the Quarkus App"
+mvn io.quarkus:quarkus-maven-plugin:3.18.3:create \
+    -DplatformVersion=3.18.3 \
+    -DprojectGroupId=io.containerapps.javaruntime.workshop \
+    -DprojectArtifactId=quarkus-app \
+    -DprojectName="Azure Container Apps and Java Runtimes Workshop :: Quarkus" \
+    -DjavaVersion=21 \
+    -DclassName="io.containerapps.javaruntime.workshop.quarkus.QuarkusResource" \
+    -Dpath="/quarkus" \
+    -Dextensions="resteasy, resteasy-jsonb, hibernate-orm-panache, jdbc-postgresql"
+
+echo "### Bootstraps the Spring Boot App"
+curl https://start.spring.io/starter.tgz  -d bootVersion=3.4.3 -d javaVersion=21 -d dependencies=web,data-jpa,postgresql,testcontainers -d type=maven-project -d packageName=io.containerapps.javaruntime.workshop.springboot -d artifactId=springboot-app -d version=1.0.0-SNAPSHOT -d baseDir=springboot-app -d name=springboot -d groupId=io.containerapps.javaruntime.workshop -d description=Azure%20Container%20Apps%20and%20Java%20Runtimes%20Workshop%20%3A%3A%20Spring%20Boot | tar -xzvf -
 
 echo "### Creates a Parent POM"
 echo -e "<?xml version=\"1.0\"?>
@@ -24,32 +42,12 @@ echo -e "<?xml version=\"1.0\"?>
   
   <modules>
     <module>micronaut-app</module>
+    <module>quarkus-app</module>
     <module>springboot-app</module>
   </modules>
 
 </project>
 " >> pom.xml
-
-
-echo "### Bootstraps the Micronaut App"
-curl --location --request GET 'https://launch.micronaut.io/create/default/io.containerapps.javaruntime.workshop.micronaut.micronaut-app?lang=JAVA&build=MAVEN&test=JUNIT&javaVersion=JDK_17&features=data-jpa&features=postgres&features=testcontainers&features=micronaut-test-rest-assured' --output micronaut-app.zip && unzip -o micronaut-app.zip && rm micronaut-app.zip
-
-echo "### Bootstraps the Quarkus App"
-mvn io.quarkus:quarkus-maven-plugin:3.10.0:create \
-    -DplatformVersion=3.10.0 \
-    -DprojectGroupId=io.containerapps.javaruntime.workshop \
-    -DprojectArtifactId=quarkus-app \
-    -DprojectName="Azure Container Apps and Java Runtimes Workshop :: Quarkus" \
-    -DjavaVersion=17 \
-    -DclassName="io.containerapps.javaruntime.workshop.quarkus.QuarkusResource" \
-    -Dpath="/quarkus" \
-    -Dextensions="resteasy, resteasy-jsonb, hibernate-orm-panache, jdbc-postgresql"
-
-echo "### Bootstraps the Spring Boot App"
-curl https://start.spring.io/starter.tgz  -d bootVersion=3.0.5 -d javaVersion=17 -d dependencies=web,data-jpa,postgresql,testcontainers -d type=maven-project -d packageName=io.containerapps.javaruntime.workshop.springboot -d artifactId=springboot-app -d version=1.0.0-SNAPSHOT -d baseDir=springboot-app -d name=springboot -d groupId=io.containerapps.javaruntime.workshop -d description=Azure%20Container%20Apps%20and%20Java%20Runtimes%20Workshop%20%3A%3A%20Spring%20Boot | tar -xzvf -
-
-echo "### Running all the Tests"
-mvn test
 
 
 echo "### Adding .editorconfig file"
@@ -81,3 +79,6 @@ max_line_length = 1024
 
 cp quarkus-app/.editorconfig micronaut-app/.editorconfig
 cp quarkus-app/.editorconfig springboot-app/.editorconfig
+
+echo "### Running all the Tests"
+mvn test-compile
